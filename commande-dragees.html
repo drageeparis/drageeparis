@@ -4,21 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none';">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Dragées Naissance Blanc Doux · Dragée Paris</title>
-  <meta name="description" content="Dragées Naissance Blanc Doux, façonnée à la main pour accueillir une naissance. Personnalisable : couleurs, quantités, emballage.">
+  <title>Commander mes dragées · Dragée Paris</title>
+  <meta name="description" content="Vous savez déjà ce que vous voulez ? Commandez vos dragées Avola, traditionnelles ou chocolat en quelques secondes, sans passer par le configurateur complet.">
   <link rel="stylesheet" href="style.css">
-  <meta property="og:type" content="product">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
-  <meta property="og:title" content="Dragées Naissance Blanc Doux · Dragée Paris">
-  <meta property="og:description" content="Dragées façonnées à la main dans notre atelier d'Île-de-France, pour accueillir une naissance. Personnalisation entière selon vos envies : couleurs, quantités et emballage.">
-  <meta property="og:url" content="https://drageeparis.fr/produit-naissance-blanc-doux.html">
-  <meta property="og:image" content="https://drageeparis.fr/images/premiers-instants/naissance-blanc-doux.png">
+  <meta property="og:title" content="Commander mes dragées · Dragée Paris">
+  <meta property="og:description" content="Vous savez déjà ce que vous voulez ? Commandez vos dragées Avola, traditionnelles ou chocolat en quelques secondes, sans passer par le configurateur complet.">
+  <meta property="og:url" content="https://drageeparis.fr/commande-dragees.html">
+  <meta property="og:image:width" content="1659">
+  <meta property="og:image:height" content="948">
+  <meta property="og:image" content="https://drageeparis.fr/images/hero/home-page-hero.png">
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Dragées Naissance Blanc Doux · Dragée Paris">
-  <meta name="twitter:description" content="Dragées façonnées à la main dans notre atelier d'Île-de-France, pour accueillir une naissance. Personnalisation entière selon vos envies : couleurs, quantités et emballage.">
-  <meta name="twitter:image" content="https://drageeparis.fr/images/premiers-instants/naissance-blanc-doux.png">
-  <link rel="canonical" href="https://drageeparis.fr/produit-naissance-blanc-doux.html">
+  <meta name="twitter:title" content="Commander mes dragées · Dragée Paris">
+  <meta name="twitter:description" content="Vous savez déjà ce que vous voulez ? Commandez vos dragées Avola, traditionnelles ou chocolat en quelques secondes, sans passer par le configurateur complet.">
+  <meta name="twitter:image" content="https://drageeparis.fr/images/hero/home-page-hero.png">
+  <link rel="canonical" href="https://drageeparis.fr/commande-dragees.html">
+  <meta name="robots" content="noindex, follow">
+  <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -26,7 +31,7 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#965F36">
 </head>
-<body>
+<body class="order-page">
 
   <a class="skip-link" href="#main">Aller au contenu principal</a>
 
@@ -146,73 +151,95 @@
   <div class="header__safe-area" aria-hidden="true"></div>
 
   <main id="main">
-    <section class="pdp">
-      <div class="pdp__gallery">
-        <picture>
-          <img src="./images/premiers-instants/naissance-blanc-doux.png" alt="Dragées Naissance Blanc Doux, façonnée à la main">
-        </picture>
-      </div>
-      <div class="pdp__info">
-        <a href="creations.html?filter=premiers-instants&sub=naissance" class="pdp__back">← Les créations</a>
-        <h1 class="pdp__title">Dragées Naissance Blanc Doux</h1>
-        <p class="pdp__tagline">Dragées façonnées à la main dans notre atelier d'Île-de-France, pour accueillir une naissance. Personnalisation entière selon vos envies : couleurs, quantités et emballage.</p>
 
-        <a href="commande-creations.html" class="pdp__cta">Commander cette création →</a>
+    <div class="section-intro fade-in">
+      <h1 class="section-intro__title">Commander mes dragées</h1>
+      <p class="section-intro__sub">Vous savez déjà ce que vous voulez ? Dites-nous en quelques champs la catégorie, le produit, la quantité et la date souhaitée : nous revenons vers vous avec un devis sous 48 heures.</p>
+    </div>
 
-        <details class="pdp__acc-item">
-          <summary class="pdp__acc-trigger">Livraison & Commande</summary>
-          <div class="pdp__acc-body">
-            <p>Toutes nos créations sont préparées à la main dans notre atelier d'Île-de-France. Nous vous recommandons de nous contacter <strong>4 à 6 semaines</strong> avant votre événement. Livraison en France et en Europe.</p>
-            <ul>
-              <li>Livraison à domicile en France et en Europe</li>
-              <li>Click & Collect disponible sur rendez-vous en atelier</li>
-              <li>Emballage soigné, adapté au transport</li>
-            </ul>
+    <section class="form-section fade-in">
+      <div class="contact__layout">
+
+        <aside class="contact__sidebar contact__sidebar--photo">
+          <img src="./images/sac-dragee-paris.jpg" alt="Sac Dragée Paris devant la Tour Eiffel, à Paris" loading="lazy">
+        </aside>
+
+        <div>
+          <form class="form" id="boutique-order-form" novalidate>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="bo-nom">Nom <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="text" id="bo-nom" name="nom" autocomplete="name" placeholder="Votre nom" required>
+                <span class="form__error" id="err-bo-nom">Ce champ est obligatoire.</span>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="bo-email">E-mail <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="email" id="bo-email" name="email" autocomplete="email" placeholder="votre@email.fr" required>
+                <span class="form__error" id="err-bo-email">Adresse e-mail invalide.</span>
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="bo-tel">Téléphone <span class="required" aria-hidden="true">*</span></label>
+              <input class="form__input" type="tel" id="bo-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" required>
+              <span class="form__error" id="err-bo-tel">Veuillez indiquer un numéro de téléphone.</span>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="bo-categorie">Catégorie de dragées souhaitée <span class="required" aria-hidden="true">*</span></label>
+              <select class="form__select" id="bo-categorie" name="categorie" required>
+                <option value="" disabled selected>Choisissez une catégorie</option>
+                <option value="Avola">Avola</option>
+                <option value="Traditionnelles">Traditionnelles</option>
+                <option value="Chocolat">Chocolat</option>
+                <option value="Autres">Autres</option>
+              </select>
+              <span class="form__error" id="err-bo-categorie">Veuillez choisir une catégorie.</span>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="bo-produit">Nom du produit souhaité <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="text" id="bo-produit" name="produit" placeholder="Exemple : Dragée chocolat jaune" required>
+                <span class="form__error" id="err-bo-produit">Ce champ est obligatoire.</span>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="bo-quantite">Quantité souhaitée (en grammes) <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="number" id="bo-quantite" name="quantite" min="1" step="1" placeholder="500" required>
+                <span class="form__error" id="err-bo-quantite">Veuillez indiquer une quantité.</span>
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="bo-date">Date souhaitée de réception <span class="required" aria-hidden="true">*</span></label>
+              <input class="form__input" type="date" id="bo-date" name="date" required>
+              <span class="form__error" id="err-bo-date">Veuillez indiquer une date.</span>
+            </div>
+            <div class="form__honeypot" aria-hidden="true">
+              <label for="bo-company">Ne pas remplir ce champ</label>
+              <input type="text" id="bo-company" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="msg-form__footer">
+              <p class="msg-form__note">Les champs marqués <span aria-hidden="true">*</span> sont obligatoires. Réponse garantie sous 48 heures.</p>
+              <button type="submit" class="msg-form__submit">Envoyer ma demande</button>
+            </div>
+            <p id="bo-send-error" hidden style="font-size:13px;color:#c0392b;margin-top:12px;font-family:var(--font);font-weight:300;">
+              Une erreur est survenue. Réessayez ou contactez-nous directement à <a href="mailto:drageeparis@gmail.com" style="color:inherit">drageeparis@gmail.com</a>.
+            </p>
+          </form>
+
+          <div class="msg-confirmation" id="bo-confirmation" hidden>
+            <div class="msg-confirmation__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h2 class="msg-confirmation__title">Demande bien envoyée !</h2>
+            <p class="msg-confirmation__text">Merci pour votre commande. Nous revenons vers vous dans les 48 heures ouvrées avec un devis.</p>
+            <button class="msg-confirmation__back" id="bo-back">Envoyer une autre demande <span class="btn-arrow">→</span></button>
           </div>
-        </details>
-
-        <details class="pdp__acc-item">
-          <summary class="pdp__acc-trigger">Personnalisation</summary>
-          <div class="pdp__acc-body">
-            <p>Cette création est entièrement personnalisable selon votre événement : couleurs de l'enrobage, quantités, type d'emballage et ruban.</p>
-            <p>Contactez-nous pour un devis sur mesure. Chaque commande est unique.</p>
-          </div>
-        </details>
+        </div>
 
       </div>
     </section>
 
-    <section class="pdp-related" aria-label="Vous aimerez aussi">
-      <p class="pdp-related__title">Vous aimerez aussi</p>
-      <div class="pdp-related__grid">
-        <a href="produit-naissance-ecru-taupe.html" class="prod-card">
-          <div class="prod-card__image">
-            <picture>
-          <img src="./images/premiers-instants/naissance-jaune-soleil.png" alt="Dragées Naissance Écru & Taupe" loading="lazy">
-        </picture>
-          </div>
-          <div class="prod-card__info">
-            <div class="prod-card__row">
-              <span class="prod-card__name">Dragées Naissance Écru & Taupe</span>
-            </div>
-            <p class="prod-card__price">5 dragées — 4 €</p>
-          </div>
-        </a>
-        <a href="produit-naissance-univers-marin.html" class="prod-card">
-          <div class="prod-card__image">
-            <picture>
-          <img src="./images/premiers-instants/naissance-baleine-hippocampe.png" alt="Dragées Naissance Univers Marin" loading="lazy">
-        </picture>
-          </div>
-          <div class="prod-card__info">
-            <div class="prod-card__row">
-              <span class="prod-card__name">Dragées Naissance Univers Marin</span>
-            </div>
-            
-          </div>
-        </a>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
@@ -243,17 +270,8 @@
       <p>© 2024 Dragée Paris · Artisan confiseur en Île-de-France · Tous droits réservés</p>
     </div>
   </footer>
+
   <script src="main.js"></script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Dragées Naissance Blanc Doux",
-    "description": "Dragées façonnées à la main dans notre atelier d'Île-de-France, pour accueillir une naissance. Personnalisation entière selon vos envies : couleurs, quantités et emballage.",
-    "image": "https://drageeparis.fr/images/premiers-instants/naissance-blanc-doux.png",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "category": "Dragées artisanales"
-  }
-  </script>
+  <script src="commande-dragees-form.js"></script>
 </body>
 </html>

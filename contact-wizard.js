@@ -60,7 +60,7 @@
       if (name === 'division') {
         data.division = r.value;
         // « Les dragées » n'utilise pas le configurateur : redirection directe.
-        if (r.value === 'Les dragées') { window.location.href = 'boutique.html'; return; }
+        if (r.value === 'Les dragées') { window.location.href = 'dragees.html'; return; }
       }
       if (name === 'dragees')   data.dragees = r.value;
       if (name === 'evenement') data.evenement = r.value;
@@ -192,7 +192,7 @@
 
   nextBtn.addEventListener('click', function() {
     // Filet de sécurité : « Les dragées » pré-sélectionné (?div=boutique) → redirection.
-    if (current === 1 && data.division === 'Les dragées') { window.location.href = 'boutique.html'; return; }
+    if (current === 1 && data.division === 'Les dragées') { window.location.href = 'dragees.html'; return; }
 
     if (current === TOTAL) {
       if (!validateContact()) return;

@@ -138,12 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---- 3. Lien actif dans le drawer au chargement ---- */
   const page = window.location.pathname.split('/').pop() || 'index.html';
   const navItems = drawer ? Array.from(drawer.querySelectorAll('.drawer__main-item')) : [];
-  if (page.startsWith('boutique') || page.startsWith('produit')) {
+  if (page.startsWith('dragees') || page.startsWith('produit')) {
     navItems.find(li => li.dataset.sub === 'sub-boutique')?.classList.add('is-active');
-  } else if (page.startsWith('atelier')) {
+  } else if (page.startsWith('creations')) {
     navItems.find(li => li.dataset.sub === 'sub-atelier')?.classList.add('is-active');
-  } else if (page === 'a-propos.html') {
-    navItems.find(li => li.querySelector('a[href="a-propos.html"]'))?.classList.add('is-active');
+  } else if (page === 'atelier.html') {
+    navItems.find(li => li.querySelector('a[href="atelier.html"]'))?.classList.add('is-active');
   } else if (page === 'message.html' || page === 'contact.html') {
     navItems.find(li => li.querySelector('a[href="message.html"]'))?.classList.add('is-active');
   }
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animateItems(visibleOnLoad);
   }
 
-  /* ---- 5. Filtres galeries produits (boutique.html / atelier.html) ---- */
+  /* ---- 5. Filtres galeries produits (dragees.html / creations.html) ---- */
   function initProductFilter(filterId, gridId) {
     const filterEl  = document.getElementById(filterId);
     const grid      = document.getElementById(gridId);
@@ -553,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
-  /* ---- 13. Bascule grille / liste (boutique & atelier, mobile) ---- */
+  /* ---- 13. Bascule grille / liste (dragées & créations, mobile) ---- */
   (function() {
     var btnGrid = document.getElementById('view-grid');
     var btnList = document.getElementById('view-list');
@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
-  /* ---- 15. Transmet le produit + sa photo aux formulaires (commande-boutique / commande-atelier / contact) ---- */
+  /* ---- 15. Transmet le produit + sa photo aux formulaires (commande-dragees / commande-creations / contact) ---- */
   (function() {
     function textWithSpaces(el) {
       var text = '';
@@ -604,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addProductParams(link, produit, imageSrc) {
       if (!link || !produit || !imageSrc) return;
       var href = link.getAttribute('href');
-      if (!href || (href.indexOf('contact.html') === -1 && href.indexOf('commande-boutique.html') === -1 && href.indexOf('commande-atelier.html') === -1)) return;
+      if (!href || (href.indexOf('contact.html') === -1 && href.indexOf('commande-dragees.html') === -1 && href.indexOf('commande-creations.html') === -1)) return;
       var parts = href.split('?');
       var params = new URLSearchParams(parts[1] || '');
       params.set('produit', produit);

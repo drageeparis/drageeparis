@@ -2,9 +2,15 @@ User-agent: *
 Allow: /
 
 # Pages de redirection — pas de valeur d'indexation
-Disallow: /boutique-avola.html
-Disallow: /boutique-chocolats.html
-Disallow: /boutique-gourmandes.html
-Disallow: /boutique-traditionnelles.html
+Disallow: /dragees-avola.html
+Disallow: /dragees-chocolats.html
+Disallow: /dragees-gourmandes.html
+Disallow: /dragees-traditionnelles.html
+
+# Anciennes URLs conservées en redirection
+Disallow: /boutique.html
+Disallow: /a-propos.html
+Disallow: /commande-boutique.html
+Disallow: /commande-atelier.html
 
 Sitemap: https://drageeparis.fr/sitemap.xml
