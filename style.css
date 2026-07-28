@@ -3487,6 +3487,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
 .wizard__card {
   position: relative;
   cursor: pointer;
+  display: flex;
 }
 .wizard__card input[type="radio"],
 .wizard__card input[type="checkbox"] {
@@ -3495,6 +3496,8 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   width: 0; height: 0;
 }
 .wizard__card-inner {
+  flex: 1;
+  min-width: 0;
   border: 1px solid var(--ink-20);
   padding: 22px 18px 20px;
   display: flex;
