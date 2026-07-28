@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Dragée Paris · Dragées Artisanales Personnalisables en Île-de-France</title>
+  <meta name="description" content="Créations artisanales de dragées personnalisables pour mariages, naissances et réceptions. Sur mesure, fabriquées à la main en Île-de-France.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dragée Paris">
+  <meta property="og:title" content="Dragée Paris · Dragées Artisanales Personnalisables en Île-de-France">
+  <meta property="og:description" content="Créations artisanales de dragées personnalisables pour mariages, naissances et réceptions. Sur mesure, fabriquées à la main en Île-de-France.">
+  <meta property="og:url" content="https://drageeparis.fr/">
+  <meta property="og:image:width" content="1659">
+  <meta property="og:image:height" content="948">
+  <meta property="og:image" content="https://drageeparis.fr/images/hero/home-page-hero.png">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dragée Paris · Dragées Artisanales Personnalisables en Île-de-France">
+  <meta name="twitter:description" content="Créations artisanales de dragées personnalisables pour mariages, naissances et réceptions. Sur mesure, fabriquées à la main en Île-de-France.">
+  <meta name="twitter:image" content="https://drageeparis.fr/images/hero/home-page-hero.png">
+  <link rel="canonical" href="https://drageeparis.fr/">
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#965F36">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+  <header class="header" id="header">
+    <div class="header__container">
+      <button class="header__menu-toggle" id="drawer-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <a href="/" class="header__logo" aria-label="Dragée Paris, Accueil">Dragée Paris</a>
+      <div class="header__actions">
+        <div class="header__socials">
+          <a href="https://www.instagram.com/drageeparis/" class="header__social" aria-label="Instagram Dragée Paris" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.tiktok.com/@drageeparis" class="header__social" aria-label="TikTok Dragée Paris" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.02v11.9a2.42 2.42 0 1 1-2.42-2.42c.25 0 .5.04.72.11V9.5a5.44 5.44 0 0 0-.72-.05 5.44 5.44 0 1 0 5.44 5.44V8.6a7.14 7.14 0 0 0 4.16 1.33V6.9a4.28 4.28 0 0 1-3.1-1.08z"/></svg></a>
+        </div>
+
+        <a href="contact.html" class="header__cta">Lancer ma création</a>
+      <a href="contact.html" class="header__cta-icon" aria-label="Lancer ma création">
+        <svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg>
+      </a>
+      </div>
+    </div>
+  </header>
+  <!-- Drawer navigation -->
+  <div class="drawer" id="drawer" aria-hidden="true" inert>
+    <div class="drawer__content">
+      <div class="drawer__left">
+        <button class="drawer__close" id="drawer-close">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          Fermer
+        </button>
+        <ul class="drawer__main-list">
+          <li class="drawer__main-item" data-sub="sub-boutique">
+            <button class="drawer__main-btn" type="button">
+              Les dragées
+              <svg class="drawer__main-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </li>
+          <li class="drawer__main-item" data-sub="sub-atelier">
+            <button class="drawer__main-btn" type="button">
+              Les créations
+              <svg class="drawer__main-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </li>
+          <li class="drawer__main-item">
+            <a href="a-propos.html" class="drawer__main-btn">L'atelier</a>
+          </li>
+          <li class="drawer__main-item">
+            <a href="message.html" class="drawer__main-btn">Contact</a>
+          </li>
+        </ul>
+        <a href="contact.html" class="drawer__cta">Lancer ma création</a>
+        <div class="drawer__secondary">
+          <a href="mentions-legales.html">Mentions légales</a>
+        </div>
+      </div>
+      <div class="drawer__divider"></div>
+      <div class="drawer__right">
+        <button class="drawer__back" id="drawer-back" aria-label="Retour au menu principal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Retour
+        </button>
+        <div class="drawer__sub" id="sub-boutique" aria-hidden="true" inert>
+          <a href="boutique.html" class="drawer__sub-link drawer__sub-link--all">Toutes les dragées</a>
+          <div class="drawer__sub-sep"></div>
+          <a href="boutique-avola.html" class="drawer__sub-link">Amandes Avola</a>
+          <a href="boutique-traditionnelles.html" class="drawer__sub-link">Amandes traditionnelles</a>
+          <a href="boutique-chocolats.html" class="drawer__sub-link">Chocolats</a>
+          <a href="boutique-gourmandes.html" class="drawer__sub-link">Chocolats amandes</a>
+        </div>
+        <div class="drawer__sub" id="sub-atelier" aria-hidden="true" inert>
+          <a href="atelier.html" class="drawer__sub-link drawer__sub-link--all">Toutes les collections</a>
+          <div class="drawer__sub-sep"></div>
+
+          <div class="drawer__sub-group">
+            <button class="drawer__sub-group-trigger" type="button" aria-expanded="false">
+              Premiers instants
+              <svg class="drawer__sub-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="drawer__sub-group-panel">
+              <a href="atelier.html?filter=premiers-instants&sub=naissance" class="drawer__sub-link">Naissance</a>
+              <a href="atelier.html?filter=premiers-instants&sub=gender-reveal" class="drawer__sub-link">Gender reveal</a>
+              <a href="atelier.html?filter=premiers-instants&sub=baby-shower" class="drawer__sub-link">Baby shower</a>
+            </div>
+          </div>
+
+          <a href="atelier.html?filter=mariage" class="drawer__sub-link">Mariage</a>
+
+          <div class="drawer__sub-group">
+            <button class="drawer__sub-group-trigger" type="button" aria-expanded="false">
+              Fêtes religieuses
+              <svg class="drawer__sub-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="drawer__sub-group-panel">
+              <a href="atelier.html?filter=fetes-religieuses&sub=bapteme" class="drawer__sub-link">Baptême</a>
+              <a href="atelier.html?filter=fetes-religieuses&sub=communion" class="drawer__sub-link">Communion</a>
+            </div>
+          </div>
+
+          <a href="atelier.html?filter=anniversaires" class="drawer__sub-link">Anniversaires</a>
+
+          <div class="drawer__sub-group">
+            <button class="drawer__sub-group-trigger" type="button" aria-expanded="false">
+              Moments précieux
+              <svg class="drawer__sub-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="drawer__sub-group-panel">
+              <a href="atelier.html?filter=moments-precieux&sub=diplome" class="drawer__sub-link">Diplôme</a>
+              <a href="atelier.html?filter=moments-precieux&sub=retraite" class="drawer__sub-link">Retraite</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header__safe-area" aria-hidden="true"></div>
+  <main id="main">
+
+    <section class="hero" aria-label="Bannière principale">
+      <div class="hero__bg">
+        <picture>
+          <source type="image/webp" srcset="./images/hero/home-page-hero-800w.webp 800w, ./images/hero/home-page-hero-1200w.webp 1200w, ./images/hero/home-page-hero.webp 1672w" sizes="100vw">
+          <img src="./images/hero/home-page-hero.png" alt="Amandes enrobées de chocolat Dragée Paris" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__content">
+        <span class="hero__eyebrow">Créations artisanales · Île-de-France</span>
+        <h1 class="hero__title-main">Sublimez vos plus belles célébrations</h1>
+      </div>
+      <div class="hero__arrow" aria-hidden="true">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 10,14 17,6"/></svg>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 10,14 17,6"/></svg>
+      </div>
+    </section>
+
+    <div class="band" aria-hidden="true">
+      <div class="band__track">
+        <span class="band__item">Fabrication artisanale <span class="band__sep"></span></span>
+        <span class="band__item">Mariage <span class="band__sep"></span></span>
+        <span class="band__item">Naissance <span class="band__sep"></span></span>
+        <span class="band__item">Réception <span class="band__sep"></span></span>
+        <span class="band__item">Anniversaire <span class="band__sep"></span></span>
+        <span class="band__item">Dragées sur mesure <span class="band__sep"></span></span>
+        <span class="band__item">Emballage écrin <span class="band__sep"></span></span>
+        <span class="band__item">Île-de-France <span class="band__sep"></span></span>
+        <span class="band__item">Fabrication artisanale <span class="band__sep"></span></span>
+        <span class="band__item">Mariage <span class="band__sep"></span></span>
+        <span class="band__item">Naissance <span class="band__sep"></span></span>
+        <span class="band__item">Réception <span class="band__sep"></span></span>
+        <span class="band__item">Anniversaire <span class="band__sep"></span></span>
+        <span class="band__item">Dragées sur mesure <span class="band__sep"></span></span>
+        <span class="band__item">Emballage écrin <span class="band__sep"></span></span>
+        <span class="band__item">Île-de-France <span class="band__sep"></span></span>
+      </div>
+    </div>
+
+    <section class="cedric-products fade-in" aria-label="Nos incontournables">
+      <div class="cedric-products__header">
+        <h2 class="cedric-products__title">Les incontournables</h2>
+        <a href="atelier.html" class="cedric-products__link">Découvrir l'Atelier →</a>
+      </div>
+      <div class="cedric-products__grid">
+        <a href="produit-mariage-romantique.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <source type="image/webp" srcset="./images/mariage/mariage-boheme-nature.webp">
+              <img src="./images/mariage/mariage-boheme-nature.png" alt="Dragées Mariage Romantique" loading="lazy">
+            </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Mariage Romantique</span>
+              <span class="prod-card__weight">7 dragées</span>
+            </div>
+            <p class="prod-card__price">À partir de 5,50 €</p>
+          </div>
+        </a>
+        <a href="produit-mariage-douceur.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <source type="image/webp" srcset="./images/mariage/mariage-lin-beige.webp">
+              <img src="./images/mariage/mariage-lin-beige.png" alt="Dragées Mariage Douceur" loading="lazy">
+            </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Mariage Douceur</span>
+              <span class="prod-card__weight">5 dragées</span>
+            </div>
+            <p class="prod-card__price">À partir de 5 €</p>
+          </div>
+        </a>
+        <a href="produit-mariage-poetique.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <source type="image/webp" srcset="./images/mariage/mariage-duo-nature.webp">
+              <img src="./images/mariage/mariage-duo-nature.png" alt="Dragées Mariage Poétique" loading="lazy">
+            </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Mariage Poétique</span>
+              <span class="prod-card__weight">10 dragées</span>
+            </div>
+            <p class="prod-card__price">À partir de 4,50 €</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="cedric-products fade-in" aria-label="Une sélection de nos dragées Boutique">
+      <div class="cedric-products__header">
+        <h2 class="cedric-products__title">Nos dragées</h2>
+        <a href="boutique.html" class="cedric-products__link">Découvrir nos créations →</a>
+      </div>
+      <div class="cedric-products__grid">
+        <a href="produit-chocolat-bleu-poudre.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <img src="./images/dragee-chocolat/dragee-chocolat-5.png" alt="Dragées Chocolat Bleu Poudré" loading="lazy">
+        </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Chocolat Bleu Poudré</span>
+              <span class="prod-card__weight">250 g</span>
+            </div>
+            <p class="prod-card__price">À partir de 7,50 €</p>
+          </div>
+        </a>
+        <a href="produit-avola-eminence.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <img src="./images/amandes-avola/avola-eminence.png" alt="Dragées Avola Éminence" loading="lazy">
+        </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Avola Éminence</span>
+              <span class="prod-card__weight">500 g</span>
+            </div>
+            <p class="prod-card__price">À partir de 34 €</p>
+          </div>
+        </a>
+        <a href="produit-chocolat-vert-sauge.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <img src="./images/dragee-chocolat/chocolat-vert-sauge.png" alt="Prali Amande Chocolat Noir Vert Sauge" loading="lazy">
+        </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Prali Amande Chocolat Noir Vert Sauge</span>
+              <span class="prod-card__weight">250 g</span>
+            </div>
+            <p class="prod-card__price">À partir de 11 €</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="cedric-split cedric-split--savoir-faire fade-in" aria-label="Notre savoir-faire">
+      <div class="cedric-split__visual">
+        <video autoplay muted loop playsinline aria-hidden="true">
+          <source src="./images/vid-savoir1-web.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="cedric-split__body fade-in fade-in--delay-1">
+        <h2 class="cedric-split__title">Notre savoir-faire</h2>
+        <p class="cedric-split__text">Chez Dragée Paris, chaque création est l'expression d'un savoir-faire artisanal transmis avec passion. Ici, la précision du geste, l'équilibre des couleurs et la recherche de la finition parfaite trouvent leur inspiration dans la confiserie française.</p>
+        <p class="cedric-split__text">Nous enrobons chaque dragée à la main dans notre atelier d'Île-de-France, avec les meilleures amandes sélectionnées pour leur goût et leur texture. Chaque commande est unique, pensée pour vous.</p>
+        <p class="cedric-split__text">Plus qu'un atelier de dragées, Dragée Paris célèbre une vision de l'événement où la créativité, la précision et la passion s'unissent pour proposer une nouvelle façon de sublimer vos célébrations.</p>
+        <a href="a-propos.html" class="cedric-split__cta">Voir notre histoire →</a>
+      </div>
+    </section>
+
+    <section class="garanties" aria-label="Nos engagements">
+      <p class="garanties__label">Votre projet entre de bonnes mains</p>
+      <div class="garanties__grid garanties__grid--4">
+
+        <div class="garantie-item fade-in">
+          <div class="garantie-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M28 6 L34 12 L14 32 L8 34 L10 28 Z"/>
+              <path d="M22 12 L28 18"/>
+            </svg>
+          </div>
+          <h3 class="garantie-item__title">Sur mesure</h3>
+          <p class="garantie-item__desc">Couleurs, emballages, inscriptions, chaque création est conçue uniquement pour vous, selon vos envies et votre événement.</p>
+        </div>
+
+        <div class="garantie-item fade-in fade-in--delay-1">
+          <div class="garantie-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="20" cy="20" r="14"/>
+              <path d="M20 10 L20 20 L28 26"/>
+            </svg>
+          </div>
+          <h3 class="garantie-item__title">Suivi pas à pas</h3>
+          <p class="garantie-item__desc">Vous validez chaque étape de la personnalisation avec nous, maquettes, couleurs, matières. Rien ne démarre sans votre accord.</p>
+        </div>
+
+        <div class="garantie-item fade-in fade-in--delay-2">
+          <div class="garantie-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 10 L20 4 L34 10 L34 28 L20 34 L6 28 Z"/>
+              <path d="M6 10 L20 16 L34 10"/>
+              <path d="M20 16 L20 34"/>
+              <path d="M13 7 L27 13"/>
+            </svg>
+          </div>
+          <h3 class="garantie-item__title">Livraison soignée</h3>
+          <p class="garantie-item__desc">Expédition protégée en France et en Europe.</p>
+          <ul class="garantie-item__list">
+            <li>Livraison Mondial Relay ou Chronopost.</li>
+            <li>Retrait possible en Île-de-France.</li>
+          </ul>
+        </div>
+
+        <div class="garantie-item fade-in fade-in--delay-3">
+          <div class="garantie-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 8 C10 8 8 8 8 10 L8 14 C8 26 22 34 28 34 L32 34 C34 34 34 32 34 32 L34 28 C34 28 34 26 32 26 L27 24 C27 24 25 24 24 26 L23 28 C20 27 15 22 14 19 L16 18 C18 17 18 15 18 15 L16 10 C16 10 16 8 14 8 Z"/>
+            </svg>
+          </div>
+          <h3 class="garantie-item__title">Un après, toujours</h3>
+          <p class="garantie-item__desc">Un doute après réception ? Nous sommes joignables et répondons sous 24 h. Chaque commande est suivie jusqu'à votre entière satisfaction.</p>
+        </div>
+
+      </div>
+      <div class="garanties__dots" aria-hidden="true">
+        <button class="garanties__dot is-active" data-idx="0" aria-label="Slide 1" tabindex="-1"></button>
+        <button class="garanties__dot" data-idx="1" aria-label="Slide 2" tabindex="-1"></button>
+        <button class="garanties__dot" data-idx="2" aria-label="Slide 3" tabindex="-1"></button>
+        <button class="garanties__dot" data-idx="3" aria-label="Slide 4" tabindex="-1"></button>
+      </div>
+    </section>
+
+    <div class="illustration-banner fade-in" role="img" aria-label="Coffrets et dragées personnalisés Dragée Paris">
+      <picture>
+          <source type="image/webp" srcset="./images/coffrets-naissance-800w.webp 800w, ./images/coffrets-naissance.webp 1376w" sizes="(max-width: 768px) 100vw, 50vw">
+          <img src="./images/coffrets-naissance.jpg" alt="Coffrets et dragées personnalisés pour naissance, Dragée Paris" loading="lazy">
+        </picture>
+    </div>
+
+    <section class="reassurances" aria-label="Nos engagements en bref">
+      <div class="reassurances__grid">
+        <div class="reassurance-item"><strong>Fabrication artisanale</strong> à la main, dans notre atelier en Île-de-France</div>
+        <div class="reassurance-item"><strong>Sur mesure</strong>, chaque création est conçue uniquement pour vous</div>
+        <div class="reassurance-item"><strong>Livraison soignée</strong> en France et en Europe</div>
+      </div>
+    </section>
+
+    <section class="faq" aria-label="Questions fréquentes">
+      <div class="collections__intro fade-in">
+        <p class="collections__intro-title">Questions fréquentes</p>
+        <p class="collections__intro-sub">Délais · Personnalisation · Livraison</p>
+      </div>
+      <div class="faq__list fade-in fade-in--delay-1">
+          <div class="faq__item">
+            <button class="faq__question" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+              <span>Quel est le délai de fabrication ?</span>
+              <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="faq__answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <div class="faq__answer-inner">2 à 6 semaines.</div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+              <span>Quelle quantité minimum peut-on commander ?</span>
+              <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="faq__answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <div class="faq__answer-inner">Chaque boîte est confectionnée sur mesure, sans quantité minimale. Que vous souhaitiez une création unique ou plusieurs centaines de boîtes pour un mariage, un baptême ou un événement professionnel, nous vous accompagnons dans chaque projet.</div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+              <span>Comment se déroule la personnalisation ?</span>
+              <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="faq__answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <div class="faq__answer-inner">À la suite de votre demande de devis, nous vous accompagnons dans le choix des couleurs, des finitions, des accessoires et de la personnalisation. Avant toute fabrication, nous réalisons un visuel de votre création, soumis à votre validation, afin de vous permettre d'approuver chaque détail en toute sérénité.</div>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+              <span>Livrez-vous en dehors de l'Île-de-France ?</span>
+              <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="faq__answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <div class="faq__answer-inner">Nous livrons vos créations en France et en Europe, avec un emballage soigné et renforcé. Les frais de livraison sont calculés selon la destination et le volume de la commande. Une remise en main propre est possible en Île-de-France, sur rendez-vous.</div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="prefooter">
+      <span class="prefooter__logo">Dragée <br>Paris</span>
+      <div class="prefooter__social">
+        <a href="https://www.instagram.com/drageeparis/" rel="noopener noreferrer" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@drageeparis" rel="noopener noreferrer" target="_blank">TikTok</a>
+        <a href="https://www.facebook.com/drageeparis" rel="noopener noreferrer" target="_blank">Facebook</a>
+      </div>
+    </div>
+
+    <div class="footer__inner">
+      <nav aria-label="Footer navigation pages">
+        <span class="footer__col-title">Pages</span>
+        <ul class="footer__nav-list">
+          <li><a href="boutique.html">Les dragées</a></li>
+          <li><a href="atelier.html">Les créations</a></li>
+          <li><a href="a-propos.html">L'atelier</a></li>
+          <li><a href="message.html">Contact</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span class="footer__col-title">Nous contacter</span>
+        <ul class="footer__contact-list">
+          <li><a href="tel:+33608671443">06 08 67 14 43</a></li>
+          <li><a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer__col-title">Notre atelier</span>
+        <address class="footer__address">145 Ter, Av. Jacques Chirac<br>91200 Athis-Mons</address>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2024 Dragée Paris · Artisan confiseur en Île-de-France · Tous droits réservés</p>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Dragée Paris",
+    "description": "Artisan confiseur en Île-de-France, spécialisé dans les dragées personnalisables pour mariages, naissances et réceptions. Créations faites à la main.",
+    "url": "https://drageeparis.fr/",
+    "telephone": "+33608671443",
+    "email": "drageeparis@gmail.com",
+    "image": "https://drageeparis.fr/images/hero/home-page-hero.png",
+    "priceRange": "€€",
+    "currenciesAccepted": "EUR",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "145 Ter, Av. Jacques Chirac",
+      "addressLocality": "Athis-Mons",
+      "postalCode": "91200",
+      "addressRegion": "Île-de-France",
+      "addressCountry": "FR"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "France"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/drageeparis/",
+      "https://www.tiktok.com/@drageeparis",
+      "https://www.facebook.com/drageeparis"
+    ]
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Environnement
+.env
+.env.local
+.env*.local
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Node (si utilisé)
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Outillage assistant IA (config locale, hors dépôt du site)
+.agents/
+emilkowalski/
+skills-lock.json

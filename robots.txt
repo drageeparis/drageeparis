@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Pages de redirection — pas de valeur d'indexation
+Disallow: /boutique-avola.html
+Disallow: /boutique-chocolats.html
+Disallow: /boutique-gourmandes.html
+Disallow: /boutique-traditionnelles.html
+
+Sitemap: https://drageeparis.fr/sitemap.xml
