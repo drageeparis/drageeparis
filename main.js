@@ -505,34 +505,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
-  /* ---- 11. Bannière RGPD ---- */
-  (function() {
-    if (localStorage.getItem('dp-consent')) return;
-    const banner = document.createElement('div');
-    banner.className = 'rgpd-banner';
-    banner.setAttribute('role', 'region');
-    banner.setAttribute('aria-label', 'Confidentialité');
-    banner.innerHTML =
-      '<p class="rgpd-banner__text">' +
-        'Ce site utilise vos données uniquement pour traiter vos demandes — aucun cookie publicitaire. ' +
-        '<a href="mentions-legales.html#rgpd">En savoir plus</a>' +
-      '</p>' +
-      '<div class="rgpd-banner__actions">' +
-        '<button class="rgpd-banner__btn rgpd-banner__btn--accept" id="rgpd-accept">Accepter</button>' +
-        '<button class="rgpd-banner__btn" id="rgpd-decline">Fermer</button>' +
-      '</div>';
-    document.body.appendChild(banner);
-    setTimeout(() => banner.classList.add('is-visible'), 900);
-
-    const dismiss = (val) => {
-      localStorage.setItem('dp-consent', val);
-      banner.classList.remove('is-visible');
-      setTimeout(() => banner.remove(), 450);
-    };
-    document.getElementById('rgpd-accept').addEventListener('click', () => dismiss('accepted'));
-    document.getElementById('rgpd-decline').addEventListener('click', () => dismiss('declined'));
-  })();
-
   /* ---- 12. Carrousel garanties (mobile, page d'accueil) ---- */
   (function() {
     var grid = document.querySelector('.garanties__grid--4');
