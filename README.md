@@ -35,7 +35,7 @@ drageeparis/
     ├── mariage/, premiers-instants/, fetes-religieuses/, anniversaire/, naissance/, bapteme/  # Photos Atelier par occasion
     ├── chocolat-amande/, amandes-avola/, amandes-traditionnelles/, dragee-chocolat/           # Photos Boutique par famille
     ├── images-library/, illustration-habillage/, hero/                                        # Visuels homepage / pages institutionnelles
-    └── artisanat_1.png, illustration3.png                                                     # Photos atelier / à propos
+    └── artisanat_1.png                                                                        # Photos atelier / à propos
 ```
 
 **Chaque fiche produit est indépendante** (pas de templating serveur) : modifier le header, le footer ou la structure d'une page implique de répercuter le changement sur les fichiers concernés à la main. Header et footer sont volontairement tenus identiques sur presque toutes les pages — vérifier qu'un changement ne casse pas cette cohérence avant de commiter.
