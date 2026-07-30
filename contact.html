@@ -558,8 +558,9 @@
               <span class="wizard__field-error">Veuillez saisir une adresse e-mail valide.</span>
             </div>
             <div class="wizard__field" id="field-tel">
-              <label class="wizard__label" for="w-tel">Téléphone <span style="font-size:9px;opacity:.55">(optionnel)</span></label>
-              <input class="wizard__input" type="tel" id="w-tel" name="telephone" autocomplete="tel" placeholder="06 00 00 00 00">
+              <label class="wizard__label" for="w-tel">Téléphone <span class="req">*</span></label>
+              <input class="wizard__input" type="tel" id="w-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00" required>
+              <span class="wizard__field-error">Veuillez indiquer un numéro de téléphone.</span>
             </div>
             <div class="form__honeypot" aria-hidden="true">
               <label for="w-company">Ne pas remplir ce champ</label>

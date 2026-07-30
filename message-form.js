@@ -20,12 +20,14 @@
   function validate() {
     var nom = document.getElementById('msg-nom').value.trim();
     var email = document.getElementById('msg-email').value.trim();
+    var tel = document.getElementById('msg-tel').value.trim();
     var message = document.getElementById('msg-message').value.trim();
     var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     var ok = true;
     ok = setError('msg-nom', 'err-nom', nom.length === 0) && ok;
     ok = setError('msg-email', 'err-email', !emailOk) && ok;
+    ok = setError('msg-tel', 'err-tel', tel.length === 0) && ok;
     ok = setError('msg-message', 'err-message', message.length === 0) && ok;
     return ok;
   }
@@ -36,6 +38,7 @@
 
     var nom     = document.getElementById('msg-nom').value.trim();
     var email   = document.getElementById('msg-email').value.trim();
+    var tel     = document.getElementById('msg-tel').value.trim();
     var message = document.getElementById('msg-message').value.trim();
     var gotcha  = document.getElementById('msg-company').value;
 
@@ -53,7 +56,7 @@
     fetch('https://formspree.io/f/xzdnpoez', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ 'Nom': nom, 'Email': email, 'Message': message, '_gotcha': gotcha })
+      body: JSON.stringify({ 'Nom': nom, 'Email': email, 'Téléphone': tel, 'Message': message, '_gotcha': gotcha })
     })
     .then(function(r) { return r.json().then(function(d) { return { ok: r.ok }; }); })
     .then(function(res) {

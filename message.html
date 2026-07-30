@@ -195,6 +195,11 @@
               </div>
             </div>
             <div class="form__group">
+              <label class="form__label" for="msg-tel">Téléphone <span class="required" aria-hidden="true">*</span></label>
+              <input class="form__input" type="tel" id="msg-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" required>
+              <span class="form__error" id="err-tel">Veuillez indiquer un numéro de téléphone.</span>
+            </div>
+            <div class="form__group">
               <label class="form__label" for="msg-message">Message <span class="required" aria-hidden="true">*</span></label>
               <textarea class="form__textarea msg-textarea" id="msg-message" name="message" placeholder="Votre message..." required></textarea>
               <span class="form__error" id="err-message">Veuillez saisir votre message.</span>

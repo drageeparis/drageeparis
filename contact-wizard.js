@@ -178,11 +178,14 @@
     var ok = true;
     var prenom = document.getElementById('w-prenom');
     var email  = document.getElementById('w-email');
+    var tel    = document.getElementById('w-tel');
     var fp = document.getElementById('field-prenom');
     var fe = document.getElementById('field-email');
+    var ft = document.getElementById('field-tel');
     if (!prenom.value.trim()) { fp.classList.add('has-error'); ok = false; } else { fp.classList.remove('has-error'); }
     var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRe.test(email.value.trim())) { fe.classList.add('has-error'); ok = false; } else { fe.classList.remove('has-error'); }
+    if (!tel.value.trim()) { ft.classList.add('has-error'); ok = false; } else { ft.classList.remove('has-error'); }
     return ok;
   }
 
@@ -222,7 +225,7 @@
         body: JSON.stringify({
           'Prénom': prenom,
           'Email': email,
-          'Téléphone': tel || 'Non renseigné',
+          'Téléphone': tel,
           'Division': data.division || 'Non précisée',
           'Dragées': data.dragees || 'Non précisé',
           'Produit consulté': data.produit || 'Non précisé',
