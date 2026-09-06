@@ -16,12 +16,18 @@
   /* Pré-remplit la création si on arrive depuis une fiche produit (?produit=...&image=...) */
   var params = new URLSearchParams(window.location.search);
   var produitParam = params.get('produit');
+  var categorieParam = params.get('categorie');
   var imageParamRaw = params.get('image');
   var imageParam = isSafeImageUrl(imageParamRaw) ? imageParamRaw : '';
   if (produitParam) {
     document.getElementById('at-produit').value = produitParam.slice(0, 200);
   }
-
+if (categorieParam) {
+  var categorieSelect = document.getElementById('at-categorie');
+  if (categorieSelect) {
+    categorieSelect.value = categorieParam;
+  }
+}
   function setError(inputId, errorId, show) {
     var input = document.getElementById(inputId);
     var error = document.getElementById(errorId);
