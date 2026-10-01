@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lancer ma création · Dragée Paris</title>
   <meta name="description" content="Lancez votre création personnalisée étape par étape, événement, quantité, date, couleurs et coordonnées. Réponse sous 48h.">
-  <link rel="stylesheet" href="style.css?v=20261002b">
+  <link rel="stylesheet" href="style.css?v=20261002c">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -142,8 +142,8 @@
     <div class="wizard-wrap">
 
       <!-- Barre de progression -->
-      <div class="wizard__bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="wizard-bar" aria-label="Progression">
-        <div class="wizard__bar-fill" id="wizard-bar-fill" style="width:14%"></div>
+      <div class="wizard__bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="17" id="wizard-bar" aria-label="Progression">
+        <div class="wizard__bar-fill" id="wizard-bar-fill" style="width:17%"></div>
       </div>
 
       <!-- Contenu du wizard -->
@@ -152,10 +152,10 @@
         <!-- Étape 1 : Occasion -->
         <div class="wizard__panel active" id="wizard-step-1">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 01 / 05</span>
+            <span class="wizard__step-label">Étape 01 / 06</span>
           </div>
           <h1 class="wizard__step-title">Racontez-nous<br>votre célébration</h1>
-          <p class="wizard__step-sub">Décrivez votre projet en deux minutes&nbsp;: nous vous adressons une proposition sur mesure sous 48&nbsp;h, gratuite et sans engagement. Une maquette vous est soumise avant toute fabrication.</p>
+          <p class="wizard__step-sub">Composez votre création en quelques étapes&nbsp;: nous vous adressons une proposition sur mesure sous 48&nbsp;h, gratuite et sans engagement. Une maquette vous est soumise avant toute fabrication.</p>
           <p class="wizard__question">Pour quelle occasion imaginez-vous votre création&nbsp;?</p>
 
           <div class="wizard__cards" role="group" aria-label="Occasion">
@@ -220,94 +220,56 @@
           <a href="commande-dragees.html" class="wizard__skip-link">Vous souhaitez uniquement des dragées au poids&nbsp;? Commandez-les ici →</a>
         </div>
 
-        <!-- Étape 2 : Votre création (contenant, avec ou sans dragées) -->
+        <!-- Étape 2 : Contenant (carrousel) -->
         <div class="wizard__panel" id="wizard-step-2">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 02 / 05</span>
+            <span class="wizard__step-label">Étape 02 / 06</span>
           </div>
-          <h2 class="wizard__step-title">Votre<br>création</h2>
-          <p class="wizard__step-sub">Quel contenant vous inspire&nbsp;? Plusieurs choix possibles, nous affinerons ensemble.</p>
-
-          <div class="wizard__cards wizard__cards--photo" role="group" aria-label="Contenant souhaité">
-            <label class="wizard__card wizard__photo-card">
-              <input type="checkbox" name="contenant" value="Pochon en tissu">
-              <div class="wizard__card-inner">
-                <picture class="wizard__photo">
-                  <source type="image/webp" srcset="./images/formulaire/contenant-pochon.webp">
-                  <img src="./images/formulaire/contenant-pochon.jpg" alt="" width="480" height="600" loading="lazy">
-                </picture>
-                <span class="wizard__card-name">Pochon en tissu</span>
-                <span class="wizard__card-sub">Lin, jute, coton</span>
+          <h2 class="wizard__step-title">Choisissez<br>votre contenant</h2>
+          <p class="wizard__step-sub">Faites défiler les contenants avec les flèches. Dragées, couleurs et étiquette se personnalisent ensuite.</p>
+          <div class="cfg-slot">
+          <!-- Scène du configurateur : déplacée par le script dans l'étape active -->
+          <div class="cfg-stage cfg-stage--choose" id="cfg-stage" data-containers="boite::Boîte en papier::Carton blanc, ruban satiné et fleurs séchées.|pot::Pot en verre::Un bocal transparent qui laisse voir les dragées.|tube::Tube::Les dragées empilées en colonne, sous un bouchon.|pochon::Pochon en tissu::Lin ou jute, noué d’un cordon.|bouquet::Bouquet de dragées::Des dragées enveloppées de tulle, montées à la main.">
+            <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><g id="cfg-dg"><ellipse rx="13" ry="8.5" fill="currentColor" stroke="rgba(82,54,42,0.24)" stroke-width=".8"/><ellipse cx="-4" cy="-3.2" rx="4.6" ry="1.9" fill="#fff" opacity=".55"/></g></defs></svg>
+            <div class="cfg-view">
+              <button type="button" class="cfg-arrow cfg-arrow--prev" id="cfg-prev" aria-label="Contenant précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <div class="cfg-viewport" id="cfg-viewport" aria-live="off">
+                <svg class="cfg-svg" data-key="boite" viewBox="0 0 400 400" role="img" aria-label="Boîte en papier"><ellipse cx="214" cy="360" rx="150" ry="12" fill="rgba(82,54,42,0.08)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F7F3EC" transform="translate(84 356) rotate(-18) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#EADCC2" transform="translate(338 358) rotate(20) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F1E8D8" transform="translate(362 342) rotate(-32) scale(0.9 0.9)"/><path d="M214,200 Q193.6,175.8 180,151.6" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(180 151.6) rotate(-20)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M214,200 Q215.2,171.4 216,142.8" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(216 142.8) rotate(2)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M214,200 Q233.2,176.3 246,152.7" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(246 152.7) rotate(18)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M214,200 Q199.7,173 192,146" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M192,147 L186.7,139.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M192,147 L196.1,136.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M192,147 L186.1,137.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M192,147 L194,141.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M192,147 L186.6,133.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M192,147 L194.5,139.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="186.7" cy="139.3" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="196.1" cy="136.3" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="186.1" cy="137.8" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="194" cy="141.8" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="186.6" cy="133.4" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="194.5" cy="139.4" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M214,200 Q225.7,171 232,142" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M232,143 L225.5,134.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M232,143 L231.3,133" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M232,143 L235.7,134.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M232,143 L230.8,140.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M232,143 L229.8,129.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M232,143 L225.8,132.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="225.5" cy="134.8" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="231.3" cy="133" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="235.7" cy="134.2" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="230.8" cy="140.4" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="229.8" cy="129.5" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="225.8" cy="132.1" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M214,200 Q211.4,179 210,158" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M210,159 L209.6,155.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M210,159 L206.6,143.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M210,159 L210.9,151.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M210,159 L211.4,151.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M210,159 L209.9,149" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M210,159 L207.9,149.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="209.6" cy="155.5" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="206.6" cy="143.8" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="210.9" cy="151.7" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="211.4" cy="151.4" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="209.9" cy="149" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="207.9" cy="149.7" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M214,200 Q233.5,181 244,162" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M244,163 L249.5,157.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M244,163 L238.6,147.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M244,163 L243.7,156" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M244,163 L243.3,148.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M244,163 L241.8,159.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M244,163 L237.8,157.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="249.5" cy="157.5" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="238.6" cy="147.9" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="243.7" cy="156" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="243.3" cy="148.8" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="241.8" cy="159.2" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="237.8" cy="157.8" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M214,200 Q190.6,182 178,164" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M178,165 L178.1,156" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M178,165 L177.9,154.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M178,165 L178.2,156" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M178,165 L183,152.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M178,165 L184.2,149.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M178,165 L178.2,158.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="178.1" cy="156" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="177.9" cy="154.7" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="178.2" cy="156" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="183" cy="152.3" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="184.2" cy="149.8" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="178.2" cy="158.7" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><polygon points="264,214 308,192 308,334 264,356" fill="#EDE4D8" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><polygon points="120,214 164,192 308,192 264,214" fill="#F6F0E8" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><rect x="120" y="214" width="144" height="142" fill="#FCF9F4" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><polygon points="186,214 230,192 242,192 198,214" fill="#D3BD95" stroke="#52362A" stroke-width=".9" stroke-linejoin="round"/><polygon points="138,205 284,205 290,201 144,201" fill="#D3BD95" stroke="#52362A" stroke-width=".9" stroke-linejoin="round"/><path d="M212,202 C205.6,212.6 200.3,223.1 196.2,233.6 L204.6,232.6 C207.7,222.1 210.8,212.6 214,204 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M216,202 C223.4,211.6 230.8,221 237.1,229.4 L228.7,232.6 C224.5,222.1 219.2,212.6 214,204 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M214,200 C199.3,182.2 176.2,183.2 179.3,196.8 C182.5,208.4 201.4,205.2 214,200 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M214,200 C228.7,181.1 253.9,184.2 249.7,197.9 C245.5,209.4 226.6,205.2 214,200 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M186.7,195.8 C195.1,193.7 205.6,196.8 211,200" fill="none" stroke="#B99E72" stroke-width=".8"/><path d="M242.3,196.8 C232.9,193.7 222.4,196.8 217,200" fill="none" stroke="#B99E72" stroke-width=".8"/><ellipse cx="214" cy="200" rx="5.8" ry="4.7" fill="#D3BD95" stroke="#52362A" stroke-width="1"/><g class="cfg-tag" data-r="40" transform="translate(192 286)"><circle r="40" fill="#FFFDF9" stroke="#965F36" stroke-width="1"/><circle r="36.5" fill="none" stroke="rgba(150,95,54,0.35)" stroke-width=".7"/><text class="cfg-tag__l1" text-anchor="middle" y="-0.8" font-size="14.4">Vos prénoms</text><text class="cfg-tag__l2" text-anchor="middle" y="15.2" font-size="8">jj.mm.aaaa</text></g></svg><svg class="cfg-svg" data-key="pot" viewBox="0 0 400 400" role="img" aria-label="Pot en verre"><ellipse cx="200" cy="362" rx="118" ry="11" fill="rgba(82,54,42,0.08)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F7F3EC" transform="translate(78 356) rotate(-16) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#EADCC2" transform="translate(322 358) rotate(18) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F1E8D8" transform="translate(346 344) rotate(-30) scale(0.9 0.9)"/><path d="M200,184 Q178.6,159.8 164.3,135.6" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(164.3 135.6) rotate(-20)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,184 Q201.3,155.4 202.1,126.8" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(202.1 126.8) rotate(2)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,184 Q220.2,160.3 233.6,136.7" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(233.6 136.7) rotate(18)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,184 Q185,157 176.9,130" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M176.9,131 L180.4,126.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M176.9,131 L173.7,119.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M176.9,131 L178.6,128.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M176.9,131 L178.7,118.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M176.9,131 L174.5,121.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M176.9,131 L180.6,122.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="180.4" cy="126.7" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="173.7" cy="119.1" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="178.6" cy="128.2" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="178.7" cy="118.2" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="174.5" cy="121.9" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="180.6" cy="122.1" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,184 Q212.3,155 218.9,126" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M218.9,127 L220.3,117.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M218.9,127 L228.8,119.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M218.9,127 L219.4,118.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M218.9,127 L216.9,115.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M218.9,127 L220.7,116.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M218.9,127 L222,117.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="220.3" cy="117.7" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="228.8" cy="119.2" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="219.4" cy="118.9" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="216.9" cy="115.7" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="220.7" cy="116.8" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="222" cy="117.4" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,184 Q197.3,163 195.8,142" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M195.8,143 L204.2,130.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.8,143 L196.5,133.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.8,143 L192.3,132.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.8,143 L194.5,133.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.8,143 L197.4,137.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.8,143 L196.6,137.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="204.2" cy="130.5" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="196.5" cy="133.6" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="192.3" cy="132.1" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="194.5" cy="133.8" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="197.4" cy="137.3" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="196.6" cy="137.6" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,184 Q220.5,165 231.5,146" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M231.5,147 L229.5,131.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M231.5,147 L235.6,145.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M231.5,147 L233.8,143" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M231.5,147 L237.9,141.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M231.5,147 L235.6,142.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M231.5,147 L230.3,132" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="229.5" cy="131.5" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="235.6" cy="145.3" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="233.8" cy="143" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="237.9" cy="141.3" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="235.6" cy="142.6" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="230.3" cy="132" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,184 Q175.4,166 162.2,148" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M162.2,149 L155.6,145.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M162.2,149 L163.4,138.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M162.2,149 L166.6,136.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M162.2,149 L171.4,142" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M162.2,149 L162.1,142.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M162.2,149 L157,142.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="155.6" cy="145.2" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="163.4" cy="138.6" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="166.6" cy="136.3" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="171.4" cy="142" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="162.1" cy="142.4" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="157" cy="142.2" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><defs><clipPath id="cfg-clip-pot"><path d="M164,190 L164,204 C116,214 106,256 108,298 C110,346 146,362 200,362 C254,362 290,346 292,298 C294,256 284,214 236,204 L236,190 Z"/></clipPath></defs><g clip-path="url(#cfg-clip-pot)" class="cfg-fill"><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(110.9 352.6) rotate(10.6) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(139.9 352.4) rotate(5.8) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(162.3 352.3) rotate(-5.7) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(187.5 353.7) rotate(22.9) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(218.7 354.5) rotate(5.8) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(242.5 353.6) rotate(33.3) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(268.3 352.5) rotate(-5.7) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(122.7 340.2) rotate(22.1) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(148.6 341.3) rotate(-21.8) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(177.3 339.3) rotate(-30.8) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(203 341.1) rotate(19.4) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(229.5 340.8) rotate(-14) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(256.2 340) rotate(5.2) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(281 340.4) rotate(-3.6) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(114.9 326.5) rotate(-5.7) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(135.9 328) rotate(-32.3) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(161.5 328.2) rotate(20.2) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(189 327.4) rotate(-0.2) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(213.4 326.4) rotate(-16.1) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(243 326.2) rotate(14.1) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(268.5 328.7) rotate(-3.8) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(124.3 315.7) rotate(-33.4) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(150.1 315.4) rotate(-0.4) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(178.6 313.5) rotate(-17.7) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(205.5 315) rotate(-23.4) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(229.3 316.5) rotate(22.3) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(253.7 314.7) rotate(-9.9) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(283.7 313.6) rotate(-22.7) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(113 300) rotate(23.2) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(136.6 300) rotate(-5.7) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(164.7 301.3) rotate(-26.2) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(192.7 302.6) rotate(16.8) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(218.4 303.1) rotate(26.2) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(241.4 301.6) rotate(-27.8) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(267.4 300.8) rotate(33.9) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(123 288.4) rotate(-31.3) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(151.4 289.1) rotate(31.4) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(174.2 290.5) rotate(8) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(203.8 290.8) rotate(7.2) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(226.7 290.4) rotate(34.5) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(254.9 288.2) rotate(-24.9) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(280.1 288.1) rotate(23) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(112.1 274.8) rotate(31.6) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(135.9 276.2) rotate(-33.1) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(162.8 276.6) rotate(-28.6) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(190.1 277.6) rotate(-10.1) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(216.2 277.1) rotate(-11.9) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(242.7 277.2) rotate(18.1) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(269.8 277.3) rotate(16.8) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(123.2 264) rotate(16.2) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(152.7 263.9) rotate(-21.4) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(179.7 263.8) rotate(30.6) scale(1 1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(205.7 263.5) rotate(-19.6) scale(0.9 0.9)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(228.8 263.4) rotate(-1.2) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(257 263.9) rotate(10.7) scale(1.1 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(278.5 264.6) rotate(28.7) scale(1.1 1.1)"/></g><path d="M164,190 L164,204 C116,214 106,256 108,298 C110,346 146,362 200,362 C254,362 290,346 292,298 C294,256 284,214 236,204 L236,190 Z" fill="rgba(255,255,255,0.30)" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><path d="M128,250 C120,280 122,318 140,340" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M264,232 C273,246 277,260 278,272" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/><rect x="157" y="177" width="86" height="15" rx="6" fill="rgba(255,255,255,0.55)" stroke="#52362A" stroke-width="1.3"/><rect x="164" y="193" width="72" height="9" fill="#D3BD95" stroke="#52362A" stroke-width=".9"/><path d="M198,199 C192.8,207.8 188.3,216.8 184.7,225.8 L191.9,224.9 C194.6,215.9 197.3,207.8 200,201 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M202,199 C208.1,206.9 214.4,215 219.8,222.2 L212.6,224.9 C209,215.9 204.5,207.8 200,201 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M200,197 C187.4,181.7 167.6,182.6 170.3,194.3 C173,204.2 189.2,201.5 200,197 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M200,197 C212.6,180.8 234.2,183.5 230.6,195.2 C227,205.1 210.8,201.5 200,197 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M176.6,193.4 C183.8,191.6 192.8,194.3 197,197" fill="none" stroke="#B99E72" stroke-width=".8"/><path d="M224.3,194.3 C216.2,191.6 207.2,194.3 203,197" fill="none" stroke="#B99E72" stroke-width=".8"/><ellipse cx="200" cy="197" rx="5" ry="4" fill="#D3BD95" stroke="#52362A" stroke-width="1"/><path d="M200,203 C200,213 200,222 200,234" fill="none" stroke="#B5976B" stroke-width="1"/><g class="cfg-tag" data-r="34" transform="translate(200 268)"><circle r="34" fill="#FFFDF9" stroke="#965F36" stroke-width="1"/><circle r="30.5" fill="none" stroke="rgba(150,95,54,0.35)" stroke-width=".7"/><text class="cfg-tag__l1" text-anchor="middle" y="-0.7" font-size="12.2">Vos prénoms</text><text class="cfg-tag__l2" text-anchor="middle" y="12.9" font-size="6.8">jj.mm.aaaa</text></g></svg><svg class="cfg-svg" data-key="tube" viewBox="0 0 400 400" role="img" aria-label="Tube"><ellipse cx="206" cy="362" rx="100" ry="10" fill="rgba(82,54,42,0.08)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F1E8D8" transform="translate(122 356) rotate(-14) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F7F3EC" transform="translate(292 358) rotate(18) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#EADCC2" transform="translate(316 344) rotate(-30) scale(0.9 0.9)"/><path d="M200,140 Q182.4,117 170.9,94" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(170.9 94) rotate(-20)"><path d="M0,0 C-6.5,-16.5 -5.2,-39.7 0,-55.1 C5.2,-39.7 6.5,-16.5 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.4 L0,-49.6" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,140 Q201,112.8 201.7,85.7" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(201.7 85.7) rotate(2)"><path d="M0,0 C-6.5,-16.5 -5.2,-39.7 0,-55.1 C5.2,-39.7 6.5,-16.5 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.4 L0,-49.6" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,140 Q216.6,117.5 227.4,95.1" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(227.4 95.1) rotate(18)"><path d="M0,0 C-6.5,-16.5 -5.2,-39.7 0,-55.1 C5.2,-39.7 6.5,-16.5 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.4 L0,-49.6" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,140 Q187.6,114.5 181.2,89.1" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M181.2,89.6 L182.3,81.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M181.2,89.6 L176.1,84.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M181.2,89.6 L181.9,81.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M181.2,89.6 L182,86.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M181.2,89.6 L185.4,85.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M181.2,89.6 L180.5,80.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="182.3" cy="81.2" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="176.1" cy="84.3" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="181.9" cy="81.8" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="182" cy="86.8" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="185.4" cy="85.6" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="180.5" cy="80.2" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,140 Q210.1,112.7 215.4,85.3" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M215.4,85.9 L217.2,78.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M215.4,85.9 L212.6,83.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M215.4,85.9 L208.5,77.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M215.4,85.9 L219.3,79.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M215.4,85.9 L218.1,74" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M215.4,85.9 L223.3,75" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="217.2" cy="78.1" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="212.6" cy="83.8" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="208.5" cy="77.4" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="219.3" cy="79.6" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="218.1" cy="74" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="223.3" cy="75" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,140 Q197.8,120.2 196.6,100.5" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M196.6,101 L191.2,90.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M196.6,101 L197.7,90.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M196.6,101 L191.7,87" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M196.6,101 L198.1,91.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M196.6,101 L193.2,88.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M196.6,101 L187.4,92.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="191.2" cy="90.4" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="197.7" cy="90.6" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="191.7" cy="87" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="198.1" cy="91.7" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="193.2" cy="88.7" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="187.4" cy="92.3" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,140 Q216.9,122.2 225.7,104.3" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M225.7,104.9 L220.2,95.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M225.7,104.9 L230.4,90.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M225.7,104.9 L228.2,94.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M225.7,104.9 L229.5,95.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M225.7,104.9 L225.3,97" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M225.7,104.9 L224.2,96.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="220.2" cy="95.5" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="230.4" cy="90.6" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="228.2" cy="94.4" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="229.5" cy="95.3" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="225.3" cy="97" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="224.2" cy="96.2" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,140 Q179.8,123.1 169.2,106.2" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M169.2,106.8 L162.4,96.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M169.2,106.8 L169.1,91.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M169.2,106.8 L167.2,105.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M169.2,106.8 L162.7,95.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M169.2,106.8 L169.5,91.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M169.2,106.8 L168.7,101" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="162.4" cy="96.5" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="169.1" cy="91.6" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="167.2" cy="105.4" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="162.7" cy="95.9" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="169.5" cy="91.1" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="168.7" cy="101" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><defs><clipPath id="cfg-clip-tube"><rect x="177" y="151" width="46" height="210" rx="11"/></clipPath></defs><g clip-path="url(#cfg-clip-tube)" class="cfg-fill"><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(199.2 349) rotate(0.4) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(199.6 336.4) rotate(1) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(200.4 323.8) rotate(-4.3) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(198.4 311.2) rotate(3.4) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(199.2 298.6) rotate(-2.7) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(201.6 286) rotate(-0.3) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(201.1 273.4) rotate(-0.2) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(200.4 260.8) rotate(-3.5) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(200.4 248.2) rotate(3.7) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(200.1 235.6) rotate(2.4) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(200.5 223) rotate(-4.4) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(200.8 210.4) rotate(0.9) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(199.4 197.8) rotate(-4.7) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(201.2 185.2) rotate(-0.3) scale(1.6 1.1)"/><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(200.7 172.6) rotate(3.8) scale(1.6 1.1)"/></g><rect x="176" y="150" width="48" height="212" rx="12" fill="rgba(255,255,255,0.30)" stroke="#52362A" stroke-width="1.3"/><path d="M185,172 L185,344" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".75"/><rect x="171" y="136" width="58" height="17" rx="4" fill="rgba(255,255,255,0.6)" stroke="#52362A" stroke-width="1.3"/><rect x="176" y="156" width="48" height="9" fill="#D3BD95" stroke="#52362A" stroke-width=".9"/><path d="M224,162 C219.4,169.8 215.3,178 212.1,186.2 L218.6,185.4 C221.1,177.2 223.5,169.8 226,164 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M228,162 C233.4,169 239.1,176.4 244,183 L237.5,185.4 C234.2,177.2 230.1,169.8 226,164 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M226,160 C214.5,146.1 196.5,146.9 198.9,157.5 C201.4,166.6 216.2,164.1 226,160 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M226,160 C237.5,145.2 257.2,147.7 253.9,158.4 C250.6,167.4 235.8,164.1 226,160 Z" fill="#D3BD95" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M204.7,156.7 C211.2,155.1 219.4,157.5 223,160" fill="none" stroke="#B99E72" stroke-width=".8"/><path d="M248.1,157.5 C240.8,155.1 232.6,157.5 229,160" fill="none" stroke="#B99E72" stroke-width=".8"/><ellipse cx="226" cy="160" rx="4.5" ry="3.7" fill="#D3BD95" stroke="#52362A" stroke-width="1"/><path d="M228,166 C228,176 268,179 268,191" fill="none" stroke="#B5976B" stroke-width="1"/><g class="cfg-tag" data-r="31" transform="translate(268 222)"><circle r="31" fill="#FFFDF9" stroke="#965F36" stroke-width="1"/><circle r="27.5" fill="none" stroke="rgba(150,95,54,0.35)" stroke-width=".7"/><text class="cfg-tag__l1" text-anchor="middle" y="-0.6" font-size="11.2">Vos prénoms</text><text class="cfg-tag__l2" text-anchor="middle" y="11.8" font-size="6.2">jj.mm.aaaa</text></g></svg><svg class="cfg-svg" data-key="pochon" viewBox="0 0 400 400" role="img" aria-label="Pochon en tissu"><ellipse cx="200" cy="362" rx="112" ry="11" fill="rgba(82,54,42,0.08)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F1E8D8" transform="translate(92 356) rotate(-18) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#F7F3EC" transform="translate(316 358) rotate(20) scale(1 1)"/><use href="#cfg-dg" class="dg dg--sol" style="color:#EADCC2" transform="translate(340 344) rotate(-30) scale(0.9 0.9)"/><path d="M200,196 Q177.6,171.8 162.6,147.6" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(162.6 147.6) rotate(-20)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,196 Q201.3,167.4 202.2,138.8" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(202.2 138.8) rotate(2)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,196 Q221.1,172.3 235.2,148.7" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><g transform="translate(235.2 148.7) rotate(18)"><path d="M0,0 C-6.5,-17.4 -5.2,-41.8 0,-58 C5.2,-41.8 6.5,-17.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-4.6 L0,-52.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><path d="M200,196 Q184.3,169 175.8,142" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M175.8,143 L174.1,135.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M175.8,143 L180.4,140.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M175.8,143 L169.7,131.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M175.8,143 L172.2,133" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M175.8,143 L175.1,129.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M175.8,143 L177.1,128.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="174.1" cy="135.3" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="180.4" cy="140.3" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="169.7" cy="131.4" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="172.2" cy="133" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="175.1" cy="129.4" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="177.1" cy="128.8" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,196 Q212.9,167 219.8,138" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M219.8,139 L219.6,129.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M219.8,139 L219.5,131.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M219.8,139 L219.2,124.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M219.8,139 L220.5,129.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M219.8,139 L219.5,130.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M219.8,139 L220.8,134" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="219.6" cy="129.8" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="219.5" cy="131.8" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="219.2" cy="124.6" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="220.5" cy="129.6" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="219.5" cy="130.1" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="220.8" cy="134" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,196 Q197.1,175 195.6,154" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M195.6,155 L202.4,147.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.6,155 L198.5,148.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.6,155 L191.9,140.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.6,155 L190.8,147.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.6,155 L199.9,146.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M195.6,155 L189.7,150.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="202.4" cy="147.3" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="198.5" cy="148.9" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="191.9" cy="140.4" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="190.8" cy="147.2" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="199.9" cy="146.4" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="189.7" cy="150.9" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,196 Q221.4,177 233,158" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M233,159 L228.5,152.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M233,159 L234.1,148.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M233,159 L233,150.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M233,159 L233.1,150" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M233,159 L235.8,153.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M233,159 L239.9,149.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="228.5" cy="152.4" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="234.1" cy="148.9" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="233" cy="150.2" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="233.1" cy="150" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="235.8" cy="153.4" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="239.9" cy="149.6" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,196 Q174.3,178 160.4,160" fill="none" stroke="#B49C74" stroke-width="1" stroke-linecap="round"/><path d="M160.4,161 L159.7,155.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M160.4,161 L163.3,153.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M160.4,161 L160.5,152" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M160.4,161 L160.2,152.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M160.4,161 L157.6,157.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M160.4,161 L166.5,153.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="159.7" cy="155.9" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="163.3" cy="153.3" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="160.5" cy="152" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="160.2" cy="152.9" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="157.6" cy="157.5" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="166.5" cy="153.1" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M152,248 C142,232 128,214 126,196 C134,201 140,190 148,195 C154,185 162,193 168,187 C176,181 182,191 190,185 C198,179 204,189 212,183 C220,179 226,189 234,185 C242,181 248,193 256,189 C264,187 268,199 274,197 C272,215 258,233 248,248 Z" fill="#EFE6D7" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><path d="M150,214 C160,226 166,236 170,246 M182,200 C186,214 188,230 188,246 M216,200 C214,216 212,232 212,246 M250,212 C240,224 234,236 230,246" fill="none" stroke="#CDBBA0" stroke-width=".8"/><path d="M146,246 C128,300 132,346 166,359 C186,366 214,366 234,359 C268,346 272,300 254,246 Z" fill="#E7DAC7" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><path d="M160,262 C150,296 152,326 166,348 M188,258 C182,296 184,330 192,356 M228,260 C234,298 232,330 222,354 M244,262 C254,292 252,324 240,346" fill="none" stroke="#CDBBA0" stroke-width=".8" opacity=".9"/><path d="M144,244 C168,256 232,256 256,244" fill="none" stroke="#B5976B" stroke-width="2.8" stroke-linecap="round"/><path d="M200,253 C190,240 174,240 176,250 C178,258 192,256 200,253 Z M200,253 C210,240 226,240 224,250 C222,258 208,256 200,253 Z" fill="none" stroke="#B5976B" stroke-width="2.2"/><path d="M199,255 C194,266 190,276 186,284 M201,255 C206,266 210,276 213,286" fill="none" stroke="#B5976B" stroke-width="2" stroke-linecap="round"/><path d="M200,256 C200,266 200,264 200,276" fill="none" stroke="#B5976B" stroke-width="1"/><g class="cfg-tag" data-r="32" transform="translate(200 308)"><circle r="32" fill="#FFFDF9" stroke="#965F36" stroke-width="1"/><circle r="28.5" fill="none" stroke="rgba(150,95,54,0.35)" stroke-width=".7"/><text class="cfg-tag__l1" text-anchor="middle" y="-0.6" font-size="11.5">Vos prénoms</text><text class="cfg-tag__l2" text-anchor="middle" y="12.2" font-size="6.4">jj.mm.aaaa</text></g></svg><svg class="cfg-svg" data-key="bouquet" viewBox="0 0 400 400" role="img" aria-label="Bouquet de dragées"><ellipse cx="200" cy="372" rx="70" ry="8" fill="rgba(82,54,42,0.08)"/><g transform="translate(192 218) rotate(-40)"><path d="M0,0 C-8,-27.6 -6.4,-66.2 0,-92 C6.4,-66.2 8,-27.6 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-7.4 L0,-82.8" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><g transform="translate(208 218) rotate(42)"><path d="M0,0 C-8,-26.4 -6.4,-63.4 0,-88 C6.4,-63.4 8,-26.4 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-7 L0,-79.2" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><g transform="translate(200 216) rotate(-8)"><path d="M0,0 C-7,-33 -5.6,-79.2 0,-110 C5.6,-79.2 7,-33 0,0 Z" fill="#EBE1CE" stroke="#CBB68F" stroke-width=".8"/><path d="M0,-8.8 L0,-99" stroke="#CBB68F" stroke-width=".6" opacity=".8"/></g><g transform="translate(200 226) rotate(-78)"><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><g transform="translate(200 226) rotate(78)"><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><g transform="translate(200 226) rotate(-52)"><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><g transform="translate(200 226) rotate(52)"><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><g transform="translate(200 226) rotate(-26)"><use href="#cfg-dg" class="dg dg--in" style="color:#F7F3EC" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><g transform="translate(200 226) rotate(26)"><use href="#cfg-dg" class="dg dg--in" style="color:#EADCC2" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><g transform="translate(200 226) rotate(0)"><use href="#cfg-dg" class="dg dg--in" style="color:#F1E8D8" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/><path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/><path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g><path d="M132,158.1 L129.6,150" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M132,158.1 L130.6,148.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M132,158.1 L123.4,151.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M132,158.1 L134.5,151.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M132,158.1 L131.7,149.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M132,158.1 L136.2,154.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="129.6" cy="150" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="130.6" cy="148.7" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="123.4" cy="151.2" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="134.5" cy="151.2" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="131.7" cy="149.5" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="136.2" cy="154.9" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M268,158.1 L268.2,153.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M268,158.1 L271.9,155" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M268,158.1 L268.6,153.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M268,158.1 L271.2,148.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M268,158.1 L274.4,148.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M268,158.1 L262.6,148.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="268.2" cy="153.6" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="271.9" cy="155" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="268.6" cy="153.9" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="271.2" cy="148.7" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="274.4" cy="148.9" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="262.6" cy="148.7" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M164,130.1 L164.5,121.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M164,130.1 L163.3,118.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M164,130.1 L167.4,121" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M164,130.1 L165.3,121.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M164,130.1 L167.7,121.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M164,130.1 L165.3,124.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="164.5" cy="121.9" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="163.3" cy="118.6" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="167.4" cy="121" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="165.3" cy="121.4" r="2.1" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="167.7" cy="121.9" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="165.3" cy="124.3" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M236,130.1 L230.1,117.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M236,130.1 L229.8,123.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M236,130.1 L240.3,120.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M236,130.1 L235.3,116.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M236,130.1 L236.2,121.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M236,130.1 L240.4,128.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="230.1" cy="117.7" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="229.8" cy="123.4" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="240.3" cy="120.6" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="235.3" cy="116.8" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="236.2" cy="121.8" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="240.4" cy="128.3" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M200,116.1 L201.1,107.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M200,116.1 L195.9,106.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M200,116.1 L203.3,107.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M200,116.1 L195.1,109.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M200,116.1 L193.9,112.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M200,116.1 L204.7,104.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="201.1" cy="107.5" r="2.2" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="195.9" cy="106.8" r="3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="203.3" cy="107.3" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="195.1" cy="109.4" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="193.9" cy="112.4" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="204.7" cy="104.4" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M106,206.1 L113.2,201.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M106,206.1 L109.9,202.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M106,206.1 L109.6,193.5" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M106,206.1 L105,200.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M106,206.1 L104.5,191.2" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M106,206.1 L103.5,194.7" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="113.2" cy="201.7" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="109.9" cy="202.3" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="109.6" cy="193.5" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="105" cy="200.4" r="2.5" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="104.5" cy="191.2" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="103.5" cy="194.7" r="2.7" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M294,206.1 L298.9,197.1" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M294,206.1 L289.4,198.6" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M294,206.1 L295,190.9" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M294,206.1 L292.2,198.8" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M294,206.1 L293.6,198.3" stroke="#B49C74" stroke-width=".55" opacity=".7"/><path d="M294,206.1 L288.4,192.4" stroke="#B49C74" stroke-width=".55" opacity=".7"/><circle cx="298.9" cy="197.1" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="289.4" cy="198.6" r="2.8" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="295" cy="190.9" r="2.3" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="292.2" cy="198.8" r="2.9" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="293.6" cy="198.3" r="2.6" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><circle cx="288.4" cy="192.4" r="2.4" fill="#FCF9F3" stroke="#CDBA95" stroke-width=".7"/><path d="M189,228 L211,228 L208,364 Q200,373 192,364 Z" fill="#CFB48B" stroke="#52362A" stroke-width="1.3" stroke-linejoin="round"/><path d="M190.2,238 L209.8,232" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M190.4,246 L209.6,240" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M190.6,254 L209.4,248" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M190.7,262 L209.3,256" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M190.9,270 L209.1,264" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M191.1,278 L208.9,272" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M191.3,286 L208.7,280" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M191.5,294 L208.5,288" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M191.6,302 L208.4,296" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M191.8,310 L208.2,304" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M192,318 L208,312" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M192.2,326 L207.8,320" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M192.3,334 L207.7,328" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M192.5,342 L207.5,336" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M192.7,350 L207.3,344" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M192.9,358 L207.1,352" stroke="#A88A5E" stroke-width="1" opacity=".85"/><path d="M198,236 C193.6,243.6 189.6,251.6 186.4,259.6 L192.8,258.8 C195.2,250.8 197.6,243.6 200,238 Z" fill="#E9DCC2" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M202,236 C207.2,242.8 212.8,250 217.6,256.4 L211.2,258.8 C208,250.8 204,243.6 200,238 Z" fill="#E9DCC2" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M200,234 C188.8,220.4 171.2,221.2 173.6,231.6 C176,240.4 190.4,238 200,234 Z" fill="#E9DCC2" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M200,234 C211.2,219.6 230.4,222 227.2,232.4 C224,241.2 209.6,238 200,234 Z" fill="#E9DCC2" stroke="#52362A" stroke-width="1" stroke-linejoin="round"/><path d="M179.2,230.8 C185.6,229.2 193.6,231.6 197,234" fill="none" stroke="#A88A5E" stroke-width=".8"/><path d="M221.6,231.6 C214.4,229.2 206.4,231.6 203,234" fill="none" stroke="#A88A5E" stroke-width=".8"/><ellipse cx="200" cy="234" rx="4.4" ry="3.6" fill="#E9DCC2" stroke="#52362A" stroke-width="1"/><path d="M200,238 C200,248 200,240 200,252" fill="none" stroke="#B5976B" stroke-width="1"/><g class="cfg-tag" data-r="30" transform="translate(200 282)"><circle r="30" fill="#FFFDF9" stroke="#965F36" stroke-width="1"/><circle r="26.5" fill="none" stroke="rgba(150,95,54,0.35)" stroke-width=".7"/><text class="cfg-tag__l1" text-anchor="middle" y="-0.6" font-size="10.8">Vos prénoms</text><text class="cfg-tag__l2" text-anchor="middle" y="11.4" font-size="6">jj.mm.aaaa</text></g></svg>
               </div>
-              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__photo-card">
-              <input type="checkbox" name="contenant" value="Boîte">
-              <div class="wizard__card-inner">
-                <picture class="wizard__photo">
-                  <source type="image/webp" srcset="./images/formulaire/contenant-boite.webp">
-                  <img src="./images/formulaire/contenant-boite.jpg" alt="" width="480" height="600" loading="lazy">
-                </picture>
-                <span class="wizard__card-name">Boîte</span>
-                <span class="wizard__card-sub">Carton, coffret</span>
-              </div>
-              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__photo-card">
-              <input type="checkbox" name="contenant" value="Verre &amp; transparent">
-              <div class="wizard__card-inner">
-                <picture class="wizard__photo">
-                  <source type="image/webp" srcset="./images/formulaire/contenant-verre.webp">
-                  <img src="./images/formulaire/contenant-verre.jpg" alt="" width="480" height="600" loading="lazy">
-                </picture>
-                <span class="wizard__card-name">Verre &amp; transparent</span>
-                <span class="wizard__card-sub">Bocal, coupe, cube</span>
-              </div>
-              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__photo-card">
-              <input type="checkbox" name="contenant" value="Tube">
-              <div class="wizard__card-inner">
-                <picture class="wizard__photo">
-                  <source type="image/webp" srcset="./images/formulaire/contenant-tube.webp">
-                  <img src="./images/formulaire/contenant-tube.jpg" alt="" width="480" height="600" loading="lazy">
-                </picture>
-                <span class="wizard__card-name">Tube</span>
-                <span class="wizard__card-sub">Dragées en colonne</span>
-              </div>
-              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__photo-card">
-              <input type="checkbox" name="contenant" value="Bouquet de dragées">
-              <div class="wizard__card-inner">
-                <picture class="wizard__photo">
-                  <source type="image/webp" srcset="./images/formulaire/contenant-bouquet.webp">
-                  <img src="./images/formulaire/contenant-bouquet.jpg" alt="" width="480" height="600" loading="lazy">
-                </picture>
-                <span class="wizard__card-name">Bouquet de dragées</span>
-                <span class="wizard__card-sub">Monté à la main</span>
-              </div>
-              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__photo-card wizard__photo-card--advice">
-              <input type="checkbox" name="contenant" value="Conseillez-moi">
-              <div class="wizard__card-inner">
-                <span class="wizard__photo wizard__photo--advice"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg></span>
-                <span class="wizard__card-name">Conseillez-moi</span>
-                <span class="wizard__card-sub">Nous vous proposerons le contenant idéal</span>
-              </div>
-              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
-            </label>
+              <button type="button" class="cfg-arrow cfg-arrow--next" id="cfg-next" aria-label="Contenant suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+              <svg class="cfg-loupe" id="cfg-loupe" viewBox="-60 -60 120 120" aria-hidden="true">
+                <g class="cfg-tag" data-r="52">
+                  <circle r="52" fill="#FFFDF9" stroke="#965F36" stroke-width="1.2"/>
+                  <circle r="47" fill="none" stroke="rgba(150,95,54,0.35)" stroke-width=".8"/>
+                  <text class="cfg-tag__l1" text-anchor="middle" y="-1" font-size="18.7">Vos prénoms</text>
+                  <text class="cfg-tag__l2" text-anchor="middle" y="19.8" font-size="10.4">jj.mm.aaaa</text>
+                </g>
+              </svg>
+            </div>
+            <div class="cfg-caption" aria-live="polite">
+              <p class="cfg-name" id="cfg-name">Boîte en papier</p>
+              <p class="cfg-desc" id="cfg-desc">Carton blanc, ruban satiné et fleurs séchées.</p>
+            </div>
+            <div class="cfg-dots" id="cfg-dots"><button type="button" class="cfg-dot" data-index="0" aria-label="Boîte en papier"></button><button type="button" class="cfg-dot" data-index="1" aria-label="Pot en verre"></button><button type="button" class="cfg-dot" data-index="2" aria-label="Tube"></button><button type="button" class="cfg-dot" data-index="3" aria-label="Pochon en tissu"></button><button type="button" class="cfg-dot" data-index="4" aria-label="Bouquet de dragées"></button></div>
           </div>
+</div>
+          <p class="cfg-advice"><button type="button" class="wizard__skip-link" id="cfg-advice">Vous hésitez&nbsp;? Laissez-nous vous conseiller →</button></p>
+        </div>
 
-          <p class="wizard__question">Votre création sera-t-elle garnie de dragées&nbsp;?</p>
+        <!-- Étape 3 : Dragées -->
+        <div class="wizard__panel" id="wizard-step-3">
+          <div class="wizard__meta">
+            <span class="wizard__step-label">Étape 03 / 06</span>
+          </div>
+          <h2 class="wizard__step-title">Garnissez<br>votre création</h2>
+          <p class="wizard__step-sub">Avec ou sans dragées&nbsp;? Choisissez ensuite jusqu'à trois couleurs&nbsp;: elles s'affichent sur votre création.</p>
+          <div class="cfg-slot"></div>
+
           <div class="wizard__cards wizard__cards--two" role="group" aria-label="Avec ou sans dragées">
             <label class="wizard__card">
               <input type="radio" name="dragees" value="Avec dragées">
               <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="15" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>
-                </div>
+                <div class="wizard__card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="15" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg></div>
                 <span class="wizard__card-name">Avec dragées</span>
                 <span class="wizard__card-sub">Contenant garni de dragées.</span>
               </div>
@@ -316,9 +278,7 @@
             <label class="wizard__card">
               <input type="radio" name="dragees" value="Sans dragées">
               <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-                </div>
+                <div class="wizard__card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div>
                 <span class="wizard__card-name">Sans dragées</span>
                 <span class="wizard__card-sub">Le contenant seul, sans garniture.</span>
               </div>
@@ -326,22 +286,136 @@
             </label>
           </div>
 
-          <div class="wizard__dragee-type" id="wizard-dragee-type" hidden>
-            <p class="wizard__question">Quelles dragées&nbsp;? <span class="wizard__optional">(facultatif)</span></p>
-            <div class="wizard__chips" role="group" aria-label="Type de dragées">
-              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Chocolat"><span>Chocolat</span></label>
-              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Amande Avola"><span>Amande Avola</span></label>
-              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Amande traditionnelle"><span>Amande traditionnelle</span></label>
-              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Chocolat amande"><span>Chocolat amande</span></label>
-              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Conseillez-moi"><span>Conseillez-moi</span></label>
+          <div class="cfg-colors" id="cfg-colors" hidden>
+            <p class="wizard__question">Couleurs des dragées <span class="wizard__optional">(jusqu'à 3)</span></p>
+            <div class="wizard__colors" role="group" aria-label="Couleurs des dragées">
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Blanc" data-hex="#F9F7F3">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#F9F7F5;"></span>
+                <span class="wizard__color-swatch-name">Blanc</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Ivoire" data-hex="#F1E9D2">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#F3EDD8;"></span>
+                <span class="wizard__color-swatch-name">Ivoire</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Rose poudré" data-hex="#E7BFBB">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#E8C2BF;"></span>
+                <span class="wizard__color-swatch-name">Rose poudré</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Bleu pastel" data-hex="#BBD1E3">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#BDD3E5;"></span>
+                <span class="wizard__color-swatch-name">Bleu pastel</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Lavande" data-hex="#D1BDDA">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#D3BFDB;"></span>
+                <span class="wizard__color-swatch-name">Lavande</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Vert sauge" data-hex="#B1C4B3">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#B3C5B5;"></span>
+                <span class="wizard__color-swatch-name">Vert sauge</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Champagne" data-hex="#D8C79A">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#D9C99C;"></span>
+                <span class="wizard__color-swatch-name">Champagne</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Nude" data-hex="#D5B69B">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#D6B79D;"></span>
+                <span class="wizard__color-swatch-name">Nude</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Bordeaux" data-hex="#7A2E35">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#7A2E35;"></span>
+                <span class="wizard__color-swatch-name">Bordeaux</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Noir" data-hex="#2B2622">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#1A1816;"></span>
+                <span class="wizard__color-swatch-name">Noir</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Or" data-hex="#C8A85C">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:#C4A558;"></span>
+                <span class="wizard__color-swatch-name">Or</span>
+              </div>
+            </label>
+            <label class="wizard__color-item">
+              <input type="checkbox" name="couleurs" value="Autre" data-hex="">
+              <div class="wizard__color-swatch">
+                <span class="wizard__color-swatch-bg" style="background:linear-gradient(135deg,#E8C2BF,#BDD3E5,#D9C99C,#B3C5B5);"></span>
+                <span class="wizard__color-swatch-name">Autre</span>
+              </div>
+            </label>
+            </div>
+            <p class="wizard__hint cfg-colors__limit" id="cfg-colors-limit" hidden>Trois couleurs maximum&nbsp;: retirez-en une pour en choisir une autre.</p>
+            <div class="wizard__field cfg-autre" id="cfg-autre" hidden>
+              <label class="wizard__label" for="wizard-couleur-autre">Teinte souhaitée <span class="wizard__optional">(facultatif)</span></label>
+              <input class="wizard__input" type="text" id="wizard-couleur-autre" maxlength="60" autocomplete="off" placeholder="Ex. : vert d'eau, terracotta…">
             </div>
           </div>
         </div>
 
-        <!-- Étape 3 : Nombre de contenants et date -->
-        <div class="wizard__panel" id="wizard-step-3">
+        <!-- Étape 4 : Étiquette -->
+        <div class="wizard__panel" id="wizard-step-4">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 03 / 05</span>
+            <span class="wizard__step-label">Étape 04 / 06</span>
+          </div>
+          <h2 class="wizard__step-title">Personnalisez<br>l'étiquette</h2>
+          <p class="wizard__step-sub">Écrivez le texte de l'étiquette&nbsp;: il s'affiche en direct. Nous le mettrons en forme sur la maquette.</p>
+          <div class="cfg-slot"></div>
+
+          <div class="wizard__row">
+            <div class="wizard__field">
+              <label class="wizard__label" for="cfg-l1">Prénoms ou nom <span class="wizard__optional">(facultatif)</span></label>
+              <input class="wizard__input" type="text" id="cfg-l1" maxlength="28" autocomplete="off" placeholder="Ex. : Camille &amp; Louis">
+            </div>
+            <div class="wizard__field">
+              <label class="wizard__label" for="cfg-l2">Date ou petit mot <span class="wizard__optional">(facultatif)</span></label>
+              <input class="wizard__input" type="text" id="cfg-l2" maxlength="24" autocomplete="off" placeholder="Ex. : 14.06.2027">
+            </div>
+          </div>
+          <div class="wizard__field">
+            <label class="wizard__label" for="wizard-message">Une envie particulière&nbsp;? <span class="wizard__optional">(facultatif)</span></label>
+            <textarea class="wizard__input wizard__textarea" id="wizard-message" name="message" rows="3" placeholder="Couleur du ruban, figurine, thème, inspirations…"></textarea>
+          </div>
+          <div class="wizard__field">
+            <label class="wizard__label" for="wizard-visuel-lien">Lien vers un visuel <span class="wizard__optional">(facultatif)</span></label>
+            <input class="wizard__input" type="url" id="wizard-visuel-lien" name="visuel_lien" placeholder="Lien Google Drive, WeTransfer, Pinterest…" autocomplete="off" inputmode="url">
+            <p class="wizard__hint">Vous pouvez aussi nous envoyer votre visuel par e-mail à <a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a>, en précisant votre nom.</p>
+          </div>
+        </div>
+
+        <!-- Étape 5 : Nombre de contenants et date -->
+        <div class="wizard__panel" id="wizard-step-5">
+          <div class="wizard__meta">
+            <span class="wizard__step-label">Étape 05 / 06</span>
           </div>
           <h2 class="wizard__step-title">Vos invités<br>&amp; le jour J</h2>
           <p class="wizard__step-sub">Combien de contenants souhaitez-vous&nbsp;? En général, un par invité. Un ordre de grandeur suffit, nous affinerons ensemble.</p>
@@ -405,176 +479,50 @@
           </div>
         </div>
 
-        <!-- Étape 4 : Couleurs et étiquette -->
-        <div class="wizard__panel" id="wizard-step-4">
+        <!-- Étape 6 : Coordonnées -->
+        <div class="wizard__panel" id="wizard-step-6">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 04 / 05</span>
-          </div>
-          <h2 class="wizard__step-title">Vos couleurs,<br>vos mots</h2>
-          <p class="wizard__step-sub">Quelles teintes vous inspirent&nbsp;? Plusieurs choix possibles, nous vous proposerons une palette harmonieuse.</p>
-
-          <div class="wizard__colors" role="group" aria-label="Couleurs souhaitées">
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Blanc">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#F9F7F5;"></span>
-                <span class="wizard__color-swatch-name">Blanc</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Ivoire">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#F3EDD8;"></span>
-                <span class="wizard__color-swatch-name">Ivoire</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Rose poudré">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#E8C2BF;"></span>
-                <span class="wizard__color-swatch-name">Rose poudré</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Bleu pastel">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#BDD3E5;"></span>
-                <span class="wizard__color-swatch-name">Bleu pastel</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Lavande">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#D3BFDB;"></span>
-                <span class="wizard__color-swatch-name">Lavande</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Vert sauge">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#B3C5B5;"></span>
-                <span class="wizard__color-swatch-name">Vert sauge</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Champagne">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#D9C99C;"></span>
-                <span class="wizard__color-swatch-name">Champagne</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Nude">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#D6B79D;"></span>
-                <span class="wizard__color-swatch-name">Nude</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Bordeaux">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#7A2E35;"></span>
-                <span class="wizard__color-swatch-name">Bordeaux</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Noir">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#1A1816;"></span>
-                <span class="wizard__color-swatch-name">Noir</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Or">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:#C4A558;"></span>
-                <span class="wizard__color-swatch-name">Or</span>
-              </div>
-            </label>
-
-            <label class="wizard__color-item">
-              <input type="checkbox" name="couleurs" value="Personnalisée">
-              <div class="wizard__color-swatch">
-                <span class="wizard__color-swatch-bg" style="background:linear-gradient(135deg,#E8C2BF,#BDD3E5,#D9C99C,#B3C5B5);"></span>
-                <span class="wizard__color-swatch-name">Autre</span>
-              </div>
-            </label>
-
-          </div>
-          <div class="wizard__free-text fade-in">
-            <label class="wizard__label" for="wizard-etiquette">Texte de l'étiquette <span class="wizard__optional">(facultatif)</span></label>
-            <input class="wizard__input" type="text" id="wizard-etiquette" name="etiquette" maxlength="120" autocomplete="off" placeholder="Ex. : Camille &amp; Louis · 14.06.2027">
-            <p class="wizard__hint">Prénoms, date, petit mot&nbsp;: nous le mettrons en forme sur la maquette.</p>
-
-            <div class="wizard__file-upload">
-              <label class="wizard__label" for="wizard-message">Précisez vos souhaits <span class="wizard__optional">(facultatif)</span></label>
-              <textarea class="wizard__input wizard__textarea" id="wizard-message" name="message" rows="3" placeholder="Thème, figurine, ruban, inspirations, questions particulières…"></textarea>
-            </div>
-            <div class="wizard__file-upload">
-              <label class="wizard__label" for="wizard-visuel-lien">Lien vers un visuel <span class="wizard__optional">(facultatif)</span></label>
-              <input class="wizard__input" type="url" id="wizard-visuel-lien" name="visuel_lien" placeholder="Lien Google Drive, WeTransfer, Pinterest…" autocomplete="off" inputmode="url">
-              <p class="wizard__hint">Vous pouvez aussi nous envoyer votre visuel par e-mail à <a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a> ou via WeTransfer, en précisant votre nom.</p>
-            </div>
-          </div>
-          <span class="wizard__skip-link" id="wizard-skip-colors" tabindex="0" role="button">Je préciserai ces détails plus tard →</span>
-        </div>
-
-        <!-- Étape 5 : Coordonnées -->
-        <div class="wizard__panel" id="wizard-step-5">
-          <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 05 / 05</span>
+            <span class="wizard__step-label">Étape 06 / 06</span>
           </div>
           <h2 class="wizard__step-title">Vos coordonnées</h2>
           <p class="wizard__step-sub">Plus qu'une étape&nbsp;: nous vous recontactons sous 48&nbsp;h avec une proposition sur mesure, gratuite et sans engagement.</p>
 
           <!-- Récapitulatif -->
-          <div class="wizard__summary" id="wizard-summary" aria-label="Récapitulatif de votre projet">
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Occasion</span>
-              <span class="wizard__summary-val" id="sum-event">-</span>
-            </div>
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Contenant</span>
-              <span class="wizard__summary-val" id="sum-contenant">-</span>
-            </div>
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Dragées</span>
-              <span class="wizard__summary-val" id="sum-dragees">-</span>
-            </div>
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Contenants</span>
-              <span class="wizard__summary-val" id="sum-qty">-</span>
-            </div>
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Date</span>
-              <span class="wizard__summary-val" id="sum-date">Non précisée</span>
-            </div>
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Couleurs</span>
-              <span class="wizard__summary-val" id="sum-colors">À préciser</span>
-            </div>
-            <div class="wizard__summary-item" id="sum-etiquette-row" style="display:none;">
-              <span class="wizard__summary-key">Étiquette</span>
-              <span class="wizard__summary-val" id="sum-etiquette"></span>
-            </div>
-            <div class="wizard__summary-item" id="sum-message-row" style="display:none;">
-              <span class="wizard__summary-key">Précisions</span>
-              <span class="wizard__summary-val" id="sum-message"></span>
-            </div>
-            <div class="wizard__summary-item" id="sum-visuel-row" style="display:none;">
-              <span class="wizard__summary-key">Visuel</span>
-              <span class="wizard__summary-val" id="sum-visuel"></span>
+          <div class="wizard__summary cfg-summary" id="wizard-summary" aria-label="Récapitulatif de votre création">
+            <div class="cfg-summary__art" id="cfg-summary-art" aria-hidden="true"></div>
+            <div class="cfg-summary__list">
+              <div class="wizard__summary-item">
+                <span class="wizard__summary-key">Occasion</span>
+                <span class="wizard__summary-val" id="sum-event">-</span>
+              </div>
+              <div class="wizard__summary-item">
+                <span class="wizard__summary-key">Contenant</span>
+                <span class="wizard__summary-val" id="sum-contenant">-</span>
+              </div>
+              <div class="wizard__summary-item">
+                <span class="wizard__summary-key">Dragées</span>
+                <span class="wizard__summary-val" id="sum-dragees">-</span>
+              </div>
+              <div class="wizard__summary-item" id="sum-etiquette-row" style="display:none;">
+                <span class="wizard__summary-key">Étiquette</span>
+                <span class="wizard__summary-val" id="sum-etiquette"></span>
+              </div>
+              <div class="wizard__summary-item">
+                <span class="wizard__summary-key">Contenants</span>
+                <span class="wizard__summary-val" id="sum-qty">-</span>
+              </div>
+              <div class="wizard__summary-item">
+                <span class="wizard__summary-key">Date</span>
+                <span class="wizard__summary-val" id="sum-date">Non précisée</span>
+              </div>
+              <div class="wizard__summary-item" id="sum-message-row" style="display:none;">
+                <span class="wizard__summary-key">Précisions</span>
+                <span class="wizard__summary-val" id="sum-message"></span>
+              </div>
+              <div class="wizard__summary-item" id="sum-visuel-row" style="display:none;">
+                <span class="wizard__summary-key">Visuel</span>
+                <span class="wizard__summary-val" id="sum-visuel"></span>
+              </div>
             </div>
           </div>
 
@@ -711,7 +659,7 @@
     </div>
   </footer>
 
-  <script src="main.js?v=20261002b"></script>
-  <script src="contact-wizard.js?v=20261002b"></script>
+  <script src="main.js?v=20261002c"></script>
+  <script src="contact-wizard.js?v=20261002c"></script>
 </body>
 </html>

@@ -1,11 +1,13 @@
-/* Formulaire « Lancer ma création » — 5 étapes
-   1. Occasion · 2. Votre création (contenant, avec/sans dragées) · 3. Contenants & date
-   4. Couleurs & étiquette · 5. Coordonnées (+ envoi Formspree) */
+/* Configurateur « Lancer ma création » — 6 étapes
+   1. Occasion · 2. Contenant (carrousel) · 3. Dragées et couleurs · 4. Étiquette
+   5. Contenants & date · 6. Coordonnées (+ envoi Formspree) */
 (function() {
-  var TOTAL = 5;
+  var TOTAL = 6;
   var FORMSPREE_ID = 'mlgqrzed';
   var PHONE_LABEL = '06 08 67 14 43';
   var PHONE_HREF = 'tel:+33608671443';
+  var MAX_COLORS = 3;
+  var DEFAULT_DG = ['#F7F3EC', '#EADCC2', '#F1E8D8'];
   var current = 1;
 
   var bar     = document.getElementById('wizard-bar-fill');
@@ -15,7 +17,8 @@
   var backBtn = document.getElementById('wizard-back');
   var nextBtn = document.getElementById('wizard-next');
   var success = document.getElementById('wizard-success');
-  if (!body || !nextBtn) return;
+  var stage   = document.getElementById('cfg-stage');
+  if (!body || !nextBtn || !stage) return;
 
   /* ---------- Utilitaires ---------- */
   function $(id) { return document.getElementById(id); }
@@ -23,11 +26,7 @@
     var el = document.querySelector('input[name="' + name + '"]:checked');
     return el ? el.value : '';
   }
-  function checkedValues(name) {
-    return Array.prototype.map.call(document.querySelectorAll('input[name="' + name + '"]:checked'), function(x) { return x.value; });
-  }
   function val(id) { var el = $(id); return el ? el.value.trim() : ''; }
-
   function isSafeImageUrl(url) {
     if (!url) return false;
     try {
@@ -35,19 +34,140 @@
       return u.origin === window.location.origin && u.pathname.indexOf('/images/') !== -1;
     } catch (e) { return false; }
   }
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Produit d'origine éventuel (?produit=&image=) */
   var params = new URLSearchParams(window.location.search);
   var produitParam = (params.get('produit') || '').slice(0, 200);
   var imageParam = isSafeImageUrl(params.get('image')) ? params.get('image') : '';
 
+  /* ---------- Contenants (carrousel) ---------- */
+  var containers = stage.getAttribute('data-containers').split('|').map(function(row) {
+    var p = row.split('::');
+    return { key: p[0], name: p[1], desc: p[2] };
+  });
+  var svgs = Array.prototype.slice.call(stage.querySelectorAll('.cfg-svg'));
+  var dots = Array.prototype.slice.call(stage.querySelectorAll('.cfg-dot'));
+  var idx = 0;            // contenant affiché
+  var conseil = false;    // « Laissez-nous vous conseiller »
+
+  function show(newIdx, dir) {
+    var n = containers.length;
+    newIdx = (newIdx + n) % n;
+    if (newIdx === idx && svgs[idx].getAttribute('data-pos') === 'active') return;
+    var incoming = svgs[newIdx], outgoing = svgs[idx];
+    if (!reduceMotion && dir) {
+      incoming.style.transition = 'none';
+      incoming.setAttribute('data-pos', dir > 0 ? 'next' : 'prev');
+      void incoming.getBoundingClientRect();
+      incoming.style.transition = '';
+    }
+    if (outgoing !== incoming) outgoing.setAttribute('data-pos', dir > 0 ? 'prev' : 'next');
+    incoming.setAttribute('data-pos', 'active');
+    idx = newIdx;
+    updateCaption();
+    fitAllTags();
+  }
+  function updateCaption() {
+    $('cfg-name').textContent = containers[idx].name;
+    $('cfg-desc').textContent = containers[idx].desc;
+    dots.forEach(function(d, i) { d.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+  }
+  svgs.forEach(function(s, i) { s.setAttribute('data-pos', i === 0 ? 'active' : 'next'); });
+  dots.forEach(function(d, i) { d.addEventListener('click', function() { show(i, i > idx ? 1 : -1); }); });
+  $('cfg-prev').addEventListener('click', function() { show(idx - 1, -1); });
+  $('cfg-next').addEventListener('click', function() { show(idx + 1, 1); });
+  document.addEventListener('keydown', function(e) {
+    if (current !== 2) return;
+    var t = e.target && e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA') return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1, -1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1, 1); }
+  });
+  // Balayage sur mobile
+  (function() {
+    var vp = $('cfg-viewport'), x0 = null, y0 = null;
+    vp.addEventListener('touchstart', function(e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    vp.addEventListener('touchend', function(e) {
+      if (x0 === null || current !== 2) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+      x0 = null;
+    });
+  })();
+
+  $('cfg-advice').addEventListener('click', function() {
+    conseil = true;
+    showStep(3, 'next');
+  });
+
+  /* ---------- Dragées et couleurs ---------- */
+  var colorInputs = Array.prototype.slice.call(document.querySelectorAll('input[name="couleurs"]'));
+  var chosenColors = []; // dans l'ordre de sélection
+
+  function paint() {
+    var sans = checkedValue('dragees') === 'Sans dragées';
+    var palette = chosenColors.map(function(v) {
+      var el = colorInputs.filter(function(c) { return c.value === v; })[0];
+      return el ? el.getAttribute('data-hex') : '';
+    }).filter(Boolean);
+    if (!palette.length) palette = DEFAULT_DG;
+    svgs.forEach(function(svg) {
+      var list = svg.querySelectorAll('.dg');
+      for (var i = 0; i < list.length; i++) {
+        list[i].classList.toggle('is-hidden', sans);
+        list[i].style.color = palette[(i * 2 + Math.floor(i / 3)) % palette.length];
+      }
+    });
+  }
+
+  colorInputs.forEach(function(c) {
+    c.addEventListener('change', function() {
+      if (c.checked) chosenColors.push(c.value);
+      else chosenColors = chosenColors.filter(function(v) { return v !== c.value; });
+      var full = chosenColors.length >= MAX_COLORS;
+      colorInputs.forEach(function(o) { if (!o.checked) o.disabled = full; });
+      $('cfg-colors-limit').hidden = !full;
+      $('cfg-autre').hidden = chosenColors.indexOf('Autre') === -1;
+      paint();
+    });
+  });
+  document.querySelectorAll('input[name="dragees"]').forEach(function(r) {
+    r.addEventListener('change', function() {
+      $('cfg-colors').hidden = checkedValue('dragees') !== 'Avec dragées';
+      paint();
+    });
+  });
+
+  /* ---------- Étiquette ---------- */
+  var tags = Array.prototype.slice.call(stage.querySelectorAll('.cfg-tag'));
+  function setTagText(g, l1, l2) {
+    var r = parseFloat(g.getAttribute('data-r'));
+    var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
+    t1.textContent = l1 || 'Vos prénoms';
+    t2.textContent = l2 || 'jj.mm.aaaa';
+    t1.classList.toggle('is-placeholder', !l1);
+    t2.classList.toggle('is-placeholder', !l2);
+    fitText(t1, r * 0.36, r * 1.62);
+    fitText(t2, r * 0.2, r * 1.42);
+  }
+  function fitText(t, base, maxW) {
+    t.setAttribute('font-size', base.toFixed(1));
+    var w = 0;
+    try { w = t.getComputedTextLength(); } catch (e) { w = 0; }
+    if (w > maxW) t.setAttribute('font-size', Math.max(base * 0.5, base * maxW / w).toFixed(1));
+  }
+  function fitAllTags() {
+    var l1 = val('cfg-l1'), l2 = val('cfg-l2');
+    tags.forEach(function(g) { setTagText(g, l1, l2); });
+  }
+  ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', fitAllTags); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAllTags);
+  window.addEventListener('load', fitAllTags);
+
   /* ---------- Date ---------- */
   var dateEl = $('wizard-date');
   var dateAlert = $('wizard-date-alert');
-  var isMobileDate = !!(dateEl && window.innerWidth <= 768);
-
-  if (isMobileDate) {
-    // Sur mobile, champ texte jj/mm/aaaa (plus simple à saisir)
+  if (dateEl && window.innerWidth <= 768) {
     dateEl.type = 'text';
     dateEl.setAttribute('inputmode', 'numeric');
     dateEl.setAttribute('maxlength', '10');
@@ -59,12 +179,9 @@
       this.value = d;
     });
   }
-
-  // Renvoie un objet Date (minuit) ou null — accepte aaaa-mm-jj et jj/mm/aaaa
   function readDate() {
     if (!dateEl) return null;
-    var raw = dateEl.value.trim();
-    var y, m, d, mt;
+    var raw = dateEl.value.trim(), y, m, d, mt;
     if ((mt = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/))) { y = +mt[1]; m = +mt[2]; d = +mt[3]; }
     else if ((mt = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) { y = +mt[3]; m = +mt[2]; d = +mt[1]; }
     else return null;
@@ -74,10 +191,7 @@
   }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function formatDate(date) { return pad(date.getDate()) + '/' + pad(date.getMonth() + 1) + '/' + date.getFullYear(); }
-  function daysUntil(date) {
-    var t = new Date(); t.setHours(0, 0, 0, 0);
-    return Math.round((date - t) / 86400000);
-  }
+  function daysUntil(date) { var t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((date - t) / 86400000); }
   function relativeDelay(days) {
     if (days < 0) return 'date passée, à vérifier';
     if (days === 0) return "aujourd'hui";
@@ -86,7 +200,6 @@
     return 'dans environ ' + Math.round(days / 30.4) + ' mois';
   }
   function updateDateAlert() {
-    if (!dateAlert) return;
     var date = readDate();
     if (!date) { dateAlert.hidden = true; return; }
     var days = daysUntil(date);
@@ -95,18 +208,23 @@
       dateAlert.hidden = false;
     } else if (days < 28) {
       dateAlert.textContent = 'Votre événement approche : nous ferons tout notre possible. Pour un délai court, appelez-nous au ';
-      var a = document.createElement('a');
-      a.href = PHONE_HREF; a.textContent = PHONE_LABEL;
-      dateAlert.appendChild(a);
-      dateAlert.appendChild(document.createTextNode('.'));
+      var a = document.createElement('a'); a.href = PHONE_HREF; a.textContent = PHONE_LABEL;
+      dateAlert.appendChild(a); dateAlert.appendChild(document.createTextNode('.'));
       dateAlert.hidden = false;
-    } else {
-      dateAlert.hidden = true;
-    }
+    } else dateAlert.hidden = true;
   }
-  if (dateEl) {
-    dateEl.addEventListener('input', updateDateAlert);
-    dateEl.addEventListener('change', updateDateAlert);
+  if (dateEl) { dateEl.addEventListener('input', updateDateAlert); dateEl.addEventListener('change', updateDateAlert); }
+
+  /* ---------- Textes récapitulatifs ---------- */
+  function contenantText() { return conseil ? 'À définir ensemble (conseil demandé)' : containers[idx].name; }
+  function drageesText() {
+    var d = checkedValue('dragees');
+    if (d !== 'Avec dragées') return d;
+    var cols = chosenColors.map(function(c) { return c === 'Autre' ? (val('wizard-couleur-autre') || 'autre teinte') : c; });
+    return cols.length ? d + ' · ' + cols.join(', ') : d + ' · couleurs à définir';
+  }
+  function etiquetteText() {
+    return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
   }
 
   /* ---------- Navigation ---------- */
@@ -116,7 +234,6 @@
     barEl.setAttribute('aria-valuenow', pct);
   }
   function getPanel(n) { return $('wizard-step-' + n); }
-
   function setNextLabel(label) {
     nextBtn.innerHTML = '';
     nextBtn.appendChild(document.createTextNode(label + ' '));
@@ -126,21 +243,31 @@
     nextBtn.appendChild(arrow);
     nextBtn.setAttribute('aria-label', label);
   }
-  function finalLabel() { return 'Recevoir ma proposition'; }
-
+  function labelFor(n) {
+    if (n === 2) return 'Choisir ce contenant';
+    if (n === TOTAL) return 'Recevoir ma proposition';
+    return 'Continuer';
+  }
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
-    if (n === 2) return checkedValues('contenant').length > 0 && !!checkedValue('dragees');
-    if (n === 3) return !!checkedValue('quantite'); // date facultative
-    if (n === 4) return true;                       // couleurs et étiquette facultatives
+    if (n === 3) return !!checkedValue('dragees');
+    if (n === 5) return !!checkedValue('quantite');
     return true;
   }
-  function updateNextState() {
-    if (current < TOTAL) nextBtn.disabled = !validateStep(current);
-    else nextBtn.disabled = false;
+  function updateNextState() { nextBtn.disabled = current < TOTAL && !validateStep(current); }
+
+  function placeStage(n) {
+    var slot = getPanel(n) && getPanel(n).querySelector('.cfg-slot');
+    if (!slot) return;
+    slot.appendChild(stage);
+    stage.classList.toggle('cfg-stage--choose', n === 2);
+    stage.classList.toggle('cfg-stage--preview', n !== 2);
+    stage.classList.toggle('cfg-stage--label', n === 4);
+    $('cfg-name').textContent = (n !== 2 && conseil) ? 'Contenant à définir ensemble' : containers[idx].name;
   }
 
   function showStep(n, direction) {
+    if (n === 2) conseil = false; // retour au choix du contenant
     var prev = getPanel(current);
     if (prev) {
       prev.classList.remove('active');
@@ -149,45 +276,22 @@
     }
     current = n;
     setProgress(n);
+    placeStage(n);
     var next = getPanel(n);
     if (next) {
       next.style.animationName = direction === 'back' ? 'wizardInBack' : 'wizardIn';
       next.classList.add('active');
     }
     backBtn.hidden = (n === 1);
-    setNextLabel(n === TOTAL ? finalLabel() : 'Continuer');
+    setNextLabel(labelFor(n));
     if (n === TOTAL) updateSummary();
     updateNextState();
-    var top = document.querySelector('.wizard-wrap');
-    if (top && top.getBoundingClientRect().top < 0) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    fitAllTags();
+    var wrap = document.querySelector('.wizard-wrap');
+    if (wrap && wrap.getBoundingClientRect().top < 0) wrap.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   }
 
-  /* ---------- Interactions des choix ---------- */
-  // Contenant : « Conseillez-moi » est exclusif des autres choix
-  document.querySelectorAll('input[name="contenant"]').forEach(function(box) {
-    box.addEventListener('change', function() {
-      if (!box.checked) return;
-      document.querySelectorAll('input[name="contenant"]').forEach(function(other) {
-        if (other === box) return;
-        if (box.value === 'Conseillez-moi' || other.value === 'Conseillez-moi') other.checked = false;
-      });
-    });
-  });
-
-  // Avec / sans dragées : affiche le choix du type de dragées
-  var typeBlock = $('wizard-dragee-type');
-  document.querySelectorAll('input[name="dragees"]').forEach(function(r) {
-    r.addEventListener('change', function() {
-      if (!typeBlock) return;
-      var avec = checkedValue('dragees') === 'Avec dragées';
-      typeBlock.hidden = !avec;
-      if (!avec) document.querySelectorAll('input[name="type_dragees"]').forEach(function(t) { t.checked = false; });
-    });
-  });
-
   body.addEventListener('change', updateNextState);
-
-  // Clavier : Entrée sur un choix le sélectionne
   document.querySelectorAll('.wizard__card input, .wizard__chip input').forEach(function(input) {
     input.addEventListener('keydown', function(e) {
       if (e.key !== 'Enter') return;
@@ -197,21 +301,7 @@
     });
   });
 
-  var skipColors = $('wizard-skip-colors');
-  if (skipColors) {
-    skipColors.addEventListener('click', function() { showStep(5, 'next'); });
-    skipColors.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); skipColors.click(); }
-    });
-  }
-
   /* ---------- Récapitulatif ---------- */
-  function drageesText() {
-    var d = checkedValue('dragees');
-    if (!d) return '';
-    var type = checkedValue('type_dragees');
-    return d === 'Avec dragées' && type ? d + ' · ' + type : d;
-  }
   function setRow(id, text, hideWhenEmpty, fallback) {
     var el = $(id); if (!el) return;
     el.textContent = text || fallback || '-';
@@ -221,18 +311,30 @@
   function updateSummary() {
     var date = readDate();
     setRow('sum-event', checkedValue('evenement'));
-    setRow('sum-contenant', checkedValues('contenant').join(', '));
+    setRow('sum-contenant', contenantText());
     setRow('sum-dragees', drageesText());
+    setRow('sum-etiquette', etiquetteText(), true);
     setRow('sum-qty', checkedValue('quantite'));
     setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
-    var couleurs = checkedValues('couleurs').map(function(c) { return c === 'Personnalisée' ? 'Autre' : c; });
-    setRow('sum-colors', couleurs.join(', '), false, 'À préciser');
-    setRow('sum-etiquette', val('wizard-etiquette'), true);
     setRow('sum-message', val('wizard-message'), true);
     setRow('sum-visuel', val('wizard-visuel-lien'), true);
+    // Miniature de la création
+    var art = $('cfg-summary-art');
+    art.innerHTML = '';
+    if (!conseil) {
+      var clone = svgs[idx].cloneNode(true);
+      clone.removeAttribute('data-pos');
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('[id]').forEach(function(el) {
+        var old = el.id; el.id = old + '-mini';
+        clone.querySelectorAll('[clip-path="url(#' + old + ')"]').forEach(function(u) { u.setAttribute('clip-path', 'url(#' + old + '-mini)'); });
+      });
+      clone.classList.remove('cfg-svg');
+      art.appendChild(clone);
+    }
   }
 
-  /* ---------- Coordonnées ---------- */
+  /* ---------- Coordonnées et envoi ---------- */
   function markField(fieldId, ok) {
     var f = $(fieldId); if (!f) return ok;
     f.classList.toggle('has-error', !ok);
@@ -248,7 +350,6 @@
     ok = markField('field-reception', !!checkedValue('reception')) && ok;
     return ok;
   }
-  // Retire l'erreur dès que le champ est corrigé
   ['w-prenom', 'w-nom', 'w-email', 'w-tel', 'w-ville'].forEach(function(id) {
     var el = $(id); if (!el) return;
     el.addEventListener('input', function() { var f = el.closest('.wizard__field'); if (f) f.classList.remove('has-error'); });
@@ -257,45 +358,31 @@
     r.addEventListener('change', function() { markField('field-reception', true); });
   });
 
-  /* ---------- Envoi ---------- */
   function buildPayload() {
     var prenom = val('w-prenom'), nom = val('w-nom'), email = val('w-email');
-    var occasion = checkedValue('evenement');
-    var quantite = checkedValue('quantite');
-    var date = readDate();
-    var days = date ? daysUntil(date) : null;
+    var occasion = checkedValue('evenement'), quantite = checkedValue('quantite');
+    var date = readDate(), days = date ? daysUntil(date) : null;
     var urgent = days !== null && days >= 0 && days < 28;
-    var couleurs = checkedValues('couleurs').map(function(c) { return c === 'Personnalisée' ? 'Autre (à préciser)' : c; });
-
-    var subject = 'Création sur mesure · ' + occasion + ' · ' + quantite + ' contenants · ' +
-      (date ? formatDate(date) : 'date non fixée') + ' · ' + prenom + ' ' + nom + (urgent ? ' · DÉLAI COURT' : '');
-
     var p = {
-      'subject': subject,
+      'subject': 'Création sur mesure · ' + occasion + ' · ' + (conseil ? 'contenant à définir' : containers[idx].name) + ' · ' +
+        quantite + ' contenants · ' + (date ? formatDate(date) : 'date non fixée') + ' · ' + prenom + ' ' + nom + (urgent ? ' · DÉLAI COURT' : ''),
       'email': email,
       '_replyto': email,
-      'Type de demande': 'Création sur mesure (formulaire « Lancer ma création »)',
+      'Type de demande': 'Création sur mesure (configurateur « Lancer ma création »)',
       'Nom': prenom + ' ' + nom,
       'Téléphone': val('w-tel'),
       'Ville / code postal': val('w-ville'),
       'Réception': checkedValue('reception'),
       'Occasion': occasion,
-      'Contenant': checkedValues('contenant').join(', '),
+      'Contenant': contenantText(),
       'Dragées': drageesText(),
+      'Texte de l\'étiquette': etiquetteText() || 'À définir',
       'Nombre de contenants': quantite,
-      "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée',
-      'Couleurs': couleurs.length ? couleurs.join(', ') : 'À préciser'
+      "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
-    var optional = [
-      ["Texte de l'étiquette", val('wizard-etiquette')],
-      ['Précisions', val('wizard-message')],
-      ['Visuel (lien)', val('wizard-visuel-lien')],
-      ['Budget par contenant', checkedValue('budget')],
-      ['Nous a connus via', checkedValue('source')],
-      ['Produit consulté', produitParam],
-      ['Photo du produit', imageParam]
-    ];
-    optional.forEach(function(o) { if (o[1]) p[o[0]] = o[1]; });
+    [['Précisions', val('wizard-message')], ['Visuel (lien)', val('wizard-visuel-lien')],
+     ['Budget par contenant', checkedValue('budget')], ['Nous a connus via', checkedValue('source')],
+     ['Produit consulté', produitParam], ['Photo du produit', imageParam]].forEach(function(o) { if (o[1]) p[o[0]] = o[1]; });
     p['_gotcha'] = val('w-company');
     return p;
   }
@@ -308,24 +395,19 @@
   }
   function showSendError() {
     nextBtn.disabled = false;
-    setNextLabel(finalLabel());
-    var errEl = $('wizard-send-error');
-    if (errEl) errEl.hidden = false;
+    setNextLabel(labelFor(TOTAL));
+    var errEl = $('wizard-send-error'); if (errEl) errEl.hidden = false;
   }
-
   function send() {
     if (!validateContact()) {
-      var firstError = document.querySelector('#wizard-step-5 .has-error');
-      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var firstError = document.querySelector('#wizard-step-6 .has-error');
+      if (firstError) firstError.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
       return;
     }
     if (val('w-company')) { showSuccess(); return; } // champ piège rempli : robot
-
-    var errEl = $('wizard-send-error');
-    if (errEl) errEl.hidden = true;
+    var errEl = $('wizard-send-error'); if (errEl) errEl.hidden = true;
     nextBtn.disabled = true;
     nextBtn.textContent = 'Envoi en cours…';
-
     fetch('https://formspree.io/f/' + FORMSPREE_ID, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -335,10 +417,7 @@
     .catch(showSendError);
   }
 
-  backBtn.addEventListener('click', function() {
-    if (current > 1) showStep(current - 1, 'back');
-  });
-
+  backBtn.addEventListener('click', function() { if (current > 1) showStep(current - 1, 'back'); });
   nextBtn.addEventListener('click', function() {
     if (current === TOTAL) { send(); return; }
     if (!validateStep(current)) {
@@ -346,10 +425,22 @@
       if (p) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = ''; }
       return;
     }
+    if (current === 2) conseil = false;
     showStep(current + 1, 'next');
   });
 
+  /* Hauteur de l'en-tête fixe, pour l'aperçu collant sur mobile */
+  function setStickyTop() {
+    var hdr = document.querySelector('.header');
+    if (hdr) document.documentElement.style.setProperty('--cfg-top', hdr.getBoundingClientRect().height + 'px');
+  }
+  window.addEventListener('resize', setStickyTop);
+  setStickyTop();
+
+  /* ---------- Initialisation ---------- */
+  updateCaption();
+  paint();
   setProgress(1);
-  setNextLabel('Continuer');
+  setNextLabel(labelFor(1));
   updateNextState();
 })();

@@ -3895,43 +3895,6 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
 }
 .wizard__hint a { color: inherit; text-decoration: underline; }
 
-/* Cartes photo (contenants) */
-.wizard__photo-card .wizard__card-inner { padding: 0 0 16px; gap: 2px; }
-.wizard__photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  margin-bottom: 12px;
-  background: var(--paper-2);
-}
-.wizard__photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-soft);
-}
-.wizard__photo-card:hover .wizard__photo img { transform: scale(1.03); }
-.wizard__photo-card .wizard__card-name,
-.wizard__photo-card .wizard__card-sub { padding: 0 14px; }
-.wizard__photo--advice {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--caramel);
-}
-.wizard__photo--advice svg { width: 28px; height: 28px; }
-.wizard__card-check--square { border-radius: 3px; }
-.wizard__card input:checked ~ .wizard__card-check--square::after {
-  width: 4px;
-  height: 8px;
-  border-radius: 0;
-  background: none;
-  border: solid var(--blanc);
-  border-width: 0 1.5px 1.5px 0;
-  transform: translateY(-1px) rotate(45deg);
-}
 .wizard__cards--two { grid-template-columns: repeat(2, 1fr); }
 
 /* Pastilles (choix courts) */
@@ -3983,7 +3946,6 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
 
 @media (max-width: 768px) {
   .wizard__row { grid-template-columns: 1fr; }
-  .wizard__photo { aspect-ratio: 1 / 1; }
 }
 
 @media (max-width: 768px) {
@@ -4124,6 +4086,182 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   .hero__title { font-size: 36px; line-height: 1.08; }
   .hero__sub    { font-size: 11.5px; }
   .page-intro__title  { font-size: 30px; }
+}
+
+
+/* ================================================
+   CONFIGURATEUR « Lancer ma création »
+================================================ */
+@font-face {
+  font-family: 'Etiquette Italic';
+  src: url('./fonts/etiquette-italic.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.cfg-slot:empty { display: none; }
+.cfg-stage { margin: 0 auto 36px; text-align: center; }
+.cfg-view {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.cfg-viewport {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 1 / 1;
+  flex-shrink: 1;
+  touch-action: pan-y;
+}
+/* Halo discret derrière le contenant */
+.cfg-viewport::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 52%;
+  width: 78%; aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 68%);
+  pointer-events: none;
+}
+.cfg-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(0);
+  transition: opacity 0.45s var(--ease-soft), transform 0.55s var(--ease), visibility 0s linear 0.55s;
+}
+.cfg-svg[data-pos="active"] { opacity: 1; visibility: visible; transform: none; transition: opacity 0.45s var(--ease-soft), transform 0.55s var(--ease), visibility 0s; }
+.cfg-svg[data-pos="prev"] { transform: translateX(-14%); }
+.cfg-svg[data-pos="next"] { transform: translateX(14%); }
+.cfg-svg .dg { transition: color 0.35s var(--ease-soft); }
+.dg.is-hidden { display: none; }
+.cfg-tag__l1 { font-family: 'Etiquette Italic', Georgia, serif; fill: var(--ink); }
+.cfg-tag__l2 { font-family: var(--font); fill: var(--ink); letter-spacing: 0.08em; opacity: 0.6; }
+.cfg-tag .is-placeholder { opacity: 0.38; }
+
+.cfg-arrow {
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-20);
+  background: var(--paper);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+.cfg-arrow svg { width: 20px; height: 20px; }
+.cfg-arrow:hover { border-color: var(--caramel); color: var(--caramel); }
+.cfg-arrow:focus-visible, .cfg-dot:focus-visible { outline: 2px solid var(--caramel); outline-offset: 3px; }
+
+.cfg-caption { margin-top: 6px; min-height: 52px; }
+.cfg-name {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+.cfg-desc { font-size: 13px; font-weight: 300; color: var(--ink-60); margin: 0; }
+.cfg-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+.cfg-dot {
+  width: 22px; height: 18px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+.cfg-dot::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  background: var(--ink-20);
+  transition: background 0.25s, height 0.25s;
+}
+.cfg-dot[aria-current="true"]::after { background: var(--caramel); height: 2px; margin-top: -0.5px; }
+.cfg-advice { text-align: center; margin: -12px 0 32px; }
+.cfg-advice .wizard__skip-link { background: none; border-top: none; border-left: none; border-right: none; padding: 0 0 2px; font-family: var(--font); }
+
+/* Aperçu (étapes 3 et 4) : contenant plus petit, sans flèches */
+.cfg-stage--preview .cfg-arrow,
+.cfg-stage--preview .cfg-dots { display: none; }
+.cfg-stage--preview .cfg-viewport { width: min(100%, 300px); }
+.cfg-stage--preview .cfg-desc { display: none; }
+.cfg-stage--preview .cfg-name { font-size: 13px; color: var(--ink-60); }
+
+/* Loupe sur l'étiquette (étape 4) */
+.cfg-loupe {
+  position: absolute;
+  width: 132px; height: 132px;
+  left: calc(50% + 92px);
+  bottom: 14px;
+  display: none;
+  filter: drop-shadow(0 6px 16px rgba(82,54,42,0.14));
+}
+.cfg-stage--label .cfg-loupe { display: block; }
+
+/* Couleurs */
+.cfg-colors .wizard__colors { margin-bottom: 12px; }
+.wizard__color-item input:disabled + .wizard__color-swatch { opacity: 0.35; cursor: not-allowed; }
+.wizard__color-item input:focus-visible + .wizard__color-swatch { outline: 2px solid var(--caramel); outline-offset: 2px; }
+.cfg-autre { margin-top: 16px; }
+
+/* Récapitulatif avec miniature */
+.cfg-summary { flex-direction: row; align-items: center; gap: 24px; }
+.cfg-summary__art { width: 150px; flex-shrink: 0; }
+.cfg-summary__art:empty { display: none; }
+.cfg-summary__art svg { width: 100%; height: auto; display: block; }
+.cfg-summary__list { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cfg-svg, .cfg-svg[data-pos="active"], .cfg-svg .dg { transition: none; }
+}
+@media (max-width: 768px) {
+  .wizard__cards.wizard__qty-cards { grid-template-columns: 1fr; }
+  .wizard__qty-num { font-size: 30px; min-width: 112px; }
+  .cfg-view { gap: 0; }
+  .cfg-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; background: rgba(243,236,230,0.85); }
+  .cfg-arrow--prev { left: 0; }
+  .cfg-arrow--next { right: 0; }
+  .cfg-viewport { width: min(100%, 360px); }
+  .cfg-stage--preview .cfg-viewport { width: min(100%, 260px); }
+  .cfg-loupe { width: 104px; height: 104px; left: auto; right: 0; bottom: 6px; }
+  .cfg-summary { flex-direction: column; align-items: flex-start; }
+  .cfg-summary__art { width: 120px; align-self: center; }
+  /* Aperçu collant : la création reste visible pendant le choix des couleurs et de l'étiquette */
+  #wizard-step-3 .cfg-slot,
+  #wizard-step-4 .cfg-slot {
+    position: sticky;
+    top: var(--cfg-top, 72px);
+    z-index: 4;
+    margin: 0 -20px 20px;
+    padding: 4px 20px 0;
+    background: var(--paper);
+    box-shadow: 0 10px 14px -14px rgba(82, 54, 42, 0.35);
+    transition: top 0.3s var(--ease-soft);
+  }
+  /* L'en-tête se masque au défilement : l'aperçu remonte en haut de l'écran */
+  body:has(.header--hidden) #wizard-step-3 .cfg-slot,
+  body:has(.header--hidden) #wizard-step-4 .cfg-slot { top: 0; }
+  .cfg-stage--preview { margin-bottom: 8px; }
+  .cfg-stage--preview .cfg-viewport { width: min(100%, 190px); }
+  .cfg-stage--preview .cfg-caption { min-height: 0; margin-top: 0; }
+  .cfg-stage--preview .cfg-name { font-size: 12px; margin: 0 0 4px; }
+  .cfg-stage--label .cfg-loupe { width: 96px; height: 96px; right: 4px; bottom: 4px; }
+}
+@media (max-width: 480px) {
+  #wizard-step-3 .cfg-slot,
+  #wizard-step-4 .cfg-slot { margin: 0 -16px 20px; padding: 4px 16px 0; }
 }
 
 
