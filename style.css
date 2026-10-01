@@ -4189,6 +4189,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   transition: background 0.25s, height 0.25s;
 }
 .cfg-dot[aria-current="true"]::after { background: var(--caramel); height: 2px; margin-top: -0.5px; }
+.cfg-note { font-size: 11px; font-weight: 300; color: var(--ink-60); margin: 14px 0 0; }
 .cfg-advice { text-align: center; margin: -12px 0 32px; }
 .cfg-advice .wizard__skip-link { background: none; border-top: none; border-left: none; border-right: none; padding: 0 0 2px; font-family: var(--font); }
 
@@ -4257,6 +4258,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   .cfg-stage--preview .cfg-viewport { width: min(100%, 190px); }
   .cfg-stage--preview .cfg-caption { min-height: 0; margin-top: 0; }
   .cfg-stage--preview .cfg-name { font-size: 12px; margin: 0 0 4px; }
+  .cfg-stage--preview .cfg-note { display: none; }
   .cfg-stage--label .cfg-loupe { width: 96px; height: 96px; right: 4px; bottom: 4px; }
 }
 @media (max-width: 480px) {
