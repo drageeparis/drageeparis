@@ -159,10 +159,10 @@
       <!-- Contenu du wizard -->
       <div id="wizard-body">
 
-        <!-- Étape 1 : Division Boutique / Atelier -->
+        <!-- Étape 1 : Univers -->
         <div class="wizard__panel active" id="wizard-step-1">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 01 / 07</span>
+            <span class="wizard__step-label">Étape 01 / 06</span>
           </div>
           <h1 class="wizard__step-title">Votre projet<br>nous intéresse</h1>
           <p class="wizard__step-sub">Souhaitez-vous commander des dragées ou confectionner une création sur mesure&nbsp;?</p>
@@ -192,13 +192,46 @@
           </div>
         </div>
 
-        <!-- Étape 2 : Type d'événement -->
+        <!-- Étape 2 : Avec ou sans dragées -->
         <div class="wizard__panel" id="wizard-step-2">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 02 / 07</span>
+            <span class="wizard__step-label">Étape 02 / 06</span>
+          </div>
+          <h2 class="wizard__step-title">Avec ou sans<br>dragées&nbsp;?</h2>
+          <p class="wizard__step-sub">Souhaitez-vous que votre création soit garnie de dragées, ou préférez-vous le contenant seul&nbsp;?</p>
+          <div class="wizard__cards" role="group" aria-label="Avec ou sans dragées">
+            <label class="wizard__card">
+              <input type="radio" name="dragees" value="Avec dragées">
+              <div class="wizard__card-inner">
+                <div class="wizard__card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="15" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <span class="wizard__card-name">Avec dragées</span>
+                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Contenant garni de dragées.</span>
+              </div>
+              <span class="wizard__card-check" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card">
+              <input type="radio" name="dragees" value="Sans dragées">
+              <div class="wizard__card-inner">
+                <div class="wizard__card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                </div>
+                <span class="wizard__card-name">Sans dragées</span>
+                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Le contenant seul, sans garniture.</span>
+              </div>
+              <span class="wizard__card-check" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Étape 3 : Type d'événement -->
+        <div class="wizard__panel" id="wizard-step-3">
+          <div class="wizard__meta">
+            <span class="wizard__step-label">Étape 03 / 06</span>
           </div>
           <h2 class="wizard__step-title">Racontez-nous<br>votre célébration</h2>
-          <p class="wizard__step-sub">Quel est le type de l'événement pour lequel vous souhaitez créer vos dragées&nbsp;?</p>
+          <p class="wizard__step-sub">Pour quelle occasion imaginez-vous votre création&nbsp;?</p>
 
           <div class="wizard__cards" role="group" aria-label="Type d'événement">
 
@@ -214,34 +247,23 @@
             </label>
 
             <label class="wizard__card">
-              <input type="radio" name="evenement" value="Naissance">
+              <input type="radio" name="evenement" value="Naissance &amp; premiers instants">
               <div class="wizard__card-inner">
                 <div class="wizard__card-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18"/><path d="M5 9v5a4 4 0 004 4h6a4 4 0 004-4V9"/><path d="M9 5l-2 4"/><path d="M15 5l2 4"/></svg>
                 </div>
-                <span class="wizard__card-name">Naissance</span>
+                <span class="wizard__card-name">Naissance &amp; premiers instants</span>
               </div>
               <span class="wizard__card-check" aria-hidden="true"></span>
             </label>
 
             <label class="wizard__card">
-              <input type="radio" name="evenement" value="Réception">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-2 10H10z"/><path d="M10 12v7"/><path d="M7 19h10"/></svg>
-                </div>
-                <span class="wizard__card-name">Réception</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-
-            <label class="wizard__card">
-              <input type="radio" name="evenement" value="Célébration religieuse">
+              <input type="radio" name="evenement" value="Baptême &amp; communion">
               <div class="wizard__card-inner">
                 <div class="wizard__card-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M6 8h12"/></svg>
                 </div>
-                <span class="wizard__card-name">Célébration religieuse</span>
+                <span class="wizard__card-name">Baptême &amp; communion</span>
               </div>
               <span class="wizard__card-check" aria-hidden="true"></span>
             </label>
@@ -253,6 +275,17 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18"/><path d="M12 9v12"/><path d="M12 9c0-2 2-4 5-2s2 3-1 2h-4"/><path d="M12 9c0-2-2-4-5-2s-2 3 1 2h4"/></svg>
                 </div>
                 <span class="wizard__card-name">Anniversaire</span>
+              </div>
+              <span class="wizard__card-check" aria-hidden="true"></span>
+            </label>
+
+            <label class="wizard__card">
+              <input type="radio" name="evenement" value="Diplôme &amp; retraite">
+              <div class="wizard__card-inner">
+                <div class="wizard__card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/><path d="M22 9v5"/></svg>
+                </div>
+                <span class="wizard__card-name">Diplôme &amp; retraite</span>
               </div>
               <span class="wizard__card-check" aria-hidden="true"></span>
             </label>
@@ -271,12 +304,12 @@
           </div>
         </div>
 
-        <!-- Étape 3 : Quantité -->
-        <div class="wizard__panel" id="wizard-step-3">
+        <!-- Étape 4 : Quantité et date -->
+        <div class="wizard__panel" id="wizard-step-4">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 03 / 07</span>
+            <span class="wizard__step-label">Étape 04 / 06</span>
           </div>
-          <h2 class="wizard__step-title">L'importance<br>des chiffres</h2>
+          <h2 class="wizard__step-title">Vos invités<br>&amp; le jour J</h2>
           <p class="wizard__step-sub">Combien de pièces estimez-vous avoir besoin&nbsp;? Un ordre de grandeur suffit, nous affinerons ensemble.</p>
 
           <div class="wizard__qty-cards wizard__cards" role="group" aria-label="Quantité">
@@ -330,16 +363,8 @@
             </label>
 
           </div>
-        </div>
 
-        <!-- Étape 4 : Date -->
-        <div class="wizard__panel" id="wizard-step-4">
-          <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 04 / 07</span>
-          </div>
-          <h2 class="wizard__step-title">Le jour J</h2>
-          <p class="wizard__step-sub">Quelle est la date de votre événement&nbsp;? Cela nous permet d'anticiper les délais de fabrication.</p>
-
+          <p class="wizard__step-sub wizard__step-sub--date">Et la date de votre événement&nbsp;? <span style="opacity:.6;">(facultatif, si elle n'est pas encore fixée, laissez vide)</span></p>
           <div class="wizard__date-wrap">
             <input type="date" class="wizard__date-input" id="wizard-date" name="date" aria-label="Date de l'événement" placeholder="jj/mm/aaaa">
             <p class="wizard__date-hint">
@@ -347,13 +372,12 @@
               Nous recommandons de nous contacter 4 à 6 semaines avant votre événement.
             </p>
           </div>
-          <span class="wizard__skip-link" id="wizard-skip-date" tabindex="0" role="button" aria-label="Passer la date">Date non définie, passer cette étape →</span>
         </div>
 
         <!-- Étape 5 : Couleurs -->
         <div class="wizard__panel" id="wizard-step-5">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 05 / 07</span>
+            <span class="wizard__step-label">Étape 05 / 06</span>
           </div>
           <h2 class="wizard__step-title">L'émotion<br>en couleurs</h2>
           <p class="wizard__step-sub">Quelles teintes vous inspirent&nbsp;? Vous pouvez en choisir plusieurs, nous vous proposerons une palette harmonieuse.</p>
@@ -469,43 +493,10 @@
           <span class="wizard__skip-link" id="wizard-skip-colors" tabindex="0" role="button" aria-label="Passer les couleurs">Je préciserai les couleurs plus tard →</span>
         </div>
 
-        <!-- Étape 6 : Avec ou sans dragées -->
+        <!-- Étape 6 : Coordonnées -->
         <div class="wizard__panel" id="wizard-step-6">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 06 / 07</span>
-          </div>
-          <h2 class="wizard__step-title">Avec ou sans<br>dragées&nbsp;?</h2>
-          <p class="wizard__step-sub">Souhaitez-vous que votre création soit garnie de dragées, ou préférez-vous le contenant seul&nbsp;?</p>
-          <div class="wizard__cards" role="group" aria-label="Avec ou sans dragées">
-            <label class="wizard__card">
-              <input type="radio" name="dragees" value="Avec dragées">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="15" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>
-                </div>
-                <span class="wizard__card-name">Avec dragées</span>
-                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Contenant garni de dragées.</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card">
-              <input type="radio" name="dragees" value="Sans dragées">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-                </div>
-                <span class="wizard__card-name">Sans dragées</span>
-                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Le contenant seul, sans garniture.</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Étape 7 : Coordonnées -->
-        <div class="wizard__panel" id="wizard-step-7">
-          <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 07 / 07</span>
+            <span class="wizard__step-label">Étape 06 / 06</span>
           </div>
           <h2 class="wizard__step-title">Vos coordonnées</h2>
           <p class="wizard__step-sub">Plus qu'une étape, renseignez vos informations pour que nous puissions vous recontacter sous 48 h avec une proposition sur mesure.</p>

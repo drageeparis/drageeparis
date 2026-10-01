@@ -1,5 +1,5 @@
 (function() {
-  var TOTAL = 7;
+  var TOTAL = 6;
   var current = 1;
   var data = { division: '', dragees: '', evenement: '', quantite: '', date: '', couleurs: [], message: '', visuel: '', produit: '', image: '' };
 
@@ -30,7 +30,7 @@
   function getPanel(n) { return document.getElementById('wizard-step-' + n); }
 
   function updateNextState() {
-    var needsSelection = (current === 1 || current === 2 || current === 3 || current === 6);
+    var needsSelection = (current === 1 || current === 2 || current === 3 || current === 4);
     nextBtn.disabled = needsSelection && !validateStep(current);
   }
 
@@ -114,14 +114,9 @@
   }
 
   // Skip buttons
-  var skipDate = document.getElementById('wizard-skip-date');
-  if (skipDate) {
-    skipDate.addEventListener('click', function() { data.date = ''; showStep(5, 'next'); });
-    skipDate.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') skipDate.click(); });
-  }
   var skipColors = document.getElementById('wizard-skip-colors');
   if (skipColors) {
-    skipColors.addEventListener('click', function() { data.couleurs = []; showStep(6, 'next'); });
+    skipColors.addEventListener('click', function() { data.couleurs = []; showStep(6, 'next'); updateSummary(); });
     skipColors.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') skipColors.click(); });
   }
 
@@ -165,12 +160,11 @@
 
   function validateStep(n) {
     if (n === 1) return !!document.querySelector('input[name="division"]:checked');
-    if (n === 2) return !!document.querySelector('input[name="evenement"]:checked');
-    if (n === 3) return !!document.querySelector('input[name="quantite"]:checked');
-    if (n === 4) return true; // date optional
+    if (n === 2) return !!document.querySelector('input[name="dragees"]:checked');
+    if (n === 3) return !!document.querySelector('input[name="evenement"]:checked');
+    if (n === 4) return !!document.querySelector('input[name="quantite"]:checked'); // date facultative
     if (n === 5) return true; // colors optional
-    if (n === 6) return !!document.querySelector('input[name="dragees"]:checked');
-    if (n === 7) return validateContact();
+    if (n === 6) return validateContact();
     return true;
   }
 
@@ -270,7 +264,12 @@
       }
       return;
     }
-    if (current === 4) { data.date = document.getElementById('wizard-date').value; }
+    if (current === 4) {
+      // Date facultative : accepte aaaa-mm-jj (ordinateur) ou jj/mm/aaaa (mobile)
+      var rawDate = document.getElementById('wizard-date').value.trim();
+      var dm = rawDate.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      data.date = dm ? dm[3] + '-' + dm[2].padStart(2, '0') + '-' + dm[1].padStart(2, '0') : (/^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate : '');
+    }
     showStep(current + 1, 'next');
     if (current === TOTAL) updateSummary();
   });
