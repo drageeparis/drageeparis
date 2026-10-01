@@ -226,7 +226,7 @@
           'Prénom': prenom,
           'Email': email,
           'Téléphone': tel,
-          'Division': data.division || 'Non précisée',
+          'Univers': data.division || 'Non précisée',
           'Dragées': data.dragees || 'Non précisé',
           'Produit consulté': data.produit || 'Non précisé',
           'Photo du produit': data.image || 'Non précisée',
