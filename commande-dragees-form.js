@@ -22,6 +22,18 @@
     document.getElementById('bo-produit').value = produitParam.slice(0, 200);
   }
 
+  /* Présélectionne la catégorie si elle est fournie (?categorie=Chocolat) et existe dans la liste */
+  var categorieParam = params.get('categorie');
+  if (categorieParam) {
+    var select = document.getElementById('bo-categorie');
+    for (var i = 0; i < select.options.length; i++) {
+      if (select.options[i].value && select.options[i].value === categorieParam) {
+        select.value = categorieParam;
+        break;
+      }
+    }
+  }
+
   function setError(inputId, errorId, show) {
     var input = document.getElementById(inputId);
     var error = document.getElementById(errorId);
