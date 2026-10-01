@@ -3411,6 +3411,8 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   max-width: 760px;
   margin: 0 auto;
   padding: 140px 52px 100px;
+  /* Empêche l'animation de glissement des étapes d'élargir la page sur mobile */
+  overflow-x: clip;
 }
 
 /* Progress bar */
