@@ -22,12 +22,19 @@
   if (produitParam) {
     document.getElementById('at-produit').value = produitParam.slice(0, 200);
   }
-if (categorieParam) {
-  var categorieSelect = document.getElementById('at-categorie');
-  if (categorieSelect) {
-    categorieSelect.value = categorieParam;
+  /* Présélectionne la collection uniquement si elle existe dans la liste */
+  if (categorieParam) {
+    var categorieSelect = document.getElementById('at-categorie');
+    if (categorieSelect) {
+      for (var i = 0; i < categorieSelect.options.length; i++) {
+        if (categorieSelect.options[i].value && categorieSelect.options[i].value === categorieParam) {
+          categorieSelect.value = categorieParam;
+          break;
+        }
+      }
+    }
   }
-}
+
   function setError(inputId, errorId, show) {
     var input = document.getElementById(inputId);
     var error = document.getElementById(errorId);
