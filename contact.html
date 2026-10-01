@@ -149,46 +149,14 @@
       <!-- Contenu du wizard -->
       <div id="wizard-body">
 
-        <!-- Étape 1 : Univers -->
+        <!-- Étape 1 : Avec ou sans dragées -->
         <div class="wizard__panel active" id="wizard-step-1">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 01 / 06</span>
+            <span class="wizard__step-label">Étape 01 / 05</span>
           </div>
-          <h1 class="wizard__step-title">Votre projet<br>nous intéresse</h1>
-          <p class="wizard__step-sub">Souhaitez-vous commander des dragées ou confectionner une création sur mesure&nbsp;?</p>
-          <div class="wizard__cards" role="group" aria-label="Univers">
-            <label class="wizard__card">
-              <input type="radio" name="division" value="Les dragées">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                </div>
-                <span class="wizard__card-name">Les dragées</span>
-                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Commander vos dragées.</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card">
-              <input type="radio" name="division" value="Les créations">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </div>
-                <span class="wizard__card-name">Les créations</span>
-                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Confectionnez votre création sur mesure.</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Étape 2 : Avec ou sans dragées -->
-        <div class="wizard__panel" id="wizard-step-2">
-          <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 02 / 06</span>
-          </div>
-          <h2 class="wizard__step-title">Avec ou sans<br>dragées&nbsp;?</h2>
-          <p class="wizard__step-sub">Souhaitez-vous que votre création soit garnie de dragées, ou préférez-vous le contenant seul&nbsp;?</p>
+          <h1 class="wizard__step-title">Avec ou sans<br>dragées&nbsp;?</h1>
+          <p class="wizard__step-sub">Souhaitez-vous que votre création soit garnie de dragées, ou préférez-vous le contenant seul&nbsp;?<br>
+            <a href="commande-dragees.html" class="wizard__skip-link" style="margin-top:12px;">Vous souhaitez uniquement des dragées au poids&nbsp;? Commandez-les ici →</a></p>
           <div class="wizard__cards" role="group" aria-label="Avec ou sans dragées">
             <label class="wizard__card">
               <input type="radio" name="dragees" value="Avec dragées">
@@ -215,10 +183,10 @@
           </div>
         </div>
 
-        <!-- Étape 3 : Type d'événement -->
-        <div class="wizard__panel" id="wizard-step-3">
+        <!-- Étape 2 : Type d'événement -->
+        <div class="wizard__panel" id="wizard-step-2">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 03 / 06</span>
+            <span class="wizard__step-label">Étape 02 / 05</span>
           </div>
           <h2 class="wizard__step-title">Racontez-nous<br>votre célébration</h2>
           <p class="wizard__step-sub">Pour quelle occasion imaginez-vous votre création&nbsp;?</p>
@@ -284,10 +252,10 @@
           </div>
         </div>
 
-        <!-- Étape 4 : Quantité et date -->
-        <div class="wizard__panel" id="wizard-step-4">
+        <!-- Étape 3 : Quantité et date -->
+        <div class="wizard__panel" id="wizard-step-3">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 04 / 06</span>
+            <span class="wizard__step-label">Étape 03 / 05</span>
           </div>
           <h2 class="wizard__step-title">Vos invités<br>&amp; le jour J</h2>
           <p class="wizard__step-sub">Combien de pièces estimez-vous avoir besoin&nbsp;? Un ordre de grandeur suffit, nous affinerons ensemble.</p>
@@ -354,10 +322,10 @@
           </div>
         </div>
 
-        <!-- Étape 5 : Couleurs -->
-        <div class="wizard__panel" id="wizard-step-5">
+        <!-- Étape 4 : Couleurs -->
+        <div class="wizard__panel" id="wizard-step-4">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 05 / 06</span>
+            <span class="wizard__step-label">Étape 04 / 05</span>
           </div>
           <h2 class="wizard__step-title">L'émotion<br>en couleurs</h2>
           <p class="wizard__step-sub">Quelles teintes vous inspirent&nbsp;? Vous pouvez en choisir plusieurs, nous vous proposerons une palette harmonieuse.</p>
@@ -473,20 +441,16 @@
           <span class="wizard__skip-link" id="wizard-skip-colors" tabindex="0" role="button" aria-label="Passer les couleurs">Je préciserai les couleurs plus tard →</span>
         </div>
 
-        <!-- Étape 6 : Coordonnées -->
-        <div class="wizard__panel" id="wizard-step-6">
+        <!-- Étape 5 : Coordonnées -->
+        <div class="wizard__panel" id="wizard-step-5">
           <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 06 / 06</span>
+            <span class="wizard__step-label">Étape 05 / 05</span>
           </div>
           <h2 class="wizard__step-title">Vos coordonnées</h2>
           <p class="wizard__step-sub">Plus qu'une étape, renseignez vos informations pour que nous puissions vous recontacter sous 48 h avec une proposition sur mesure.</p>
 
           <!-- Récapitulatif -->
           <div class="wizard__summary" id="wizard-summary" aria-label="Récapitulatif de votre projet">
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Univers</span>
-              <span class="wizard__summary-val" id="sum-division">-</span>
-            </div>
             <div class="wizard__summary-item" id="sum-dragees-row" style="display:none;">
               <span class="wizard__summary-key">Dragées</span>
               <span class="wizard__summary-val" id="sum-dragees">-</span>

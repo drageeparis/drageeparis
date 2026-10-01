@@ -1,7 +1,7 @@
 (function() {
-  var TOTAL = 6;
+  var TOTAL = 5;
   var current = 1;
-  var data = { division: '', dragees: '', evenement: '', quantite: '', date: '', couleurs: [], message: '', visuel: '', produit: '', image: '' };
+  var data = { division: 'Les créations', dragees: '', evenement: '', quantite: '', date: '', couleurs: [], message: '', visuel: '', produit: '', image: '' };
 
   var bar     = document.getElementById('wizard-bar-fill');
   var barEl   = document.getElementById('wizard-bar');
@@ -30,7 +30,7 @@
   function getPanel(n) { return document.getElementById('wizard-step-' + n); }
 
   function updateNextState() {
-    var needsSelection = (current === 1 || current === 2 || current === 3 || current === 4);
+    var needsSelection = (current === 1 || current === 2 || current === 3);
     nextBtn.disabled = needsSelection && !validateStep(current);
   }
 
@@ -57,11 +57,6 @@
   document.querySelectorAll('.wizard__card input[type="radio"]').forEach(function(r) {
     r.addEventListener('change', function() {
       var name = r.getAttribute('name');
-      if (name === 'division') {
-        data.division = r.value;
-        // « Les dragées » n'utilise pas le configurateur : redirection directe.
-        if (r.value === 'Les dragées') { window.location.href = 'dragees.html'; return; }
-      }
       if (name === 'dragees')   data.dragees = r.value;
       if (name === 'evenement') data.evenement = r.value;
       if (name === 'quantite')  data.quantite = r.value;
@@ -116,12 +111,11 @@
   // Skip buttons
   var skipColors = document.getElementById('wizard-skip-colors');
   if (skipColors) {
-    skipColors.addEventListener('click', function() { data.couleurs = []; showStep(6, 'next'); updateSummary(); });
+    skipColors.addEventListener('click', function() { data.couleurs = []; showStep(5, 'next'); updateSummary(); });
     skipColors.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') skipColors.click(); });
   }
 
   function updateSummary() {
-    document.getElementById('sum-division').textContent = data.division || '-';
     var drRow = document.getElementById('sum-dragees-row');
     var drVal = document.getElementById('sum-dragees');
     if (data.dragees) {
@@ -159,12 +153,11 @@
   }
 
   function validateStep(n) {
-    if (n === 1) return !!document.querySelector('input[name="division"]:checked');
-    if (n === 2) return !!document.querySelector('input[name="dragees"]:checked');
-    if (n === 3) return !!document.querySelector('input[name="evenement"]:checked');
-    if (n === 4) return !!document.querySelector('input[name="quantite"]:checked'); // date facultative
-    if (n === 5) return true; // colors optional
-    if (n === 6) return validateContact();
+    if (n === 1) return !!document.querySelector('input[name="dragees"]:checked');
+    if (n === 2) return !!document.querySelector('input[name="evenement"]:checked');
+    if (n === 3) return !!document.querySelector('input[name="quantite"]:checked'); // date facultative
+    if (n === 4) return true; // colors optional
+    if (n === 5) return validateContact();
     return true;
   }
 
@@ -188,9 +181,6 @@
   });
 
   nextBtn.addEventListener('click', function() {
-    // Filet de sécurité : « Les dragées » pré-sélectionné (?div=boutique) → redirection.
-    if (current === 1 && data.division === 'Les dragées') { window.location.href = 'dragees.html'; return; }
-
     if (current === TOTAL) {
       if (!validateContact()) return;
 
@@ -220,7 +210,6 @@
           'Prénom': prenom,
           'Email': email,
           'Téléphone': tel,
-          'Univers': data.division || 'Non précisée',
           'Dragées': data.dragees || 'Non précisé',
           'Produit consulté': data.produit || 'Non précisé',
           'Photo du produit': data.image || 'Non précisée',
@@ -264,7 +253,7 @@
       }
       return;
     }
-    if (current === 4) {
+    if (current === 3) {
       // Date facultative : accepte aaaa-mm-jj (ordinateur) ou jj/mm/aaaa (mobile)
       var rawDate = document.getElementById('wizard-date').value.trim();
       var dm = rawDate.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
@@ -281,23 +270,13 @@
     });
   });
 
-  // Pré-sélectionner la division si ?div= dans l'URL, et mémoriser le produit d'origine (?produit=&image=)
+  // Mémoriser le produit d'origine (?produit=&image=)
   (function() {
     var params = new URLSearchParams(window.location.search);
     data.produit = (params.get('produit') || '').slice(0, 200);
     var imageParam = params.get('image');
     data.image = isSafeImageUrl(imageParam) ? imageParam : '';
 
-    var div = params.get('div');
-    if (!div) return;
-    var val = div === 'boutique' ? 'Les dragées' : div === 'atelier' ? 'Les créations' : null;
-    if (!val) return;
-    var radio = document.querySelector('input[name="division"][value="' + val + '"]');
-    if (radio) {
-      radio.checked = true;
-      data.division = val;
-      updateNextState();
-    }
   })();
 
   setProgress(1);
