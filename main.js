@@ -608,11 +608,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---- 16. FAB — bouton flottant mobile (bas-droite) ---- */
   (function() {
     if (window.innerWidth > 768) return;
+    // Inutile sur la page du formulaire elle-même (et il masquait les champs)
+    if (document.body.classList.contains('wizard-page')) return;
     var fab = document.createElement('a');
     fab.href = 'contact.html';
     fab.className = 'fab';
     fab.setAttribute('aria-label', 'Lancer ma création');
-    fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>';
+    // Même étoile que le bouton « Lancer ma création » de l'en-tête
+    fab.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg>';
     document.body.appendChild(fab);
   })();
 

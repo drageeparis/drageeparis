@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lancer ma création · Dragée Paris</title>
   <meta name="description" content="Lancez votre création personnalisée étape par étape, événement, quantité, date, couleurs et coordonnées. Réponse sous 48h.">
-  <link rel="stylesheet" href="style.css?v=20261002">
+  <link rel="stylesheet" href="style.css?v=20261002b">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -149,49 +149,16 @@
       <!-- Contenu du wizard -->
       <div id="wizard-body">
 
-        <!-- Étape 1 : Avec ou sans dragées -->
+        <!-- Étape 1 : Occasion -->
         <div class="wizard__panel active" id="wizard-step-1">
           <div class="wizard__meta">
             <span class="wizard__step-label">Étape 01 / 05</span>
           </div>
-          <h1 class="wizard__step-title">Avec ou sans<br>dragées&nbsp;?</h1>
-          <p class="wizard__step-sub">Souhaitez-vous que votre création soit garnie de dragées, ou préférez-vous le contenant seul&nbsp;?<br>
-            <a href="commande-dragees.html" class="wizard__skip-link" style="margin-top:12px;">Vous souhaitez uniquement des dragées au poids&nbsp;? Commandez-les ici →</a></p>
-          <div class="wizard__cards" role="group" aria-label="Avec ou sans dragées">
-            <label class="wizard__card">
-              <input type="radio" name="dragees" value="Avec dragées">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="15" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>
-                </div>
-                <span class="wizard__card-name">Avec dragées</span>
-                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Contenant garni de dragées.</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card">
-              <input type="radio" name="dragees" value="Sans dragées">
-              <div class="wizard__card-inner">
-                <div class="wizard__card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-                </div>
-                <span class="wizard__card-name">Sans dragées</span>
-                <span class="wizard__card-sub" style="font-size:11px;opacity:.6;margin-top:4px;display:block;">Le contenant seul, sans garniture.</span>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-          </div>
-        </div>
+          <h1 class="wizard__step-title">Racontez-nous<br>votre célébration</h1>
+          <p class="wizard__step-sub">Décrivez votre projet en deux minutes&nbsp;: nous vous adressons une proposition sur mesure sous 48&nbsp;h, gratuite et sans engagement. Une maquette vous est soumise avant toute fabrication.</p>
+          <p class="wizard__question">Pour quelle occasion imaginez-vous votre création&nbsp;?</p>
 
-        <!-- Étape 2 : Type d'événement -->
-        <div class="wizard__panel" id="wizard-step-2">
-          <div class="wizard__meta">
-            <span class="wizard__step-label">Étape 02 / 05</span>
-          </div>
-          <h2 class="wizard__step-title">Racontez-nous<br>votre célébration</h2>
-          <p class="wizard__step-sub">Pour quelle occasion imaginez-vous votre création&nbsp;?</p>
-
-          <div class="wizard__cards" role="group" aria-label="Type d'événement">
+          <div class="wizard__cards" role="group" aria-label="Occasion">
 
             <label class="wizard__card">
               <input type="radio" name="evenement" value="Mariage">
@@ -250,46 +217,162 @@
             </label>
 
           </div>
+          <a href="commande-dragees.html" class="wizard__skip-link">Vous souhaitez uniquement des dragées au poids&nbsp;? Commandez-les ici →</a>
         </div>
 
-        <!-- Étape 3 : Quantité et date -->
+        <!-- Étape 2 : Votre création (contenant, avec ou sans dragées) -->
+        <div class="wizard__panel" id="wizard-step-2">
+          <div class="wizard__meta">
+            <span class="wizard__step-label">Étape 02 / 05</span>
+          </div>
+          <h2 class="wizard__step-title">Votre<br>création</h2>
+          <p class="wizard__step-sub">Quel contenant vous inspire&nbsp;? Plusieurs choix possibles, nous affinerons ensemble.</p>
+
+          <div class="wizard__cards wizard__cards--photo" role="group" aria-label="Contenant souhaité">
+            <label class="wizard__card wizard__photo-card">
+              <input type="checkbox" name="contenant" value="Pochon en tissu">
+              <div class="wizard__card-inner">
+                <picture class="wizard__photo">
+                  <source type="image/webp" srcset="./images/formulaire/contenant-pochon.webp">
+                  <img src="./images/formulaire/contenant-pochon.jpg" alt="" width="480" height="600" loading="lazy">
+                </picture>
+                <span class="wizard__card-name">Pochon en tissu</span>
+                <span class="wizard__card-sub">Lin, jute, coton</span>
+              </div>
+              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card wizard__photo-card">
+              <input type="checkbox" name="contenant" value="Boîte">
+              <div class="wizard__card-inner">
+                <picture class="wizard__photo">
+                  <source type="image/webp" srcset="./images/formulaire/contenant-boite.webp">
+                  <img src="./images/formulaire/contenant-boite.jpg" alt="" width="480" height="600" loading="lazy">
+                </picture>
+                <span class="wizard__card-name">Boîte</span>
+                <span class="wizard__card-sub">Carton, coffret</span>
+              </div>
+              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card wizard__photo-card">
+              <input type="checkbox" name="contenant" value="Verre &amp; transparent">
+              <div class="wizard__card-inner">
+                <picture class="wizard__photo">
+                  <source type="image/webp" srcset="./images/formulaire/contenant-verre.webp">
+                  <img src="./images/formulaire/contenant-verre.jpg" alt="" width="480" height="600" loading="lazy">
+                </picture>
+                <span class="wizard__card-name">Verre &amp; transparent</span>
+                <span class="wizard__card-sub">Bocal, coupe, cube</span>
+              </div>
+              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card wizard__photo-card">
+              <input type="checkbox" name="contenant" value="Tube">
+              <div class="wizard__card-inner">
+                <picture class="wizard__photo">
+                  <source type="image/webp" srcset="./images/formulaire/contenant-tube.webp">
+                  <img src="./images/formulaire/contenant-tube.jpg" alt="" width="480" height="600" loading="lazy">
+                </picture>
+                <span class="wizard__card-name">Tube</span>
+                <span class="wizard__card-sub">Dragées en colonne</span>
+              </div>
+              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card wizard__photo-card">
+              <input type="checkbox" name="contenant" value="Bouquet de dragées">
+              <div class="wizard__card-inner">
+                <picture class="wizard__photo">
+                  <source type="image/webp" srcset="./images/formulaire/contenant-bouquet.webp">
+                  <img src="./images/formulaire/contenant-bouquet.jpg" alt="" width="480" height="600" loading="lazy">
+                </picture>
+                <span class="wizard__card-name">Bouquet de dragées</span>
+                <span class="wizard__card-sub">Monté à la main</span>
+              </div>
+              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card wizard__photo-card wizard__photo-card--advice">
+              <input type="checkbox" name="contenant" value="Conseillez-moi">
+              <div class="wizard__card-inner">
+                <span class="wizard__photo wizard__photo--advice"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg></span>
+                <span class="wizard__card-name">Conseillez-moi</span>
+                <span class="wizard__card-sub">Nous vous proposerons le contenant idéal</span>
+              </div>
+              <span class="wizard__card-check wizard__card-check--square" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <p class="wizard__question">Votre création sera-t-elle garnie de dragées&nbsp;?</p>
+          <div class="wizard__cards wizard__cards--two" role="group" aria-label="Avec ou sans dragées">
+            <label class="wizard__card">
+              <input type="radio" name="dragees" value="Avec dragées">
+              <div class="wizard__card-inner">
+                <div class="wizard__card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="13" cy="15" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <span class="wizard__card-name">Avec dragées</span>
+                <span class="wizard__card-sub">Contenant garni de dragées.</span>
+              </div>
+              <span class="wizard__card-check" aria-hidden="true"></span>
+            </label>
+            <label class="wizard__card">
+              <input type="radio" name="dragees" value="Sans dragées">
+              <div class="wizard__card-inner">
+                <div class="wizard__card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                </div>
+                <span class="wizard__card-name">Sans dragées</span>
+                <span class="wizard__card-sub">Le contenant seul, sans garniture.</span>
+              </div>
+              <span class="wizard__card-check" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="wizard__dragee-type" id="wizard-dragee-type" hidden>
+            <p class="wizard__question">Quelles dragées&nbsp;? <span class="wizard__optional">(facultatif)</span></p>
+            <div class="wizard__chips" role="group" aria-label="Type de dragées">
+              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Chocolat"><span>Chocolat</span></label>
+              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Amande Avola"><span>Amande Avola</span></label>
+              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Amande traditionnelle"><span>Amande traditionnelle</span></label>
+              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Chocolat amande"><span>Chocolat amande</span></label>
+              <label class="wizard__chip"><input type="radio" name="type_dragees" value="Conseillez-moi"><span>Conseillez-moi</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 3 : Nombre de contenants et date -->
         <div class="wizard__panel" id="wizard-step-3">
           <div class="wizard__meta">
             <span class="wizard__step-label">Étape 03 / 05</span>
           </div>
           <h2 class="wizard__step-title">Vos invités<br>&amp; le jour J</h2>
-          <p class="wizard__step-sub">Combien de pièces estimez-vous avoir besoin&nbsp;? Un ordre de grandeur suffit, nous affinerons ensemble.</p>
+          <p class="wizard__step-sub">Combien de contenants souhaitez-vous&nbsp;? En général, un par invité. Un ordre de grandeur suffit, nous affinerons ensemble.</p>
 
-          <div class="wizard__qty-cards wizard__cards" role="group" aria-label="Quantité">
-
+          <div class="wizard__qty-cards wizard__cards" role="group" aria-label="Nombre de contenants">
             <label class="wizard__card wizard__qty-card">
               <input type="radio" name="quantite" value="Moins de 50">
               <div class="wizard__card-inner">
-                <span class="wizard__qty-num">–50</span>
+                <span class="wizard__qty-num">&lt;&nbsp;50</span>
                 <div class="wizard__qty-info">
                   <span class="wizard__qty-label">Moins de 50</span>
-                  <span class="wizard__qty-sub">Pour petits comités</span>
+                  <span class="wizard__qty-sub">Pour un comité intime</span>
                 </div>
               </div>
               <span class="wizard__card-check" aria-hidden="true"></span>
             </label>
-
             <label class="wizard__card wizard__qty-card">
               <input type="radio" name="quantite" value="50 à 100">
               <div class="wizard__card-inner">
-                <span class="wizard__qty-num">100</span>
+                <span class="wizard__qty-num">50–100</span>
                 <div class="wizard__qty-info">
                   <span class="wizard__qty-label">50 à 100</span>
-                  <span class="wizard__qty-sub">Notre minimum recommandé pour les dragées</span>
+                  <span class="wizard__qty-sub">Baptêmes, communions, anniversaires</span>
                 </div>
               </div>
               <span class="wizard__card-check" aria-hidden="true"></span>
             </label>
-
             <label class="wizard__card wizard__qty-card">
               <input type="radio" name="quantite" value="100 à 200">
               <div class="wizard__card-inner">
-                <span class="wizard__qty-num">200</span>
+                <span class="wizard__qty-num">100–200</span>
                 <div class="wizard__qty-info">
                   <span class="wizard__qty-label">100 à 200</span>
                   <span class="wizard__qty-sub">Idéal pour les mariages et grandes réceptions</span>
@@ -297,7 +380,6 @@
               </div>
               <span class="wizard__card-check" aria-hidden="true"></span>
             </label>
-
             <label class="wizard__card wizard__qty-card">
               <input type="radio" name="quantite" value="Plus de 200">
               <div class="wizard__card-inner">
@@ -312,23 +394,24 @@
 
           </div>
 
-          <p class="wizard__step-sub wizard__step-sub--date">Et la date de votre événement&nbsp;? <span style="opacity:.6;">(facultatif, si elle n'est pas encore fixée, laissez vide)</span></p>
+          <p class="wizard__question">Et la date de votre événement&nbsp;? <span class="wizard__optional">(facultatif)</span></p>
           <div class="wizard__date-wrap">
             <input type="date" class="wizard__date-input" id="wizard-date" name="date" aria-label="Date de l'événement" placeholder="jj/mm/aaaa">
             <p class="wizard__date-hint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round"/></svg>
               Nous recommandons de nous contacter 4 à 6 semaines avant votre événement.
             </p>
+            <p class="wizard__date-alert" id="wizard-date-alert" role="status" hidden></p>
           </div>
         </div>
 
-        <!-- Étape 4 : Couleurs -->
+        <!-- Étape 4 : Couleurs et étiquette -->
         <div class="wizard__panel" id="wizard-step-4">
           <div class="wizard__meta">
             <span class="wizard__step-label">Étape 04 / 05</span>
           </div>
-          <h2 class="wizard__step-title">L'émotion<br>en couleurs</h2>
-          <p class="wizard__step-sub">Quelles teintes vous inspirent&nbsp;? Vous pouvez en choisir plusieurs, nous vous proposerons une palette harmonieuse.</p>
+          <h2 class="wizard__step-title">Vos couleurs,<br>vos mots</h2>
+          <p class="wizard__step-sub">Quelles teintes vous inspirent&nbsp;? Plusieurs choix possibles, nous vous proposerons une palette harmonieuse.</p>
 
           <div class="wizard__colors" role="group" aria-label="Couleurs souhaitées">
 
@@ -430,15 +513,21 @@
 
           </div>
           <div class="wizard__free-text fade-in">
-            <label class="wizard__label" for="wizard-message">Précisez vos souhaits <span style="font-size:9px;opacity:.55">(optionnel)</span></label>
-            <textarea class="wizard__input wizard__textarea" id="wizard-message" name="message" rows="3" placeholder="Couleurs exactes, thème, inspirations, questions particulières..."></textarea>
+            <label class="wizard__label" for="wizard-etiquette">Texte de l'étiquette <span class="wizard__optional">(facultatif)</span></label>
+            <input class="wizard__input" type="text" id="wizard-etiquette" name="etiquette" maxlength="120" autocomplete="off" placeholder="Ex. : Camille &amp; Louis · 14.06.2027">
+            <p class="wizard__hint">Prénoms, date, petit mot&nbsp;: nous le mettrons en forme sur la maquette.</p>
+
             <div class="wizard__file-upload">
-              <label class="wizard__label" for="wizard-visuel-lien">Lien vers un visuel <span style="font-size:9px;opacity:.55">(optionnel)</span></label>
+              <label class="wizard__label" for="wizard-message">Précisez vos souhaits <span class="wizard__optional">(facultatif)</span></label>
+              <textarea class="wizard__input wizard__textarea" id="wizard-message" name="message" rows="3" placeholder="Thème, figurine, ruban, inspirations, questions particulières…"></textarea>
+            </div>
+            <div class="wizard__file-upload">
+              <label class="wizard__label" for="wizard-visuel-lien">Lien vers un visuel <span class="wizard__optional">(facultatif)</span></label>
               <input class="wizard__input" type="url" id="wizard-visuel-lien" name="visuel_lien" placeholder="Lien Google Drive, WeTransfer, Pinterest…" autocomplete="off" inputmode="url">
-              <p style="font-size:11px;opacity:.6;margin-top:6px;line-height:1.5;">Vous pouvez aussi nous envoyer votre visuel par e-mail à <a href="mailto:drageeparis@gmail.com" style="color:inherit;text-decoration:underline;">drageeparis@gmail.com</a> ou via WeTransfer, en précisant votre nom.</p>
+              <p class="wizard__hint">Vous pouvez aussi nous envoyer votre visuel par e-mail à <a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a> ou via WeTransfer, en précisant votre nom.</p>
             </div>
           </div>
-          <span class="wizard__skip-link" id="wizard-skip-colors" tabindex="0" role="button" aria-label="Passer les couleurs">Je préciserai les couleurs plus tard →</span>
+          <span class="wizard__skip-link" id="wizard-skip-colors" tabindex="0" role="button">Je préciserai ces détails plus tard →</span>
         </div>
 
         <!-- Étape 5 : Coordonnées -->
@@ -447,20 +536,24 @@
             <span class="wizard__step-label">Étape 05 / 05</span>
           </div>
           <h2 class="wizard__step-title">Vos coordonnées</h2>
-          <p class="wizard__step-sub">Plus qu'une étape, renseignez vos informations pour que nous puissions vous recontacter sous 48 h avec une proposition sur mesure.</p>
+          <p class="wizard__step-sub">Plus qu'une étape&nbsp;: nous vous recontactons sous 48&nbsp;h avec une proposition sur mesure, gratuite et sans engagement.</p>
 
           <!-- Récapitulatif -->
           <div class="wizard__summary" id="wizard-summary" aria-label="Récapitulatif de votre projet">
-            <div class="wizard__summary-item" id="sum-dragees-row" style="display:none;">
+            <div class="wizard__summary-item">
+              <span class="wizard__summary-key">Occasion</span>
+              <span class="wizard__summary-val" id="sum-event">-</span>
+            </div>
+            <div class="wizard__summary-item">
+              <span class="wizard__summary-key">Contenant</span>
+              <span class="wizard__summary-val" id="sum-contenant">-</span>
+            </div>
+            <div class="wizard__summary-item">
               <span class="wizard__summary-key">Dragées</span>
               <span class="wizard__summary-val" id="sum-dragees">-</span>
             </div>
             <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Événement</span>
-              <span class="wizard__summary-val" id="sum-event">-</span>
-            </div>
-            <div class="wizard__summary-item">
-              <span class="wizard__summary-key">Quantité</span>
+              <span class="wizard__summary-key">Contenants</span>
               <span class="wizard__summary-val" id="sum-qty">-</span>
             </div>
             <div class="wizard__summary-item">
@@ -470,6 +563,10 @@
             <div class="wizard__summary-item">
               <span class="wizard__summary-key">Couleurs</span>
               <span class="wizard__summary-val" id="sum-colors">À préciser</span>
+            </div>
+            <div class="wizard__summary-item" id="sum-etiquette-row" style="display:none;">
+              <span class="wizard__summary-key">Étiquette</span>
+              <span class="wizard__summary-val" id="sum-etiquette"></span>
             </div>
             <div class="wizard__summary-item" id="sum-message-row" style="display:none;">
               <span class="wizard__summary-key">Précisions</span>
@@ -482,21 +579,68 @@
           </div>
 
           <form class="wizard__form" id="wizard-form" novalidate>
-            <div class="wizard__field" id="field-prenom">
-              <label class="wizard__label" for="w-prenom">Prénom <span class="req">*</span></label>
-              <input class="wizard__input" type="text" id="w-prenom" name="prenom" autocomplete="given-name" placeholder="Votre prénom" required>
-              <span class="wizard__field-error">Ce champ est obligatoire.</span>
+            <div class="wizard__row">
+              <div class="wizard__field" id="field-prenom">
+                <label class="wizard__label" for="w-prenom">Prénom <span class="req">*</span></label>
+                <input class="wizard__input" type="text" id="w-prenom" name="prenom" autocomplete="given-name" placeholder="Votre prénom" required>
+                <span class="wizard__field-error">Ce champ est obligatoire.</span>
+              </div>
+              <div class="wizard__field" id="field-nom">
+                <label class="wizard__label" for="w-nom">Nom <span class="req">*</span></label>
+                <input class="wizard__input" type="text" id="w-nom" name="nom" autocomplete="family-name" placeholder="Votre nom" required>
+                <span class="wizard__field-error">Ce champ est obligatoire.</span>
+              </div>
             </div>
-            <div class="wizard__field" id="field-email">
-              <label class="wizard__label" for="w-email">E-mail <span class="req">*</span></label>
-              <input class="wizard__input" type="email" id="w-email" name="email" autocomplete="email" placeholder="votre@email.fr" required>
-              <span class="wizard__field-error">Veuillez saisir une adresse e-mail valide.</span>
+            <div class="wizard__row">
+              <div class="wizard__field" id="field-email">
+                <label class="wizard__label" for="w-email">E-mail <span class="req">*</span></label>
+                <input class="wizard__input" type="email" id="w-email" name="email" autocomplete="email" placeholder="votre@email.fr" required>
+                <span class="wizard__field-error">Veuillez saisir une adresse e-mail valide.</span>
+              </div>
+              <div class="wizard__field" id="field-tel">
+                <label class="wizard__label" for="w-tel">Téléphone <span class="req">*</span></label>
+                <input class="wizard__input" type="tel" id="w-tel" name="telephone" autocomplete="tel" placeholder="06 00 00 00 00" required inputmode="tel">
+                <span class="wizard__field-error">Veuillez indiquer un numéro de téléphone.</span>
+              </div>
             </div>
-            <div class="wizard__field" id="field-tel">
-              <label class="wizard__label" for="w-tel">Téléphone <span class="req">*</span></label>
-              <input class="wizard__input" type="tel" id="w-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00" required>
-              <span class="wizard__field-error">Veuillez indiquer un numéro de téléphone.</span>
+              <div class="wizard__field" id="field-ville">
+                <label class="wizard__label" for="w-ville">Ville ou code postal <span class="req">*</span></label>
+                <input class="wizard__input" type="text" id="w-ville" name="ville" autocomplete="address-level2" placeholder="Ex. : Paris, 91200…" required>
+                <span class="wizard__field-error">Veuillez indiquer votre ville ou votre code postal.</span>
+              </div>
+
+            <div class="wizard__field" id="field-reception">
+              <span class="wizard__label" id="label-reception">Réception de votre commande <span class="req">*</span></span>
+              <div class="wizard__chips" role="radiogroup" aria-labelledby="label-reception">
+                <label class="wizard__chip"><input type="radio" name="reception" value="Livraison"><span>Livraison</span></label>
+                <label class="wizard__chip"><input type="radio" name="reception" value="Remise en main propre (Île-de-France)"><span>Remise en main propre (Île-de-France)</span></label>
+                <label class="wizard__chip"><input type="radio" name="reception" value="Je ne sais pas encore"><span>Je ne sais pas encore</span></label>
+              </div>
+              <span class="wizard__field-error">Veuillez choisir une option.</span>
             </div>
+
+            <div class="wizard__field">
+              <span class="wizard__label" id="label-budget">Budget par contenant <span class="wizard__optional">(facultatif)</span></span>
+              <div class="wizard__chips" role="radiogroup" aria-labelledby="label-budget">
+                <label class="wizard__chip"><input type="radio" name="budget" value="Moins de 4 €"><span>Moins de 4 €</span></label>
+                <label class="wizard__chip"><input type="radio" name="budget" value="4 à 6 €"><span>4 à 6 €</span></label>
+                <label class="wizard__chip"><input type="radio" name="budget" value="6 à 10 €"><span>6 à 10 €</span></label>
+                <label class="wizard__chip"><input type="radio" name="budget" value="Plus de 10 €"><span>Plus de 10 €</span></label>
+                <label class="wizard__chip"><input type="radio" name="budget" value="Je ne sais pas"><span>Je ne sais pas</span></label>
+              </div>
+            </div>
+
+            <div class="wizard__field">
+              <span class="wizard__label" id="label-source">Comment nous avez-vous connus&nbsp;? <span class="wizard__optional">(facultatif)</span></span>
+              <div class="wizard__chips" role="radiogroup" aria-labelledby="label-source">
+                <label class="wizard__chip"><input type="radio" name="source" value="Instagram"><span>Instagram</span></label>
+                <label class="wizard__chip"><input type="radio" name="source" value="TikTok"><span>TikTok</span></label>
+                <label class="wizard__chip"><input type="radio" name="source" value="Google"><span>Google</span></label>
+                <label class="wizard__chip"><input type="radio" name="source" value="Bouche-à-oreille"><span>Bouche-à-oreille</span></label>
+                <label class="wizard__chip"><input type="radio" name="source" value="Autre"><span>Autre</span></label>
+              </div>
+            </div>
+
             <div class="form__honeypot" aria-hidden="true">
               <label for="w-company">Ne pas remplir ce champ</label>
               <input type="text" id="w-company" name="_gotcha" tabindex="-1" autocomplete="off">
@@ -567,7 +711,7 @@
     </div>
   </footer>
 
-  <script src="main.js"></script>
-  <script src="contact-wizard.js?v=20261002"></script>
+  <script src="main.js?v=20261002b"></script>
+  <script src="contact-wizard.js?v=20261002b"></script>
 </body>
 </html>

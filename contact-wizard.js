@@ -1,7 +1,12 @@
+/* Formulaire « Lancer ma création » — 5 étapes
+   1. Occasion · 2. Votre création (contenant, avec/sans dragées) · 3. Contenants & date
+   4. Couleurs & étiquette · 5. Coordonnées (+ envoi Formspree) */
 (function() {
   var TOTAL = 5;
+  var FORMSPREE_ID = 'mlgqrzed';
+  var PHONE_LABEL = '06 08 67 14 43';
+  var PHONE_HREF = 'tel:+33608671443';
   var current = 1;
-  var data = { division: 'Les créations', dragees: '', evenement: '', quantite: '', date: '', couleurs: [], message: '', visuel: '', produit: '', image: '' };
 
   var bar     = document.getElementById('wizard-bar-fill');
   var barEl   = document.getElementById('wizard-bar');
@@ -10,28 +15,129 @@
   var backBtn = document.getElementById('wizard-back');
   var nextBtn = document.getElementById('wizard-next');
   var success = document.getElementById('wizard-success');
+  if (!body || !nextBtn) return;
+
+  /* ---------- Utilitaires ---------- */
+  function $(id) { return document.getElementById(id); }
+  function checkedValue(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+  function checkedValues(name) {
+    return Array.prototype.map.call(document.querySelectorAll('input[name="' + name + '"]:checked'), function(x) { return x.value; });
+  }
+  function val(id) { var el = $(id); return el ? el.value.trim() : ''; }
 
   function isSafeImageUrl(url) {
     if (!url) return false;
     try {
       var u = new URL(url, window.location.href);
       return u.origin === window.location.origin && u.pathname.indexOf('/images/') !== -1;
-    } catch (e) {
-      return false;
-    }
+    } catch (e) { return false; }
   }
 
+  /* Produit d'origine éventuel (?produit=&image=) */
+  var params = new URLSearchParams(window.location.search);
+  var produitParam = (params.get('produit') || '').slice(0, 200);
+  var imageParam = isSafeImageUrl(params.get('image')) ? params.get('image') : '';
+
+  /* ---------- Date ---------- */
+  var dateEl = $('wizard-date');
+  var dateAlert = $('wizard-date-alert');
+  var isMobileDate = !!(dateEl && window.innerWidth <= 768);
+
+  if (isMobileDate) {
+    // Sur mobile, champ texte jj/mm/aaaa (plus simple à saisir)
+    dateEl.type = 'text';
+    dateEl.setAttribute('inputmode', 'numeric');
+    dateEl.setAttribute('maxlength', '10');
+    dateEl.setAttribute('placeholder', 'jj/mm/aaaa');
+    dateEl.addEventListener('input', function() {
+      var d = this.value.replace(/\D/g, '').slice(0, 8);
+      if (d.length > 4) d = d.slice(0, 2) + '/' + d.slice(2, 4) + '/' + d.slice(4);
+      else if (d.length > 2) d = d.slice(0, 2) + '/' + d.slice(2);
+      this.value = d;
+    });
+  }
+
+  // Renvoie un objet Date (minuit) ou null — accepte aaaa-mm-jj et jj/mm/aaaa
+  function readDate() {
+    if (!dateEl) return null;
+    var raw = dateEl.value.trim();
+    var y, m, d, mt;
+    if ((mt = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/))) { y = +mt[1]; m = +mt[2]; d = +mt[3]; }
+    else if ((mt = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) { y = +mt[3]; m = +mt[2]; d = +mt[1]; }
+    else return null;
+    var date = new Date(y, m - 1, d);
+    if (date.getFullYear() !== y || date.getMonth() !== m - 1 || date.getDate() !== d) return null;
+    return date;
+  }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function formatDate(date) { return pad(date.getDate()) + '/' + pad(date.getMonth() + 1) + '/' + date.getFullYear(); }
+  function daysUntil(date) {
+    var t = new Date(); t.setHours(0, 0, 0, 0);
+    return Math.round((date - t) / 86400000);
+  }
+  function relativeDelay(days) {
+    if (days < 0) return 'date passée, à vérifier';
+    if (days === 0) return "aujourd'hui";
+    if (days < 28) return 'DÉLAI COURT : dans ' + days + ' jour' + (days > 1 ? 's' : '');
+    if (days < 70) return 'dans ' + Math.round(days / 7) + ' semaines';
+    return 'dans environ ' + Math.round(days / 30.4) + ' mois';
+  }
+  function updateDateAlert() {
+    if (!dateAlert) return;
+    var date = readDate();
+    if (!date) { dateAlert.hidden = true; return; }
+    var days = daysUntil(date);
+    if (days < 0) {
+      dateAlert.textContent = 'Cette date est déjà passée : pouvez-vous la vérifier ?';
+      dateAlert.hidden = false;
+    } else if (days < 28) {
+      dateAlert.textContent = 'Votre événement approche : nous ferons tout notre possible. Pour un délai court, appelez-nous au ';
+      var a = document.createElement('a');
+      a.href = PHONE_HREF; a.textContent = PHONE_LABEL;
+      dateAlert.appendChild(a);
+      dateAlert.appendChild(document.createTextNode('.'));
+      dateAlert.hidden = false;
+    } else {
+      dateAlert.hidden = true;
+    }
+  }
+  if (dateEl) {
+    dateEl.addEventListener('input', updateDateAlert);
+    dateEl.addEventListener('change', updateDateAlert);
+  }
+
+  /* ---------- Navigation ---------- */
   function setProgress(step) {
     var pct = Math.round((step / TOTAL) * 100);
     bar.style.width = pct + '%';
     barEl.setAttribute('aria-valuenow', pct);
   }
+  function getPanel(n) { return $('wizard-step-' + n); }
 
-  function getPanel(n) { return document.getElementById('wizard-step-' + n); }
+  function setNextLabel(label) {
+    nextBtn.innerHTML = '';
+    nextBtn.appendChild(document.createTextNode(label + ' '));
+    var arrow = document.createElement('span');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '→';
+    nextBtn.appendChild(arrow);
+    nextBtn.setAttribute('aria-label', label);
+  }
+  function finalLabel() { return 'Recevoir ma proposition'; }
 
+  function validateStep(n) {
+    if (n === 1) return !!checkedValue('evenement');
+    if (n === 2) return checkedValues('contenant').length > 0 && !!checkedValue('dragees');
+    if (n === 3) return !!checkedValue('quantite'); // date facultative
+    if (n === 4) return true;                       // couleurs et étiquette facultatives
+    return true;
+  }
   function updateNextState() {
-    var needsSelection = (current === 1 || current === 2 || current === 3);
-    nextBtn.disabled = needsSelection && !validateStep(current);
+    if (current < TOTAL) nextBtn.disabled = !validateStep(current);
+    else nextBtn.disabled = false;
   }
 
   function showStep(n, direction) {
@@ -49,131 +155,184 @@
       next.classList.add('active');
     }
     backBtn.hidden = (n === 1);
-    nextBtn.textContent = (n === TOTAL) ? 'Envoyer ma création →' : 'Continuer →';
+    setNextLabel(n === TOTAL ? finalLabel() : 'Continuer');
+    if (n === TOTAL) updateSummary();
     updateNextState();
+    var top = document.querySelector('.wizard-wrap');
+    if (top && top.getBoundingClientRect().top < 0) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Radio / checkbox micro-interactions
-  document.querySelectorAll('.wizard__card input[type="radio"]').forEach(function(r) {
+  /* ---------- Interactions des choix ---------- */
+  // Contenant : « Conseillez-moi » est exclusif des autres choix
+  document.querySelectorAll('input[name="contenant"]').forEach(function(box) {
+    box.addEventListener('change', function() {
+      if (!box.checked) return;
+      document.querySelectorAll('input[name="contenant"]').forEach(function(other) {
+        if (other === box) return;
+        if (box.value === 'Conseillez-moi' || other.value === 'Conseillez-moi') other.checked = false;
+      });
+    });
+  });
+
+  // Avec / sans dragées : affiche le choix du type de dragées
+  var typeBlock = $('wizard-dragee-type');
+  document.querySelectorAll('input[name="dragees"]').forEach(function(r) {
     r.addEventListener('change', function() {
-      var name = r.getAttribute('name');
-      if (name === 'dragees')   data.dragees = r.value;
-      if (name === 'evenement') data.evenement = r.value;
-      if (name === 'quantite')  data.quantite = r.value;
-      updateNextState();
+      if (!typeBlock) return;
+      var avec = checkedValue('dragees') === 'Avec dragées';
+      typeBlock.hidden = !avec;
+      if (!avec) document.querySelectorAll('input[name="type_dragees"]').forEach(function(t) { t.checked = false; });
     });
   });
 
-  var dateEl = document.getElementById('wizard-date');
-  // Sur mobile, convertir en champ texte jj/mm/aaaa
-  if (dateEl && window.innerWidth <= 768) {
-    dateEl.type = 'text';
-    dateEl.setAttribute('inputmode', 'numeric');
-    dateEl.setAttribute('maxlength', '10');
-    dateEl.setAttribute('placeholder', 'jj/mm/aaaa');
-    dateEl.addEventListener('input', function() {
-      var digits = this.value.replace(/\D/g, '');
-      if (digits.length > 8) digits = digits.substr(0, 8);
-      var formatted = digits;
-      if (digits.length > 4) formatted = digits.substr(0, 2) + '/' + digits.substr(2, 2) + '/' + digits.substr(4);
-      else if (digits.length > 2) formatted = digits.substr(0, 2) + '/' + digits.substr(2);
-      this.value = formatted;
-    });
-    dateEl.addEventListener('change', function() {
-      var parts = this.value.split('/');
-      if (parts.length === 3 && parts[2].length === 4) {
-        data.date = parts[2] + '-' + parts[1].padStart(2,'0') + '-' + parts[0].padStart(2,'0');
-      } else {
-        data.date = this.value;
-      }
-    });
-  } else if (dateEl) {
-    dateEl.addEventListener('change', function() { data.date = this.value; });
-  }
+  body.addEventListener('change', updateNextState);
 
-  document.querySelectorAll('.wizard__color-item input[type="checkbox"]').forEach(function(c) {
-    c.addEventListener('change', function() {
-      data.couleurs = Array.from(document.querySelectorAll('.wizard__color-item input:checked')).map(function(x) { return x.value; });
+  // Clavier : Entrée sur un choix le sélectionne
+  document.querySelectorAll('.wizard__card input, .wizard__chip input').forEach(function(input) {
+    input.addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      input.checked = input.type === 'checkbox' ? !input.checked : true;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
     });
   });
 
-  var msgEl = document.getElementById('wizard-message');
-  if (msgEl) {
-    msgEl.addEventListener('input', function() { data.message = this.value.trim(); });
-  }
-
-  // Visuel : champ lien (Formspree ne transmet pas les fichiers uploadés sur l'offre gratuite)
-  var visuelLienEl = document.getElementById('wizard-visuel-lien');
-  if (visuelLienEl) {
-    visuelLienEl.addEventListener('input', function() { data.visuel = this.value.trim(); });
-  }
-
-  // Skip buttons
-  var skipColors = document.getElementById('wizard-skip-colors');
+  var skipColors = $('wizard-skip-colors');
   if (skipColors) {
-    skipColors.addEventListener('click', function() { data.couleurs = []; showStep(5, 'next'); updateSummary(); });
-    skipColors.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') skipColors.click(); });
+    skipColors.addEventListener('click', function() { showStep(5, 'next'); });
+    skipColors.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); skipColors.click(); }
+    });
   }
 
+  /* ---------- Récapitulatif ---------- */
+  function drageesText() {
+    var d = checkedValue('dragees');
+    if (!d) return '';
+    var type = checkedValue('type_dragees');
+    return d === 'Avec dragées' && type ? d + ' · ' + type : d;
+  }
+  function setRow(id, text, hideWhenEmpty, fallback) {
+    var el = $(id); if (!el) return;
+    el.textContent = text || fallback || '-';
+    var row = $(id + '-row');
+    if (row && hideWhenEmpty) row.style.display = text ? '' : 'none';
+  }
   function updateSummary() {
-    var drRow = document.getElementById('sum-dragees-row');
-    var drVal = document.getElementById('sum-dragees');
-    if (data.dragees) {
-      drVal.textContent = data.dragees;
-      drRow.style.display = '';
-    } else {
-      drRow.style.display = 'none';
-    }
-    document.getElementById('sum-event').textContent = data.evenement || '-';
-    document.getElementById('sum-qty').textContent = data.quantite || '-';
-    var d = data.date;
-    if (d) {
-      var parts = d.split('-');
-      document.getElementById('sum-date').textContent = parts[2] + '/' + parts[1] + '/' + parts[0];
-    } else {
-      document.getElementById('sum-date').textContent = 'Non précisée';
-    }
-    document.getElementById('sum-colors').textContent = data.couleurs.length ? data.couleurs.join(', ') : 'À préciser';
-    var msgRow = document.getElementById('sum-message-row');
-    var msgVal = document.getElementById('sum-message');
-    if (data.message) {
-      msgVal.textContent = data.message;
-      msgRow.style.display = '';
-    } else {
-      msgRow.style.display = 'none';
-    }
-    var visRow = document.getElementById('sum-visuel-row');
-    var visVal = document.getElementById('sum-visuel');
-    if (data.visuel) {
-      visVal.textContent = data.visuel;
-      visRow.style.display = '';
-    } else {
-      visRow.style.display = 'none';
-    }
+    var date = readDate();
+    setRow('sum-event', checkedValue('evenement'));
+    setRow('sum-contenant', checkedValues('contenant').join(', '));
+    setRow('sum-dragees', drageesText());
+    setRow('sum-qty', checkedValue('quantite'));
+    setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
+    var couleurs = checkedValues('couleurs').map(function(c) { return c === 'Personnalisée' ? 'Autre' : c; });
+    setRow('sum-colors', couleurs.join(', '), false, 'À préciser');
+    setRow('sum-etiquette', val('wizard-etiquette'), true);
+    setRow('sum-message', val('wizard-message'), true);
+    setRow('sum-visuel', val('wizard-visuel-lien'), true);
   }
 
-  function validateStep(n) {
-    if (n === 1) return !!document.querySelector('input[name="dragees"]:checked');
-    if (n === 2) return !!document.querySelector('input[name="evenement"]:checked');
-    if (n === 3) return !!document.querySelector('input[name="quantite"]:checked'); // date facultative
-    if (n === 4) return true; // colors optional
-    if (n === 5) return validateContact();
-    return true;
+  /* ---------- Coordonnées ---------- */
+  function markField(fieldId, ok) {
+    var f = $(fieldId); if (!f) return ok;
+    f.classList.toggle('has-error', !ok);
+    return ok;
   }
-
   function validateContact() {
     var ok = true;
-    var prenom = document.getElementById('w-prenom');
-    var email  = document.getElementById('w-email');
-    var tel    = document.getElementById('w-tel');
-    var fp = document.getElementById('field-prenom');
-    var fe = document.getElementById('field-email');
-    var ft = document.getElementById('field-tel');
-    if (!prenom.value.trim()) { fp.classList.add('has-error'); ok = false; } else { fp.classList.remove('has-error'); }
-    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(email.value.trim())) { fe.classList.add('has-error'); ok = false; } else { fe.classList.remove('has-error'); }
-    if (!tel.value.trim()) { ft.classList.add('has-error'); ok = false; } else { ft.classList.remove('has-error'); }
+    ok = markField('field-prenom', !!val('w-prenom')) && ok;
+    ok = markField('field-nom', !!val('w-nom')) && ok;
+    ok = markField('field-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('w-email'))) && ok;
+    ok = markField('field-tel', val('w-tel').replace(/\D/g, '').length >= 9) && ok;
+    ok = markField('field-ville', !!val('w-ville')) && ok;
+    ok = markField('field-reception', !!checkedValue('reception')) && ok;
     return ok;
+  }
+  // Retire l'erreur dès que le champ est corrigé
+  ['w-prenom', 'w-nom', 'w-email', 'w-tel', 'w-ville'].forEach(function(id) {
+    var el = $(id); if (!el) return;
+    el.addEventListener('input', function() { var f = el.closest('.wizard__field'); if (f) f.classList.remove('has-error'); });
+  });
+  document.querySelectorAll('input[name="reception"]').forEach(function(r) {
+    r.addEventListener('change', function() { markField('field-reception', true); });
+  });
+
+  /* ---------- Envoi ---------- */
+  function buildPayload() {
+    var prenom = val('w-prenom'), nom = val('w-nom'), email = val('w-email');
+    var occasion = checkedValue('evenement');
+    var quantite = checkedValue('quantite');
+    var date = readDate();
+    var days = date ? daysUntil(date) : null;
+    var urgent = days !== null && days >= 0 && days < 28;
+    var couleurs = checkedValues('couleurs').map(function(c) { return c === 'Personnalisée' ? 'Autre (à préciser)' : c; });
+
+    var subject = 'Création sur mesure · ' + occasion + ' · ' + quantite + ' contenants · ' +
+      (date ? formatDate(date) : 'date non fixée') + ' · ' + prenom + ' ' + nom + (urgent ? ' · DÉLAI COURT' : '');
+
+    var p = {
+      'subject': subject,
+      'email': email,
+      '_replyto': email,
+      'Type de demande': 'Création sur mesure (formulaire « Lancer ma création »)',
+      'Nom': prenom + ' ' + nom,
+      'Téléphone': val('w-tel'),
+      'Ville / code postal': val('w-ville'),
+      'Réception': checkedValue('reception'),
+      'Occasion': occasion,
+      'Contenant': checkedValues('contenant').join(', '),
+      'Dragées': drageesText(),
+      'Nombre de contenants': quantite,
+      "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée',
+      'Couleurs': couleurs.length ? couleurs.join(', ') : 'À préciser'
+    };
+    var optional = [
+      ["Texte de l'étiquette", val('wizard-etiquette')],
+      ['Précisions', val('wizard-message')],
+      ['Visuel (lien)', val('wizard-visuel-lien')],
+      ['Budget par contenant', checkedValue('budget')],
+      ['Nous a connus via', checkedValue('source')],
+      ['Produit consulté', produitParam],
+      ['Photo du produit', imageParam]
+    ];
+    optional.forEach(function(o) { if (o[1]) p[o[0]] = o[1]; });
+    p['_gotcha'] = val('w-company');
+    return p;
+  }
+
+  function showSuccess() {
+    body.style.display = 'none';
+    nav.style.display = 'none';
+    success.classList.add('visible');
+    setProgress(TOTAL);
+  }
+  function showSendError() {
+    nextBtn.disabled = false;
+    setNextLabel(finalLabel());
+    var errEl = $('wizard-send-error');
+    if (errEl) errEl.hidden = false;
+  }
+
+  function send() {
+    if (!validateContact()) {
+      var firstError = document.querySelector('#wizard-step-5 .has-error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (val('w-company')) { showSuccess(); return; } // champ piège rempli : robot
+
+    var errEl = $('wizard-send-error');
+    if (errEl) errEl.hidden = true;
+    nextBtn.disabled = true;
+    nextBtn.textContent = 'Envoi en cours…';
+
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(buildPayload())
+    })
+    .then(function(r) { if (r.ok) showSuccess(); else showSendError(); })
+    .catch(showSendError);
   }
 
   backBtn.addEventListener('click', function() {
@@ -181,103 +340,16 @@
   });
 
   nextBtn.addEventListener('click', function() {
-    if (current === TOTAL) {
-      if (!validateContact()) return;
-
-      var prenom = document.getElementById('w-prenom').value.trim();
-      var email  = document.getElementById('w-email').value.trim();
-      var tel    = document.getElementById('w-tel').value.trim();
-      var gotcha = document.getElementById('w-company').value;
-
-      if (gotcha) {
-        /* Champ piège rempli : soumission robot, on affiche un faux succès sans rien envoyer */
-        body.style.display = 'none';
-        nav.style.display = 'none';
-        success.classList.add('visible');
-        setProgress(TOTAL);
-        return;
-      }
-
-      var FORMSPREE_ID = 'mlgqrzed';
-
-      nextBtn.disabled = true;
-      nextBtn.textContent = 'Envoi en cours…';
-
-      fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          'Prénom': prenom,
-          'Email': email,
-          'Téléphone': tel,
-          'Dragées': data.dragees || 'Non précisé',
-          'Produit consulté': data.produit || 'Non précisé',
-          'Photo du produit': data.image || 'Non précisée',
-          'Événement': data.evenement,
-          'Quantité': data.quantite,
-          'Date': data.date || 'Non précisée',
-          'Couleurs': data.couleurs.length ? data.couleurs.join(', ') : 'À préciser',
-          'Message': data.message || '',
-          'Visuel (lien)': data.visuel || '',
-          '_gotcha': gotcha
-        })
-      })
-      .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-      .then(function(res) {
-        if (res.ok) {
-          body.style.display = 'none';
-          nav.style.display = 'none';
-          success.classList.add('visible');
-          setProgress(TOTAL);
-        } else {
-          nextBtn.disabled = false;
-          nextBtn.textContent = 'Envoyer ma création →';
-          var errEl = document.getElementById('wizard-send-error');
-          if (errEl) errEl.hidden = false;
-        }
-      })
-      .catch(function() {
-        nextBtn.disabled = false;
-        nextBtn.textContent = 'Envoyer ma création →';
-        var errEl = document.getElementById('wizard-send-error');
-        if (errEl) errEl.hidden = false;
-      });
-      return;
-    }
+    if (current === TOTAL) { send(); return; }
     if (!validateStep(current)) {
       var p = getPanel(current);
-      if (p) {
-        p.style.animation = 'none';
-        void p.offsetWidth;
-        p.style.animation = '';
-      }
+      if (p) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = ''; }
       return;
     }
-    if (current === 3) {
-      // Date facultative : accepte aaaa-mm-jj (ordinateur) ou jj/mm/aaaa (mobile)
-      var rawDate = document.getElementById('wizard-date').value.trim();
-      var dm = rawDate.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-      data.date = dm ? dm[3] + '-' + dm[2].padStart(2, '0') + '-' + dm[1].padStart(2, '0') : (/^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate : '');
-    }
     showStep(current + 1, 'next');
-    if (current === TOTAL) updateSummary();
   });
-
-  // Keyboard: Enter sur une card radio avance
-  document.querySelectorAll('.wizard__card input[type="radio"]').forEach(function(r) {
-    r.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { r.checked = true; r.dispatchEvent(new Event('change')); }
-    });
-  });
-
-  // Mémoriser le produit d'origine (?produit=&image=)
-  (function() {
-    var params = new URLSearchParams(window.location.search);
-    data.produit = (params.get('produit') || '').slice(0, 200);
-    var imageParam = params.get('image');
-    data.image = isSafeImageUrl(imageParam) ? imageParam : '';
-
-  })();
 
   setProgress(1);
+  setNextLabel('Continuer');
+  updateNextState();
 })();
