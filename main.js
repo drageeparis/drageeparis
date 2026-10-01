@@ -328,7 +328,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const applyFilter = (f, sub) => {
       tabs.forEach(t => t.classList.remove('active'));
-      const activeTab = tabs.find(t => t.dataset.filter === f) || tabs[0];
+      const knownTab = tabs.find(t => t.dataset.filter === f);
+      if (!knownTab) sub = undefined; // collection inconnue ou supprimée : on affiche tout
+      const activeTab = knownTab || tabs[0];
       activeTab.classList.add('active');
       f = activeTab.dataset.filter;
 

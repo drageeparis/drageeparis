@@ -281,11 +281,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-diplome-or-blanc.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-gender-reveal-bleu.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -372,11 +367,6 @@
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-naissance-rose-pastel.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-retraite-prestige.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
