@@ -85,6 +85,8 @@ Le bouton « Commander » d'une fiche produit pointe vers `commander.html?ref=<r
 
 Frais point relais (Mondial Relay) calculés automatiquement : offerts sous 1 kg, puis 12 € par kilo entamé (`RELAIS_PRIX_KG` dans `commander.js`). Retrait en boutique : pas de frais. Délai affiché : 5 à 10 jours (première date proposée à J+10, `LEAD_DAYS`).
 
+Saisie d'adresse assistée : suggestions via l'API Adresse de la Base Adresse Nationale (IGN, `data.geopf.fr/geocodage/search`, gratuite et sans clé ; domaine ajouté au `connect-src` de la CSP de `commander.html`). France uniquement, saisie libre si le service ne répond pas.
+
 Le champ `email` (en minuscules) est envoyé à Formspree pour permettre la réponse automatique au client (Autoresponse, offre Formspree Professional ou Business). Une fois activée, passer `AUTORESPONSE_ACTIVE` à `true` dans `commander.js`.
 
 ## Sécurité

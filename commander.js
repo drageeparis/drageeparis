@@ -280,6 +280,92 @@
   });
   render();
 
+  /* ---------- saisie d'adresse assistée (Base Adresse Nationale, IGN) ----------
+     France uniquement ; pour une adresse à l'étranger, le client saisit librement. */
+  (function () {
+    var API = 'https://data.geopf.fr/geocodage/search';
+    var rue = document.getElementById('o-rue');
+    var list = document.getElementById('o-rue-list');
+    var cp = document.getElementById('o-cp');
+    var ville = document.getElementById('o-ville');
+    var timer = null, ctrl = null, items = [], active = -1;
+
+    function close() {
+      list.hidden = true;
+      list.textContent = '';
+      items = [];
+      active = -1;
+      rue.setAttribute('aria-expanded', 'false');
+      rue.removeAttribute('aria-activedescendant');
+    }
+    function highlight(i) {
+      var opts = list.querySelectorAll('[role="option"]');
+      opts.forEach(function (o, k) { o.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+      active = i;
+      if (i >= 0 && opts[i]) {
+        rue.setAttribute('aria-activedescendant', opts[i].id);
+        opts[i].scrollIntoView({ block: 'nearest' });
+      } else {
+        rue.removeAttribute('aria-activedescendant');
+      }
+    }
+    function choose(p) {
+      rue.value = p.name || '';
+      cp.value = p.postcode || '';
+      ville.value = p.city || '';
+      [rue, cp, ville].forEach(function (inp) { inp.closest('.form__group').classList.remove('has-error'); });
+      close();
+      document.getElementById('o-tel').focus();
+    }
+    function show(features) {
+      list.textContent = '';
+      items = features.map(function (f) { return f.properties; });
+      if (!items.length) { close(); return; }
+      items.forEach(function (p, i) {
+        var li = el('li', 'order__addr-opt');
+        li.id = 'o-rue-opt-' + i;
+        li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', 'false');
+        li.appendChild(el('span', 'order__addr-name', p.name));
+        li.appendChild(el('span', 'order__addr-city', p.postcode + ' ' + p.city));
+        li.addEventListener('mousedown', function (e) { e.preventDefault(); choose(p); });
+        list.appendChild(li);
+      });
+      list.hidden = false;
+      rue.setAttribute('aria-expanded', 'true');
+      active = -1;
+    }
+    function search(q) {
+      if (ctrl) ctrl.abort();
+      ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var url = API + '?q=' + encodeURIComponent(q) + '&autocomplete=1&limit=5&index=address';
+      fetch(url, ctrl ? { signal: ctrl.signal } : {})
+        .then(function (r) { return r.ok ? r.json() : { features: [] }; })
+        .then(function (d) {
+          if (rue.value.trim() !== q) return;
+          show((d.features || []).filter(function (f) {
+            var t = f.properties && f.properties.type;
+            return t === 'housenumber' || t === 'street' || t === 'locality';
+          }));
+        })
+        .catch(function () { /* service indisponible : saisie libre */ });
+    }
+    rue.addEventListener('input', function () {
+      clearTimeout(timer);
+      var q = rue.value.trim();
+      if (q.length < 4) { close(); return; }
+      timer = setTimeout(function () { search(q); }, 250);
+    });
+    rue.addEventListener('keydown', function (e) {
+      if (list.hidden || !items.length) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); highlight((active + 1) % items.length); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); highlight(active <= 0 ? items.length - 1 : active - 1); }
+      else if (e.key === 'Enter' && active >= 0) { e.preventDefault(); choose(items[active]); }
+      else if (e.key === 'Escape') { close(); }
+    });
+    rue.addEventListener('blur', function () { setTimeout(close, 150); });
+  })();
+
   /* ---------- validation ---------- */
   function setErr(group, show) {
     group.classList.toggle('has-error', show);

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io https://data.geopf.fr; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none';">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Ma commande · Dragée Paris</title>
   <meta name="description" content="Finalisez votre commande de dragées Dragée Paris : format, quantité, mode de réception et date. Réponse sous 48 heures, sans paiement en ligne.">
@@ -211,9 +211,13 @@
                   <span class="form__error">Ce champ est obligatoire.</span>
                 </div>
               </div>
-              <div class="form__group">
+              <div class="form__group order__addr">
                 <label class="form__label" for="o-rue">Adresse (numéro et rue) <span class="required" aria-hidden="true">*</span></label>
-                <input class="form__input" type="text" id="o-rue" name="rue" autocomplete="address-line1" placeholder="12 rue des Lilas" required>
+                <div class="order__addr-field">
+                  <input class="form__input" type="text" id="o-rue" name="rue" autocomplete="off" placeholder="12 rue des Lilas" required role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="o-rue-list" aria-describedby="o-rue-help">
+                  <ul class="order__addr-list" id="o-rue-list" role="listbox" aria-label="Adresses suggérées" hidden></ul>
+                </div>
+                <span class="form__helper" id="o-rue-help">Commencez à taper votre adresse, puis choisissez-la dans la liste : le code postal et la ville se remplissent automatiquement.</span>
                 <span class="form__error">Veuillez indiquer votre adresse.</span>
               </div>
               <div class="form__row order__row-cp">
@@ -319,6 +323,6 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="commander.js?v=20261002c"></script>
+  <script src="commander.js?v=20261002d"></script>
 </body>
 </html>
