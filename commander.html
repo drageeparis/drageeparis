@@ -164,9 +164,13 @@
             <section class="order__section" aria-labelledby="sec-selection">
               <h2 class="order__label" id="sec-selection">Votre sélection</h2>
               <div id="order-lines" class="order__lines"></div>
-              <button type="button" class="order__add" id="order-add" hidden>+ Ajouter une autre dragée</button>
+              <button type="button" class="order__add" id="order-add" aria-controls="order-picker" aria-expanded="false"><span class="order__add-plus" aria-hidden="true">+</span>Ajouter un article</button>
               <div class="order__picker" id="order-picker" hidden>
-                <p class="form__label">Choisissez une dragée</p>
+                <div class="order__picker-head">
+                  <p class="order__picker-title">Ajouter un article</p>
+                  <button type="button" class="order__picker-close" id="order-picker-close" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+                </div>
+                <div class="order__picker-tabs" id="order-picker-tabs" role="group" aria-label="Familles de dragées"></div>
                 <div class="order__picker-grid" id="order-picker-grid"></div>
               </div>
             </section>
@@ -323,6 +327,7 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="commander.js?v=20261002e"></script>
+  <script src="commande-catalogue.js?v=20261002"></script>
+  <script src="commander.js?v=20261002f"></script>
 </body>
 </html>

@@ -25,20 +25,9 @@
   var RELAIS_PRIX_KG = 12;
   var MAX_QTY = 50;     /* nombre maximal de sachets par ligne */
 
-  var CATALOGUE = {
-    'avola-eminence': {
-      name: 'Dragées Avola Éminence',
-      family: 'Amandes Avola',
-      familyUrl: 'dragees.html?filter=avola',
-      detail: 'Calibre 37 · Amandes Avola de Sicile',
-      url: 'produit-avola-eminence.html',
-      image: 'images/amandes-avola/avola-eminence-800w.webp',
-      formats: [
-        { id: '500g', label: '500 g', grams: 500, price: 34 },
-        { id: '1kg', label: '1 kg', grams: 1000, price: 68.5 }
-      ]
-    }
-  };
+  /* Catalogue généré depuis les fiches produit : commande-catalogue.js (outils/catalogue-commande.py) */
+  var CATALOGUE = window.DP_CATALOGUE || {};
+  var FAMILLES = window.DP_FAMILLES || [];
 
   var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
@@ -237,29 +226,49 @@
     return Object.keys(CATALOGUE).filter(function (r) { return used.indexOf(r) === -1; });
   }
 
+  var pickerFamily = 'all';
   function renderPicker() {
-    var refs = availableRefs();
-    addBtn.hidden = refs.length === 0;
-    picker.hidden = !pickerOpen || refs.length === 0;
+    var used = lines.map(function (l) { return l.ref; });
     addBtn.setAttribute('aria-expanded', pickerOpen ? 'true' : 'false');
+    addBtn.hidden = pickerOpen;
+    picker.hidden = !pickerOpen;
+    if (!pickerOpen) return;
+
+    var tabs = document.getElementById('order-picker-tabs');
+    tabs.textContent = '';
+    [{ id: 'all', name: 'Tout' }].concat(FAMILLES).forEach(function (f) {
+      var b = el('button', 'order-chip order-chip--sm', f.name);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', f.id === pickerFamily ? 'true' : 'false');
+      b.addEventListener('click', function () { pickerFamily = f.id; renderPicker(); });
+      tabs.appendChild(b);
+    });
+
     pickerGrid.textContent = '';
-    refs.forEach(function (r) {
+    Object.keys(CATALOGUE).forEach(function (r) {
       var p = CATALOGUE[r];
+      if (pickerFamily !== 'all' && p.familyId !== pickerFamily) return;
+      var added = used.indexOf(r) !== -1;
       var b = el('button', 'order-pick');
       b.type = 'button';
+      if (added) { b.disabled = true; b.setAttribute('aria-label', p.name + ' (déjà dans votre sélection)'); }
+      var media = el('span', 'order-pick__img');
       var img = el('img');
       img.src = p.image;
       img.alt = '';
-      b.appendChild(img);
-      var txt = el('span', 'order-pick__txt');
-      txt.appendChild(el('span', 'order-line__family', p.family));
-      txt.appendChild(el('span', 'order-pick__name', p.name));
-      txt.appendChild(el('span', 'order-line__detail', 'À partir de ' + euro(p.formats[0].price)));
-      b.appendChild(txt);
+      img.loading = 'lazy';
+      media.appendChild(img);
+      if (added) media.appendChild(el('span', 'order-pick__badge', 'Ajouté'));
+      b.appendChild(media);
+      b.appendChild(el('span', 'order-pick__name', p.name));
+      b.appendChild(el('span', 'order-pick__price', 'À partir de ' + euro(p.formats[0].price) + ' · ' + p.formats[0].label));
       b.addEventListener('click', function () {
         lines.push({ ref: r, format: p.formats[0].id, qty: 1 });
         pickerOpen = false;
         render();
+        var rows = linesBox.querySelectorAll('.order-line');
+        var last = rows[rows.length - 1];
+        if (last) { last.classList.add('is-new'); last.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
       });
       pickerGrid.appendChild(b);
     });
@@ -271,7 +280,8 @@
     renderPicker();
   }
 
-  addBtn.addEventListener('click', function () { pickerOpen = !pickerOpen; renderPicker(); });
+  addBtn.addEventListener('click', function () { pickerOpen = true; renderPicker(); picker.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  document.getElementById('order-picker-close').addEventListener('click', function () { pickerOpen = false; renderPicker(); addBtn.focus(); });
   form.querySelectorAll('input[name="reception"]').forEach(function (r) {
     r.addEventListener('change', function () {
       document.getElementById('grp-mode').classList.remove('has-error');
