@@ -4151,7 +4151,6 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   font-style: normal;
   font-display: swap;
 }
-.cfg-svg--photo { box-shadow: 0 14px 34px -22px rgba(82, 54, 42, 0.55); }
 .cfg-ptag { font-family: 'Etiquette Serif', Georgia, serif; fill: #6E1A26; }
 .cfg-ptag--date { fill: #5B4A44; }
 .cfg-tag--photo .is-placeholder { opacity: 0.45; }
