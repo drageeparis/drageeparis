@@ -127,6 +127,8 @@
       var full = chosenColors.length >= MAX_COLORS;
       colorInputs.forEach(function(o) { if (!o.checked) o.disabled = full; });
       $('cfg-colors-limit').hidden = !full;
+      var cnt = $('cfg-colors-count');
+      if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', full); }
       paint();
     });
   });
