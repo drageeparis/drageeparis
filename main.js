@@ -559,6 +559,14 @@ document.addEventListener('DOMContentLoaded', () => {
         var opt = select.options[select.selectedIndex];
         if (priceEl) priceEl.textContent = opt.value;
         if (unitEl) unitEl.textContent = opt.dataset.unit || '';
+        /* Transmet le format choisi à la page commander.html (?format=500g / 1kg) */
+        var orderLink = document.querySelector('a[data-order-link]');
+        if (orderLink && opt.dataset.unit) {
+          var parts = orderLink.getAttribute('href').split('?');
+          var q = new URLSearchParams(parts[1] || '');
+          q.set('format', opt.dataset.unit.replace(/\s+/g, '').toLowerCase());
+          orderLink.setAttribute('href', parts[0] + '?' + q.toString());
+        }
       }
       select.addEventListener('change', update);
       update();

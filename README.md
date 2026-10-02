@@ -17,7 +17,8 @@ drageeparis/
 ├── dragees-traditionnelles.html #   idem
 ├── produit-*.html                # 85 fiches produit individuelles (1 par couleur/occasion)
 ├── personnalisation.html         # Options de personnalisation
-├── commande-dragees.html        # Formulaire de commande (Boutique)
+├── commande-dragees.html        # Formulaire de commande (Boutique) — ancien formulaire générique
+├── commander.html               # Page « Ma commande » façon panier (fiche produit → Commander), logique dans commander.js
 ├── contact.html                  # Formulaire "Lancer ma création" (wizard, Atelier)
 ├── message.html                  # Formulaire de contact simple
 ├── atelier.html                 # Histoire, valeurs, localisation
@@ -72,10 +73,17 @@ Le site utilise 3 formulaires Formspree indépendants, chacun avec son propre en
 | Page | Usage | Endpoint |
 |---|---|---|
 | `contact.html` | Wizard "Lancer ma création" (Atelier) | `formspree.io/f/mlgqrzed` (via `var FORMSPREE_ID` dans `contact-wizard.js`) |
-| `commande-dragees.html` | Commande Boutique | `formspree.io/f/xeeyjnae` (codé en dur dans `commande-dragees-form.js`) |
+| `commande-dragees.html` | Commande Boutique (ancien formulaire) | `formspree.io/f/xeeyjnae` (codé en dur dans `commande-dragees-form.js`) |
+| `commander.html` | Commande depuis une fiche produit (panier) | `formspree.io/f/xeeyjnae` (`FORMSPREE_URL` dans `commander.js`) |
 | `message.html` | Contact simple | `formspree.io/f/xzdnpoez` (codé en dur dans `message-form.js`) |
 
 Pour régénérer un endpoint (compte Formspree, formulaire expiré, etc.), remplacer l'ID à l'emplacement correspondant ci-dessus — il n'y a pas de configuration centralisée. Chaque formulaire transmet aussi l'image du produit cliqué par le prospect (paramètres d'URL `produit`/`image`, voir `main.js` section 15) pour que le mail reçu par Dragée Paris inclue la photo de référence.
+
+## Page « Ma commande » (`commander.html`)
+
+Le bouton « Commander » d'une fiche produit pointe vers `commander.html?ref=<ref>&format=<500g|1kg>` (attribut `data-order-link` ; `main.js` section 14 met à jour `format` selon le sélecteur de quantité). Les produits raccordés sont décrits dans l'objet `CATALOGUE` en tête de `commander.js` (nom, famille, image, formats et prix). Pour raccorder une fiche : ajouter son entrée au catalogue, puis remplacer son lien `commande-dragees.html?...` par `commander.html?ref=<ref>&format=...` avec `data-order-link`.
+
+Le champ `email` (en minuscules) est envoyé à Formspree pour permettre la réponse automatique au client (Autoresponse, offre Formspree Professional ou Business). Une fois activée, passer `AUTORESPONSE_ACTIVE` à `true` dans `commander.js`.
 
 ## Sécurité
 
