@@ -561,10 +561,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (unitEl) unitEl.textContent = opt.dataset.unit || '';
         /* Transmet le format choisi à la page commander.html (?format=500g / 1kg) */
         var orderLink = document.querySelector('a[data-order-link]');
-        if (orderLink && opt.dataset.unit) {
+        if (orderLink) {
+          /* Vente à l'unité : la page de commande propose le plus petit format au poids */
+          var unit = /^\d/.test(opt.dataset.unit || '') ? opt.dataset.unit : '';
+          if (!unit) {
+            for (var k = 0; k < select.options.length; k++) {
+              if (/^\d/.test(select.options[k].dataset.unit || '')) { unit = select.options[k].dataset.unit; break; }
+            }
+          }
           var parts = orderLink.getAttribute('href').split('?');
           var q = new URLSearchParams(parts[1] || '');
-          q.set('format', opt.dataset.unit.replace(/\s+/g, '').toLowerCase());
+          if (unit) q.set('format', unit.replace(/\s+/g, '').toLowerCase());
           orderLink.setAttribute('href', parts[0] + '?' + q.toString());
         }
       }

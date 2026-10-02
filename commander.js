@@ -287,6 +287,12 @@
       renderSummary();
     });
   });
+  /* Mode présélectionné depuis le catalogue (?mode=relais / ?mode=retrait) */
+  var modeParam = params.get('mode');
+  if (modeParam === 'relais' || modeParam === 'retrait') {
+    var radio = form.querySelector('input[name="reception"][value^="' + (modeParam === 'relais' ? 'Livraison en point relais' : 'Retrait') + '"]');
+    if (radio) radio.checked = true;
+  }
   render();
 
   /* ---------- saisie d'adresse assistée (Base Adresse Nationale, IGN) ----------
