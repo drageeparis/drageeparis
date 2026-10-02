@@ -2938,6 +2938,7 @@ span.btn--outline:hover {
   max-width: 320px;
 }
 .guide-cell--image { overflow: hidden; }
+.guide-cell--image picture { display: block; width: 100%; height: 100%; }
 .guide-cell--image img {
   width: 100%;
   height: 100%;
