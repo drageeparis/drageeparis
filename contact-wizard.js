@@ -7,7 +7,7 @@
   var PHONE_LABEL = '06 08 67 14 43';
   var PHONE_HREF = 'tel:+33608671443';
   var MAX_COLORS = 3;
-  var DEFAULT_DG = ['#F7F3EC', '#EADCC2', '#F1E8D8'];
+  var DEFAULT_DG = ['#F4F2EE', '#E9E6E1', '#FAF9F7']; // blanc nacré par défaut
   var current = 1;
 
   var bar     = document.getElementById('wizard-bar-fill');
@@ -127,7 +127,6 @@
       var full = chosenColors.length >= MAX_COLORS;
       colorInputs.forEach(function(o) { if (!o.checked) o.disabled = full; });
       $('cfg-colors-limit').hidden = !full;
-      $('cfg-autre').hidden = chosenColors.indexOf('Autre') === -1;
       paint();
     });
   });
@@ -220,8 +219,7 @@
   function drageesText() {
     var d = checkedValue('dragees');
     if (d !== 'Avec dragées') return d;
-    var cols = chosenColors.map(function(c) { return c === 'Autre' ? (val('wizard-couleur-autre') || 'autre teinte') : c; });
-    return cols.length ? d + ' · ' + cols.join(', ') : d + ' · couleurs à définir';
+    return chosenColors.length ? d + ' · ' + chosenColors.join(', ') : d + ' · couleurs à définir';
   }
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');

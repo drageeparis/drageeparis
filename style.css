@@ -4213,6 +4213,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
 
 /* Couleurs */
 .cfg-colors .wizard__colors { margin-bottom: 12px; }
+.wizard__colors--choco { grid-template-columns: repeat(5, 1fr); }
 .wizard__color-item input:disabled + .wizard__color-swatch { opacity: 0.35; cursor: not-allowed; }
 .wizard__color-item input:focus-visible + .wizard__color-swatch { outline: 2px solid var(--caramel); outline-offset: 2px; }
 .cfg-autre { margin-top: 16px; }
@@ -4237,6 +4238,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   .cfg-viewport { width: min(100%, 360px); }
   .cfg-stage--preview .cfg-viewport { width: min(100%, 260px); }
   .cfg-loupe { width: 104px; height: 104px; left: auto; right: 0; bottom: 6px; }
+  .wizard__colors--choco { grid-template-columns: repeat(3, 1fr); }
   .cfg-summary { flex-direction: column; align-items: flex-start; }
   .cfg-summary__art { width: 120px; align-self: center; }
   /* Aperçu collant : la création reste visible pendant le choix des couleurs et de l'étiquette */
