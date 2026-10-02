@@ -81,21 +81,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-anniversaire-classique.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-anniversaire-festif.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-anniversaire-multicolores.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-avola-elegance.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -116,22 +101,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-baby-shower-ourson-blush.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-baby-shower-rose.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-bapteme-ange-duo.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-bapteme-angelot-duo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -142,11 +112,6 @@
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-bapteme-bouquet-rose.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-bapteme-lin-naturel.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -281,22 +246,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-gender-reveal-bleu.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-gender-reveal-ecru.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-gender-reveal-mixte.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-arbre-de-vie.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -352,11 +302,6 @@
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-naissance-amande-avola.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-naissance-blanc-doux.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -979,23 +979,6 @@ window.DP_CATALOGUE = {
   ],
   "kind": "dragee"
  },
- "mariage-arbre-de-vie": {
-  "kind": "creation",
-  "name": "Dragées Mariage Arbre de Vie",
-  "familyId": "mariage",
-  "family": "Mariage",
-  "familyUrl": "creations.html?filter=mariage",
-  "detail": "Prix à la pièce",
-  "url": "produit-mariage-arbre-de-vie.html",
-  "image": "images/mariage/mariage-arbre-vie-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
-   }
-  ]
- },
  "mariage-beaute": {
   "kind": "creation",
   "name": "Dragées Mariage Beauté",
@@ -1233,23 +1216,6 @@ window.DP_CATALOGUE = {
    }
   ]
  },
- "baby-shower-ourson-blush": {
-  "kind": "creation",
-  "name": "Dragées Baby Shower Ourson Blush",
-  "familyId": "premiers-instants",
-  "family": "Premiers instants",
-  "familyUrl": "creations.html?filter=premiers-instants&sub=baby-shower",
-  "detail": "Prix à la pièce",
-  "url": "produit-baby-shower-ourson-blush.html",
-  "image": "images/premiers-instants/baby-shower-mauve-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
-   }
-  ]
- },
  "baby-shower-rose": {
   "kind": "creation",
   "name": "Dragées Baby Shower Rose",
@@ -1269,23 +1235,6 @@ window.DP_CATALOGUE = {
     "id": "sansdragée",
     "label": "Sans dragée",
     "price": 3.5
-   }
-  ]
- },
- "gender-reveal-bleu": {
-  "kind": "creation",
-  "name": "Dragées Gender Reveal Bleu",
-  "familyId": "premiers-instants",
-  "family": "Premiers instants",
-  "familyUrl": "creations.html?filter=premiers-instants&sub=gender-reveal",
-  "detail": "Prix à la pièce",
-  "url": "produit-gender-reveal-bleu.html",
-  "image": "images/premiers-instants/gender-reveal-bleu-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
    }
   ]
  },
@@ -1311,23 +1260,6 @@ window.DP_CATALOGUE = {
    }
   ]
  },
- "gender-reveal-ecru": {
-  "kind": "creation",
-  "name": "Dragées Gender Reveal Écru",
-  "familyId": "premiers-instants",
-  "family": "Premiers instants",
-  "familyUrl": "creations.html?filter=premiers-instants&sub=gender-reveal",
-  "detail": "Prix à la pièce",
-  "url": "produit-gender-reveal-ecru.html",
-  "image": "images/premiers-instants/gender-reveal-rose-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
-   }
-  ]
- },
  "naissance-amande-avola": {
   "kind": "creation",
   "name": "Dragées Naissance Amande Avola",
@@ -1347,23 +1279,6 @@ window.DP_CATALOGUE = {
     "id": "sansdragée",
     "label": "Sans dragée",
     "price": 4.0
-   }
-  ]
- },
- "naissance-blanc-doux": {
-  "kind": "creation",
-  "name": "Dragées Naissance Blanc Doux",
-  "familyId": "premiers-instants",
-  "family": "Premiers instants",
-  "familyUrl": "creations.html?filter=premiers-instants&sub=naissance",
-  "detail": "Prix à la pièce",
-  "url": "produit-naissance-blanc-doux.html",
-  "image": "images/premiers-instants/naissance-blanc-doux-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
    }
   ]
  },
@@ -1411,40 +1326,6 @@ window.DP_CATALOGUE = {
    }
   ]
  },
- "bapteme-ange-duo": {
-  "kind": "creation",
-  "name": "Dragées Baptême Ange Duo",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-ange-duo.html",
-  "image": "images/fetes-religieuses/bapteme-ange-duo-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
-   }
-  ]
- },
- "bapteme-angelot-duo": {
-  "kind": "creation",
-  "name": "Dragées Baptême Angelot Duo",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-angelot-duo.html",
-  "image": "images/fetes-religieuses/bapteme-angelot-duo-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
-   }
-  ]
- },
  "bapteme-bleu-ciel": {
   "kind": "creation",
   "name": "Dragées Baptême Bleu Ciel",
@@ -1477,23 +1358,6 @@ window.DP_CATALOGUE = {
     "id": "piece",
     "label": "À la pièce",
     "price": 5.0
-   }
-  ]
- },
- "bapteme-lin-naturel": {
-  "kind": "creation",
-  "name": "Dragées Baptême Lin Naturel",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-lin-naturel.html",
-  "image": "images/fetes-religieuses/bapteme-lin-naturel-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
    }
   ]
  },
@@ -1599,23 +1463,6 @@ window.DP_CATALOGUE = {
    }
   ]
  },
- "anniversaire-classique": {
-  "kind": "creation",
-  "name": "Dragées Anniversaire Classique",
-  "familyId": "anniversaires",
-  "family": "Anniversaires",
-  "familyUrl": "creations.html?filter=anniversaires",
-  "detail": "Prix à la pièce",
-  "url": "produit-anniversaire-classique.html",
-  "image": "images/anniversaire/image14-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
-   }
-  ]
- },
  "anniversaire-coccinelle": {
   "kind": "creation",
   "name": "Dragées Anniversaire Coccinelle",
@@ -1635,23 +1482,6 @@ window.DP_CATALOGUE = {
     "id": "sansdragées",
     "label": "Sans dragées",
     "price": 4.0
-   }
-  ]
- },
- "anniversaire-festif": {
-  "kind": "creation",
-  "name": "Dragées Anniversaire Festif",
-  "familyId": "anniversaires",
-  "family": "Anniversaires",
-  "familyUrl": "creations.html?filter=anniversaires",
-  "detail": "Prix à la pièce",
-  "url": "produit-anniversaire-festif.html",
-  "image": "images/anniversaire/image-d6-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
    }
   ]
  },
@@ -1696,23 +1526,6 @@ window.DP_CATALOGUE = {
     "id": "sansdragées",
     "label": "Sans dragées",
     "price": 3.5
-   }
-  ]
- },
- "anniversaire-multicolores": {
-  "kind": "creation",
-  "name": "Dragées Anniversaire Multicolores",
-  "familyId": "anniversaires",
-  "family": "Anniversaires",
-  "familyUrl": "creations.html?filter=anniversaires",
-  "detail": "Prix à la pièce",
-  "url": "produit-anniversaire-multicolores.html",
-  "image": "images/anniversaire/image-d4-800w.webp",
-  "formats": [
-   {
-    "id": "devis",
-    "label": "Sur devis",
-    "price": null
    }
   ]
  },
