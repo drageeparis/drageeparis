@@ -100,6 +100,88 @@
     showStep(3, 'next');
   });
 
+  /* ---------- Photos recolorables (ex. pot en verre) ----------
+     La photo est chargée dans un canevas ; chaque pixel de dragée (carte de masques)
+     reçoit la couleur choisie multipliée par son ombrage d'origine, reflets conservés. */
+  function hexToRgb(h) { var n = parseInt(h.replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+  function PhotoRecolor(svg) {
+    var self = this;
+    this.svg = svg;
+    this.img = svg.querySelector('.cfg-photo');
+    this.classes = svg.getAttribute('data-classes').split(',');
+    this.ref = svg.getAttribute('data-ref').split(',').map(Number);
+    this.hi = svg.getAttribute('data-hi').split(',').map(Number);
+    this.ready = false; this.pending = null; this.url = null;
+    var base = new Image(), map = new Image(), loaded = 0;
+    function done() {
+      if (++loaded < 2) return;
+      var w = base.naturalWidth, h = base.naturalHeight, c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      var ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(map, 0, 0, w, h);
+      var md = ctx.getImageData(0, 0, w, h).data;
+      ctx.drawImage(base, 0, 0, w, h);
+      self.baseData = ctx.getImageData(0, 0, w, h);
+      var bd = self.baseData.data, idx = [], al = [], cp = [], lu = [];
+      for (var i = 0, p = 0; i < md.length; i += 4, p++) {
+        if (md[i] > 0 && md[i + 1] > 0) {
+          idx.push(i); al.push(md[i] / 255); cp.push(md[i + 1]);
+          lu.push((0.2126 * bd[i] + 0.7152 * bd[i + 1] + 0.0722 * bd[i + 2]) / 255);
+        }
+      }
+      self.idx = idx; self.al = al; self.cp = cp; self.lu = lu;
+      // Référence de lumière propre à chaque dragée (couleur plus fidèle, même à l'ombre)
+      var groups = {};
+      for (var q = 0; q < cp.length; q++) { if (al[q] > 0.6) (groups[cp[q]] = groups[cp[q]] || []).push(lu[q]); }
+      self.refC = {}; self.hiC = {};
+      Object.keys(groups).forEach(function(k) {
+        var v = groups[k].sort(function(x, y) { return x - y; });
+        self.refC[k] = v[Math.floor(v.length * 0.88)] || 0.5;
+        self.hiC[k] = Math.min(0.995, Math.max(self.refC[k] + 0.04, v[Math.floor(v.length * 0.985)] || 0.9));
+      });
+      self.canvas = c; self.ctx = ctx; self.ready = true;
+      if (self.pending) self.render(self.pending.palette, self.pending.sans);
+    }
+    base.onload = done; map.onload = done;
+    base.src = svg.getAttribute('data-photo'); map.src = svg.getAttribute('data-map');
+  }
+  PhotoRecolor.prototype.render = function(palette, sans) {
+    if (!this.ready) { this.pending = { palette: palette, sans: sans }; return; }
+    if (!palette || sans) { this.show(null); return; }
+    var cols = palette.map(hexToRgb), n = cols.length;
+    var out = this.ctx.createImageData(this.baseData.width, this.baseData.height);
+    out.data.set(this.baseData.data);
+    var o = out.data, b = this.baseData.data;
+    var rouges = 0, blancs = 0, choix = {};
+    for (var k = 1; k <= this.classes.length; k++) {
+      var cl = this.classes[k - 1];
+      var c;
+      if (n === 1) c = 0;
+      else if (n === 2) c = cl === 'r' ? 0 : 1;
+      else c = cl === 'r' ? ((rouges++ % 2) ? 2 : 0) : ((blancs++ % 2) ? 2 : 1);
+      choix[k] = c;
+    }
+    for (var j = 0; j < this.idx.length; j++) {
+      var i = this.idx[j], k2 = this.cp[j], cls = this.classes[k2 - 1] === 'r' ? 0 : 1;
+      var col = cols[choix[k2]], L = this.lu[j], a = this.al[j];
+      var rf = this.refC[k2] || this.ref[cls], hv = this.hiC[k2] || this.hi[cls];
+      var shade = Math.min(L / rf, 1.06);
+      var hl = Math.max(0, (L - hv) / (1 - hv)) * 0.8;
+      for (var ch = 0; ch < 3; ch++) {
+        var v = col[ch] * shade;
+        v = v + (255 - v) * hl;
+        o[i + ch] = a * v + (1 - a) * b[i + ch];
+      }
+    }
+    this.ctx.putImageData(out, 0, 0);
+    this.show(this.canvas.toDataURL('image/jpeg', 0.9)); // data: autorisé par la politique de sécurité du site
+  };
+  PhotoRecolor.prototype.show = function(url) {
+    var href = url || this.svg.getAttribute('data-photo');
+    this.img.setAttribute('href', href);
+  };
+  var photoRecolors = [];
+
   /* ---------- Dragées et couleurs ---------- */
   var colorInputs = Array.prototype.slice.call(document.querySelectorAll('input[name="couleurs"]'));
   var chosenColors = []; // dans l'ordre de sélection
@@ -110,6 +192,8 @@
       var el = colorInputs.filter(function(c) { return c.value === v; })[0];
       return el ? el.getAttribute('data-hex') : '';
     }).filter(Boolean);
+    var choisie = palette.length ? palette : null;
+    photoRecolors.forEach(function(pr) { pr.render(choisie, sans); });
     if (!palette.length) palette = DEFAULT_DG;
     svgs.forEach(function(svg) {
       var list = svg.querySelectorAll('.dg');
@@ -139,7 +223,28 @@
 
   /* ---------- Étiquette ---------- */
   var tags = Array.prototype.slice.call(stage.querySelectorAll('.cfg-tag'));
+  function setPhotoTag(g, l1, l2) {
+    var t = g.querySelectorAll('.cfg-ptag');
+    var names = l1 || 'Vos prénoms', date = l2 || 'jj.mm.aaaa';
+    var lines = names.indexOf('&') > 0 ? names.split('&').map(function(x) { return x.trim(); }) : [names];
+    lines = lines.length === 2 ? [lines[0], '&', lines[1]] : lines;
+    var maxW = parseFloat(g.getAttribute('data-r')) * 1.9, lh = 27;
+    var total = lines.length * lh + 26, y = -total / 2 + 20;
+    for (var k = 0; k < 3; k++) {
+      var el = t[k];
+      if (k < lines.length) {
+        el.textContent = lines[k]; el.setAttribute('y', y.toFixed(1)); y += lh;
+        fitText(el, lines[k] === '&' ? 22 : 25, maxW);
+        el.classList.toggle('is-placeholder', !l1);
+        el.style.display = '';
+      } else { el.textContent = ''; el.style.display = 'none'; }
+    }
+    t[3].textContent = date; t[3].setAttribute('y', (y + 6).toFixed(1));
+    fitText(t[3], 17, maxW);
+    t[3].classList.toggle('is-placeholder', !l2);
+  }
   function setTagText(g, l1, l2) {
+    if (g.classList.contains('cfg-tag--photo')) { setPhotoTag(g, l1, l2); return; }
     var r = parseFloat(g.getAttribute('data-r'));
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
     t1.textContent = l1 || 'Vos prénoms';
@@ -434,6 +539,8 @@
   }
   window.addEventListener('resize', setStickyTop);
   setStickyTop();
+
+  svgs.forEach(function(svg) { if (svg.getAttribute('data-photo')) photoRecolors.push(new PhotoRecolor(svg)); });
 
   /* ---------- Initialisation ---------- */
   updateCaption();
