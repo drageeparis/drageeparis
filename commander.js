@@ -366,6 +366,44 @@
     rue.addEventListener('blur', function () { setTimeout(close, 150); });
   })();
 
+  /* ---------- téléphone : espaces automatiques (06 12 34 56 78 / +33 6 12 34 56 78) ---------- */
+  (function () {
+    var tel = document.getElementById('o-tel');
+    function format(v) {
+      var plus = v.trim().charAt(0) === '+';
+      var d = v.replace(/\D/g, '');
+      if (plus) {
+        if (d.indexOf('33') === 0) {
+          d = d.slice(0, 11);
+          var rest = d.slice(3).replace(/(\d{2})(?=\d)/g, '$1 ');
+          return ('+33' + (d.length > 2 ? ' ' + d.charAt(2) : '') + (rest ? ' ' + rest : '')).trim();
+        }
+        return '+' + d.slice(0, 15).replace(/(\d{2})(?=\d)/g, '$1 ');
+      }
+      return d.slice(0, 10).replace(/(\d{2})(?=\d)/g, '$1 ');
+    }
+    var prev = tel.value;
+    function digits(v) { return v.replace(/[^\d+]/g, '').length; }
+    tel.addEventListener('input', function (e) {
+      var v = tel.value;
+      var pos = tel.selectionStart == null ? v.length : tel.selectionStart;
+      var before = digits(v.slice(0, pos));
+      /* Retour arrière sur un espace : on efface aussi le chiffre qui le précède */
+      if (e.inputType === 'deleteContentBackward' && digits(v) === digits(prev) && before > 0) {
+        var count = 0;
+        for (var i = 0; i < v.length; i++) {
+          if (/[\d+]/.test(v.charAt(i)) && ++count === before) { v = v.slice(0, i) + v.slice(i + 1); before--; break; }
+        }
+      }
+      var out = format(v);
+      tel.value = out;
+      prev = out;
+      var n = 0, p = 0;
+      while (p < out.length && n < before) { if (/[\d+]/.test(out.charAt(p))) n++; p++; }
+      try { tel.setSelectionRange(p, p); } catch (err) { /* sélection non prise en charge */ }
+    });
+  })();
+
   /* ---------- validation ---------- */
   function setErr(group, show) {
     group.classList.toggle('has-error', show);
