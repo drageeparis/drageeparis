@@ -6311,6 +6311,12 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (hover: hover) and (pointer: fine) {
   .order__submit:not(:disabled):hover { background: #7A4D27; border-color: #7A4D27; box-shadow: 0 4px 18px rgba(150, 95, 54, 0.35); }
 }
+.order__privacy { margin: 14px 0 0; font-size: 11px; font-weight: 300; line-height: 1.6; color: var(--ink-60); }
+.order__privacy a { color: var(--ink-60); text-decoration: underline; text-underline-offset: 2px; }
+.order__optional { font-size: 10px; letter-spacing: 0.04em; text-transform: none; color: var(--ink-60); }
+.order__textarea { min-height: 88px; }
+.order__bar { display: none; }
+.order-page--cart .fab { display: none !important; } /* pas de bouton flottant « Lancer ma création » pendant la commande */
 .order__reassure { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .order__reassure li { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 300; color: var(--ink-60); }
 .order__reassure svg { width: 18px; height: 18px; flex-shrink: 0; color: #965F36; }
@@ -6330,6 +6336,13 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (max-width: 1024px) {
   .order__grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .order__summary { position: static; }
+  .order__bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--ink-20); box-shadow: 0 -6px 20px rgba(82, 54, 42, 0.08); transition: transform 0.3s var(--ease-out-cubic); }
+  .order__bar.is-hidden { transform: translateY(110%); }
+  .order__bar-total { display: flex; flex-direction: column; gap: 2px; }
+  .order__bar-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-60); }
+  #bar-total { font-size: 18px; font-weight: 400; color: var(--ink); }
+  .order__bar-btn { width: auto; min-height: 48px; padding: 0 28px; }
+  .order-page--cart .order { padding-bottom: 140px; }
 }
 @media (max-width: 768px) {
   .order { padding: 96px 20px 80px; }

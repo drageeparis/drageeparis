@@ -219,6 +219,8 @@
       note.textContent = 'Prix définitif confirmé par e-mail.';
     }
     sumTotal.textContent = euro(grandTotal());
+    var bt = document.getElementById('bar-total');
+    if (bt) bt.textContent = euro(grandTotal());
   }
 
   function availableRefs() {
@@ -419,6 +421,31 @@
     });
   })();
 
+  /* ---------- adresse facultative pour un retrait en boutique ---------- */
+  function isRetrait() { return selectedMode().indexOf('Retrait') === 0; }
+  function updateAddrRequired() {
+    var retrait = isRetrait();
+    document.querySelectorAll('.addr-req').forEach(function (s) { s.hidden = retrait; });
+    document.querySelectorAll('.addr-opt').forEach(function (s) { s.hidden = !retrait; });
+    ['o-rue', 'o-cp', 'o-ville'].forEach(function (id) {
+      var inp = document.getElementById(id);
+      if (retrait) { inp.removeAttribute('required'); inp.closest('.form__group').classList.remove('has-error'); }
+      else inp.setAttribute('required', '');
+    });
+  }
+  form.querySelectorAll('input[name="reception"]').forEach(function (r) { r.addEventListener('change', updateAddrRequired); });
+  updateAddrRequired();
+
+  /* ---------- barre fixe mobile (total + Commander) ---------- */
+  (function () {
+    var bar = document.getElementById('order-bar');
+    var card = document.querySelector('.order__card');
+    if (!bar || !card || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      bar.classList.toggle('is-hidden', entries[0].isIntersecting);
+    }, { threshold: 0.15 }).observe(card);
+  })();
+
   /* ---------- validation ---------- */
   function setErr(group, show) {
     group.classList.toggle('has-error', show);
@@ -427,12 +454,17 @@
   function validate() {
     var ok = true;
     var nom = document.getElementById('o-nom');
-    ['o-prenom', 'o-rue', 'o-ville'].forEach(function (id) {
+    var prenom = document.getElementById('o-prenom');
+    ok = setErr(prenom.closest('.form__group'), !prenom.value.trim()) && ok;
+    /* Adresse : obligatoire sauf pour un retrait en boutique */
+    var addrRequired = !isRetrait();
+    ['o-rue', 'o-ville'].forEach(function (id) {
       var inp = document.getElementById(id);
-      ok = setErr(inp.closest('.form__group'), !inp.value.trim()) && ok;
+      ok = setErr(inp.closest('.form__group'), addrRequired && !inp.value.trim()) && ok;
     });
     var cp = document.getElementById('o-cp');
-    ok = setErr(cp.closest('.form__group'), !/^[A-Za-z0-9 -]{4,10}$/.test(cp.value.trim())) && ok;
+    var cpVal = cp.value.trim();
+    ok = setErr(cp.closest('.form__group'), (addrRequired || cpVal) ? !/^[A-Za-z0-9 -]{4,10}$/.test(cpVal) : false) && ok;
     var tel = document.getElementById('o-tel');
     var email = document.getElementById('o-email');
     ok = setErr(document.getElementById('grp-mode'), !form.querySelector('input[name="reception"]:checked')) && ok;
@@ -499,6 +531,7 @@
       ville: document.getElementById('o-ville').value.trim(),
       tel: document.getElementById('o-tel').value.trim(),
       email: document.getElementById('o-email').value.trim(),
+      message: document.getElementById('o-message').value.trim(),
       date: dateInput.value,
       mode: modeInput.value,
       modeShort: modeInput.parentNode.querySelector('.order__mode-title').textContent
@@ -521,7 +554,8 @@
       'Nom': data.nom,
       email: data.email,
       'Téléphone': data.tel,
-      'Adresse': data.rue + ', ' + data.cp + ' ' + data.ville,
+      'Adresse': (data.rue || data.cp || data.ville) ? [data.rue, (data.cp + ' ' + data.ville).trim()].filter(Boolean).join(', ') : 'Non renseignée (retrait en boutique)',
+      'Précisions': data.message || '—',
       'Commande': detail,
       'Frais de livraison': shippingFee() === null ? 'Aucun (retrait en boutique)' : feeLabel(shippingFee()) + ' (point relais, ' + weight(totalGrams()) + ')',
       'Total indicatif': euro(grandTotal()) + (shippingFee() === null ? '' : ' (frais de point relais inclus)'),

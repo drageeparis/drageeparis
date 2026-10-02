@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Ma commande · Dragée Paris</title>
   <meta name="description" content="Finalisez votre commande de dragées Dragée Paris : format, quantité, mode de réception et date. Réponse sous 48 heures, sans paiement en ligne.">
-  <link rel="stylesheet" href="style.css?v=20261002g">
+  <link rel="stylesheet" href="style.css?v=20261002j">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -216,7 +216,7 @@
                 </div>
               </div>
               <div class="form__group order__addr">
-                <label class="form__label" for="o-rue">Adresse (numéro et rue) <span class="required" aria-hidden="true">*</span></label>
+                <label class="form__label" for="o-rue">Adresse (numéro et rue) <span class="required addr-req" aria-hidden="true">*</span><span class="order__optional addr-opt" hidden> (facultatif pour un retrait)</span></label>
                 <div class="order__addr-field">
                   <input class="form__input" type="text" id="o-rue" name="rue" autocomplete="off" placeholder="12 rue des Lilas" required role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="o-rue-list" aria-describedby="o-rue-help">
                   <ul class="order__addr-list" id="o-rue-list" role="listbox" aria-label="Adresses suggérées" hidden></ul>
@@ -226,12 +226,12 @@
               </div>
               <div class="form__row order__row-cp">
                 <div class="form__group">
-                  <label class="form__label" for="o-cp">Code postal <span class="required" aria-hidden="true">*</span></label>
+                  <label class="form__label" for="o-cp">Code postal <span class="required addr-req" aria-hidden="true">*</span></label>
                   <input class="form__input" type="text" id="o-cp" name="code_postal" autocomplete="postal-code" inputmode="numeric" placeholder="75001" required>
                   <span class="form__error">Code postal invalide.</span>
                 </div>
                 <div class="form__group">
-                  <label class="form__label" for="o-ville">Ville <span class="required" aria-hidden="true">*</span></label>
+                  <label class="form__label" for="o-ville">Ville <span class="required addr-req" aria-hidden="true">*</span></label>
                   <input class="form__input" type="text" id="o-ville" name="ville" autocomplete="address-level2" placeholder="Paris" required>
                   <span class="form__error">Veuillez indiquer votre ville.</span>
                 </div>
@@ -247,6 +247,10 @@
                   <input class="form__input" type="email" id="o-email" name="email" autocomplete="email" placeholder="votre@email.fr" required>
                   <span class="form__error">Adresse e-mail invalide.</span>
                 </div>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="o-message">Précisions <span class="order__optional">(facultatif)</span></label>
+                <textarea class="form__textarea order__textarea" id="o-message" name="message" rows="3" maxlength="1000" placeholder="Type d'événement, remarque, allergie, point relais souhaité…"></textarea>
               </div>
               <div class="form__honeypot" aria-hidden="true">
                 <label for="o-company">Ne pas remplir ce champ</label>
@@ -266,6 +270,7 @@
               <p class="order__form-error" id="order-form-error" role="alert" hidden>Merci de compléter les champs indiqués.</p>
               <button type="submit" class="order__submit">Commander</button>
               <p class="order__form-error" id="order-send-error" role="alert" hidden>Une erreur est survenue. Réessayez ou écrivez-nous à <a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a>.</p>
+              <p class="order__privacy">Vos informations servent uniquement à traiter votre commandeVos informations servent uniquement à traiter votre commande et ne sont jamais transmises à des tiers.nbsp;; elles ne sont ni revendues ni utilisées à d'autres fins. <a href="mentions-legales.html#rgpd">En savoir plus sur vos données</a>.</p>
               <ul class="order__reassure">
                 <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="2"/><path d="M2 7.5h14"/></svg>Aucun paiement en ligne</li>
                 <li><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l2.5 1.5"/></svg>Réponse sous 48 heures</li>
@@ -273,6 +278,11 @@
               </ul>
             </div>
           </aside>
+
+          <div class="order__bar" id="order-bar" aria-hidden="true">
+            <div class="order__bar-total"><span class="order__bar-label">Total indicatif</span><span id="bar-total">—</span></div>
+            <button type="submit" class="order__submit order__bar-btn" tabindex="-1">Commander</button>
+          </div>
         </form>
       </div>
 
@@ -327,7 +337,7 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="commande-catalogue.js?v=20261002h"></script>
-  <script src="commander.js?v=20261002h"></script>
+  <script src="commande-catalogue.js?v=20261002j"></script>
+  <script src="commander.js?v=20261002j"></script>
 </body>
 </html>
