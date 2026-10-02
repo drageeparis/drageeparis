@@ -16,8 +16,11 @@
      le message de confirmation mentionnera alors l'e-mail envoyé au client. */
   var AUTORESPONSE_ACTIVE = false;
 
-  var LEAD_DAYS = 10;   /* délai de préparation maximal (5 à 10 jours) : première date proposée */
+  var LEAD_DAYS = 10;   /* dragées : délai maximal (5 à 10 jours) = première date proposée */
   var LEAD_LABEL = '5 à 10 jours';
+  var CREA_LEAD_DAYS = 28;  /* créations : 4 à 6 semaines */
+  var CREA_LEAD_LABEL = '4 à 6 semaines';
+  var MAX_QTY_CREA = 2000;  /* nombre maximal de pièces par création */
 
   /* Frais point relais (Mondial Relay) : gratuits sous 1 kg,
      puis RELAIS_PRIX_KG € par kilo entamé (1 kg = 12 €, 1,5 kg = 24 €, 2 kg = 24 €, 3 kg = 36 €…). */
@@ -77,28 +80,43 @@
   var crumb = document.getElementById('crumb-family');
   crumb.textContent = firstProd.family;
   crumb.setAttribute('href', firstProd.familyUrl);
+  if (firstProd.kind === 'creation') {
+    var root = document.getElementById('crumb-root');
+    root.textContent = 'Les créations';
+    root.setAttribute('href', 'creations.html');
+  }
 
-  /* ---------- date minimale ---------- */
-  var minD = new Date();
-  minD.setDate(minD.getDate() + LEAD_DAYS);
-  var minIso = isoDate(minD);
-  dateInput.setAttribute('min', minIso);
-  document.getElementById('o-date-help').textContent = 'Délai de préparation : ' + LEAD_LABEL + '. Dates possibles à partir du ' + longDate(minIso) + '.';
-  document.getElementById('err-date-min').textContent = longDate(minIso);
+  function isCrea(ref) { return CATALOGUE[ref] && CATALOGUE[ref].kind === 'creation'; }
+  function hasCreation() { return lines.some(function (l) { return isCrea(l.ref); }); }
+
+  /* ---------- date minimale (dépend du contenu : dragées 5 à 10 jours, créations 4 à 6 semaines) ---------- */
+  var minIso = '';
+  function updateLead() {
+    var crea = hasCreation();
+    var d = new Date();
+    d.setDate(d.getDate() + (crea ? CREA_LEAD_DAYS : LEAD_DAYS));
+    minIso = isoDate(d);
+    dateInput.setAttribute('min', minIso);
+    document.getElementById('o-date-help').textContent = 'Délai de préparation : ' + (crea ? CREA_LEAD_LABEL : LEAD_LABEL) + '. Dates possibles à partir du ' + longDate(minIso) + '.';
+    document.getElementById('err-date-min').textContent = longDate(minIso);
+  }
+  updateLead();
 
   /* ---------- calculs ---------- */
   function lineData(l) {
     var p = CATALOGUE[l.ref];
     var f = findFormat(p, l.format);
-    return { prod: p, fmt: f, total: f.price * l.qty, grams: f.grams * l.qty };
+    return { prod: p, fmt: f, crea: p.kind === 'creation', total: f.price == null ? null : f.price * l.qty, grams: f.grams ? f.grams * l.qty : 0 };
   }
   function productsTotal() {
-    return lines.reduce(function (s, l) { return s + lineData(l).total; }, 0);
+    return lines.reduce(function (s, l) { return s + (lineData(l).total || 0); }, 0);
   }
+  function hasDevis() { return lines.some(function (l) { return lineData(l).total == null; }); }
   function totalGrams() {
     return lines.reduce(function (s, l) { return s + lineData(l).grams; }, 0);
   }
   function relaisFee() {
+    if (hasCreation()) return 'tbd'; /* créations : frais confirmés par e-mail */
     var g = totalGrams();
     return g < 1000 ? 0 : RELAIS_PRIX_KG * Math.ceil(g / 1000);
   }
@@ -106,19 +124,24 @@
     var m = form.querySelector('input[name="reception"]:checked');
     return m ? m.value : '';
   }
-  /* Frais connus : nombre (0 = gratuit) ; null = confirmés par e-mail ou sans objet */
+  /* Frais : nombre (0 = offerts) ; 'tbd' = confirmés par e-mail ; null = sans objet (retrait / mode non choisi) */
   function shippingFee() {
     return selectedMode() === RELAIS_VALUE ? relaisFee() : null;
   }
   function grandTotal() {
     var f = shippingFee();
-    return productsTotal() + (f || 0);
+    return productsTotal() + (typeof f === 'number' ? f : 0);
   }
-  function feeLabel(f) { return f === 0 ? 'Offerts' : euro(f); }
+  function totalLabel() { return euro(grandTotal()) + (hasDevis() ? ' + devis' : ''); }
+  function feeLabel(f) { return f === 'tbd' ? 'Confirmés par e-mail' : f === 0 ? 'Offerts' : euro(f); }
+  function pieces(n) { return n + ' pièce' + (n > 1 ? 's' : ''); }
   function lineLabel(l) {
     var d = lineData(l);
+    if (d.crea) return (d.fmt.price == null ? '' : d.fmt.label + ' × ') + pieces(l.qty);
     return d.fmt.label + (l.qty > 1 ? ' × ' + l.qty + ' (' + weight(d.grams) + ')' : '');
   }
+  function linePrice(d) { return d.total == null ? 'Sur devis' : euro(d.total); }
+  function chipLabel(f) { return f.price == null ? f.label : f.label + ' · ' + (f.from ? 'dès ' : '') + euro(f.price); }
 
   /* ---------- rendu ---------- */
   function renderLines() {
@@ -147,13 +170,13 @@
       formats.setAttribute('role', 'group');
       formats.setAttribute('aria-label', 'Format');
       d.prod.formats.forEach(function (f) {
-        var b = el('button', 'order-chip', f.label + ' · ' + euro(f.price));
+        var b = el('button', 'order-chip', chipLabel(f));
         b.type = 'button';
         b.setAttribute('aria-pressed', f.id === l.format ? 'true' : 'false');
         b.addEventListener('click', function () { l.format = f.id; render(); });
         formats.appendChild(b);
       });
-      info.appendChild(formats);
+      if (!(d.prod.formats.length === 1 && d.prod.formats[0].price == null)) info.appendChild(formats);
 
       if (lines.length > 1) {
         var rm = el('button', 'order-line__remove', 'Retirer');
@@ -165,25 +188,43 @@
 
       var qty = el('div', 'order-line__qty');
       var stepper = el('div', 'order-stepper');
+      var max = d.crea ? MAX_QTY_CREA : MAX_QTY;
       var minus = el('button', 'order-stepper__btn', '−');
       minus.type = 'button';
-      minus.setAttribute('aria-label', 'Retirer un sachet');
+      minus.setAttribute('aria-label', d.crea ? 'Retirer une pièce' : 'Retirer un sachet');
       minus.disabled = l.qty <= 1;
       minus.addEventListener('click', function () { if (l.qty > 1) { l.qty--; render(); } });
-      var val = el('span', 'order-stepper__val', String(l.qty));
-      val.setAttribute('aria-live', 'polite');
-      val.setAttribute('aria-label', l.qty + ' sachet' + (l.qty > 1 ? 's' : '') + ' de ' + d.fmt.label);
+      var val;
+      if (d.crea) {
+        /* Créations : quantité saisissable (souvent plusieurs dizaines de pièces) */
+        val = el('input', 'order-stepper__input');
+        val.type = 'number';
+        val.min = '1';
+        val.max = String(max);
+        val.inputMode = 'numeric';
+        val.value = String(l.qty);
+        val.setAttribute('aria-label', 'Nombre de pièces');
+        val.addEventListener('change', function () {
+          var n = parseInt(val.value, 10);
+          l.qty = isNaN(n) ? 1 : Math.max(1, Math.min(max, n));
+          render();
+        });
+      } else {
+        val = el('span', 'order-stepper__val', String(l.qty));
+        val.setAttribute('aria-live', 'polite');
+        val.setAttribute('aria-label', l.qty + ' sachet' + (l.qty > 1 ? 's' : '') + ' de ' + d.fmt.label);
+      }
       var plus = el('button', 'order-stepper__btn', '+');
       plus.type = 'button';
-      plus.setAttribute('aria-label', 'Ajouter un sachet');
-      plus.disabled = l.qty >= MAX_QTY;
-      plus.addEventListener('click', function () { if (l.qty < MAX_QTY) { l.qty++; render(); } });
+      plus.setAttribute('aria-label', d.crea ? 'Ajouter une pièce' : 'Ajouter un sachet');
+      plus.disabled = l.qty >= max;
+      plus.addEventListener('click', function () { if (l.qty < max) { l.qty++; render(); } });
       stepper.appendChild(minus);
       stepper.appendChild(val);
       stepper.appendChild(plus);
       qty.appendChild(stepper);
-      qty.appendChild(el('span', 'order-line__price', euro(d.total)));
-      qty.appendChild(el('span', 'order-line__weight', weight(d.grams) + ' au total'));
+      qty.appendChild(el('span', 'order-line__price', linePrice(d)));
+      qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + ' la pièce' : '') : weight(d.grams) + ' au total'));
       row.appendChild(qty);
 
       linesBox.appendChild(row);
@@ -199,28 +240,34 @@
       left.appendChild(el('span', 'order__sum-name', d.prod.name));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
       li.appendChild(left);
-      li.appendChild(el('span', 'order__sum-price', euro(d.total)));
+      li.appendChild(el('span', 'order__sum-price', linePrice(d)));
       sumLines.appendChild(li);
     });
     var mode = form.querySelector('input[name="reception"]:checked');
     sumMode.textContent = mode ? mode.parentNode.querySelector('.order__mode-title').textContent : 'À choisir';
 
     var rf = relaisFee();
-    document.getElementById('mode-relais-desc').textContent = 'Mondial Relay, France et Europe · ' + (rf === 0 ? 'frais offerts' : euro(rf));
+    document.getElementById('mode-relais-desc').textContent = 'Mondial Relay, France et Europe · ' + (rf === 'tbd' ? 'frais confirmés par e-mail' : rf === 0 ? 'frais offerts' : euro(rf));
     var fee = shippingFee();
     var shipRow = document.getElementById('sum-ship-row');
     var note = document.getElementById('sum-note');
-    if (fee !== null) {
+    var devis = hasDevis() ? ' Les créations sur devis sont chiffrées dans notre réponse.' : '';
+    if (fee === 'tbd') {
       shipRow.hidden = false;
       document.getElementById('sum-ship').textContent = feeLabel(fee);
-      note.textContent = 'Frais de point relais inclus' + (fee === 0 ? ' (offerts sous 1 kg)' : ' : ' + RELAIS_PRIX_KG + ' € par kilo entamé') + '. Prix définitif confirmé par e-mail.';
+      note.textContent = 'Prix définitif et frais de point relais confirmés par e-mail.' + devis;
+    } else if (fee !== null) {
+      shipRow.hidden = false;
+      document.getElementById('sum-ship').textContent = feeLabel(fee);
+      note.textContent = 'Frais de point relais inclus' + (fee === 0 ? ' (offerts sous 1 kg)' : ' : ' + RELAIS_PRIX_KG + ' € par kilo entamé') + '. Prix définitif confirmé par e-mail.' + devis;
     } else {
       shipRow.hidden = true;
-      note.textContent = 'Prix définitif confirmé par e-mail.';
+      note.textContent = 'Prix définitif confirmé par e-mail.' + devis;
     }
-    sumTotal.textContent = euro(grandTotal());
+    sumTotal.textContent = totalLabel();
     var bt = document.getElementById('bar-total');
-    if (bt) bt.textContent = euro(grandTotal());
+    if (bt) bt.textContent = totalLabel();
+    updateLead();
   }
 
   function availableRefs() {
@@ -229,6 +276,7 @@
   }
 
   var pickerFamily = 'all';
+  var pickerKind = firstProd.kind || 'dragee';
   function renderPicker() {
     var used = lines.map(function (l) { return l.ref; });
     addBtn.setAttribute('aria-expanded', pickerOpen ? 'true' : 'false');
@@ -236,9 +284,19 @@
     picker.hidden = !pickerOpen;
     if (!pickerOpen) return;
 
+    var kinds = document.getElementById('order-picker-kinds');
+    kinds.textContent = '';
+    [{ id: 'dragee', name: 'Dragées' }, { id: 'creation', name: 'Créations' }].forEach(function (k) {
+      var b = el('button', 'order-kind', k.name);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', k.id === pickerKind ? 'true' : 'false');
+      b.addEventListener('click', function () { pickerKind = k.id; pickerFamily = 'all'; renderPicker(); });
+      kinds.appendChild(b);
+    });
+
     var tabs = document.getElementById('order-picker-tabs');
     tabs.textContent = '';
-    [{ id: 'all', name: 'Tout' }].concat(FAMILLES).forEach(function (f) {
+    [{ id: 'all', name: 'Tout' }].concat(FAMILLES.filter(function (f) { return (f.kind || 'dragee') === pickerKind; })).forEach(function (f) {
       var b = el('button', 'order-chip order-chip--sm', f.name);
       b.type = 'button';
       b.setAttribute('aria-pressed', f.id === pickerFamily ? 'true' : 'false');
@@ -249,6 +307,7 @@
     pickerGrid.textContent = '';
     Object.keys(CATALOGUE).forEach(function (r) {
       var p = CATALOGUE[r];
+      if ((p.kind || 'dragee') !== pickerKind) return;
       if (pickerFamily !== 'all' && p.familyId !== pickerFamily) return;
       var added = used.indexOf(r) !== -1;
       var b = el('button', 'order-pick');
@@ -490,7 +549,7 @@
       left.appendChild(el('span', 'order__sum-name', d.prod.name));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
       li.appendChild(left);
-      li.appendChild(el('span', 'order__sum-price', euro(d.total)));
+      li.appendChild(el('span', 'order__sum-price', linePrice(d)));
       list.appendChild(li);
     });
     document.getElementById('done-mode').textContent = data.modeShort;
@@ -498,7 +557,7 @@
     var fee = shippingFee();
     document.getElementById('done-ship-row').hidden = fee === null;
     if (fee !== null) document.getElementById('done-ship').textContent = feeLabel(fee);
-    document.getElementById('done-total').textContent = euro(grandTotal());
+    document.getElementById('done-total').textContent = totalLabel();
     document.getElementById('done-text').textContent = AUTORESPONSE_ACTIVE
       ? 'Un e-mail de confirmation vient de vous être envoyé à ' + data.email + '. Nous revenons vers vous sous 48 heures pour confirmer la disponibilité, le prix et la date de réception.'
       : 'Nous revenons vers vous à ' + data.email + ' sous 48 heures pour confirmer la disponibilité, le prix et la date de réception.';
@@ -544,11 +603,13 @@
 
     var detail = lines.map(function (l) {
       var d = lineData(l);
-      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + euro(d.total);
+      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d);
     }).join('\n');
     var first = lineData(lines[0]);
 
+    var kindsInCart = lines.map(function (l) { return isCrea(l.ref) ? 'Atelier' : 'Boutique'; });
     var payload = {
+      'Type de demande': kindsInCart.indexOf('Atelier') === -1 ? 'Commande Boutique' : kindsInCart.indexOf('Boutique') === -1 ? 'Commande Atelier (créations)' : 'Commande Boutique + Atelier',
       _subject: 'Nouvelle commande — ' + first.prod.name + (lines.length > 1 ? ' + ' + (lines.length - 1) + ' autre(s)' : '') + ' — ' + data.prenom + ' ' + data.nom,
       'Prénom': data.prenom,
       'Nom': data.nom,
@@ -557,8 +618,8 @@
       'Adresse': (data.rue || data.cp || data.ville) ? [data.rue, (data.cp + ' ' + data.ville).trim()].filter(Boolean).join(', ') : 'Non renseignée (retrait en boutique)',
       'Précisions': data.message || '—',
       'Commande': detail,
-      'Frais de livraison': shippingFee() === null ? 'Aucun (retrait en boutique)' : feeLabel(shippingFee()) + ' (point relais, ' + weight(totalGrams()) + ')',
-      'Total indicatif': euro(grandTotal()) + (shippingFee() === null ? '' : ' (frais de point relais inclus)'),
+      'Frais de livraison': shippingFee() === null ? 'Aucun (retrait en boutique)' : shippingFee() === 'tbd' ? 'À confirmer (point relais, commande avec créations)' : feeLabel(shippingFee()) + ' (point relais, ' + weight(totalGrams()) + ')',
+      'Total indicatif': totalLabel() + (typeof shippingFee() === 'number' ? ' (frais de point relais inclus)' : '') + (hasDevis() ? ' — certaines créations sont sur devis' : ''),
       'Mode de réception': data.mode,
       'Date souhaitée': longDate(data.date) + ' (' + data.date + ')',
       'Photo du produit': new URL(first.prod.image, window.location.href).href,

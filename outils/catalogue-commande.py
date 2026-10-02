@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Régénère commande-catalogue.js à partir des fiches produit Boutique.
+"""Régénère commande-catalogue.js à partir des fiches produit (dragées Boutique et créations Atelier).
 
 À lancer depuis la racine du site après l'ajout ou la modification d'une fiche
 (prix, nom, photo) :  python3 outils/catalogue-commande.py
@@ -54,11 +54,75 @@ for motif in motifs:
                          'familyUrl': 'dragees.html?filter=' + filtre, 'detail': detail,
                          'url': fichier, 'image': img, 'formats': formats})
 
+
+# ---------- Créations (Atelier) : prix à la pièce ----------
+FAM_CREA = {
+    'mariage': ('mariage', 'Mariage'),
+    'premiers-instants': ('premiers-instants', 'Premiers instants'),
+    'fetes-religieuses': ('fetes-religieuses', 'Fêtes religieuses'),
+    'anniversaires': ('anniversaires', 'Anniversaires'),
+    '': ('bouquets', 'Bouquets & écrins'),
+}
+ORDRE_CREA = ['mariage', 'premiers-instants', 'fetes-religieuses', 'anniversaires', 'bouquets']
+BOUTIQUE = ('produit-avola-', 'produit-traditionnelle-', 'produit-chocolat-', 'produit-amande-chocolat-')
+
+def fmt_id(label):
+    return re.sub(r'\s+', '', label).lower()
+
+def txt(html):
+    return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', html)).strip()
+
+creations = []
+for chemin in sorted(glob.glob(os.path.join(ROOT, 'produit-*.html'))):
+    fichier = os.path.basename(chemin)
+    if fichier.startswith(BOUTIQUE):
+        continue
+    s = open(chemin, encoding='utf-8').read()
+    ref = fichier[len('produit-'):-len('.html')]
+    titre = re.search(r'class="pdp__title">(.*?)</h1>', s, re.S).group(1)
+    titre = re.sub(r'\s+', ' ', re.sub(r'<br\s*/?>', ' ', titre)).strip()
+    img = re.search(r'<source type="image/webp" srcset="\./([^ ]+-800w\.webp)', s)
+    img = img.group(1) if img else re.search(r'class="pdp__gallery">.*?<img src="\./([^"]+)"', s, re.S).group(1)
+    back = re.search(r'href="([^"]+)" class="pdp__back"', s).group(1).replace('&amp;', '&')
+    m = re.search(r'filter=([a-z-]+)', back)
+    fam_id, fam_nom = FAM_CREA[m.group(1) if m else '']
+    formats = []
+    opts = re.findall(r'<option value="([^"]+)" data-unit="([^"]+)"', s)
+    if opts:
+        for valeur, unite in opts:
+            label = ('Avec ' + unite) if re.match(r'\d', unite) else unite
+            formats.append({'id': fmt_id(unite), 'label': label, 'price': prix(valeur)})
+    else:
+        lignes = [txt(x) for x in re.findall(r'<p class="pdp__price"[^>]*>(.*?)</p>', s, re.S)]
+        for l in lignes:
+            mm = re.match(r'([\d,]+) € (avec|sans) dragées', l)
+            if mm:
+                label = 'Avec dragées' if mm.group(2) == 'avec' else 'Sans dragées'
+                formats.append({'id': fmt_id(label), 'label': label, 'price': prix(mm.group(1))})
+                continue
+            mm = re.match(r'(\d+ dragées) — ([\d,]+) €', l)
+            if mm:
+                formats.append({'id': fmt_id(mm.group(1)), 'label': mm.group(1), 'price': prix(mm.group(2))}); continue
+            mm = re.match(r'À partir de ([\d,]+) € les (.+)', l)
+            if mm:
+                formats.append({'id': fmt_id(mm.group(2)), 'label': mm.group(2), 'price': prix(mm.group(1)), 'from': True}); continue
+            mm = re.match(r'([\d,]+) €$', l)
+            if mm:
+                formats.append({'id': 'piece', 'label': 'À la pièce', 'price': prix(mm.group(1))}); continue
+    if not formats:
+        formats = [{'id': 'devis', 'label': 'Sur devis', 'price': None}]
+    creations.append({'ref': ref, 'kind': 'creation', 'name': titre, 'familyId': fam_id, 'family': fam_nom,
+                      'familyUrl': back, 'detail': 'Prix à la pièce', 'url': fichier, 'image': img, 'formats': formats})
+
+creations.sort(key=lambda p: (ORDRE_CREA.index(p['familyId']), p['name']))
+for p in produits:
+    p['kind'] = 'dragee'
 produits.sort(key=lambda p: (ORDRE.index(p['familyId']), p['name']))
-catalogue = {p.pop('ref'): p for p in produits}
-familles = [{'id': FAMILLES[k][0], 'name': FAMILLES[k][1]} for k in ORDRE]
+catalogue = {p.pop('ref'): p for p in produits + creations}
+familles = [{'id': FAMILLES[k][0], 'name': FAMILLES[k][1], 'kind': 'dragee'} for k in ORDRE] + \
+           [{'id': v[0], 'name': v[1], 'kind': 'creation'} for k, v in sorted(FAM_CREA.items(), key=lambda kv: ORDRE_CREA.index(kv[1][0]))]
 js = ('/* Fichier généré par outils/catalogue-commande.py à partir des fiches produit. Ne pas modifier à la main. */\n'
       'window.DP_FAMILLES = ' + json.dumps(familles, ensure_ascii=False) + ';\n'
       'window.DP_CATALOGUE = ' + json.dumps(catalogue, ensure_ascii=False, indent=1) + ';\n')
 open(os.path.join(ROOT, 'commande-catalogue.js'), 'w', encoding='utf-8').write(js)
-print(len(catalogue), 'produits écrits dans commande-catalogue.js')
+print(len(produits), 'dragées et', len(creations), 'créations écrites dans commande-catalogue.js')

@@ -6256,6 +6256,12 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .order__picker-title { margin: 0; font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
 .order__picker-close { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin: -8px -8px -8px 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
 .order__picker-close svg { width: 18px; height: 18px; }
+.order__picker-kinds { display: inline-flex; gap: 0; margin-bottom: 14px; border: 1px solid var(--ink-20); border-radius: var(--border-radius--button); padding: 3px; }
+.order-kind { min-height: 36px; padding: 0 18px; border: 0; border-radius: var(--border-radius--button); background: transparent; font-family: var(--font); font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-60); cursor: pointer; }
+.order-kind[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.order-stepper__input { width: 64px; height: 42px; border: 0; background: transparent; text-align: center; font-family: var(--font); font-size: 14px; font-weight: 400; color: var(--ink); -moz-appearance: textfield; appearance: textfield; }
+.order-stepper__input::-webkit-outer-spin-button, .order-stepper__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.order-stepper__input:focus { outline: 1px solid var(--ink-20); border-radius: 4px; }
 .order__picker-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .order-chip--sm { min-height: 36px; padding: 0 14px; font-size: 11px; }
 .order__picker-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 14px; max-height: 470px; overflow-y: auto; padding-right: 4px; }

@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var orderLink = document.querySelector('a[data-order-link]');
         if (orderLink) {
           /* Vente à l'unité : la page de commande propose le plus petit format au poids */
-          var unit = /^\d/.test(opt.dataset.unit || '') ? opt.dataset.unit : '';
+          var unit = /unité/.test(opt.dataset.unit || '') ? '' : (opt.dataset.unit || '');
           if (!unit) {
             for (var k = 0; k < select.options.length; k++) {
               if (/^\d/.test(select.options[k].dataset.unit || '')) { unit = select.options[k].dataset.unit; break; }
