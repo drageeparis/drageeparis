@@ -261,7 +261,6 @@
       if (added) media.appendChild(el('span', 'order-pick__badge', 'Ajouté'));
       b.appendChild(media);
       b.appendChild(el('span', 'order-pick__name', p.name));
-      b.appendChild(el('span', 'order-pick__price', 'À partir de ' + euro(p.formats[0].price) + ' · ' + p.formats[0].label));
       b.addEventListener('click', function () {
         lines.push({ ref: r, format: p.formats[0].id, qty: 1 });
         pickerOpen = false;
