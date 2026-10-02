@@ -379,7 +379,7 @@
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
     [['Précisions', val('wizard-message')], ['Visuel (lien)', val('wizard-visuel-lien')],
-     ['Budget par contenant', checkedValue('budget')], ['Nous a connus via', checkedValue('source')],
+     ['Nous a connus via', checkedValue('source')],
      ['Produit consulté', produitParam], ['Photo du produit', imageParam]].forEach(function(o) { if (o[1]) p[o[0]] = o[1]; });
     p['_gotcha'] = val('w-company');
     return p;
