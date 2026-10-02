@@ -179,7 +179,7 @@
                   <label class="order__mode">
                     <input type="radio" name="reception" value="Livraison en point relais (Mondial Relay)">
                     <span class="order__mode-title">Point relais</span>
-                    <span class="order__mode-desc">Mondial Relay, France et Europe</span>
+                    <span class="order__mode-desc" id="mode-relais-desc">Mondial Relay, France et Europe</span>
                   </label>
                   <label class="order__mode">
                     <input type="radio" name="reception" value="Livraison à domicile (Chronopost)">
@@ -233,8 +233,9 @@
               <h2 class="order__card-title" id="sum-title">Récapitulatif</h2>
               <ul class="order__sum-lines" id="sum-lines"></ul>
               <div class="order__sum-row"><span>Réception</span><span id="sum-mode">À choisir</span></div>
+              <div class="order__sum-row" id="sum-ship-row" hidden><span>Frais de livraison</span><span id="sum-ship"></span></div>
               <div class="order__total"><span>Total indicatif</span><span id="sum-total">—</span></div>
-              <p class="order__note">Prix définitif et frais de livraison confirmés par e-mail.</p>
+              <p class="order__note" id="sum-note">Prix définitif et frais de livraison confirmés par e-mail.</p>
               <p class="order__form-error" id="order-form-error" role="alert" hidden>Merci de compléter les champs indiqués.</p>
               <button type="submit" class="order__submit">Commander</button>
               <p class="order__form-error" id="order-send-error" role="alert" hidden>Une erreur est survenue. Réessayez ou écrivez-nous à <a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a>.</p>
@@ -254,6 +255,7 @@
         <p class="order__intro" id="done-text">Nous revenons vers vous sous 48 heures pour confirmer la disponibilité, le prix et la date de réception.</p>
         <ul class="order__sum-lines order__done-lines" id="done-lines"></ul>
         <div class="order__sum-row"><span>Réception</span><span id="done-mode"></span></div>
+        <div class="order__sum-row" id="done-ship-row" hidden><span>Frais de livraison</span><span id="done-ship"></span></div>
         <div class="order__sum-row"><span>Date souhaitée</span><span id="done-date"></span></div>
         <div class="order__total"><span>Total indicatif</span><span id="done-total"></span></div>
         <ol class="order__steps">

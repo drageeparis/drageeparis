@@ -17,6 +17,11 @@
   var AUTORESPONSE_ACTIVE = false;
 
   var LEAD_DAYS = 15;   /* délai de préparation */
+
+  /* Frais point relais (Mondial Relay) : gratuits sous 1 kg,
+     puis RELAIS_PRIX_KG € par kilo entamé (1 kg = 12 €, 1,5 kg = 24 €, 2 kg = 24 €, 3 kg = 36 €…). */
+  var RELAIS_VALUE = 'Livraison en point relais (Mondial Relay)';
+  var RELAIS_PRIX_KG = 12;
   var MAX_QTY = 50;     /* nombre maximal de sachets par ligne */
 
   var CATALOGUE = {
@@ -97,9 +102,29 @@
     var f = findFormat(p, l.format);
     return { prod: p, fmt: f, total: f.price * l.qty, grams: f.grams * l.qty };
   }
-  function grandTotal() {
+  function productsTotal() {
     return lines.reduce(function (s, l) { return s + lineData(l).total; }, 0);
   }
+  function totalGrams() {
+    return lines.reduce(function (s, l) { return s + lineData(l).grams; }, 0);
+  }
+  function relaisFee() {
+    var g = totalGrams();
+    return g < 1000 ? 0 : RELAIS_PRIX_KG * Math.ceil(g / 1000);
+  }
+  function selectedMode() {
+    var m = form.querySelector('input[name="reception"]:checked');
+    return m ? m.value : '';
+  }
+  /* Frais connus : nombre (0 = gratuit) ; null = confirmés par e-mail ou sans objet */
+  function shippingFee() {
+    return selectedMode() === RELAIS_VALUE ? relaisFee() : null;
+  }
+  function grandTotal() {
+    var f = shippingFee();
+    return productsTotal() + (f || 0);
+  }
+  function feeLabel(f) { return f === 0 ? 'Offerts' : euro(f); }
   function lineLabel(l) {
     var d = lineData(l);
     return d.fmt.label + (l.qty > 1 ? ' × ' + l.qty + ' (' + weight(d.grams) + ')' : '');
@@ -187,9 +212,27 @@
       li.appendChild(el('span', 'order__sum-price', euro(d.total)));
       sumLines.appendChild(li);
     });
-    sumTotal.textContent = euro(grandTotal());
     var mode = form.querySelector('input[name="reception"]:checked');
     sumMode.textContent = mode ? mode.parentNode.querySelector('.order__mode-title').textContent : 'À choisir';
+
+    var rf = relaisFee();
+    document.getElementById('mode-relais-desc').textContent = 'Mondial Relay, France et Europe · ' + (rf === 0 ? 'frais offerts' : euro(rf));
+    var fee = shippingFee();
+    var shipRow = document.getElementById('sum-ship-row');
+    var note = document.getElementById('sum-note');
+    if (fee !== null) {
+      shipRow.hidden = false;
+      document.getElementById('sum-ship').textContent = feeLabel(fee);
+      note.textContent = 'Frais de point relais inclus' + (fee === 0 ? ' (offerts sous 1 kg)' : ' : ' + RELAIS_PRIX_KG + ' € par kilo entamé') + '. Prix définitif confirmé par e-mail.';
+    } else if (mode && mode.value.indexOf('Chronopost') !== -1) {
+      shipRow.hidden = false;
+      document.getElementById('sum-ship').textContent = 'Confirmés par e-mail';
+      note.textContent = 'Prix définitif et frais de livraison confirmés par e-mail.';
+    } else {
+      shipRow.hidden = true;
+      note.textContent = mode ? 'Prix définitif confirmé par e-mail.' : 'Prix définitif et frais de livraison confirmés par e-mail.';
+    }
+    sumTotal.textContent = euro(grandTotal());
   }
 
   function availableRefs() {
@@ -278,6 +321,9 @@
     });
     document.getElementById('done-mode').textContent = data.modeShort;
     document.getElementById('done-date').textContent = longDate(data.date);
+    var fee = shippingFee();
+    document.getElementById('done-ship-row').hidden = fee === null;
+    if (fee !== null) document.getElementById('done-ship').textContent = feeLabel(fee);
     document.getElementById('done-total').textContent = euro(grandTotal());
     document.getElementById('done-text').textContent = AUTORESPONSE_ACTIVE
       ? 'Un e-mail de confirmation vient de vous être envoyé à ' + data.email + '. Nous revenons vers vous sous 48 heures pour confirmer la disponibilité, le prix et la date de réception.'
@@ -329,7 +375,8 @@
       email: data.email,
       'Téléphone': data.tel,
       'Commande': detail,
-      'Total indicatif': euro(grandTotal()),
+      'Frais de livraison': shippingFee() === null ? 'À confirmer' : feeLabel(shippingFee()) + ' (point relais, ' + weight(totalGrams()) + ')',
+      'Total indicatif': euro(grandTotal()) + (shippingFee() === null ? ' (hors frais de livraison)' : ' (frais de point relais inclus)'),
       'Mode de réception': data.mode,
       'Date souhaitée': longDate(data.date) + ' (' + data.date + ')',
       'Photo du produit': new URL(first.prod.image, window.location.href).href,

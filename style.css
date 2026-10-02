@@ -6211,6 +6211,7 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
    Logique : commander.js
    ========================================================================= */
 .order { background: var(--paper); padding: 110px 52px 120px; }
+.order [hidden] { display: none !important; }
 .order__inner { max-width: 1180px; margin: 0 auto; }
 .order__crumb { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; font-weight: 300; letter-spacing: 0.04em; color: var(--ink-60); margin-bottom: 40px; }
 .order__crumb a { color: var(--ink-60); text-decoration: none; }
