@@ -16,7 +16,8 @@
      le message de confirmation mentionnera alors l'e-mail envoyé au client. */
   var AUTORESPONSE_ACTIVE = false;
 
-  var LEAD_DAYS = 15;   /* délai de préparation */
+  var LEAD_DAYS = 10;   /* délai de préparation maximal (5 à 10 jours) : première date proposée */
+  var LEAD_LABEL = '5 à 10 jours';
 
   /* Frais point relais (Mondial Relay) : gratuits sous 1 kg,
      puis RELAIS_PRIX_KG € par kilo entamé (1 kg = 12 €, 1,5 kg = 24 €, 2 kg = 24 €, 3 kg = 36 €…). */
@@ -93,7 +94,7 @@
   minD.setDate(minD.getDate() + LEAD_DAYS);
   var minIso = isoDate(minD);
   dateInput.setAttribute('min', minIso);
-  document.getElementById('o-date-help').textContent = 'Délai de préparation : ' + LEAD_DAYS + ' jours. Dates possibles à partir du ' + longDate(minIso) + '.';
+  document.getElementById('o-date-help').textContent = 'Délai de préparation : ' + LEAD_LABEL + '. Dates possibles à partir du ' + longDate(minIso) + '.';
   document.getElementById('err-date-min').textContent = longDate(minIso);
 
   /* ---------- calculs ---------- */
@@ -224,13 +225,9 @@
       shipRow.hidden = false;
       document.getElementById('sum-ship').textContent = feeLabel(fee);
       note.textContent = 'Frais de point relais inclus' + (fee === 0 ? ' (offerts sous 1 kg)' : ' : ' + RELAIS_PRIX_KG + ' € par kilo entamé') + '. Prix définitif confirmé par e-mail.';
-    } else if (mode && mode.value.indexOf('Chronopost') !== -1) {
-      shipRow.hidden = false;
-      document.getElementById('sum-ship').textContent = 'Confirmés par e-mail';
-      note.textContent = 'Prix définitif et frais de livraison confirmés par e-mail.';
     } else {
       shipRow.hidden = true;
-      note.textContent = mode ? 'Prix définitif confirmé par e-mail.' : 'Prix définitif et frais de livraison confirmés par e-mail.';
+      note.textContent = 'Prix définitif confirmé par e-mail.';
     }
     sumTotal.textContent = euro(grandTotal());
   }
@@ -291,6 +288,12 @@
   function validate() {
     var ok = true;
     var nom = document.getElementById('o-nom');
+    ['o-prenom', 'o-rue', 'o-ville'].forEach(function (id) {
+      var inp = document.getElementById(id);
+      ok = setErr(inp.closest('.form__group'), !inp.value.trim()) && ok;
+    });
+    var cp = document.getElementById('o-cp');
+    ok = setErr(cp.closest('.form__group'), !/^[A-Za-z0-9 -]{4,10}$/.test(cp.value.trim())) && ok;
     var tel = document.getElementById('o-tel');
     var email = document.getElementById('o-email');
     ok = setErr(document.getElementById('grp-mode'), !form.querySelector('input[name="reception"]:checked')) && ok;
@@ -350,7 +353,11 @@
 
     var modeInput = form.querySelector('input[name="reception"]:checked');
     var data = {
+      prenom: document.getElementById('o-prenom').value.trim(),
       nom: document.getElementById('o-nom').value.trim(),
+      rue: document.getElementById('o-rue').value.trim(),
+      cp: document.getElementById('o-cp').value.trim(),
+      ville: document.getElementById('o-ville').value.trim(),
       tel: document.getElementById('o-tel').value.trim(),
       email: document.getElementById('o-email').value.trim(),
       date: dateInput.value,
@@ -370,13 +377,15 @@
     var first = lineData(lines[0]);
 
     var payload = {
-      _subject: 'Nouvelle commande — ' + first.prod.name + (lines.length > 1 ? ' + ' + (lines.length - 1) + ' autre(s)' : '') + ' — ' + data.nom,
+      _subject: 'Nouvelle commande — ' + first.prod.name + (lines.length > 1 ? ' + ' + (lines.length - 1) + ' autre(s)' : '') + ' — ' + data.prenom + ' ' + data.nom,
+      'Prénom': data.prenom,
       'Nom': data.nom,
       email: data.email,
       'Téléphone': data.tel,
+      'Adresse': data.rue + ', ' + data.cp + ' ' + data.ville,
       'Commande': detail,
-      'Frais de livraison': shippingFee() === null ? 'À confirmer' : feeLabel(shippingFee()) + ' (point relais, ' + weight(totalGrams()) + ')',
-      'Total indicatif': euro(grandTotal()) + (shippingFee() === null ? ' (hors frais de livraison)' : ' (frais de point relais inclus)'),
+      'Frais de livraison': shippingFee() === null ? 'Aucun (retrait en boutique)' : feeLabel(shippingFee()) + ' (point relais, ' + weight(totalGrams()) + ')',
+      'Total indicatif': euro(grandTotal()) + (shippingFee() === null ? '' : ' (frais de point relais inclus)'),
       'Mode de réception': data.mode,
       'Date souhaitée': longDate(data.date) + ' (' + data.date + ')',
       'Photo du produit': new URL(first.prod.image, window.location.href).href,

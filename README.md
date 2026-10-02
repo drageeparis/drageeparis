@@ -83,7 +83,7 @@ Pour régénérer un endpoint (compte Formspree, formulaire expiré, etc.), remp
 
 Le bouton « Commander » d'une fiche produit pointe vers `commander.html?ref=<ref>&format=<500g|1kg>` (attribut `data-order-link` ; `main.js` section 14 met à jour `format` selon le sélecteur de quantité). Les produits raccordés sont décrits dans l'objet `CATALOGUE` en tête de `commander.js` (nom, famille, image, formats et prix). Pour raccorder une fiche : ajouter son entrée au catalogue, puis remplacer son lien `commande-dragees.html?...` par `commander.html?ref=<ref>&format=...` avec `data-order-link`.
 
-Frais point relais (Mondial Relay) calculés automatiquement : offerts sous 1 kg, puis 12 € par kilo entamé (`RELAIS_PRIX_KG` dans `commander.js`). Livraison à domicile : frais confirmés par e-mail ; retrait en boutique : pas de ligne de frais.
+Frais point relais (Mondial Relay) calculés automatiquement : offerts sous 1 kg, puis 12 € par kilo entamé (`RELAIS_PRIX_KG` dans `commander.js`). Retrait en boutique : pas de frais. Délai affiché : 5 à 10 jours (première date proposée à J+10, `LEAD_DAYS`).
 
 Le champ `email` (en minuscules) est envoyé à Formspree pour permettre la réponse automatique au client (Autoresponse, offre Formspree Professional ou Business). Une fois activée, passer `AUTORESPONSE_ACTIVE` à `true` dans `commander.js`.
 

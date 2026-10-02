@@ -182,11 +182,6 @@
                     <span class="order__mode-desc" id="mode-relais-desc">Mondial Relay, France et Europe</span>
                   </label>
                   <label class="order__mode">
-                    <input type="radio" name="reception" value="Livraison à domicile (Chronopost)">
-                    <span class="order__mode-title">À domicile</span>
-                    <span class="order__mode-desc">Chronopost, France et Europe</span>
-                  </label>
-                  <label class="order__mode">
                     <input type="radio" name="reception" value="Retrait en boutique (Athis-Mons)">
                     <span class="order__mode-title">Retrait en boutique</span>
                     <span class="order__mode-desc">Athis-Mons, sur rendez-vous</span>
@@ -197,7 +192,7 @@
               <div class="form__group">
                 <label class="form__label" for="o-date">Date souhaitée de réception <span class="required" aria-hidden="true">*</span></label>
                 <input class="form__input" type="date" id="o-date" name="date" required aria-describedby="o-date-help">
-                <span class="form__helper" id="o-date-help">Délai de préparation&nbsp;: 15 jours.</span>
+                <span class="form__helper" id="o-date-help">Délai de préparation&nbsp;: 5 à 10 jours.</span>
                 <span class="form__error" id="err-date">Veuillez choisir une date à partir du <span id="err-date-min"></span>.</span>
               </div>
             </section>
@@ -206,20 +201,44 @@
               <h2 class="order__label" id="sec-coord">Vos coordonnées</h2>
               <div class="form__row">
                 <div class="form__group">
-                  <label class="form__label" for="o-nom">Nom et prénom <span class="required" aria-hidden="true">*</span></label>
-                  <input class="form__input" type="text" id="o-nom" name="nom" autocomplete="name" placeholder="Votre nom" required>
+                  <label class="form__label" for="o-prenom">Prénom <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="text" id="o-prenom" name="prenom" autocomplete="given-name" placeholder="Votre prénom" required>
                   <span class="form__error">Ce champ est obligatoire.</span>
                 </div>
+                <div class="form__group">
+                  <label class="form__label" for="o-nom">Nom <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="text" id="o-nom" name="nom" autocomplete="family-name" placeholder="Votre nom" required>
+                  <span class="form__error">Ce champ est obligatoire.</span>
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="o-rue">Adresse (numéro et rue) <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="text" id="o-rue" name="rue" autocomplete="address-line1" placeholder="12 rue des Lilas" required>
+                <span class="form__error">Veuillez indiquer votre adresse.</span>
+              </div>
+              <div class="form__row order__row-cp">
+                <div class="form__group">
+                  <label class="form__label" for="o-cp">Code postal <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="text" id="o-cp" name="code_postal" autocomplete="postal-code" inputmode="numeric" placeholder="75001" required>
+                  <span class="form__error">Code postal invalide.</span>
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="o-ville">Ville <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="text" id="o-ville" name="ville" autocomplete="address-level2" placeholder="Paris" required>
+                  <span class="form__error">Veuillez indiquer votre ville.</span>
+                </div>
+              </div>
+              <div class="form__row">
                 <div class="form__group">
                   <label class="form__label" for="o-tel">Téléphone <span class="required" aria-hidden="true">*</span></label>
                   <input class="form__input" type="tel" id="o-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" required>
                   <span class="form__error">Veuillez indiquer un numéro de téléphone.</span>
                 </div>
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="o-email">E-mail <span class="required" aria-hidden="true">*</span></label>
-                <input class="form__input" type="email" id="o-email" name="email" autocomplete="email" placeholder="votre@email.fr" required>
-                <span class="form__error">Adresse e-mail invalide.</span>
+                <div class="form__group">
+                  <label class="form__label" for="o-email">E-mail <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form__input" type="email" id="o-email" name="email" autocomplete="email" placeholder="votre@email.fr" required>
+                  <span class="form__error">Adresse e-mail invalide.</span>
+                </div>
               </div>
               <div class="form__honeypot" aria-hidden="true">
                 <label for="o-company">Ne pas remplir ce champ</label>
@@ -261,7 +280,7 @@
         <ol class="order__steps">
           <li><span>1</span>Nous analysons votre demande</li>
           <li><span>2</span>Vous validez notre proposition par e-mail</li>
-          <li><span>3</span>Vos dragées sont préparées sous 15 jours</li>
+          <li><span>3</span>Vos dragées sont préparées sous 5 à 10 jours</li>
         </ol>
         <a href="dragees.html" class="order__back">Revenir aux dragées <span class="btn-arrow">→</span></a>
       </div>
@@ -300,6 +319,6 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="commander.js?v=20261002b"></script>
+  <script src="commander.js?v=20261002c"></script>
 </body>
 </html>
