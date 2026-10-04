@@ -201,6 +201,144 @@
     return box;
   }
 
+  /* ---------- choix des dragées d'une création (même présentation que « Lancer ma création ») ---------- */
+  var DG_MAX = 10;        /* dragées au total par pièce */
+  var DG_MAX_COLORS = 3;  /* couleurs différentes au maximum */
+  var DG_CATS = [
+    { id: 'chocolats', name: 'Chocolats' },
+    { id: 'gourmandes', name: 'Chocolats amandes' },
+    { id: 'avola', name: 'Amandes Avola' },
+    { id: 'traditionnelles', name: 'Amandes traditionnelles' }
+  ];
+  var DG_PREFIX = /^(Dragées Chocolat |Prali Amande Chocolat Noir |Prali Amande Chocolat au Lait |Dragées Avola |Dragées Amande Traditionnelle )/;
+  function dgShort(ref) {
+    var n = CATALOGUE[ref].name.replace(DG_PREFIX, '');
+    if (n === 'Nature') n = 'Chocolat nature';
+    return n.charAt(0) + n.slice(1).toLowerCase();
+  }
+  function dgSub(ref) {
+    var p = CATALOGUE[ref];
+    if (p.familyId !== 'gourmandes') return '';
+    return /au Lait/.test(p.name) ? 'Chocolat au lait' : 'Chocolat noir 70 %';
+  }
+  function dgLabel(ref) {
+    var p = CATALOGUE[ref], sub = dgSub(ref);
+    var fam = { chocolats: 'Chocolat', gourmandes: 'Prali amande ' + sub.replace(' 70 %', '').toLowerCase(), avola: 'Avola', traditionnelles: 'Amande traditionnelle' }[p.familyId] || '';
+    return (fam + ' ' + dgShort(ref).toLowerCase()).trim();
+  }
+  function dgRefs(cat) {
+    var refs = Object.keys(CATALOGUE).filter(function (r) { return CATALOGUE[r].kind === 'dragee' && CATALOGUE[r].familyId === cat; });
+    if (cat === 'gourmandes') refs.sort(function (a, b) { return (dgSub(a) === 'Chocolat au lait') - (dgSub(b) === 'Chocolat au lait'); });
+    return refs;
+  }
+  function wantsDragees(l) { return !/^sans/i.test(l.format || ''); }
+  function dgOf(l) {
+    if (!l.dg) l.dg = { tab: 'chocolats', order: [], qty: {} };
+    return l.dg;
+  }
+  function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
+  function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
+  function dgText(l) {
+    var g = dgOf(l);
+    if (!g.order.length) return '';
+    return g.order.map(function (r) { return dgLabel(r) + ' ×' + g.qty[r]; }).join(', ') + ' (' + dgTotal(g) + '/' + DG_MAX + ')';
+  }
+  function refocus(id) { var f = document.getElementById(id); if (f) f.focus(); }
+  function dgBlock(l, i) {
+    var g = dgOf(l), cat = dgCat(g), tot = dgTotal(g);
+    var fullColors = g.order.length >= DG_MAX_COLORS, fullQty = tot >= DG_MAX;
+    var box = el('div', 'order-perso order-dg');
+    var head = el('p', 'order-perso__title cfg-colors__head');
+    head.appendChild(el('span', '', 'Vos dragées'));
+    head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + DG_MAX));
+    box.appendChild(head);
+
+    var tabs = el('div', 'cfg-dg-tabs');
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', 'Catégories de dragées');
+    DG_CATS.forEach(function (c) {
+      var t = el('button', 'cfg-dg-tab', c.name);
+      t.type = 'button';
+      t.id = 'dgtab-' + i + '-' + c.id;
+      t.setAttribute('role', 'tab');
+      t.setAttribute('aria-selected', g.tab === c.id ? 'true' : 'false');
+      var n = g.order.filter(function (r) { return CATALOGUE[r].familyId === c.id; }).length;
+      t.appendChild(el('span', 'cfg-dg-tab__n', n ? String(n) : ''));
+      t.addEventListener('click', function () { g.tab = c.id; render(); refocus(t.id); });
+      tabs.appendChild(t);
+    });
+    box.appendChild(tabs);
+
+    var panel = el('div', 'wizard__colors wizard__colors--choco cfg-dg-panel');
+    panel.setAttribute('role', 'tabpanel');
+    var sub = null;
+    dgRefs(g.tab).forEach(function (r) {
+      var s = dgSub(r);
+      if (s && s !== sub) { sub = s; panel.appendChild(el('p', 'cfg-dg-sub', s)); }
+      var item = el('label', 'wizard__color-item');
+      var cb = el('input');
+      cb.type = 'checkbox';
+      cb.id = 'dg-' + i + '-' + r;
+      cb.checked = g.order.indexOf(r) !== -1;
+      cb.disabled = !cb.checked && (fullColors || fullQty || (!!cat && cat !== g.tab));
+      cb.addEventListener('change', function () {
+        if (cb.checked) { g.order.push(r); g.qty[r] = 1; }
+        else { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; }
+        render(); refocus(cb.id);
+      });
+      var sw = el('div', 'wizard__color-swatch');
+      var bg = el('span', 'wizard__color-swatch-bg');
+      bg.style.background = "#F3F1EC url('" + CATALOGUE[r].image + "') center/185% no-repeat";
+      sw.appendChild(bg);
+      sw.appendChild(el('span', 'wizard__color-swatch-name', dgShort(r)));
+      item.appendChild(cb);
+      item.appendChild(sw);
+      panel.appendChild(item);
+    });
+    box.appendChild(panel);
+
+    if (cat && cat !== g.tab) {
+      var catName = DG_CATS.filter(function (c) { return c.id === cat; })[0].name;
+      box.appendChild(el('p', 'wizard__hint', 'Une seule catégorie par création : retirez vos « ' + catName + ' » pour choisir dans une autre.'));
+    }
+    if (fullColors || fullQty) {
+      box.appendChild(el('p', 'wizard__hint', fullQty ? 'Maximum atteint : ' + DG_MAX + ' dragées. Diminuez une quantité pour ajouter une couleur.' : 'Trois couleurs maximum : retirez-en une pour en choisir une autre.'));
+    }
+
+    if (g.order.length) {
+      var list = el('ul', 'cfg-qty__list');
+      g.order.forEach(function (r) {
+        var li = el('li', 'cfg-qty__row');
+        var dot = el('span', 'cfg-qty__dot');
+        dot.style.background = "#F3F1EC url('" + CATALOGUE[r].image + "') center/185% no-repeat";
+        li.appendChild(dot);
+        li.appendChild(el('span', 'cfg-qty__name', dgShort(r) + (dgSub(r) ? ' · ' + dgSub(r).toLowerCase() : '')));
+        var step = el('div', 'cfg-qty__step');
+        var mi = el('button', 'cfg-qty__btn', '−');
+        mi.type = 'button'; mi.id = 'dgm-' + i + '-' + r;
+        mi.setAttribute('aria-label', 'Une de moins');
+        mi.disabled = g.qty[r] <= 1;
+        mi.addEventListener('click', function () { if (g.qty[r] > 1) { g.qty[r]--; render(); refocus(mi.id); } });
+        var out = el('output', 'cfg-qty__n', String(g.qty[r]));
+        var pl = el('button', 'cfg-qty__btn', '+');
+        pl.type = 'button'; pl.id = 'dgp-' + i + '-' + r;
+        pl.setAttribute('aria-label', 'Une de plus');
+        pl.disabled = fullQty;
+        pl.addEventListener('click', function () { if (dgTotal(g) < DG_MAX) { g.qty[r]++; render(); refocus(pl.id); } });
+        step.appendChild(mi); step.appendChild(out); step.appendChild(pl);
+        li.appendChild(step);
+        var del = el('button', 'cfg-qty__del', '×');
+        del.type = 'button';
+        del.setAttribute('aria-label', 'Retirer ' + dgShort(r));
+        del.addEventListener('click', function () { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; render(); });
+        li.appendChild(del);
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+    }
+    return box;
+  }
+
   /* ---------- rendu ---------- */
   function renderLines() {
     linesBox.textContent = '';
@@ -285,6 +423,7 @@
       qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + ' la pièce' : '') : weight(d.grams) + ' au total'));
       row.appendChild(qty);
 
+      if (d.crea && wantsDragees(l)) row.appendChild(dgBlock(l, i));
       if (d.crea) row.appendChild(persoBlock(l, i));
 
       linesBox.appendChild(row);
@@ -299,6 +438,7 @@
       var left = el('span');
       left.appendChild(el('span', 'order__sum-name', d.prod.name));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
+      if (d.crea && wantsDragees(l) && dgText(l)) left.appendChild(el('span', 'order__sum-meta', dgText(l)));
       if (d.crea && persoText(l)) left.appendChild(el('span', 'order__sum-meta order__sum-perso', '« ' + persoText(l) + ' »'));
       li.appendChild(left);
       li.appendChild(el('span', 'order__sum-price', linePrice(d)));
@@ -665,6 +805,7 @@
     var detail = lines.map(function (l) {
       var d = lineData(l);
       return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d) +
+        (d.crea && wantsDragees(l) ? '\n   Dragées : ' + (dgText(l) || 'à définir') : '') +
         (d.crea ? '\n   Étiquette : ' + (persoText(l) || 'à définir') : '');
     }).join('\n');
     var first = lineData(lines[0]);

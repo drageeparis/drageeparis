@@ -6502,3 +6502,11 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
   .order-perso__grid.is-deux { grid-template-columns: minmax(0, 1fr); }
   .order-perso__amp { display: none; }
 }
+/* Commande : choix des dragées d'une création */
+.order-dg .cfg-dg-tabs { margin-bottom: 14px; }
+.order-dg .wizard__colors--choco { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-bottom: 4px; }
+.order-dg .cfg-qty__list { border-top: 1px solid rgba(82, 54, 42, 0.12); padding-top: 6px; }
+.order-dg .wizard__hint { margin: 0; }
+@media (max-width: 768px) {
+  .order-dg .wizard__colors--choco { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
