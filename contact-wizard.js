@@ -633,7 +633,7 @@
   // Prix unitaires (en euros), hors dragées : à ajuster ici.
   // Seule la boîte en papier a un prix pour l'instant ; les autres contenants sont chiffrés sur devis (0).
   var PRIX_CONTENANT = { boite: 3.50, pot: 0, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
-  var PRIX_NOEUD = 0.10;    // nœud satiné (boîte)
+  var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
   var NB_MAX = 5000;
   function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
