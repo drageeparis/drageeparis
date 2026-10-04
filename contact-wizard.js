@@ -188,7 +188,7 @@
   }
   function updateSizes() {
     if (sizesBox) sizesBox.hidden = conseil || containers[idx].key !== 'bouquet';
-    // boîte en papier : taille d'étiquette fixe, le curseur est masqué
+    // boîte en carton : taille d'étiquette fixe, le curseur est masqué
     var sf = $('cfg-tag-size-field');
     if (sf) {
       var fixed = !conseil && containers[idx].key === 'boite';
@@ -205,7 +205,7 @@
 
 
 
-  /* ---------- Boîte en papier : 4 rabats ----------
+  /* ---------- Boîte en carton : 4 rabats ----------
      La boîte s'ouvre dès l'étape 3 quand le client choisit « Avec dragées ».
      Les rabats sont calculés en 3D puis projetés dans la perspective du dessin. */
   var box = stage.querySelector('.cfg-svg[data-key="boite"]');
@@ -480,7 +480,7 @@
     return el;
   }
   function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
-  var TAG_SIZE_DEFAUT = 120; // taille par défaut (%), fixe pour la boîte en papier
+  var TAG_SIZE_DEFAUT = 120; // taille par défaut (%), fixe pour la boîte en carton
   function tagSizeFixed() { return !conseil && containers[idx].key === 'boite'; }
   function tagScale() {
     var el = $('cfg-tag-size');
@@ -645,7 +645,7 @@
   /* ---------- Textes récapitulatifs ---------- */
   /* ---------- Nombre de boîtes et prix ---------- */
   // Prix unitaires (en euros), hors dragées : à ajuster ici.
-  // Seule la boîte en papier a un prix pour l'instant ; les autres contenants sont chiffrés sur devis (0).
+  // Seule la boîte en carton a un prix pour l'instant ; les autres contenants sont chiffrés sur devis (0).
   var PRIX_CONTENANT = { boite: 3.50, pot: 0, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
   var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
@@ -727,14 +727,14 @@
   }
   function etiquetteFormat() {
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? 'sans bordure' : 'bordures ' + colorLabel('etiquette_bord');
-    // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en papier)
+    // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
     return tagShape() + (tagSizeFixed() ? '' : ', taille ' + Math.round(tagScale() * 100) + ' %') + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
 
   /* ---------- Étape 5 : décoration de la boîte (nœud, fleurs champêtres) ---------- */
   function isBoite() { return !conseil && containers[idx].key === 'boite'; }
-  function stepUsable(n) { return n !== 5 || isBoite(); } // l'étape décoration ne concerne que la boîte en papier
+  function stepUsable(n) { return n !== 5 || isBoite(); } // l'étape décoration ne concerne que la boîte en carton
   function decoChoice() { return checkedValue('decoration') || 'Sans décoration'; }
   function rubanHex() { var el = document.querySelector('input[name="ruban"]:checked'); return el ? el.getAttribute('data-hex') : '#D9C29A'; }
   function shadeHex(h, f) {
