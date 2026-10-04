@@ -706,9 +706,21 @@
     if (nbNeed) { nbNeed.hidden = !(n > 0 && n < NB_MIN); nbNeed.textContent = 'Commande à partir de ' + NB_MIN + ' boîtes : ajoutez-en ' + (NB_MIN - n) + ' pour continuer.'; }
     if (rem) {
       if (pu && n && r) rem.textContent = 'Remise ' + Math.round(r.taux * 100) + ' % dès ' + r.des + ' boîtes : − ' + euros(totalBrut() - totalNet());
-      else if (pu && n && next && n >= next.des - 20) rem.textContent = 'Plus que ' + (next.des - n) + ' boîte' + (next.des - n > 1 ? 's' : '') + ' pour bénéficier de − ' + Math.round(next.taux * 100) + ' %';
       else rem.textContent = '';
       rem.classList.toggle('is-on', !!r);
+    }
+    // Incitation au palier de remise (80 à 99 boîtes)
+    var pal = $('w-nb-palier');
+    if (pal) {
+      var showPal = !!(pu && next && n >= NB_MIN && n < next.des && n >= next.des - 20);
+      pal.hidden = !showPal;
+      if (showPal) {
+        var manque = next.des - n, totPal = Math.round(next.des * pu * (1 - next.taux) * 100) / 100, diff = Math.round((totPal - totalNet()) * 100) / 100;
+        $('w-nb-palier-txt').innerHTML = 'Plus que <strong>' + manque + ' boîte' + (manque > 1 ? 's' : '') + '</strong> pour bénéficier de −' + Math.round(next.taux * 100) + '&nbsp;%&nbsp;: ' +
+          next.des + ' boîtes pour ' + euros(totPal) + (diff > 0 ? ', soit seulement ' + euros(diff) + ' de plus' : diff < 0 ? ', soit ' + euros(-diff) + ' de moins' : ', pour le même prix') + '.';
+        $('w-nb-palier-btn').textContent = 'Passer à ' + next.des + ' boîtes';
+        $('w-nb-palier-btn').setAttribute('data-n', next.des);
+      }
     }
     updatePriceTag();
     $('w-nb-minus').disabled = n <= NB_MIN;
@@ -762,6 +774,7 @@
   }
   $('w-nb').addEventListener('input', function() { updatePrix(); updateNextState(); });
   $('w-nb').addEventListener('change', function() { if (val('w-nb')) setNb(nbBoites() || NB_MIN); });
+  if ($('w-nb-palier-btn')) $('w-nb-palier-btn').addEventListener('click', function() { setNb(parseInt(this.getAttribute('data-n'), 10)); });
   $('w-nb-minus').addEventListener('click', function() { setNb(nbBoites() - 1); });
   $('w-nb-plus').addEventListener('click', function() { setNb(nbBoites() + 1); });
   Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
