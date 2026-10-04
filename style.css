@@ -6444,3 +6444,18 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-qty__n { min-width: 28px; text-align: center; font-size: 13px; color: var(--ink); }
 .cfg-qty__del { width: 28px; height: 28px; background: none; border: 0; cursor: pointer; font-size: 18px; line-height: 1; color: var(--ink-60); }
 .cfg-qty__del:hover { color: var(--ink); }
+
+/* Étiquette : forme et taille (configurateur) */
+.cfg-tagopts { align-items: start; }
+.cfg-shape { display: inline-block; margin-right: 8px; border: 1px solid currentColor; opacity: 0.7; }
+.cfg-shape--rond { width: 12px; height: 12px; border-radius: 50%; }
+.cfg-shape--carre { width: 12px; height: 12px; }
+.cfg-shape--rect { width: 16px; height: 10px; }
+.cfg-size__label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.cfg-size__val { font-size: 12px; letter-spacing: 0.08em; color: var(--caramel); text-transform: none; }
+.cfg-size { -webkit-appearance: none; appearance: none; width: 100%; height: 40px; margin: 0; background: transparent; cursor: pointer; }
+.cfg-size::-webkit-slider-runnable-track { height: 1px; background: rgba(82, 54, 42, 0.3); }
+.cfg-size::-moz-range-track { height: 1px; background: rgba(82, 54, 42, 0.3); }
+.cfg-size::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; background: var(--paper); border: 1px solid var(--caramel); box-shadow: 0 1px 4px rgba(82, 54, 42, 0.15); }
+.cfg-size::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--paper); border: 1px solid var(--caramel); box-shadow: 0 1px 4px rgba(82, 54, 42, 0.15); }
+.cfg-size:focus-visible { outline: 2px solid var(--caramel); outline-offset: 4px; }

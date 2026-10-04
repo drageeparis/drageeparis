@@ -142,8 +142,13 @@
     var outside = n[0] * 0.35 + n[1] * 0.6 - n[2] > 0; // face extérieure tournée vers nous ?
     el.setAttribute('fill', outside ? '#F6F0E8' : '#E6DACA');
   }
+  var boxLid = box && box.querySelector('.cfg-box-lid');
   function drawBox(p) {
     if (!boxFlapsG) return;
+    // fermée : un dessus plein, sans fente ; dès que ça s'ouvre, les rabats prennent le relais
+    var closed = p <= 0;
+    boxFlapsG.style.display = closed ? 'none' : '';
+    if (boxLid) boxLid.style.display = closed ? '' : 'none';
     var W = BOX_W, H = BOX_H, D = BOX_D, R = Math.PI / 180;
     var k1 = boxEase(p / 0.6);                    // rabats avant / arrière d'abord
     var a1 = k1 * 125 * R, a0 = k1 * 160 * R;     // l'avant se rabat presque à plat vers nous
@@ -168,7 +173,7 @@
     boxRaf = t < 1 ? requestAnimationFrame(boxStep) : 0;
   }
   function setBoxOpen() {
-    var open = current >= 3 && checkedValue('dragees') === 'Avec dragées';
+    var open = current === 3 && checkedValue('dragees') === 'Avec dragées'; // ouverte seulement à l'étape Dragées
     if (!box) return;
     box.classList.toggle('is-open', open);
     var target = open ? 1 : 0;
@@ -321,15 +326,56 @@
 
   /* ---------- Étiquette ---------- */
   var tags = Array.prototype.slice.call(stage.querySelectorAll('.cfg-tag'));
+  // Forme (ronde, carrée, rectangle) et taille de l'étiquette, appliquées à tous les contenants
+  var TAG_FILL = '#FFFDF9', TAG_STROKE = '#965F36', TAG_STROKE_IN = 'rgba(150,95,54,0.35)';
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  tags.forEach(function(g) {
+    g.setAttribute('data-base', g.getAttribute('transform') || '');
+    Array.prototype.forEach.call(g.querySelectorAll('circle'), function(c) { c.parentNode.removeChild(c); });
+  });
+  function tagShapeEl(shape, r, inset, fill, stroke, sw) {
+    var el, R = r - inset;
+    if (shape === 'Ronde') {
+      el = document.createElementNS(SVGNS, 'circle');
+      el.setAttribute('r', R.toFixed(2));
+    } else {
+      var w = shape === 'Rectangle' ? 2.3 * r : 1.8 * r, h = shape === 'Rectangle' ? 1.45 * r : 1.8 * r;
+      w -= 2 * inset; h -= 2 * inset;
+      el = document.createElementNS(SVGNS, 'rect');
+      el.setAttribute('x', (-w / 2).toFixed(2)); el.setAttribute('y', (-h / 2).toFixed(2));
+      el.setAttribute('width', w.toFixed(2)); el.setAttribute('height', h.toFixed(2));
+      el.setAttribute('rx', (r * 0.06).toFixed(2));
+    }
+    el.setAttribute('class', 'cfg-tag__shape');
+    el.setAttribute('fill', fill); el.setAttribute('stroke', stroke); el.setAttribute('stroke-width', sw);
+    return el;
+  }
+  function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
+  function tagScale() { var el = $('cfg-tag-size'); return el ? (parseInt(el.value, 10) || 100) / 100 : 1; }
+  function renderTagShapes() {
+    var shape = tagShape(), k = tagScale();
+    tags.forEach(function(g) {
+      var r = parseFloat(g.getAttribute('data-r'));
+      Array.prototype.forEach.call(g.querySelectorAll('.cfg-tag__shape'), function(c) { c.parentNode.removeChild(c); });
+      var first = g.firstChild;
+      g.insertBefore(tagShapeEl(shape, r, 0, TAG_FILL, TAG_STROKE, '1'), first);
+      g.insertBefore(tagShapeEl(shape, r, r * 0.0875, 'none', TAG_STROKE_IN, '.7'), first);
+      g.setAttribute('transform', (g.getAttribute('data-base') + ' scale(' + k + ')').trim());
+    });
+    var out = $('cfg-tag-size-val');
+    if (out) out.textContent = Math.round(k * 100) + '\u00a0%';
+    fitAllTags();
+  }
+  function tagWidthFactor() { var s = tagShape(); return s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
   function setTagText(g, l1, l2) {
-    var r = parseFloat(g.getAttribute('data-r'));
+    var r = parseFloat(g.getAttribute('data-r')), wf = tagWidthFactor();
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
     t1.textContent = l1 || 'Vos prénoms';
     t2.textContent = l2 || 'jj.mm.aaaa';
     t1.classList.toggle('is-placeholder', !l1);
     t2.classList.toggle('is-placeholder', !l2);
-    fitText(t1, r * 0.36, r * 1.62);
-    fitText(t2, r * 0.2, r * 1.42);
+    fitText(t1, r * 0.36, r * wf);
+    fitText(t2, r * 0.2, r * (wf - 0.2));
   }
   function fitText(t, base, maxW) {
     t.setAttribute('font-size', base.toFixed(1));
@@ -342,6 +388,9 @@
     tags.forEach(function(g) { setTagText(g, l1, l2); });
   }
   ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', fitAllTags); });
+  document.querySelectorAll('input[name="etiquette_forme"]').forEach(function(r) { r.addEventListener('change', renderTagShapes); });
+  if ($('cfg-tag-size')) $('cfg-tag-size').addEventListener('input', renderTagShapes);
+  renderTagShapes();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAllTags);
   window.addEventListener('load', fitAllTags);
 
@@ -408,6 +457,7 @@
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
   }
+  function etiquetteFormat() { return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %'; }
 
   /* ---------- Navigation ---------- */
   function setProgress(step) {
@@ -496,7 +546,7 @@
     setRow('sum-event', checkedValue('evenement'));
     setRow('sum-contenant', contenantText());
     setRow('sum-dragees', drageesText());
-    setRow('sum-etiquette', etiquetteText(), true);
+    setRow('sum-etiquette', [etiquetteText(), etiquetteFormat()].filter(Boolean).join(' · '), true);
     setRow('sum-qty', checkedValue('quantite'));
     setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
     setRow('sum-message', val('wizard-message'), true);
@@ -560,6 +610,7 @@
       'Contenant': contenantText(),
       'Dragées': drageesText(),
       'Texte de l\'étiquette': etiquetteText() || 'À définir',
+      'Étiquette': etiquetteFormat(),
       'Nombre de contenants': quantite,
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
