@@ -143,6 +143,64 @@
   function linePrice(d) { return d.total == null ? 'Sur devis' : euro(d.total); }
   function chipLabel(f) { return f.price == null ? f.label : f.label + ' · ' + (f.from ? 'dès ' : '') + euro(f.price); }
 
+  /* ---------- personnalisation des créations : un ou deux prénoms + une date ou un nom ---------- */
+  function persoOf(l) {
+    if (!l.perso) l.perso = { mode: 'un', n1: '', n2: '', extra: '' };
+    return l.perso;
+  }
+  function persoText(l) {
+    var p = persoOf(l);
+    var names = p.mode === 'deux' ? [p.n1, p.n2].filter(Boolean).join(' & ') : p.n1;
+    return [names, p.extra].filter(Boolean).join(' — ');
+  }
+  function persoField(label, value, placeholder, max, onInput, id) {
+    var wrap = el('div', 'order-perso__field');
+    var lab = el('label', 'order-perso__label', label);
+    lab.setAttribute('for', id);
+    var inp = el('input', 'order-perso__input');
+    inp.type = 'text';
+    inp.id = id;
+    inp.maxLength = max;
+    inp.autocomplete = 'off';
+    inp.placeholder = placeholder;
+    inp.value = value;
+    inp.addEventListener('input', function () { onInput(inp.value.trim()); renderSummary(); });
+    wrap.appendChild(lab);
+    wrap.appendChild(inp);
+    return wrap;
+  }
+  function persoBlock(l, i) {
+    var p = persoOf(l);
+    var box = el('div', 'order-perso');
+    box.appendChild(el('p', 'order-perso__title', 'Texte de l\u2019étiquette'));
+    var modes = el('div', 'order-perso__modes');
+    modes.setAttribute('role', 'group');
+    modes.setAttribute('aria-label', 'Nombre de prénoms');
+    [['un', 'Un prénom ou nom'], ['deux', 'Deux prénoms']].forEach(function (m) {
+      var b = el('button', 'order-chip order-chip--sm', m[1]);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', p.mode === m[0] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        if (p.mode === m[0]) return;
+        p.mode = m[0];
+        render();
+        var f = document.getElementById('perso-' + i + '-n' + (m[0] === 'deux' ? '2' : '1'));
+        if (f) f.focus();
+      });
+      modes.appendChild(b);
+    });
+    box.appendChild(modes);
+    var grid = el('div', 'order-perso__grid' + (p.mode === 'deux' ? ' is-deux' : ''));
+    grid.appendChild(persoField(p.mode === 'deux' ? 'Premier prénom' : 'Prénom ou nom', p.n1, p.mode === 'deux' ? 'Ex. : Camille' : 'Ex. : Camille ou Famille Martin', 24, function (v) { p.n1 = v; }, 'perso-' + i + '-n1'));
+    if (p.mode === 'deux') {
+      grid.appendChild(el('span', 'order-perso__amp', '&'));
+      grid.appendChild(persoField('Second prénom', p.n2, 'Ex. : Louis', 24, function (v) { p.n2 = v; }, 'perso-' + i + '-n2'));
+    }
+    box.appendChild(grid);
+    box.appendChild(persoField('Date ou nom (facultatif)', p.extra, 'Ex. : 14.06.2027 ou Baptême de Léa', 32, function (v) { p.extra = v; }, 'perso-' + i + '-extra'));
+    return box;
+  }
+
   /* ---------- rendu ---------- */
   function renderLines() {
     linesBox.textContent = '';
@@ -227,6 +285,8 @@
       qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + ' la pièce' : '') : weight(d.grams) + ' au total'));
       row.appendChild(qty);
 
+      if (d.crea) row.appendChild(persoBlock(l, i));
+
       linesBox.appendChild(row);
     });
   }
@@ -239,6 +299,7 @@
       var left = el('span');
       left.appendChild(el('span', 'order__sum-name', d.prod.name));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
+      if (d.crea && persoText(l)) left.appendChild(el('span', 'order__sum-meta order__sum-perso', '« ' + persoText(l) + ' »'));
       li.appendChild(left);
       li.appendChild(el('span', 'order__sum-price', linePrice(d)));
       sumLines.appendChild(li);
@@ -603,7 +664,8 @@
 
     var detail = lines.map(function (l) {
       var d = lineData(l);
-      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d);
+      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d) +
+        (d.crea ? '\n   Étiquette : ' + (persoText(l) || 'à définir') : '');
     }).join('\n');
     var first = lineData(lines[0]);
 

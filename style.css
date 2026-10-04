@@ -6483,3 +6483,22 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (max-width: 768px) {
   .cfg-boxes__price { align-items: flex-start; text-align: left; }
 }
+
+/* Commande : texte de l'étiquette des créations */
+.order-perso { grid-column: 2 / -1; display: flex; flex-direction: column; gap: 14px; margin-top: -4px; padding: 18px 20px 20px; background: rgba(82, 54, 42, 0.035); border: 1px solid rgba(82, 54, 42, 0.1); }
+.order-perso__title { margin: 0; font-size: 10px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: #965F36; }
+.order-perso__modes { display: flex; flex-wrap: wrap; gap: 8px; }
+.order-perso__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.order-perso__grid.is-deux { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; }
+.order-perso__amp { padding-bottom: 10px; font-family: 'Etiquette Italic', Georgia, serif; font-size: 20px; color: var(--ink-60); }
+.order-perso__field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.order-perso__label { font-size: 11px; font-weight: 300; letter-spacing: 0.04em; color: var(--ink-60); }
+.order-perso__input { width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--ink-20); border-radius: 0; background: var(--paper); font-family: var(--font); font-size: 14px; font-weight: 300; color: var(--ink); transition: border-color 0.2s; }
+.order-perso__input:focus { outline: none; border-color: #965F36; }
+.order-perso__input::placeholder { color: rgba(82, 54, 42, 0.4); }
+.order__sum-perso { font-style: italic; }
+@media (max-width: 768px) {
+  .order-perso { grid-column: 1 / -1; padding: 16px; }
+  .order-perso__grid.is-deux { grid-template-columns: minmax(0, 1fr); }
+  .order-perso__amp { display: none; }
+}
