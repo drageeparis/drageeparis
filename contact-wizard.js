@@ -943,6 +943,34 @@
   window.addEventListener('resize', setStickyTop);
   setStickyTop();
 
+  /* ---------- Personnalisation : après chaque choix, on remonte vers l'aperçu ---------- */
+  var stageScrollTimer = 0;
+  function showStageIfHidden() {
+    var view = stage.querySelector('.cfg-view') || stage;
+    var hdr = document.querySelector('.header');
+    var top = hdr ? hdr.getBoundingClientRect().height : 0;
+    var r = view.getBoundingClientRect();
+    // déjà entièrement visible : on ne bouge pas
+    if (r.top >= top - 4 && r.bottom <= window.innerHeight + 4) return;
+    window.scrollTo({ top: window.pageYOffset + r.top - top - 16, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  function onCustomize(e) {
+    if (current !== 4 && current !== 5) return;
+    var t = e.target;
+    var isText = t && (t.id === 'cfg-l1' || t.id === 'cfg-l2');
+    clearTimeout(stageScrollTimer);
+    stageScrollTimer = setTimeout(function() {
+      // texte : seulement quand la saisie est terminée (pas en passant d'un champ à l'autre)
+      var a = document.activeElement;
+      if (isText && a && (a.id === 'cfg-l1' || a.id === 'cfg-l2')) return;
+      showStageIfHidden();
+    }, isText ? 120 : 60);
+  }
+  [getPanel(4), getPanel(5)].forEach(function(p) { if (p) p.addEventListener('change', onCustomize); });
+  ['cfg-l1', 'cfg-l2'].forEach(function(id) {
+    $(id).addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); $(id).blur(); } });
+  });
+
   /* ---------- Initialisation ---------- */
   updateCaption();
   paint();
