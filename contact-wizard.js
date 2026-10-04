@@ -386,6 +386,7 @@
     updateTabCounts();
     paint();
     updateNeed();
+    if (typeof PRIX_CONTENANT !== 'undefined') updatePrix(); // (pas encore défini au tout premier rendu)
     updateNextState();
   }
   // Le contenant doit être complet (10 dragées, 8 en chocolats amandes) pour passer à l'étape suivante
@@ -451,6 +452,7 @@
     r.addEventListener('change', function() {
       $('cfg-colors').hidden = checkedValue('dragees') !== 'Avec dragées';
       updateNeed();
+      updatePrix();
       paint();
     });
   });
@@ -652,32 +654,46 @@
   var PRIX_CONTENANT = { boite: 3.50, pot: 0, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
   var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
+  var DRAGEES_INCLUSES = 5;     // dragées comprises dans le prix de la boîte
+  var PRIX_DRAGEE_SUP = 0.10;   // par dragée au-delà des 5 incluses
   var NB_MAX = 5000;
   function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
+  function avecDragees() { return checkedValue('dragees') === 'Avec dragées'; }
   function prixOptions() {
-    if (!isBoite()) return { noeud: 0, bouquet: 0 };
+    if (!isBoite()) return { noeud: 0, bouquet: 0, sup: 0, nbSup: 0 };
     var d = decoChoice();
-    return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: d === 'Nœud + bouquet' ? PRIX_BOUQUET : 0 };
+    var nbSup = checkedValue('dragees') === 'Avec dragées' ? Math.max(0, totalQty() - DRAGEES_INCLUSES) : 0;
+    return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: d === 'Nœud + bouquet' ? PRIX_BOUQUET : 0,
+      sup: Math.round(nbSup * PRIX_DRAGEE_SUP * 100) / 100, nbSup: nbSup };
   }
   function prixUnitaire() {
     if (conseil) return 0;
     var base = PRIX_CONTENANT[containers[idx].key] || 0;
     if (!base) return 0;
     var o = prixOptions();
-    return Math.round((base + o.noeud + o.bouquet) * 100) / 100;
+    return Math.round((base + o.noeud + o.bouquet + o.sup) * 100) / 100;
   }
   function detailPrix() {
-    var base = PRIX_CONTENANT[containers[idx].key] || 0, o = prixOptions(), parts = ['boîte et étiquette ' + euros(base)];
+    var base = PRIX_CONTENANT[containers[idx].key] || 0, o = prixOptions();
+    var parts = [(avecDragees() ? 'boîte, étiquette et ' + DRAGEES_INCLUSES + ' dragées ' : 'boîte et étiquette ') + euros(base)];
+    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus ' + euros(o.sup));
     if (o.noeud) parts.push('nœud ' + euros(o.noeud));
     if (o.bouquet) parts.push('bouquet ' + euros(o.bouquet));
     return parts.join(' + ');
   }
   function updatePrix() {
     var n = nbBoites(), pu = prixUnitaire();
-    $('w-nb-unit').textContent = pu ? euros(pu) + ' la boîte, hors dragées' : (conseil ? 'Prix selon le contenant choisi ensemble' : 'Prix communiqué avec votre proposition');
+    $('w-nb-unit').textContent = pu ? euros(pu) + ' la boîte' + (avecDragees() ? ', dragées comprises' : '') : (conseil ? 'Prix selon le contenant choisi ensemble' : 'Prix communiqué avec votre proposition');
     var det = $('w-nb-detail');
-    if (det) det.textContent = pu && (prixOptions().noeud || prixOptions().bouquet) ? detailPrix() : '';
+    if (det) det.textContent = pu ? detailPrix() : '';
+    // étape dragées : prix des dragées supplémentaires (boîte en carton)
+    var dp = $('cfg-dg-price'), o = prixOptions();
+    if (dp) {
+      dp.hidden = !isBoite() || !avecDragees();
+      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus des ' + DRAGEES_INCLUSES + ' incluses : + ' + euros(o.sup) + ' par boîte'
+        : DRAGEES_INCLUSES + ' dragées incluses dans le prix de la boîte · + ' + euros(PRIX_DRAGEE_SUP) + ' par dragée supplémentaire';
+    }
     $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(n * pu) : '';
     $('w-nb-minus').disabled = n <= 1;
     $('w-nb-plus').disabled = n >= NB_MAX;
@@ -705,7 +721,7 @@
   }
   function prixDetailMail() {
     var n = nbBoites(), pu = prixUnitaire();
-    return n && pu ? euros(n * pu) + ' — ' + n + ' × ' + euros(pu) + ' (' + detailPrix() + '), hors dragées' : '';
+    return n && pu ? euros(n * pu) + ' — ' + n + ' × ' + euros(pu) + ' (' + detailPrix() + ')' : '';
   }
   function quantiteText() {
     var n = nbBoites(), pu = prixUnitaire();
