@@ -6525,3 +6525,8 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
   .cfg-sizes { gap: 6px; }
   .cfg-size-opt { min-width: 0; flex: 1; padding: 8px 6px; }
 }
+
+/* Configurateur : contenant à compléter avant de continuer */
+.cfg-dg-need { display: flex; align-items: baseline; gap: 8px; margin: 14px 0 0; font-size: 13px; font-weight: 300; line-height: 1.5; color: #B0442C; }
+.cfg-dg-need::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: currentColor; transform: translateY(-1px); }
+.cfg-dg-need[hidden] { display: none; }

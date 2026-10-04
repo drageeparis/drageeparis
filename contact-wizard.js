@@ -322,7 +322,7 @@
     var lim = $('cfg-colors-limit');
     lim.hidden = !(fullColors || fullQty);
     lim.textContent = fullColors ? 'Trois couleurs maximum : retirez-en une pour en choisir une autre.'
-      : 'Contenant complet (' + cap + ' dragées maximum) : diminuez une quantité pour ajouter une couleur.';
+      : 'Contenant complet (' + cap + ' dragées) : vous pouvez continuer. Pour ajouter une couleur, diminuez d’abord une quantité.';
     var one = $('cfg-dg-onecat');
     one.hidden = !cat || cat === activeCat;
     if (cat) one.textContent = 'Une seule catégorie par contenant : retirez vos « ' + catName(cat) + ' » pour choisir dans une autre.';
@@ -365,6 +365,25 @@
     });
     updateTabCounts();
     paint();
+    updateNeed();
+    updateNextState();
+  }
+  // Le contenant doit être complet (10 dragées, 8 en chocolats amandes) pour passer à l'étape suivante
+  function drageesComplete() {
+    if (checkedValue('dragees') !== 'Avec dragées') return true;
+    var cat = chosenCat();
+    return !!cat && totalQty() === capOf(cat);
+  }
+  function updateNeed() {
+    var need = $('cfg-dg-need');
+    if (!need) return;
+    var avec = checkedValue('dragees') === 'Avec dragées';
+    var cat = chosenCat(), cap = capOf(cat || activeCat), left = cap - totalQty();
+    need.hidden = !avec || drageesComplete();
+    if (need.hidden) return;
+    need.textContent = !cat
+      ? 'Choisissez ' + cap + ' dragées pour passer à l’étape suivante.'
+      : 'Il reste ' + left + ' dragée' + (left > 1 ? 's' : '') + ' à choisir : votre contenant doit en compter ' + cap + ' pour passer à l’étape suivante.';
   }
   $('cfg-qty-list').addEventListener('click', function(e) {
     var btn = e.target.closest('button');
@@ -397,6 +416,7 @@
   document.querySelectorAll('input[name="dragees"]').forEach(function(r) {
     r.addEventListener('change', function() {
       $('cfg-colors').hidden = checkedValue('dragees') !== 'Avec dragées';
+      updateNeed();
       paint();
     });
   });
@@ -600,7 +620,7 @@
   }
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
-    if (n === 3) return !!checkedValue('dragees');
+    if (n === 3) return !!checkedValue('dragees') && drageesComplete();
     if (n === 5) return nbBoites() > 0;
     return true;
   }
