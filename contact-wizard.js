@@ -654,13 +654,13 @@
   var PRIX_CONTENANT = { boite: 3.50, pot: 0, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
   var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
-  var DRAGEES_INCLUSES = 5;     // dragées comprises dans le prix de la boîte
+  var DRAGEES_INCLUSES = 0;     // aucune dragée comprise : 3,50 € = boîte + étiquette + nœud
   // Remises dégressives sur la quantité (du palier le plus haut au plus bas) : à compléter ici
   var REMISES = [{ des: 100, taux: 0.10 }];
   function remiseFor(n) { for (var i = 0; i < REMISES.length; i++) if (n >= REMISES[i].des) return REMISES[i]; return null; }
   function totalBrut() { return Math.round(nbBoites() * prixUnitaire() * 100) / 100; }
   function totalNet() { var r = remiseFor(nbBoites()), t = totalBrut(); return r ? Math.round(t * (1 - r.taux) * 100) / 100 : t; }
-  var PRIX_DRAGEE_SUP = 0.10;   // par dragée au-delà des 5 incluses
+  var PRIX_DRAGEE_SUP = 0.10;   // par dragée (minimum 5 par boîte)
   var NB_MAX = 5000;
   function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
@@ -681,8 +681,8 @@
   }
   function detailPrix() {
     var base = PRIX_CONTENANT[containers[idx].key] || 0, o = prixOptions();
-    var parts = [(avecDragees() ? 'boîte, étiquette et ' + DRAGEES_INCLUSES + ' dragées ' : 'boîte et étiquette ') + euros(base)];
-    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus ' + euros(o.sup));
+    var parts = ['boîte et étiquette ' + euros(base)];
+    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' ' + euros(o.sup));
     if (o.noeud) parts.push('nœud ' + euros(o.noeud));
     if (o.bouquet) parts.push('bouquet ' + euros(o.bouquet));
     return parts.join(' + ');
@@ -696,8 +696,8 @@
     var dp = $('cfg-dg-price'), o = prixOptions();
     if (dp) {
       dp.hidden = !isBoite() || !avecDragees();
-      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus des ' + DRAGEES_INCLUSES + ' incluses : + ' + euros(o.sup) + ' par boîte'
-        : DRAGEES_INCLUSES + ' dragées incluses dans le prix de la boîte · + ' + euros(PRIX_DRAGEE_SUP) + ' par dragée supplémentaire';
+      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + ' : + ' + euros(o.sup) + ' par boîte'
+        : euros(PRIX_DRAGEE_SUP) + ' par dragée, en plus du prix de la boîte';
     }
     var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
     $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(totalNet()) : '';
@@ -738,7 +738,7 @@
     }
     amt.textContent = euros(pu); unit.textContent = ' / boîte';
     var o = prixOptions(), parts = ['Boîte ' + euros(base)];
-    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' sup. +' + euros(o.sup));
+    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' +' + euros(o.sup));
     if (o.bouquet) parts.push('Bouquet +' + euros(o.bouquet));
     det.innerHTML = '';
     if (parts.length > 1) parts.forEach(function(t) { var sp = document.createElement('span'); sp.textContent = t; det.appendChild(sp); });
