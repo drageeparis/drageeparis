@@ -213,7 +213,6 @@
   var DG_MAX_COLORS = 3;  /* couleurs différentes au maximum */
   var DG_CATS = [
     { id: 'chocolats', name: 'Chocolats' },
-    { id: 'gourmandes', name: 'Chocolats amandes' },
     { id: 'avola', name: 'Amandes Avola' },
     { id: 'traditionnelles', name: 'Amandes traditionnelles' }
   ];
