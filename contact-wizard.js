@@ -630,15 +630,37 @@
 
   /* ---------- Textes récapitulatifs ---------- */
   /* ---------- Nombre de boîtes et prix ---------- */
-  // Prix unitaire par contenant (en euros) : à ajuster ici
-  var PRIX_CONTENANT = { boite: 5, pot: 5, tube: 5, pochon: 5, bouquet: 5 };
+  // Prix unitaires (en euros), hors dragées : à ajuster ici.
+  // Seule la boîte en papier a un prix pour l'instant ; les autres contenants sont chiffrés sur devis (0).
+  var PRIX_CONTENANT = { boite: 3.50, pot: 0, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
+  var PRIX_NOEUD = 0.10;    // nœud satiné (boîte)
+  var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
   var NB_MAX = 5000;
   function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
-  function prixUnitaire() { return conseil ? 0 : (PRIX_CONTENANT[containers[idx].key] || 0); }
+  function prixOptions() {
+    if (!isBoite()) return { noeud: 0, bouquet: 0 };
+    var d = decoChoice();
+    return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: d === 'Nœud + bouquet' ? PRIX_BOUQUET : 0 };
+  }
+  function prixUnitaire() {
+    if (conseil) return 0;
+    var base = PRIX_CONTENANT[containers[idx].key] || 0;
+    if (!base) return 0;
+    var o = prixOptions();
+    return Math.round((base + o.noeud + o.bouquet) * 100) / 100;
+  }
+  function detailPrix() {
+    var base = PRIX_CONTENANT[containers[idx].key] || 0, o = prixOptions(), parts = ['boîte et étiquette ' + euros(base)];
+    if (o.noeud) parts.push('nœud ' + euros(o.noeud));
+    if (o.bouquet) parts.push('bouquet ' + euros(o.bouquet));
+    return parts.join(' + ');
+  }
   function updatePrix() {
     var n = nbBoites(), pu = prixUnitaire();
-    $('w-nb-unit').textContent = pu ? euros(pu) + ' la boîte' : 'Prix selon le contenant choisi ensemble';
+    $('w-nb-unit').textContent = pu ? euros(pu) + ' la boîte, hors dragées' : (conseil ? 'Prix selon le contenant choisi ensemble' : 'Prix communiqué avec votre proposition');
+    var det = $('w-nb-detail');
+    if (det) det.textContent = pu && (prixOptions().noeud || prixOptions().bouquet) ? detailPrix() : '';
     $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(n * pu) : '';
     $('w-nb-minus').disabled = n <= 1;
     $('w-nb-plus').disabled = n >= NB_MAX;
@@ -663,6 +685,10 @@
   function prixText() {
     var n = nbBoites(), pu = prixUnitaire();
     return n && pu ? euros(n * pu) : '';
+  }
+  function prixDetailMail() {
+    var n = nbBoites(), pu = prixUnitaire();
+    return n && pu ? euros(n * pu) + ' — ' + n + ' × ' + euros(pu) + ' (' + detailPrix() + '), hors dragées' : '';
   }
   function quantiteText() {
     var n = nbBoites(), pu = prixUnitaire();
@@ -721,6 +747,7 @@
     box.classList.toggle('has-fleurs', fleurs);
     var bc = bouquetColor();
     box.style.setProperty('--bq', bc.base); box.style.setProperty('--bq-l', bc.light); box.style.setProperty('--bq-d', bc.dark);
+    if (typeof updatePrix === 'function') updatePrix();
     var bb = $('cfg-bouquet-couleur');
     if (bb) bb.hidden = d !== 'Nœud + bouquet';
     var rb = $('cfg-ruban');
@@ -911,7 +938,7 @@
       'Étiquette': etiquetteFormat(),
       'Décoration': decoText() || 'Sans objet (contenant autre que la boîte)',
       'Nombre de boîtes': nbBoitesText(),
-      'Prix indicatif': prixText() || 'À définir',
+      'Prix indicatif': prixDetailMail() || 'Sur devis',
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
     [['Nous a connus via', checkedValue('source')],
