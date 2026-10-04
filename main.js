@@ -636,6 +636,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
+  /* ---- Configurateur en maintenance : aperçu réservé avec ?apercu=1 (désactivé avec ?apercu=0) ---- */
+  if (document.body.classList.contains('is-maintenance')) {
+    var ap = new URLSearchParams(window.location.search).get('apercu');
+    try {
+      if (ap === '1') localStorage.setItem('dp-apercu', '1');
+      if (ap === '0') localStorage.removeItem('dp-apercu');
+      if (localStorage.getItem('dp-apercu') === '1') document.body.classList.add('is-preview');
+    } catch (e) { if (ap === '1') document.body.classList.add('is-preview'); }
+  }
+
   /* ---- 17. Choix de la langue (FR / EN) ---- */
   (function() {
     var path = window.location.pathname;

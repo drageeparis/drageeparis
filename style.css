@@ -6741,3 +6741,25 @@ a.lang-switch__item:hover { opacity: 1; }
 .faq__more { text-align: center; margin: 36px 0 0; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
 .faq__more a { color: var(--color-heading); text-decoration: none; }
 .faq__more a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- Configurateur en maintenance (body.is-maintenance) ---- */
+.maint { display: none; }
+.is-maintenance:not(.is-preview) .maint { display: block; }
+.is-maintenance:not(.is-preview) .wizard-wrap { display: none; }
+.maint { padding: 150px 20px 110px; }
+.maint__inner { max-width: 600px; margin: 0 auto; text-align: center; }
+.maint__icon { width: 22px; height: 22px; color: var(--color-heading); margin-bottom: 22px; animation: maintPulse 3.2s ease-in-out infinite; }
+@keyframes maintPulse { 0%, 100% { opacity: .45; transform: scale(.92); } 50% { opacity: 1; transform: scale(1); } }
+.maint__eyebrow { margin: 0 0 14px; font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--color-heading); }
+.maint__title { margin: 0 0 26px; font-size: clamp(30px, 5.4vw, 46px); font-weight: 300; line-height: 1.12; letter-spacing: -.01em; text-transform: uppercase; color: var(--color-foreground); }
+.maint__text { margin: 0 auto 14px; max-width: 520px; font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--color-foreground); opacity: .85; }
+.maint__btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 34px 0 30px; }
+.maint__btn { display: inline-flex; align-items: center; gap: 8px; padding: 15px 26px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--color-heading); border: 1px solid var(--color-heading); transition: background .2s, color .2s; }
+.maint__btn:hover { background: var(--color-heading); color: var(--color-foreground-light); }
+.maint__btn--primary { background: var(--color-heading); color: var(--color-foreground-light); }
+.maint__btn--primary:hover { background: transparent; color: var(--color-heading); }
+.maint__contact { margin: 0 0 18px; font-size: 13.5px; font-weight: 300; line-height: 1.8; color: var(--color-foreground); }
+.maint__contact a { color: var(--color-heading); text-decoration: none; border-bottom: 1px solid rgba(150, 95, 54, .35); }
+.maint__note { margin: 0; padding-top: 22px; border-top: 1px solid var(--color-border); font-size: 12.5px; font-weight: 300; color: var(--color-foreground); opacity: .7; }
+@media (max-width: 600px) { .maint { padding: 118px 20px 80px; } .maint__btn { width: 100%; justify-content: center; } }
+@media (prefers-reduced-motion: reduce) { .maint__icon { animation: none; } }

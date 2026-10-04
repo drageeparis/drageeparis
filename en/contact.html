@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Start my creation · Dragée Paris</title>
   <meta name="description" content="Design your personalised creation step by step: occasion, quantity, date, colours and contact details. Reply within 48 hours.">
-  <link rel="stylesheet" href="../style.css?v=20261005faq">
+  <link rel="stylesheet" href="../style.css?v=20261005m2">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -33,7 +33,7 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#965F36">
 </head>
-<body class="wizard-page">
+<body class="wizard-page is-maintenance">
 
   <a class="skip-link" href="#main">Skip to main content</a>
 
@@ -145,6 +145,24 @@
   </div>
   <div class="header__safe-area" aria-hidden="true"></div>
   <main id="main">
+    <!-- Configurateur en maintenance : retirer la classe « is-maintenance » du <body> pour le réactiver.
+         Aperçu réservé : ajouter ?apercu=1 à l'adresse (?apercu=0 pour revenir au message). -->
+    <section class="maint" aria-labelledby="maint-title">
+      <div class="maint__inner">
+        <svg class="maint__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg>
+        <p class="maint__eyebrow">Start my creation</p>
+        <h1 class="maint__title" id="maint-title">Our configurator<br>is getting a makeover</h1>
+        <p class="maint__text">We are fine-tuning our online creation tool to give you an experience worthy of your celebrations. It will be available again very soon.</p>
+        <p class="maint__text">In the meantime, we will prepare your project with you, as always: tell us about it and receive a bespoke proposal within 48 hours, free and with no obligation.</p>
+        <div class="maint__btns">
+          <a href="message.html" class="maint__btn maint__btn--primary">Tell us about my project <span aria-hidden="true">→</span></a>
+          <a href="creations.html" class="maint__btn">See our creations</a>
+        </div>
+        <p class="maint__contact">Or call us: <a href="tel:+33608671443">+33 6 08 67 14 43</a>, Monday to Friday, 9 am to 6 pm (Paris time)<br><a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a></p>
+        <p class="maint__note">You can also order a creation or dragées directly from our product pages.</p>
+      </div>
+    </section>
+
     <div class="wizard-wrap">
 
       <!-- Barre de progression -->
@@ -783,7 +801,7 @@
     </div>
   </footer>
 
-  <script src="../main.js?v=20261005en"></script>
+  <script src="../main.js?v=20261005m2"></script>
   <script src="../contact-wizard.js?v=20261005en"></script>
 </body>
 </html>
