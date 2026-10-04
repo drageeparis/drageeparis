@@ -747,8 +747,7 @@
     var d = checkedValue('dragees');
     if (d !== 'Avec dragées') return d;
     if (!chosenColors.length) return d + ' · couleurs à définir';
-    return d + ' · ' + chosenColors.map(function(v) { return v + ' ×' + (qty[v] || 1); }).join(', ') +
-      ' (' + totalQty() + ' dragées sur ' + capOf(chosenCat()) + ' max)';
+    return d + ' · ' + chosenColors.map(function(v) { return v + ' ×' + (qty[v] || 1); }).join(', ');
   }
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
