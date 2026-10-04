@@ -650,7 +650,7 @@
   function nbBoitesText() { var n = nbBoites(); return n ? n + ' boîte' + (n > 1 ? 's' : '') : ''; }
   function prixText() {
     var n = nbBoites(), pu = prixUnitaire();
-    return n && pu ? euros(n * pu) + ' (' + euros(pu) + ' la boîte, prix indicatif)' : '';
+    return n && pu ? euros(n * pu) : '';
   }
   function quantiteText() {
     var n = nbBoites(), pu = prixUnitaire();
@@ -675,7 +675,8 @@
   }
   function etiquetteFormat() {
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? 'sans bordure' : 'bordures ' + colorLabel('etiquette_bord');
-    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, écriture ' + tagFont().name.toLowerCase() + ', fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
+    // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en papier)
+    return tagShape() + (tagSizeFixed() ? '' : ', taille ' + Math.round(tagScale() * 100) + ' %') + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
 
