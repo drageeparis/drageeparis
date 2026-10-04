@@ -553,6 +553,11 @@
     b.addEventListener('click', function() { setNb(parseInt(b.getAttribute('data-n'), 10)); });
   });
   updatePrix();
+  function nbBoitesText() { var n = nbBoites(); return n ? n + ' boîte' + (n > 1 ? 's' : '') : ''; }
+  function prixText() {
+    var n = nbBoites(), pu = prixUnitaire();
+    return n && pu ? euros(n * pu) + ' (' + euros(pu) + ' la boîte, prix indicatif)' : '';
+  }
   function quantiteText() {
     var n = nbBoites(), pu = prixUnitaire();
     if (!n) return '';
@@ -662,7 +667,8 @@
     setRow('sum-contenant', contenantText());
     setRow('sum-dragees', drageesText());
     setRow('sum-etiquette', [etiquetteText(), etiquetteFormat()].filter(Boolean).join(' · '), true);
-    setRow('sum-qty', quantiteText());
+    setRow('sum-qty', nbBoitesText());
+    setRow('sum-prix', prixText(), true);
     setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
     setRow('sum-message', val('wizard-message'), true);
     setRow('sum-visuel', val('wizard-visuel-lien'), true);
@@ -726,7 +732,8 @@
       'Dragées': drageesText(),
       'Texte de l\'étiquette': etiquetteText() || 'À définir',
       'Étiquette': etiquetteFormat(),
-      'Nombre de boîtes': quantite,
+      'Nombre de boîtes': nbBoitesText(),
+      'Prix indicatif': prixText() || 'À définir',
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
     [['Précisions', val('wizard-message')], ['Visuel (lien)', val('wizard-visuel-lien')],
