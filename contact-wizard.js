@@ -187,6 +187,12 @@
   }
   function updateSizes() {
     if (sizesBox) sizesBox.hidden = conseil || containers[idx].key !== 'bouquet';
+    // boîte en papier : taille d'étiquette fixe, le curseur est masqué
+    var sf = $('cfg-tag-size-field');
+    if (sf) {
+      var fixed = !conseil && containers[idx].key === 'boite';
+      if (sf.hidden !== fixed) { sf.hidden = fixed; if (typeof renderTagShapes === 'function' && tags) renderTagShapes(); }
+    }
   }
   function bouquetText() { var b = sizeOf(bouquetSize); return b.name + ' bouquet (' + b.n + ' pétales)'; }
   function containerLabel() {
@@ -448,7 +454,13 @@
     return el;
   }
   function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
-  function tagScale() { var el = $('cfg-tag-size'); return el ? (parseInt(el.value, 10) || 100) / 100 : 1; }
+  var TAG_SIZE_DEFAUT = 120; // taille par défaut (%), fixe pour la boîte en papier
+  function tagSizeFixed() { return !conseil && containers[idx].key === 'boite'; }
+  function tagScale() {
+    var el = $('cfg-tag-size');
+    if (tagSizeFixed() || !el) return TAG_SIZE_DEFAUT / 100;
+    return (parseInt(el.value, 10) || TAG_SIZE_DEFAUT) / 100;
+  }
   function renderTagShapes() {
     var shape = tagShape(), k = tagScale();
     tags.forEach(function(g) {
