@@ -6646,3 +6646,4 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-dg-hint { display: flex; align-items: baseline; gap: 10px; margin: 14px 0 0; font-size: 13px; font-weight: 300; line-height: 1.5; color: var(--caramel); animation: wizardIn 0.35s var(--ease-soft); }
 .cfg-dg-hint::before { content: '✓'; flex-shrink: 0; font-size: 12px; }
 .cfg-dg-hint[hidden] { display: none; }
+#cfg-tag-fond-field[hidden] { display: none; }

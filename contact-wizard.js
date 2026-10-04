@@ -189,6 +189,8 @@
   function updateSizes() {
     if (sizesBox) sizesBox.hidden = conseil || containers[idx].key !== 'bouquet';
     // boîte en carton : taille d'étiquette fixe, le curseur est masqué
+    var ff = $('cfg-tag-fond-field');
+    if (ff) ff.hidden = !conseil && containers[idx].key === 'boite';
     var sf = $('cfg-tag-size-field');
     if (sf) {
       var fixed = !conseil && containers[idx].key === 'boite';
@@ -507,6 +509,7 @@
   function tagWidthFactor() { var s = tagShape(); return s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
   // Couleurs de l'étiquette et de l'écriture (pastilles + couleur libre)
   function tagColor(name, fallback) {
+    if (name === 'etiquette_fond' && !conseil && containers[idx].key === 'boite') return '#FFFFFF'; // boîte en carton : étiquettes toujours blanches
     var el = document.querySelector('input[name="' + name + '"]:checked');
     return el ? el.getAttribute('data-hex') : fallback;
   }
@@ -728,7 +731,7 @@
   function etiquetteFormat() {
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? 'sans bordure' : 'bordures ' + colorLabel('etiquette_bord');
     // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
-    return tagShape() + (tagSizeFixed() ? '' : ', taille ' + Math.round(tagScale() * 100) + ' %') + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
+    return tagShape() + (tagSizeFixed() ? '' : ', taille ' + Math.round(tagScale() * 100) + ' %') + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagSizeFixed() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
 
