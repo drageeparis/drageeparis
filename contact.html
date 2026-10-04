@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lancer ma création · Dragée Paris</title>
   <meta name="description" content="Lancez votre création personnalisée étape par étape, événement, quantité, date, couleurs et coordonnées. Réponse sous 48h.">
-  <link rel="stylesheet" href="style.css?v=20261004e">
+  <link rel="stylesheet" href="style.css?v=20261004f">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -394,54 +394,30 @@
             <span class="wizard__step-label">Étape 05 / 06</span>
           </div>
           <h2 class="wizard__step-title">Vos invités<br>&amp; le jour J</h2>
-          <p class="wizard__step-sub">Combien de contenants souhaitez-vous&nbsp;? En général, un par invité. Un ordre de grandeur suffit, nous affinerons ensemble.</p>
+          <p class="wizard__step-sub">Combien de boîtes souhaitez-vous&nbsp;? En général, une par invité. Le prix s'affiche au fur et à mesure.</p>
 
-          <div class="wizard__qty-cards wizard__cards" role="group" aria-label="Nombre de contenants">
-            <label class="wizard__card wizard__qty-card">
-              <input type="radio" name="quantite" value="Moins de 50">
-              <div class="wizard__card-inner">
-                <span class="wizard__qty-num">&lt;&nbsp;50</span>
-                <div class="wizard__qty-info">
-                  <span class="wizard__qty-label">Moins de 50</span>
-                  <span class="wizard__qty-sub">Pour un comité intime</span>
-                </div>
+          <div class="wizard__field cfg-boxes">
+            <label class="wizard__label" for="w-nb">Nombre de boîtes</label>
+            <div class="cfg-boxes__row">
+              <div class="cfg-boxes__step">
+                <button type="button" class="cfg-boxes__btn" id="w-nb-minus" aria-label="Une boîte de moins">−</button>
+                <input class="cfg-boxes__input" type="number" id="w-nb" name="nombre_boites" min="1" max="5000" step="1" inputmode="numeric" placeholder="0" autocomplete="off">
+                <button type="button" class="cfg-boxes__btn" id="w-nb-plus" aria-label="Une boîte de plus">+</button>
               </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__qty-card">
-              <input type="radio" name="quantite" value="50 à 100">
-              <div class="wizard__card-inner">
-                <span class="wizard__qty-num">50–100</span>
-                <div class="wizard__qty-info">
-                  <span class="wizard__qty-label">50 à 100</span>
-                  <span class="wizard__qty-sub">Baptêmes, communions, anniversaires</span>
-                </div>
+              <div class="cfg-boxes__price" aria-live="polite">
+                <span class="cfg-boxes__unit" id="w-nb-unit"></span>
+                <span class="cfg-boxes__total" id="w-nb-total"></span>
               </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__qty-card">
-              <input type="radio" name="quantite" value="100 à 200">
-              <div class="wizard__card-inner">
-                <span class="wizard__qty-num">100–200</span>
-                <div class="wizard__qty-info">
-                  <span class="wizard__qty-label">100 à 200</span>
-                  <span class="wizard__qty-sub">Idéal pour les mariages et grandes réceptions</span>
-                </div>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-            <label class="wizard__card wizard__qty-card">
-              <input type="radio" name="quantite" value="Plus de 200">
-              <div class="wizard__card-inner">
-                <span class="wizard__qty-num">200+</span>
-                <div class="wizard__qty-info">
-                  <span class="wizard__qty-label">Plus de 200</span>
-                  <span class="wizard__qty-sub">Grand événement, nous gérons</span>
-                </div>
-              </div>
-              <span class="wizard__card-check" aria-hidden="true"></span>
-            </label>
-
+            </div>
+            <div class="wizard__chips cfg-boxes__presets" role="group" aria-label="Quantités courantes">
+              <button type="button" class="cfg-boxes__preset" data-n="30">30</button>
+              <button type="button" class="cfg-boxes__preset" data-n="50">50</button>
+              <button type="button" class="cfg-boxes__preset" data-n="80">80</button>
+              <button type="button" class="cfg-boxes__preset" data-n="100">100</button>
+              <button type="button" class="cfg-boxes__preset" data-n="150">150</button>
+              <button type="button" class="cfg-boxes__preset" data-n="200">200</button>
+            </div>
+            <p class="wizard__hint">Prix indicatif, confirmé avec votre maquette.</p>
           </div>
 
           <p class="wizard__question">Et la date de votre événement&nbsp;? <span class="wizard__optional">(facultatif)</span></p>
@@ -484,7 +460,7 @@
                 <span class="wizard__summary-val" id="sum-etiquette"></span>
               </div>
               <div class="wizard__summary-item">
-                <span class="wizard__summary-key">Contenants</span>
+                <span class="wizard__summary-key">Nombre de boîtes</span>
                 <span class="wizard__summary-val" id="sum-qty">-</span>
               </div>
               <div class="wizard__summary-item">
@@ -625,6 +601,6 @@
   </footer>
 
   <script src="main.js?v=20261002f"></script>
-  <script src="contact-wizard.js?v=20261004e"></script>
+  <script src="contact-wizard.js?v=20261004f"></script>
 </body>
 </html>

@@ -446,6 +446,42 @@
   if (dateEl) { dateEl.addEventListener('input', updateDateAlert); dateEl.addEventListener('change', updateDateAlert); }
 
   /* ---------- Textes récapitulatifs ---------- */
+  /* ---------- Nombre de boîtes et prix ---------- */
+  // Prix unitaire par contenant (en euros) : à ajuster ici
+  var PRIX_CONTENANT = { boite: 5, pot: 5, tube: 5, pochon: 5, bouquet: 5 };
+  var NB_MAX = 5000;
+  function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
+  function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
+  function prixUnitaire() { return conseil ? 0 : (PRIX_CONTENANT[containers[idx].key] || 0); }
+  function updatePrix() {
+    var n = nbBoites(), pu = prixUnitaire();
+    $('w-nb-unit').textContent = pu ? euros(pu) + ' la boîte' : 'Prix selon le contenant choisi ensemble';
+    $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(n * pu) : '';
+    $('w-nb-minus').disabled = n <= 1;
+    $('w-nb-plus').disabled = n >= NB_MAX;
+    Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
+      b.classList.toggle('is-active', parseInt(b.getAttribute('data-n'), 10) === n);
+    });
+  }
+  function setNb(n) {
+    $('w-nb').value = Math.max(1, Math.min(NB_MAX, n));
+    updatePrix();
+    updateNextState();
+  }
+  $('w-nb').addEventListener('input', function() { updatePrix(); updateNextState(); });
+  $('w-nb').addEventListener('change', function() { if (val('w-nb')) setNb(nbBoites() || 1); });
+  $('w-nb-minus').addEventListener('click', function() { setNb(nbBoites() - 1); });
+  $('w-nb-plus').addEventListener('click', function() { setNb(nbBoites() + 1); });
+  Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
+    b.addEventListener('click', function() { setNb(parseInt(b.getAttribute('data-n'), 10)); });
+  });
+  updatePrix();
+  function quantiteText() {
+    var n = nbBoites(), pu = prixUnitaire();
+    if (!n) return '';
+    return n + ' boîte' + (n > 1 ? 's' : '') + (pu ? ' × ' + euros(pu) + ' = ' + euros(n * pu) + ' (prix indicatif)' : '');
+  }
+
   function contenantText() { return conseil ? 'À définir ensemble (conseil demandé)' : containers[idx].name; }
   function drageesText() {
     var d = checkedValue('dragees');
@@ -483,7 +519,7 @@
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
     if (n === 3) return !!checkedValue('dragees');
-    if (n === 5) return !!checkedValue('quantite');
+    if (n === 5) return nbBoites() > 0;
     return true;
   }
   function updateNextState() { nextBtn.disabled = current < TOTAL && !validateStep(current); }
@@ -496,6 +532,7 @@
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
     setBoxOpen();
+    updatePrix();
     $('cfg-name').textContent = (n !== 2 && conseil) ? 'Contenant à définir ensemble' : containers[idx].name;
   }
 
@@ -547,7 +584,7 @@
     setRow('sum-contenant', contenantText());
     setRow('sum-dragees', drageesText());
     setRow('sum-etiquette', [etiquetteText(), etiquetteFormat()].filter(Boolean).join(' · '), true);
-    setRow('sum-qty', checkedValue('quantite'));
+    setRow('sum-qty', quantiteText());
     setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
     setRow('sum-message', val('wizard-message'), true);
     setRow('sum-visuel', val('wizard-visuel-lien'), true);
@@ -593,12 +630,12 @@
 
   function buildPayload() {
     var prenom = val('w-prenom'), nom = val('w-nom'), email = val('w-email');
-    var occasion = checkedValue('evenement'), quantite = checkedValue('quantite');
+    var occasion = checkedValue('evenement'), quantite = quantiteText();
     var date = readDate(), days = date ? daysUntil(date) : null;
     var urgent = days !== null && days >= 0 && days < 28;
     var p = {
       'subject': 'Création sur mesure · ' + occasion + ' · ' + (conseil ? 'contenant à définir' : containers[idx].name) + ' · ' +
-        quantite + ' contenants · ' + (date ? formatDate(date) : 'date non fixée') + ' · ' + prenom + ' ' + nom + (urgent ? ' · DÉLAI COURT' : ''),
+        nbBoites() + ' boîtes · ' + (date ? formatDate(date) : 'date non fixée') + ' · ' + prenom + ' ' + nom + (urgent ? ' · DÉLAI COURT' : ''),
       'email': email,
       '_replyto': email,
       'Type de demande': 'Création sur mesure (configurateur « Lancer ma création »)',
@@ -611,7 +648,7 @@
       'Dragées': drageesText(),
       'Texte de l\'étiquette': etiquetteText() || 'À définir',
       'Étiquette': etiquetteFormat(),
-      'Nombre de contenants': quantite,
+      'Nombre de boîtes': quantite,
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
     [['Précisions', val('wizard-message')], ['Visuel (lien)', val('wizard-visuel-lien')],
