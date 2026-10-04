@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dragée Paris · Personalised Dragées in Paris &amp; Île-de-France</title>
   <meta name="description" content="Personalised dragée (sugared almond) creations for weddings, births and receptions. Made to measure and hand-assembled in Île-de-France.">
-  <link rel="stylesheet" href="../style.css?v=20261005en">
+  <link rel="stylesheet" href="../style.css?v=20261005faq">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -88,6 +88,7 @@
         </ul>
         <a href="contact.html" class="drawer__cta">Start my creation</a>
         <div class="drawer__secondary">
+          <a href="faq.html">FAQ</a>
           <a href="mentions-legales.html">Legal notice</a>
         </div>
       </div>
@@ -456,7 +457,7 @@
               <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
             </button>
             <div class="faq__answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
-              <div class="faq__answer-inner">Each container is personalised to measure, according to your event and your wishes, with no minimum quantity. Whether you would like a single creation or several hundred boxes for a wedding, a christening or a corporate event, we will guide you through every project.</div>
+              <div class="faq__answer-inner">For a bespoke creation, orders start at 20 boxes; dragées sold by weight start from 250 g. Whether you are preparing a few dozen boxes or several hundred for a wedding, a christening or a corporate event, we are with you every step of the way.</div>
             </div>
           </div>
           <div class="faq__item">
@@ -478,6 +479,7 @@
             </div>
           </div>
       </div>
+      <p class="faq__more"><a href="faq.html">All frequently asked questions →</a></p>
     </section>
 
   </main>
@@ -500,6 +502,7 @@
           <li><a href="creations.html">Our creations</a></li>
           <li><a href="atelier.html">The workshop</a></li>
           <li><a href="message.html">Contact</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="mentions-legales.html">Legal notice</a></li>
         </ul>
       </nav>
@@ -523,14 +526,17 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": [
+      "LocalBusiness",
+      "Store"
+    ],
     "name": "Dragée Paris",
     "description": "Personalised dragée creations for weddings, births and receptions, hand-assembled in Île-de-France.",
-    "url": "https://drageeparis.fr/",
+    "url": "https://drageeparis.fr/en/",
     "telephone": "+33608671443",
     "email": "drageeparis@gmail.com",
     "image": "https://drageeparis.fr/images/hero/home-page-hero.png",
-    "priceRange": "€€",
+    "priceRange": "€",
     "currenciesAccepted": "EUR",
     "address": {
       "@type": "PostalAddress",
@@ -540,14 +546,26 @@
       "addressRegion": "Île-de-France",
       "addressCountry": "FR"
     },
-    "areaServed": {
-      "@type": "Country",
-      "name": "France"
-    },
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "France"
+      },
+      {
+        "@type": "Place",
+        "name": "Europe"
+      }
+    ],
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "opens": "09:00",
         "closes": "18:00"
       }
@@ -556,7 +574,17 @@
       "https://www.instagram.com/drageeparis/",
       "https://www.tiktok.com/@drageeparis",
       "https://www.facebook.com/drageeparis"
-    ]
+    ],
+    "knowsAbout": [
+      "Personalised dragées",
+      "Sugared almonds",
+      "Wedding favours",
+      "Christening favours",
+      "Avola almond dragées",
+      "Chocolate dragées"
+    ],
+    "slogan": "Elevate your finest celebrations",
+    "inLanguage": "en"
   }
   </script>
 </body>

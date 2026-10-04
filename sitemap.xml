@@ -1036,4 +1036,18 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-banquise.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-banquise.html"/>
   </url>
+  <url>
+    <loc>https://drageeparis.fr/faq.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/faq.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/faq.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/faq.html"/>
+  </url>
 </urlset>

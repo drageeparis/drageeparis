@@ -135,3 +135,9 @@ Exports de la marque (symbole seul + lockup horizontal, en noir/blanc, avec/sans
 - Les scripts détectent la langue avec `<html lang="en">`. Les demandes et commandes envoyées à l'atelier restent rédigées en français, avec un champ « Langue du client : Anglais ».
 - Nouvelle page ou page française refaite : `python3 outils/build-en.py page.html` crée la copie anglaise (chemins corrigés, hreflang), puis traduire le texte en suivant `outils/glossaire-en.md` et `outils/consignes-traduction-en.md`. Attention : la commande écrase la traduction existante.
 - Après une modification de fiche produit (FR ou EN) : `python3 outils/catalogue-commande.py` (le catalogue contient aussi les noms anglais).
+
+## Référencement (Google, ChatGPT, Claude)
+
+- `faq.html` / `en/faq.html` : générées par `python3 outils/build-faq.py` (questions dans le script, données structurées FAQPage incluses). Mettre à jour les réponses si les prix, délais ou conditions changent.
+- `llms.txt` : résumé de l'activité pour les assistants IA (prix, délais, contact). À tenir à jour avec les prix.
+- Données structurées LocalBusiness dans `index.html` et `en/index.html`.
