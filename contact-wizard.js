@@ -2,7 +2,7 @@
    1. Occasion · 2. Contenant (carrousel) · 3. Dragées (par catégorie) · 4. Étiquette
    5. Contenants & date · 6. Coordonnées (+ envoi Formspree) */
 (function() {
-  var TOTAL = 6;
+  var TOTAL = 7;
   var FORMSPREE_ID = 'mlgqrzed';
   var PHONE_LABEL = '06 08 67 14 43';
   var PHONE_HREF = 'tel:+33608671443';
@@ -666,6 +666,43 @@
     return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, écriture ' + tagFont().name.toLowerCase() + ', fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
+
+  /* ---------- Étape 5 : décoration de la boîte (nœud, fleurs champêtres) ---------- */
+  function isBoite() { return !conseil && containers[idx].key === 'boite'; }
+  function stepUsable(n) { return n !== 5 || isBoite(); } // l'étape décoration ne concerne que la boîte en papier
+  function decoChoice() { return checkedValue('decoration') || 'Sans décoration'; }
+  function rubanHex() { var el = document.querySelector('input[name="ruban"]:checked'); return el ? el.getAttribute('data-hex') : '#D9C29A'; }
+  function shadeHex(h, f) {
+    var n = parseInt(h.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    function c(v) { v = Math.round(v * f); return (v < 16 ? '0' : '') + Math.min(255, v).toString(16); }
+    return '#' + c(r) + c(g) + c(b);
+  }
+  function applyDeco() {
+    if (!box) return;
+    var d = decoChoice(), on = isBoite() && current >= 5;
+    var noeud = on && (d === 'Nœud satiné' || d === 'Nœud + fleurs');
+    var fleurs = on && (d === 'Fleurs champêtres' || d === 'Nœud + fleurs');
+    box.style.setProperty('--ruban', rubanHex());
+    box.style.setProperty('--ruban-d', shadeHex(rubanHex(), 0.93));
+    function show(cls, v) { var g = box.querySelector('.cfg-deco--' + cls); if (g) g.style.display = v ? 'inline' : 'none'; }
+    show('ruban', noeud); show('noeud', noeud); show('fleurs', fleurs);
+    show('attache-ruban', noeud && fleurs); show('attache-raphia', fleurs && !noeud);
+    // avec des fleurs, la boîte se réduit un peu pour laisser la place au bouquet
+    var body = box.querySelector('.cfg-box-body');
+    if (body) body.setAttribute('transform', 'translate(200 ' + (fleurs ? 362 : 356) + ') scale(' + (fleurs ? 1.3 : 1.55) + ') translate(-214 -356)');
+    var rb = $('cfg-ruban');
+    if (rb) rb.hidden = !(d === 'Nœud satiné' || d === 'Nœud + fleurs');
+  }
+  function decoText() {
+    if (!isBoite()) return '';
+    var d = decoChoice();
+    return (d === 'Nœud satiné' || d === 'Nœud + fleurs') ? d + ' (ruban ' + checkedValue('ruban').toLowerCase() + ')' : d;
+  }
+  document.querySelectorAll('input[name="decoration"]').forEach(function(r) { r.addEventListener('change', applyDeco); });
+  document.querySelectorAll('input[name="ruban"]').forEach(function(r) {
+    r.addEventListener('change', function() { var l = $('label-ruban-name'); if (l) l.textContent = r.value; applyDeco(); });
+  });
+
   /* ---------- Navigation ---------- */
   function setProgress(step) {
     var pct = Math.round((step / TOTAL) * 100);
@@ -690,7 +727,7 @@
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
     if (n === 3) return !!checkedValue('dragees') && drageesComplete();
-    if (n === 5) return nbBoites() > 0;
+    if (n === 6) return nbBoites() > 0;
     return true;
   }
   function updateNextState() { nextBtn.disabled = current < TOTAL && !validateStep(current); }
@@ -703,6 +740,7 @@
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
     setBoxOpen();
+    applyDeco();
     updatePrix();
     $('cfg-name').textContent = (n !== 2 && conseil) ? 'Contenant à définir ensemble' : containers[idx].name;
     updateSizes();
@@ -756,6 +794,7 @@
     setRow('sum-contenant', contenantText());
     setRow('sum-dragees', drageesText());
     setRow('sum-etiquette', [etiquetteText(), etiquetteFormat()].filter(Boolean).join(' · '), true);
+    setRow('sum-deco', decoText(), true);
     setRow('sum-qty', nbBoitesText());
     setRow('sum-prix', prixText(), true);
     setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
@@ -819,6 +858,7 @@
       'Dragées': drageesText(),
       'Texte de l\'étiquette': etiquetteText() || 'À définir',
       'Étiquette': etiquetteFormat(),
+      'Décoration': decoText() || 'Sans objet (contenant autre que la boîte)',
       'Nombre de boîtes': nbBoitesText(),
       'Prix indicatif': prixText() || 'À définir',
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
@@ -842,7 +882,7 @@
   }
   function send() {
     if (!validateContact()) {
-      var firstError = document.querySelector('#wizard-step-6 .has-error');
+      var firstError = document.querySelector('#wizard-step-7 .has-error');
       if (firstError) firstError.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
       return;
     }
@@ -859,7 +899,12 @@
     .catch(showSendError);
   }
 
-  backBtn.addEventListener('click', function() { if (current > 1) showStep(current - 1, 'back'); });
+  backBtn.addEventListener('click', function() {
+    if (current <= 1) return;
+    var n = current - 1;
+    while (n > 1 && !stepUsable(n)) n--;
+    showStep(n, 'back');
+  });
   nextBtn.addEventListener('click', function() {
     if (current === TOTAL) { send(); return; }
     if (!validateStep(current)) {
@@ -868,7 +913,9 @@
       return;
     }
     if (current === 2) conseil = false;
-    showStep(current + 1, 'next');
+    var n = current + 1;
+    while (n < TOTAL && !stepUsable(n)) n++;
+    showStep(n, 'next');
   });
 
   /* Hauteur de l'en-tête fixe, pour l'aperçu collant sur mobile */

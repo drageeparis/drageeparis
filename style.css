@@ -6574,3 +6574,10 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-font__sample { display: flex; align-items: center; justify-content: center; height: 44px; }
 .cfg-font__card { height: 100%; }
 @media (max-width: 768px) { .cfg-font__sample { justify-content: flex-start; height: 38px; } }
+
+/* Étape décoration de la boîte */
+.cfg-deco { display: none; }
+.cfg-deco-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cfg-ruban { margin-top: 8px; }
+.cfg-ruban[hidden] { display: none; }
+@media (max-width: 768px) { .cfg-deco-cards { grid-template-columns: minmax(0, 1fr); } }
