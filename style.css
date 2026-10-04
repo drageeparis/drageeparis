@@ -6674,3 +6674,7 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 
 .cfg-pricetag__detail span { white-space: nowrap; }
 .cfg-pricetag__detail span + span::before { content: '·'; margin: 0 6px; opacity: .6; }
+
+/* Étape étiquette : textes d'abord, puis le style */
+.cfg-tagtext { margin-bottom: 4px; }
+.cfg-section-title { margin: 8px 0 14px; padding-top: 22px; border-top: 1px solid var(--color-border); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-heading); font-weight: 400; }

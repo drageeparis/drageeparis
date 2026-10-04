@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lancer ma création · Dragée Paris</title>
   <meta name="description" content="Lancez votre création personnalisée étape par étape, événement, quantité, date, couleurs et coordonnées. Réponse sous 48h.">
-  <link rel="stylesheet" href="style.css?v=20261005m">
+  <link rel="stylesheet" href="style.css?v=20261005n">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -388,8 +388,21 @@
             <span class="wizard__step-label">Étape 04 / 07</span>
           </div>
           <h2 class="wizard__step-title">Personnalisez<br>l'étiquette</h2>
-          <p class="wizard__step-sub">Choisissez la forme et la taille, puis écrivez le texte&nbsp;: tout s'affiche en direct. Nous le mettrons en forme sur la maquette.</p>
+          <p class="wizard__step-sub">Écrivez d'abord vos prénoms et la date, puis choisissez le style&nbsp;: tout s'affiche en direct sur l'étiquette. Nous le mettrons en forme sur la maquette.</p>
           <div class="cfg-slot"></div>
+
+          <div class="wizard__row cfg-tagtext">
+            <div class="wizard__field">
+              <label class="wizard__label" for="cfg-l1">Prénoms ou nom <span class="req">*</span></label>
+              <input class="wizard__input" type="text" id="cfg-l1" maxlength="28" autocomplete="off" required aria-required="true" placeholder="Ex. : Camille &amp; Louis">
+            </div>
+            <div class="wizard__field">
+              <label class="wizard__label" for="cfg-l2">Date ou petit mot <span class="req">*</span></label>
+              <input class="wizard__input" type="text" id="cfg-l2" maxlength="24" autocomplete="off" required aria-required="true" placeholder="Ex. : 14.06.2027">
+            </div>
+          </div>
+
+          <p class="cfg-section-title">Le style de l'étiquette</p>
 
           <div class="wizard__row cfg-tagopts">
             <div class="wizard__field">
@@ -468,16 +481,6 @@
             </div>
           </div>
 
-          <div class="wizard__row">
-            <div class="wizard__field">
-              <label class="wizard__label" for="cfg-l1">Prénoms ou nom <span class="req">*</span></label>
-              <input class="wizard__input" type="text" id="cfg-l1" maxlength="28" autocomplete="off" required aria-required="true" placeholder="Ex. : Camille &amp; Louis">
-            </div>
-            <div class="wizard__field">
-              <label class="wizard__label" for="cfg-l2">Date ou petit mot <span class="req">*</span></label>
-              <input class="wizard__input" type="text" id="cfg-l2" maxlength="24" autocomplete="off" required aria-required="true" placeholder="Ex. : 14.06.2027">
-            </div>
-          </div>
           <p class="cfg-dg-need" id="cfg-tag-need" aria-live="polite" hidden></p>
         </div>
 
