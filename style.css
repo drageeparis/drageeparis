@@ -6701,3 +6701,8 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .wizard__next-steps span { font-size: 13px; font-weight: 300; line-height: 1.6; color: var(--ink-60); }
 .wizard__success p.wizard__success-note { font-size: 12.5px; margin-bottom: 28px; }
 .wizard__success-note a { color: inherit; }
+
+.wizard__proof { margin: 18px 0 0; text-align: center; font-size: 13.5px; font-weight: 300; color: var(--color-foreground); }
+.wizard__proof[hidden] { display: none; }
+.wizard__proof strong { font-weight: 500; color: var(--color-heading); }
+.wizard__proof + .wizard__reassure { margin-top: 8px; }

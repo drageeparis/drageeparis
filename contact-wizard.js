@@ -943,6 +943,7 @@
     setNextLabel(labelFor(n));
     if (n === TOTAL) updateSummary();
     var reassure = $('wizard-reassure'); if (reassure) reassure.hidden = n !== TOTAL;
+    var proof = $('wizard-proof'); if (proof) proof.hidden = n !== TOTAL;
     if (typeof queueSave === 'function') queueSave();
     updateNextState();
     fitAllTags();
@@ -1055,6 +1056,7 @@
     var em = val('w-email'), emEl = $('wizard-success-email');
     if (emEl) emEl.textContent = em ? ' à ' + em : '';
     var rs = $('wizard-reassure'); if (rs) rs.hidden = true;
+    var pf = $('wizard-proof'); if (pf) pf.hidden = true;
     success.classList.add('visible');
     setProgress(TOTAL);
   }
