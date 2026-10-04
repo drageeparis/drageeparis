@@ -6398,10 +6398,3 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (prefers-reduced-motion: reduce) {
   .wizard__colors--choco .wizard__color-swatch { transition: none; }
 }
-
-/* Boîte en papier : les 4 rabats s'ouvrent quand on choisit « Avec dragées » (animés par contact-wizard.js) */
-.cfg-box-fill .cfg-in { opacity: 0; transform: translateY(-14px); transition: opacity 0.2s var(--ease-soft), transform 0.2s var(--ease-soft); }
-.cfg-svg.is-open .cfg-box-fill .cfg-in { opacity: 1; transform: none; transition: opacity 0.35s var(--ease-soft), transform 0.45s cubic-bezier(0.3, 1.4, 0.5, 1); transition-delay: calc(0.55s + var(--d, 0ms) * 0.5); }
-@media (prefers-reduced-motion: reduce) {
-  .cfg-box-fill .cfg-in { transition: none !important; }
-}
