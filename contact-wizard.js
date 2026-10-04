@@ -530,7 +530,11 @@
     t2.classList.toggle('is-placeholder', !l2);
     t1.style.fontFamily = tagFont().family;
     fitText(t1, r * tagFont().size, r * wf);
-    fitText(t2, r * 0.2, r * (wf - 0.2));
+    // la date ou le petit mot suit la même écriture que les prénoms
+    var tf = tagFont();
+    t2.style.fontFamily = tf.family;
+    t2.style.letterSpacing = tf.name === 'Calligraphie' ? '0' : tf.name === 'Classique' ? '0.06em' : '0.02em';
+    fitText(t2, r * 0.2 * (tf.size / 0.36) * (tf.name === 'Calligraphie' ? 1.45 : tf.name === 'Classique' ? 1.3 : 1.1), r * (wf - 0.2));
   }
   function fitText(t, base, maxW) {
     t.setAttribute('font-size', base.toFixed(1));
