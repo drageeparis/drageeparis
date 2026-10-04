@@ -121,11 +121,66 @@
     });
   }
 
-  // La boîte s'ouvre dès l'étape 3 quand le client choisit « Avec dragées »
+  /* ---------- Boîte en papier : 4 rabats ----------
+     La boîte s'ouvre dès l'étape 3 quand le client choisit « Avec dragées ».
+     Les rabats sont calculés en 3D puis projetés dans la perspective du dessin. */
+  var box = stage.querySelector('.cfg-svg[data-key="boite"]');
+  var boxFlapsG = box && box.querySelector('.cfg-flaps');
+  var boxFlaps = {};
+  if (boxFlapsG) ['left', 'right', 'back', 'front'].forEach(function(k) { boxFlaps[k] = boxFlapsG.querySelector('[data-flap="' + k + '"]'); });
+  var BOX_W = 144, BOX_H = 142, BOX_D = 100;
+  var boxP = 0, boxTarget = 0, boxFrom = 0, boxT0 = 0, boxRaf = 0, boxOrder = '';
+  function boxProj(p) { return (120 + p[0] + p[2] * 0.44).toFixed(1) + ',' + (356 - p[1] - p[2] * 0.22).toFixed(1); }
+  function boxEase(t) { t = Math.max(0, Math.min(1, t)); return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  // a, b : charnière (3D) ; d : direction du rabat ; n : normale extérieure ; inset : biseau des coins
+  function boxFlap(el, a, b, d, n, L, inset) {
+    var hx = b[0] - a[0], hy = b[1] - a[1], hz = b[2] - a[2], hl = Math.sqrt(hx * hx + hy * hy + hz * hz) || 1;
+    var u = [hx / hl * inset, hy / hl * inset, hz / hl * inset];
+    var c = [b[0] + d[0] * L - u[0], b[1] + d[1] * L - u[1], b[2] + d[2] * L - u[2]];
+    var e = [a[0] + d[0] * L + u[0], a[1] + d[1] * L + u[1], a[2] + d[2] * L + u[2]];
+    el.setAttribute('points', [a, b, c, e].map(boxProj).join(' '));
+    var outside = n[0] * 0.35 + n[1] * 0.6 - n[2] > 0; // face extérieure tournée vers nous ?
+    el.setAttribute('fill', outside ? '#F6F0E8' : '#E6DACA');
+  }
+  function drawBox(p) {
+    if (!boxFlapsG) return;
+    var W = BOX_W, H = BOX_H, D = BOX_D, R = Math.PI / 180;
+    var k1 = boxEase(p / 0.6);                    // rabats avant / arrière d'abord
+    var a1 = k1 * 125 * R, a0 = k1 * 160 * R;     // l'avant se rabat presque à plat vers nous
+    var a2 = boxEase((p - 0.35) / 0.65) * 115 * R; // puis les rabats latéraux
+    var s1 = Math.sin(a1), c1 = Math.cos(a1), s2 = Math.sin(a2), c2 = Math.cos(a2), s0 = Math.sin(a0), c0 = Math.cos(a0);
+    boxFlap(boxFlaps.front, [0, H, 0], [W, H, 0], [0, s0, c0], [0, c0, -s0], D / 2, 0);
+    boxFlap(boxFlaps.back, [W, H, D], [0, H, D], [0, s1, -c1], [0, c1, s1], D / 2, 0);
+    boxFlap(boxFlaps.left, [0, H, D], [0, H, 0], [c2, s2, 0], [-s2, c2, 0], W * 0.42, 9);
+    boxFlap(boxFlaps.right, [W, H, 0], [W, H, D], [-c2, s2, 0], [s2, c2, 0], W * 0.42, 9);
+    // ordre d'affichage : rabat arrière derrière les côtés une fois relevé
+    var order = a1 > Math.PI / 2 ? 'back,left,right,front' : 'left,right,back,front';
+    if (order !== boxOrder) {
+      order.split(',').forEach(function(k) { boxFlapsG.appendChild(boxFlaps[k]); });
+      boxOrder = order;
+    }
+  }
+  function boxStep(now) {
+    var dur = 1100 * Math.abs(boxTarget - boxFrom);
+    var t = dur ? Math.min(1, (now - boxT0) / dur) : 1;
+    boxP = boxFrom + (boxTarget - boxFrom) * t;
+    drawBox(boxP);
+    boxRaf = t < 1 ? requestAnimationFrame(boxStep) : 0;
+  }
   function setBoxOpen() {
     var open = current >= 3 && checkedValue('dragees') === 'Avec dragées';
-    svgs.forEach(function(svg) { svg.classList.toggle('is-open', open && svg.getAttribute('data-key') === 'boite'); });
+    if (!box) return;
+    box.classList.toggle('is-open', open);
+    var target = open ? 1 : 0;
+    if (target === boxTarget && (boxRaf || boxP === target)) return;
+    boxTarget = target;
+    if (boxRaf) cancelAnimationFrame(boxRaf);
+    // pas d'animation si mouvement réduit ou boîte hors champ (autre contenant affiché)
+    if (reduceMotion || box.getAttribute('data-pos') !== 'active') { boxP = target; boxRaf = 0; drawBox(boxP); return; }
+    boxFrom = boxP; boxT0 = performance.now();
+    boxRaf = requestAnimationFrame(boxStep);
   }
+  drawBox(0);
 
   colorInputs.forEach(function(c) {
     c.addEventListener('change', function() {
