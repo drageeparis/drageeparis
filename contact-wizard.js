@@ -972,6 +972,19 @@
     $(id).addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); $(id).blur(); } });
   });
 
+  /* ---------- Étape 1 : après le choix de l'occasion, on descend vers « Continuer » ---------- */
+  document.querySelectorAll('input[name="evenement"]').forEach(function(r) {
+    r.addEventListener('change', function() {
+      setTimeout(function() {
+        var rb = nextBtn.getBoundingClientRect();
+        if (rb.bottom > window.innerHeight - 16 || rb.top < 0) {
+          window.scrollTo({ top: window.pageYOffset + rb.bottom - window.innerHeight + 40, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+        nextBtn.classList.remove('is-nudge'); void nextBtn.offsetWidth; nextBtn.classList.add('is-nudge');
+      }, 150);
+    });
+  });
+
   /* ---------- Initialisation ---------- */
   updateCaption();
   paint();

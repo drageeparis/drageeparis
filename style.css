@@ -6593,3 +6593,7 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-occ-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 0; }
 .cfg-occ .wizard__card-sub { margin-top: 2px; }
 @media (max-width: 900px) { .cfg-occ-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Étape 1 : léger appel sur « Continuer » après le choix */
+@keyframes cfgNudge { 0%, 100% { transform: none; } 35% { transform: translateX(4px); } 65% { transform: translateX(-2px); } }
+#wizard-next.is-nudge { animation: cfgNudge 0.7s var(--ease-soft) 0.35s 1; }
+@media (prefers-reduced-motion: reduce) { #wizard-next.is-nudge { animation: none; } }
