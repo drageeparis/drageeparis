@@ -6549,3 +6549,28 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-swatch > input:focus-visible + .cfg-swatch__dot--ring { box-shadow: inset 0 0 0 3px var(--c), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--c), 0 0 0 3px var(--paper), 0 0 0 5px var(--caramel); }
 .cfg-swatch__dot--none { background: var(--paper); overflow: hidden; }
 .cfg-swatch__dot--none::after { content: ''; position: absolute; left: 50%; top: 4px; bottom: 4px; width: 1px; background: rgba(82, 54, 42, 0.55); transform: translateX(-50%) rotate(45deg); }
+
+/* Étiquette : styles d'écriture */
+@font-face { font-family: 'Great Vibes'; src: url('./fonts/great-vibes.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cinzel'; src: url('./fonts/cinzel.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+.cfg-fontopts { margin-bottom: 8px; }
+.cfg-fonts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.cfg-font { position: relative; cursor: pointer; min-width: 0; }
+.cfg-font > input { position: absolute; opacity: 0; width: 0; height: 0; }
+.cfg-font__card { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 10px 14px; border: 1px solid var(--ink-20); background: var(--paper); text-align: center; transition: border-color 0.25s, background 0.25s; }
+.cfg-font:hover .cfg-font__card { border-color: rgba(26, 24, 22, 0.35); }
+.cfg-font > input:checked + .cfg-font__card { border-color: var(--caramel); background: rgba(150, 95, 54, 0.06); box-shadow: inset 0 0 0 1px var(--caramel); }
+.cfg-font > input:focus-visible + .cfg-font__card { outline: 2px solid var(--caramel); outline-offset: 2px; }
+.cfg-font__sample { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 24px; line-height: 1.35; color: var(--ink); }
+.cfg-font:nth-child(2) .cfg-font__sample { font-size: 30px; }
+.cfg-font:nth-child(3) .cfg-font__sample { font-size: 18px; letter-spacing: 0.04em; }
+.cfg-font__name { font-size: 12px; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); }
+.cfg-font__sub { font-size: 11px; font-weight: 300; color: var(--ink-60); }
+@media (max-width: 768px) {
+  .cfg-fonts { grid-template-columns: minmax(0, 1fr); }
+  .cfg-font__card { flex-direction: row; justify-content: space-between; flex-wrap: wrap; padding: 12px 14px; text-align: left; }
+  .cfg-font__sample { order: 3; width: 100%; }
+}
+.cfg-font__sample { display: flex; align-items: center; justify-content: center; height: 44px; }
+.cfg-font__card { height: 100%; }
+@media (max-width: 768px) { .cfg-font__sample { justify-content: flex-start; height: 38px; } }

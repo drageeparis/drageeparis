@@ -501,6 +501,24 @@
       renderTagShapes();
     });
   });
+  // Style d'écriture du prénom : élégante, calligraphie ou classique
+  function tagFont() {
+    var el = document.querySelector('input[name="etiquette_police"]:checked');
+    return el ? { name: el.value, family: el.getAttribute('data-font'), size: parseFloat(el.getAttribute('data-size')) || 0.36 }
+              : { name: 'Élégante', family: "'Etiquette Italic', Georgia, serif", size: 0.36 };
+  }
+  document.querySelectorAll('input[name="etiquette_police"]').forEach(function(r) {
+    r.addEventListener('change', function() {
+      fitAllTags();
+      // la police se charge à la demande : on réajuste le texte une fois prête
+      if (document.fonts && document.fonts.load) document.fonts.load('20px ' + r.getAttribute('data-font').split(',')[0]).then(fitAllTags, function() {});
+    });
+  });
+  function updateFontSamples() {
+    var t = val('cfg-l1') || 'Vos prénoms';
+    Array.prototype.forEach.call(document.querySelectorAll('.cfg-font__sample'), function(s) { s.textContent = t; });
+  }
+  if ($('cfg-l1')) $('cfg-l1').addEventListener('input', updateFontSamples);
   function setTagText(g, l1, l2) {
     var r = parseFloat(g.getAttribute('data-r')), wf = tagWidthFactor();
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
@@ -510,7 +528,8 @@
     t1.style.fill = ink; t2.style.fill = ink;
     t1.classList.toggle('is-placeholder', !l1);
     t2.classList.toggle('is-placeholder', !l2);
-    fitText(t1, r * 0.36, r * wf);
+    t1.style.fontFamily = tagFont().family;
+    fitText(t1, r * tagFont().size, r * wf);
     fitText(t2, r * 0.2, r * (wf - 0.2));
   }
   function fitText(t, base, maxW) {
@@ -640,7 +659,7 @@
   }
   function etiquetteFormat() {
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? 'sans bordure' : 'bordures ' + colorLabel('etiquette_bord');
-    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
+    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, écriture ' + tagFont().name.toLowerCase() + ', fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
   /* ---------- Navigation ---------- */
