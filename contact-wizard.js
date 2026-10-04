@@ -310,6 +310,8 @@
   function inputOf(v) { return colorInputs.filter(function(c) { return c.value === v; })[0]; }
   function catOf(el) { var p = el && el.closest('.cfg-dg-panel'); return p ? p.getAttribute('data-cat') : ''; }
   function catName(cat) { var t = $('cfg-tab-' + cat); return t ? t.firstChild.textContent.trim() : ''; }
+  var DG_START = 5; // jamais moins de 5 dragées dans un contenant
+  function floorOf(cat) { return Math.min(DG_START, capOf(cat)); }
   function capOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
   // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
   function minOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
@@ -368,7 +370,7 @@
         '<output class="cfg-qty__n" aria-live="polite"></output>' +
         '<button type="button" class="cfg-qty__btn" data-act="plus" aria-label="Une de plus">+</button>';
       step.querySelector('output').textContent = n;
-      step.querySelector('[data-act="minus"]').disabled = n <= 1;
+      step.querySelector('[data-act="minus"]').disabled = n <= 1 || tot <= floorOf(cat);
       step.querySelector('[data-act="plus"]').disabled = fullQty;
       var del = document.createElement('button');
       del.type = 'button';
@@ -416,7 +418,7 @@
       return;
     }
     if (act === 'plus' && totalQty() < capOf(chosenCat())) qty[v] = (qty[v] || 1) + 1;
-    else if (act === 'minus' && qty[v] > 1) qty[v] -= 1;
+    else if (act === 'minus' && qty[v] > 1 && totalQty() > floorOf(chosenCat())) qty[v] -= 1;
     refreshDragees();
     var rows = $('cfg-qty-list').querySelectorAll('.cfg-qty__row');
     for (var i = 0; i < rows.length; i++) {
@@ -427,8 +429,18 @@
   });
   colorInputs.forEach(function(c) {
     c.addEventListener('change', function() {
-      if (c.checked) { chosenColors.push(c.value); qty[c.value] = 1; }
-      else { chosenColors = chosenColors.filter(function(v) { return v !== c.value; }); delete qty[c.value]; }
+      var cat = catOf(c);
+      if (c.checked) {
+        // première dragée : on part directement sur 5 (le minimum) ; les couleurs suivantes s'ajoutent une par une
+        qty[c.value] = chosenColors.length ? 1 : Math.min(DG_START, capOf(cat));
+        chosenColors.push(c.value);
+      } else {
+        chosenColors = chosenColors.filter(function(v) { return v !== c.value; });
+        delete qty[c.value];
+        // en retirant une couleur, le contenant ne descend pas sous 5 : la première couleur restante complète
+        var manque = floorOf(cat) - totalQty();
+        if (chosenColors.length && manque > 0) qty[chosenColors[0]] += manque;
+      }
       refreshDragees();
     });
   });
