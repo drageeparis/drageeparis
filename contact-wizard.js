@@ -1,6 +1,7 @@
-/* Configurateur « Lancer ma création » — 6 étapes
+/* Configurateur « Lancer ma création » — 7 étapes
    1. Occasion · 2. Contenant (carrousel) · 3. Dragées (par catégorie) · 4. Étiquette
-   5. Contenants & date · 6. Coordonnées (+ envoi Formspree) */
+   5. Décoration (boîte) · 6. Nombre de boîtes & date · 7. Coordonnées (+ envoi Formspree)
+   Sauvegarde automatique des choix dans le navigateur, avec « Reprendre ma création ». */
 (function() {
   var TOTAL = 7;
   var FORMSPREE_ID = 'mlgqrzed';
@@ -814,6 +815,7 @@
     backBtn.hidden = (n === 1);
     setNextLabel(labelFor(n));
     if (n === TOTAL) updateSummary();
+    if (typeof queueSave === 'function') queueSave();
     updateNextState();
     fitAllTags();
     var wrap = document.querySelector('.wizard-wrap');
@@ -919,6 +921,7 @@
   }
 
   function showSuccess() {
+    if (typeof clearSave === 'function') clearSave(); // demande envoyée : on oublie la création en cours
     body.style.display = 'none';
     nav.style.display = 'none';
     success.classList.add('visible');
@@ -1032,6 +1035,108 @@
       lab._tipT = setTimeout(function() { lab.classList.remove('is-tip'); }, 2800);
     });
   });
+
+  /* ---------- Sauvegarde automatique et « Reprendre ma création » ----------
+     Les choix sont gardés dans le navigateur du client (rien n'est envoyé) ;
+     les coordonnées personnelles de l'étape 7 ne sont pas enregistrées. */
+  var SAVE_KEY = 'dp-creation-v1';
+  var SAVE_DAYS = 60;
+  var SAVE_RADIOS = ['evenement', 'dragees', 'decoration', 'ruban', 'bouquet_couleur', 'etiquette_forme',
+    'etiquette_police', 'etiquette_fond', 'etiquette_texte', 'etiquette_bord'];
+  var SAVE_FIELDS = ['cfg-l1', 'cfg-l2', 'cfg-tag-size', 'w-nb', 'wizard-date'];
+  var saveOn = true, saveTimer = 0, restoring = false;
+  function store() { try { return window.localStorage; } catch (e) { return null; } }
+  function readSave() {
+    var ls = store(); if (!ls) return null;
+    try {
+      var s = JSON.parse(ls.getItem(SAVE_KEY) || 'null');
+      if (!s || !s.t || Date.now() - s.t > SAVE_DAYS * 864e5) return null;
+      return s;
+    } catch (e) { return null; }
+  }
+  function clearSave() { var ls = store(); if (ls) try { ls.removeItem(SAVE_KEY); } catch (e) {} }
+  function saveState() {
+    if (!saveOn || restoring) return;
+    var ls = store(); if (!ls) return;
+    var s = { t: Date.now(), step: current, idx: idx, conseil: conseil, bouquet: bouquetSize, tab: activeCat,
+      r: {}, hex: {}, f: {}, colors: chosenColors.slice(), qty: {} };
+    SAVE_RADIOS.forEach(function(n) { var v = checkedValue(n); if (v) s.r[n] = v; });
+    ['etiquette_fond', 'etiquette_texte', 'etiquette_bord'].forEach(function(n) {
+      var el = document.querySelector('input[name="' + n + '"][value="Personnalisée"]');
+      if (el && el.checked) s.hex[n] = el.getAttribute('data-hex');
+    });
+    SAVE_FIELDS.forEach(function(id) { var el = $(id); if (el && el.value) s.f[id] = el.value; });
+    chosenColors.forEach(function(v) { s.qty[v] = qty[v] || 1; });
+    if (!s.r.evenement && s.step === 1) { clearSave(); return; }
+    try { ls.setItem(SAVE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveState, 250); }
+  ['change', 'input', 'click'].forEach(function(ev) { body.addEventListener(ev, queueSave); });
+
+  function findInput(name, v) {
+    return Array.prototype.filter.call(document.querySelectorAll('input[name="' + name + '"]'), function(e) { return e.value === v; })[0];
+  }
+  function fire(el, type) { el.dispatchEvent(new Event(type, { bubbles: true })); }
+  function restoreState(s) {
+    restoring = true;
+    try {
+      if (typeof s.idx === 'number' && s.idx >= 0 && s.idx < containers.length && s.idx !== idx) show(s.idx, 0);
+      if (s.bouquet) setBouquetSize(s.bouquet);
+      SAVE_RADIOS.forEach(function(n) {
+        var v = s.r && s.r[n]; if (!v) return;
+        var el = findInput(n, v);
+        if (el && !el.checked) { el.checked = true; fire(el, 'change'); }
+      });
+      Object.keys(s.hex || {}).forEach(function(n) {
+        var picker = $(TAG_IDS[n] && TAG_IDS[n][1]);
+        if (picker && s.hex[n]) { picker.value = s.hex[n]; fire(picker, 'input'); }
+      });
+      Object.keys(s.f || {}).forEach(function(id) {
+        var el = $(id); if (!el) return;
+        el.value = s.f[id]; fire(el, 'input'); fire(el, 'change');
+      });
+      (s.colors || []).forEach(function(v) {
+        var el = findInput('couleurs', v);
+        if (el && !el.checked) { el.checked = true; fire(el, 'change'); }
+      });
+      Object.keys(s.qty || {}).forEach(function(v) { if (chosenColors.indexOf(v) !== -1) qty[v] = Math.max(1, s.qty[v] | 0); });
+      if (s.tab) selectTab(s.tab);
+      refreshDragees();
+      fitAllTags();
+      conseil = !!s.conseil;
+      var n = Math.min(Math.max(1, s.step | 0), TOTAL);
+      while (n > 1 && !stepUsable(n)) n--;
+      showStep(n, 'next');
+      if (conseil) $('cfg-name').textContent = 'Contenant à définir ensemble';
+    } finally {
+      restoring = false;
+    }
+    saveState();
+  }
+
+  // Bandeau proposé à l'arrivée quand une création est en cours
+  (function() {
+    var s = readSave();
+    if (!s) return;
+    saveOn = false; // on ne remplace pas la création en cours tant que le client n'a pas choisi
+    var occ = s.r && s.r.evenement;
+    var cont = s.conseil ? 'contenant à définir' : (containers[s.idx] ? containers[s.idx].name : '');
+    var bar = document.createElement('div');
+    bar.className = 'cfg-resume';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Création en cours');
+    bar.innerHTML = '<div class="cfg-resume__txt"><p class="cfg-resume__title">Votre création vous attend</p>' +
+      '<p class="cfg-resume__meta"></p></div>' +
+      '<div class="cfg-resume__actions"><button type="button" class="cfg-resume__go">Reprendre ma création</button>' +
+      '<button type="button" class="cfg-resume__new">Recommencer</button></div>';
+    bar.querySelector('.cfg-resume__meta').textContent = [occ, cont, 'étape ' + Math.min(s.step || 1, TOTAL) + ' / ' + TOTAL].filter(Boolean).join(' · ');
+    body.parentNode.insertBefore(bar, body);
+    function close() { saveOn = true; bar.parentNode && bar.parentNode.removeChild(bar); }
+    bar.querySelector('.cfg-resume__go').addEventListener('click', function() { close(); restoreState(s); });
+    bar.querySelector('.cfg-resume__new').addEventListener('click', function() { clearSave(); close(); });
+    // le client repart de zéro sans cliquer : dès l'étape 2, la nouvelle création est enregistrée
+    nextBtn.addEventListener('click', function() { if (bar.parentNode && current > 1) close(); });
+  })();
 
   /* ---------- Initialisation ---------- */
   updateCaption();

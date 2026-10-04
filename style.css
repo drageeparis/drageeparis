@@ -6625,3 +6625,15 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .wizard__color-item[data-tip].tip-right:hover::after, .wizard__color-item[data-tip].tip-right.is-tip::after { transform: none; }
 .wizard__color-item[data-tip]:hover::before, .wizard__color-item[data-tip].is-tip::before { transform: translate(-50%, 0) rotate(45deg); }
 @media (hover: none) { .wizard__color-item[data-tip]:hover::after, .wizard__color-item[data-tip]:hover::before { opacity: 0; } .wizard__color-item[data-tip].is-tip::after, .wizard__color-item[data-tip].is-tip::before { opacity: 1; } }
+
+/* Configurateur : bandeau « Reprendre ma création » */
+.cfg-resume { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; margin: 0 0 28px; padding: 18px 22px; border: 1px solid rgba(150, 95, 54, 0.35); background: rgba(150, 95, 54, 0.06); animation: wizardIn 0.4s var(--ease-soft); }
+.cfg-resume__title { margin: 0 0 2px; font-size: 15px; color: var(--ink); }
+.cfg-resume__meta { margin: 0; font-size: 12.5px; font-weight: 300; color: var(--ink-60); }
+.cfg-resume__actions { display: flex; align-items: center; gap: 18px; }
+.cfg-resume__go { padding: 12px 22px; border: 0; background: var(--caramel); color: #fff; font-family: var(--font); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.cfg-resume__go:hover { background: #a07a5a; }
+.cfg-resume__new { padding: 4px 0; border: 0; background: none; font-family: var(--font); font-size: 13px; font-weight: 300; color: var(--ink-60); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.cfg-resume__new:hover { color: var(--ink); }
+.cfg-resume__go:focus-visible, .cfg-resume__new:focus-visible { outline: 2px solid var(--caramel); outline-offset: 2px; }
+@media (max-width: 600px) { .cfg-resume { padding: 16px; } .cfg-resume__actions { width: 100%; justify-content: space-between; } }
