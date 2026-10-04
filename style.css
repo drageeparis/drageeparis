@@ -6398,3 +6398,12 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (prefers-reduced-motion: reduce) {
   .wizard__colors--choco .wizard__color-swatch { transition: none; }
 }
+
+/* Boîte en papier : le couvercle s'ouvre quand on choisit « Avec dragées » */
+.cfg-lid { transform-box: fill-box; transform-origin: 85% 100%; transition: transform 0.75s cubic-bezier(0.34, 1.3, 0.5, 1); }
+.cfg-svg.is-open .cfg-lid { transform: translate(14px, -58px) rotate(-5deg); transition-delay: 0.05s; }
+.cfg-box-fill .cfg-in { opacity: 0; transform: translateY(10px); transition: opacity 0.3s var(--ease-soft), transform 0.45s var(--ease-soft); }
+.cfg-svg.is-open .cfg-box-fill .cfg-in { opacity: 1; transform: none; transition-delay: var(--d, 0ms); }
+@media (prefers-reduced-motion: reduce) {
+  .cfg-lid, .cfg-box-fill .cfg-in { transition: none !important; }
+}

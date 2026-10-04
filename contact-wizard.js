@@ -111,6 +111,7 @@
       return el ? el.getAttribute('data-hex') : '';
     }).filter(Boolean);
     if (!palette.length) palette = DEFAULT_DG;
+    setBoxOpen();
     svgs.forEach(function(svg) {
       var list = svg.querySelectorAll('.dg');
       for (var i = 0; i < list.length; i++) {
@@ -118,6 +119,12 @@
         list[i].style.color = palette[(i * 2 + Math.floor(i / 3)) % palette.length];
       }
     });
+  }
+
+  // La boîte s'ouvre dès l'étape 3 quand le client choisit « Avec dragées »
+  function setBoxOpen() {
+    var open = current >= 3 && checkedValue('dragees') === 'Avec dragées';
+    svgs.forEach(function(svg) { svg.classList.toggle('is-open', open && svg.getAttribute('data-key') === 'boite'); });
   }
 
   colorInputs.forEach(function(c) {
@@ -263,6 +270,7 @@
     stage.classList.toggle('cfg-stage--choose', n === 2);
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
+    setBoxOpen();
     $('cfg-name').textContent = (n !== 2 && conseil) ? 'Contenant à définir ensemble' : containers[idx].name;
   }
 
