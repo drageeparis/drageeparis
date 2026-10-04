@@ -704,8 +704,8 @@
   function applyDeco() {
     if (!box) return;
     var d = decoChoice(), on = isBoite() && current >= 5;
-    var noeud = on && (d === 'Nœud satiné' || d === 'Nœud + fleurs');
-    var fleurs = on && (d === 'Fleurs champêtres' || d === 'Nœud + fleurs');
+    var noeud = on && (d === 'Nœud satiné' || d === 'Nœud + bouquet');
+    var fleurs = on && (d === 'Fleurs champêtres' || d === 'Nœud + bouquet');
     box.style.setProperty('--ruban', rubanHex());
     box.style.setProperty('--ruban-d', shadeHex(rubanHex(), 0.93));
     function show(cls, v) { var g = box.querySelector('.cfg-deco--' + cls); if (g) g.style.display = v ? 'inline' : 'none'; }
@@ -718,13 +718,33 @@
     var ombre = box.querySelector(':scope > ellipse');
     if (ombre) ombre.setAttribute('cy', fleurs ? 380 : 360);
     box.classList.toggle('has-fleurs', fleurs);
+    var bc = bouquetColor();
+    box.style.setProperty('--bq', bc.base); box.style.setProperty('--bq-l', bc.light); box.style.setProperty('--bq-d', bc.dark);
+    var bb = $('cfg-bouquet-couleur');
+    if (bb) bb.hidden = d !== 'Nœud + bouquet';
     var rb = $('cfg-ruban');
-    if (rb) rb.hidden = !(d === 'Nœud satiné' || d === 'Nœud + fleurs');
+    if (rb) rb.hidden = !(d === 'Nœud satiné' || d === 'Nœud + bouquet');
   }
+  // Couleurs du bouquet séché : teinte principale, claire et soutenue
+  var BOUQUET_TONS = {
+    'Beige': ['#F1E4C9', '#F7EEDC', '#D8C39A'], 'Blanc': ['#F6F2EA', '#FFFFFF', '#D6CDBD'],
+    'Rose': ['#EBC6C6', '#F5DFDF', '#C98F94'], 'Bleu': ['#C9D8E8', '#E3ECF5', '#8FA8C4'],
+    'Vert': ['#CBD6B4', '#E2E9D3', '#95A67A'], 'Orange': ['#EDC29C', '#F6DCC4', '#C98E5E'],
+    'Violet': ['#CFC0E0', '#E5DCEF', '#9580B5'], 'Rouge': ['#CC7573', '#E6ABA8', '#9C4447']
+  };
+  function bouquetColor() {
+    var t = BOUQUET_TONS[checkedValue('bouquet_couleur')] || BOUQUET_TONS.Beige;
+    return { base: t[0], light: t[1], dark: t[2] };
+  }
+  document.querySelectorAll('input[name="bouquet_couleur"]').forEach(function(r) {
+    r.addEventListener('change', function() { var l = $('label-bouquet-name'); if (l) l.textContent = r.value; applyDeco(); });
+  });
   function decoText() {
     if (!isBoite()) return '';
     var d = decoChoice();
-    return (d === 'Nœud satiné' || d === 'Nœud + fleurs') ? d + ' (ruban ' + checkedValue('ruban').toLowerCase() + ')' : d;
+    if (d === 'Nœud satiné') return d + ' (ruban ' + checkedValue('ruban').toLowerCase() + ')';
+    if (d === 'Nœud + bouquet') return d + ' (ruban ' + checkedValue('ruban').toLowerCase() + ', bouquet ' + (checkedValue('bouquet_couleur') || 'Beige').toLowerCase() + ')';
+    return d;
   }
   document.querySelectorAll('input[name="decoration"]').forEach(function(r) { r.addEventListener('change', applyDeco); });
   document.querySelectorAll('input[name="ruban"]').forEach(function(r) {
