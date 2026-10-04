@@ -755,8 +755,6 @@
     setRow('sum-qty', nbBoitesText());
     setRow('sum-prix', prixText(), true);
     setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
-    setRow('sum-message', val('wizard-message'), true);
-    setRow('sum-visuel', val('wizard-visuel-lien'), true);
     // Miniature de la création
     var art = $('cfg-summary-art');
     art.innerHTML = '';
@@ -821,8 +819,7 @@
       'Prix indicatif': prixText() || 'À définir',
       "Date de l'événement": date ? formatDate(date) + ' (' + relativeDelay(days) + ')' : 'Non précisée'
     };
-    [['Précisions', val('wizard-message')], ['Visuel (lien)', val('wizard-visuel-lien')],
-     ['Nous a connus via', checkedValue('source')],
+    [['Nous a connus via', checkedValue('source')],
      ['Produit consulté', produitParam], ['Photo du produit', imageParam]].forEach(function(o) { if (o[1]) p[o[0]] = o[1]; });
     p['_gotcha'] = val('w-company');
     return p;
