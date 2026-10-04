@@ -6642,3 +6642,7 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-price-tag { display: inline-block; align-self: flex-start; margin-top: 12px; padding: 3px 10px; border: 1px solid rgba(150, 95, 54, 0.35); font-size: 11.5px; letter-spacing: 0.04em; color: var(--caramel); }
 .cfg-boxes__detail { font-size: 12px; font-weight: 300; color: var(--ink-60); }
 .cfg-boxes__detail:empty { display: none; }
+/* Repère « 5 dragées, le choix le plus courant » */
+.cfg-dg-hint { display: flex; align-items: baseline; gap: 10px; margin: 14px 0 0; font-size: 13px; font-weight: 300; line-height: 1.5; color: var(--caramel); animation: wizardIn 0.35s var(--ease-soft); }
+.cfg-dg-hint::before { content: '✓'; flex-shrink: 0; font-size: 12px; }
+.cfg-dg-hint[hidden] { display: none; }

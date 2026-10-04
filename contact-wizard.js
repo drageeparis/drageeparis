@@ -392,6 +392,8 @@
     return !!cat && t >= minOf(cat) && t <= capOf(cat);
   }
   function updateNeed() {
+    var hint = $('cfg-dg-hint');
+    if (hint) hint.hidden = !(checkedValue('dragees') === 'Avec dragées' && totalQty() === 5);
     var need = $('cfg-dg-need');
     if (!need) return;
     var avec = checkedValue('dragees') === 'Avec dragées';
