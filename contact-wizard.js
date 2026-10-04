@@ -310,6 +310,9 @@
   function catOf(el) { var p = el && el.closest('.cfg-dg-panel'); return p ? p.getAttribute('data-cat') : ''; }
   function catName(cat) { var t = $('cfg-tab-' + cat); return t ? t.firstChild.textContent.trim() : ''; }
   function capOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
+  // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
+  function minOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
+  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); return mn < mx ? 'De ' + mn + ' à ' + mx + ' dragées par contenant.' : 'Jusqu’à ' + mx + ' dragées par contenant.'; }
   function chosenCat() { return chosenColors.length ? catOf(inputOf(chosenColors[0])) : ''; }
   function totalQty() { return chosenColors.reduce(function(n, v) { return n + (qty[v] || 0); }, 0); }
   function shortName(el) {
@@ -338,7 +341,7 @@
     var one = $('cfg-dg-onecat');
     one.hidden = !cat || cat === activeCat;
     if (cat) one.textContent = 'Une seule catégorie par contenant : retirez vos « ' + catName(cat) + ' » pour choisir dans une autre.';
-    $('cfg-dg-cap').textContent = 'Jusqu’à ' + capOf(activeCat) + ' dragées par contenant.';
+    $('cfg-dg-cap').textContent = rangeText(activeCat);
     var cnt = $('cfg-colors-count');
     if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', fullColors); }
     // liste des quantités
@@ -384,18 +387,20 @@
   function drageesComplete() {
     if (checkedValue('dragees') !== 'Avec dragées') return true;
     var cat = chosenCat();
-    return !!cat && totalQty() === capOf(cat);
+    var t = totalQty();
+    return !!cat && t >= minOf(cat) && t <= capOf(cat);
   }
   function updateNeed() {
     var need = $('cfg-dg-need');
     if (!need) return;
     var avec = checkedValue('dragees') === 'Avec dragées';
-    var cat = chosenCat(), cap = capOf(cat || activeCat), left = cap - totalQty();
+    var c = chosenCat() || activeCat, cap = capOf(c), mn = minOf(c), left = mn - totalQty();
     need.hidden = !avec || drageesComplete();
     if (need.hidden) return;
-    need.textContent = !cat
-      ? 'Choisissez ' + cap + ' dragées pour passer à l’étape suivante.'
-      : 'Il reste ' + left + ' dragée' + (left > 1 ? 's' : '') + ' à choisir : votre contenant doit en compter ' + cap + ' pour passer à l’étape suivante.';
+    var regle = mn < cap ? 'entre ' + mn + ' et ' + cap + ' dragées' : cap + ' dragées';
+    need.textContent = !chosenCat()
+      ? 'Choisissez ' + regle + ' pour passer à l’étape suivante.'
+      : 'Il reste ' + left + ' dragée' + (left > 1 ? 's' : '') + ' à choisir : votre contenant doit en compter ' + (mn < cap ? 'au moins ' + mn : cap) + ' pour passer à l’étape suivante.';
   }
   $('cfg-qty-list').addEventListener('click', function(e) {
     var btn = e.target.closest('button');
