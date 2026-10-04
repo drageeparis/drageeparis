@@ -6530,3 +6530,17 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-dg-need { display: flex; align-items: baseline; gap: 8px; margin: 14px 0 0; font-size: 13px; font-weight: 300; line-height: 1.5; color: #B0442C; }
 .cfg-dg-need::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: currentColor; transform: translateY(-1px); }
 .cfg-dg-need[hidden] { display: none; }
+
+/* Étiquette : couleurs du fond et de l'écriture */
+.cfg-tagcolors { margin-top: 4px; }
+.cfg-swatch__label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.cfg-swatch__current { font-size: 12px; letter-spacing: 0.04em; text-transform: none; color: var(--caramel); }
+.cfg-swatches { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px; }
+.cfg-swatch { position: relative; cursor: pointer; }
+.cfg-swatch > input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.cfg-swatch__dot { position: relative; display: block; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(82, 54, 42, 0.22); box-shadow: 0 0 0 0 transparent; transition: box-shadow 0.2s, transform 0.2s; }
+.cfg-swatch:hover .cfg-swatch__dot { transform: translateY(-1px); }
+.cfg-swatch > input:checked + .cfg-swatch__dot { box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--caramel); }
+.cfg-swatch > input:focus-visible + .cfg-swatch__dot { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--caramel); }
+.cfg-swatch--custom .cfg-swatch__dot { background: conic-gradient(#e5b5b0, #e8d39a, #b9d1a8, #a9c7dc, #c6b2d6, #e5b5b0); }
+.cfg-swatch__picker { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0; }

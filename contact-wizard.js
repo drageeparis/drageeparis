@@ -455,7 +455,7 @@
       var r = parseFloat(g.getAttribute('data-r'));
       Array.prototype.forEach.call(g.querySelectorAll('.cfg-tag__shape'), function(c) { c.parentNode.removeChild(c); });
       var first = g.firstChild;
-      g.insertBefore(tagShapeEl(shape, r, 0, TAG_FILL, TAG_STROKE, '1'), first);
+      g.insertBefore(tagShapeEl(shape, r, 0, tagColor('etiquette_fond', TAG_FILL), TAG_STROKE, '1'), first);
       g.insertBefore(tagShapeEl(shape, r, r * 0.0875, 'none', TAG_STROKE_IN, '.7'), first);
       g.setAttribute('transform', (g.getAttribute('data-base') + ' scale(' + k + ')').trim());
     });
@@ -464,11 +464,34 @@
     fitAllTags();
   }
   function tagWidthFactor() { var s = tagShape(); return s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
+  // Couleurs de l'étiquette et de l'écriture (pastilles + couleur libre)
+  function tagColor(name, fallback) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.getAttribute('data-hex') : fallback;
+  }
+  function tagColorName(name) { return checkedValue(name) || ''; }
+  ['etiquette_fond', 'etiquette_texte'].forEach(function(name) {
+    var label = $(name === 'etiquette_fond' ? 'label-tag-fond-name' : 'label-tag-texte-name');
+    document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
+      r.addEventListener('change', function() { if (label) label.textContent = r.value; renderTagShapes(); });
+    });
+    var picker = $(name === 'etiquette_fond' ? 'cfg-fond-custom' : 'cfg-texte-custom');
+    if (picker) picker.addEventListener('input', function() {
+      var radio = picker.closest('.cfg-swatch').querySelector('input[type="radio"]');
+      radio.setAttribute('data-hex', picker.value);
+      picker.parentNode.style.background = picker.value;
+      if (!radio.checked) { radio.checked = true; }
+      if (label) label.textContent = 'Personnalisée (' + picker.value.toUpperCase() + ')';
+      renderTagShapes();
+    });
+  });
   function setTagText(g, l1, l2) {
     var r = parseFloat(g.getAttribute('data-r')), wf = tagWidthFactor();
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
     t1.textContent = l1 || 'Vos prénoms';
     t2.textContent = l2 || 'jj.mm.aaaa';
+    var ink = tagColor('etiquette_texte', '');
+    t1.style.fill = ink; t2.style.fill = ink;
     t1.classList.toggle('is-placeholder', !l1);
     t2.classList.toggle('is-placeholder', !l2);
     fitText(t1, r * 0.36, r * wf);
@@ -595,7 +618,13 @@
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
   }
-  function etiquetteFormat() { return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %'; }
+  function colorLabel(name) {
+    var v = tagColorName(name);
+    return v === 'Personnalisée' ? 'personnalisée ' + tagColor(name, '').toUpperCase() : v.toLowerCase();
+  }
+  function etiquetteFormat() {
+    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte');
+  }
 
   /* ---------- Navigation ---------- */
   function setProgress(step) {
