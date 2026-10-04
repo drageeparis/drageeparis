@@ -193,6 +193,8 @@
       if (on && focus) t.focus();
     });
     dgPanels.forEach(function(p) { p.hidden = p.getAttribute('data-cat') !== cat; });
+    activeCat = cat;
+    refreshDragees();
   }
   function updateTabCounts() {
     dgTabs.forEach(function(t) {
@@ -212,19 +214,104 @@
     });
   });
 
+  /* Quantités : une seule catégorie par contenant, un maximum de dragées propre à chaque catégorie */
+  var qty = {}; // valeur -> nombre de dragées
+  var activeCat = 'chocolats';
+  dgTabs.forEach(function(t) { if (t.getAttribute('aria-selected') === 'true') activeCat = t.getAttribute('data-cat'); });
+  function inputOf(v) { return colorInputs.filter(function(c) { return c.value === v; })[0]; }
+  function catOf(el) { var p = el && el.closest('.cfg-dg-panel'); return p ? p.getAttribute('data-cat') : ''; }
+  function catName(cat) { var t = $('cfg-tab-' + cat); return t ? t.firstChild.textContent.trim() : ''; }
+  function capOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
+  function chosenCat() { return chosenColors.length ? catOf(inputOf(chosenColors[0])) : ''; }
+  function totalQty() { return chosenColors.reduce(function(n, v) { return n + (qty[v] || 0); }, 0); }
+  function shortName(el) {
+    var n = el.parentNode.querySelector('.wizard__color-swatch-name'), name = n ? n.textContent : el.value;
+    var sib = el.parentNode.previousElementSibling; // sous-famille (chocolat noir / au lait)
+    while (sib && !sib.classList.contains('cfg-dg-sub')) sib = sib.previousElementSibling;
+    return sib ? name + ' · ' + sib.textContent.toLowerCase() : name;
+  }
+
+  function refreshDragees() {
+    var cat = chosenCat(), cap = capOf(cat || activeCat), tot = totalQty();
+    var fullColors = chosenColors.length >= MAX_COLORS, fullQty = !!cat && tot >= cap;
+    colorInputs.forEach(function(o) {
+      o.disabled = !o.checked && (fullColors || fullQty || (!!cat && catOf(o) !== cat));
+    });
+    var lim = $('cfg-colors-limit');
+    lim.hidden = !(fullColors || fullQty);
+    lim.textContent = fullColors ? 'Trois couleurs maximum : retirez-en une pour en choisir une autre.'
+      : 'Contenant complet (' + cap + ' dragées maximum) : diminuez une quantité pour ajouter une couleur.';
+    var one = $('cfg-dg-onecat');
+    one.hidden = !cat || cat === activeCat;
+    if (cat) one.textContent = 'Une seule catégorie par contenant : retirez vos « ' + catName(cat) + ' » pour choisir dans une autre.';
+    $('cfg-dg-cap').textContent = 'Jusqu’à ' + capOf(activeCat) + ' dragées par contenant.';
+    var cnt = $('cfg-colors-count');
+    if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', fullColors); }
+    // liste des quantités
+    var box = $('cfg-qty'), list = $('cfg-qty-list'), total = $('cfg-qty-total');
+    box.hidden = !chosenColors.length;
+    total.textContent = tot + ' / ' + cap + ' dragées';
+    total.classList.toggle('is-full', fullQty);
+    list.innerHTML = '';
+    chosenColors.forEach(function(v) {
+      var el = inputOf(v), n = qty[v] || 1;
+      var li = document.createElement('li');
+      li.className = 'cfg-qty__row';
+      li.setAttribute('data-value', v);
+      var dot = document.createElement('span');
+      dot.className = 'cfg-qty__dot';
+      dot.setAttribute('style', el.parentNode.querySelector('.wizard__color-swatch-bg').getAttribute('style') || '');
+      var name = document.createElement('span');
+      name.className = 'cfg-qty__name';
+      name.textContent = shortName(el);
+      var step = document.createElement('div');
+      step.className = 'cfg-qty__step';
+      step.innerHTML = '<button type="button" class="cfg-qty__btn" data-act="minus" aria-label="Une de moins">−</button>' +
+        '<output class="cfg-qty__n" aria-live="polite"></output>' +
+        '<button type="button" class="cfg-qty__btn" data-act="plus" aria-label="Une de plus">+</button>';
+      step.querySelector('output').textContent = n;
+      step.querySelector('[data-act="minus"]').disabled = n <= 1;
+      step.querySelector('[data-act="plus"]').disabled = fullQty;
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'cfg-qty__del';
+      del.setAttribute('data-act', 'del');
+      del.setAttribute('aria-label', 'Retirer ' + shortName(el));
+      del.textContent = '×';
+      li.appendChild(dot); li.appendChild(name); li.appendChild(step); li.appendChild(del);
+      list.appendChild(li);
+    });
+    updateTabCounts();
+    paint();
+  }
+  $('cfg-qty-list').addEventListener('click', function(e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var v = btn.closest('.cfg-qty__row').getAttribute('data-value');
+    var act = btn.getAttribute('data-act');
+    if (act === 'del') {
+      var el = inputOf(v);
+      if (el) { el.checked = false; el.dispatchEvent(new Event('change')); }
+      return;
+    }
+    if (act === 'plus' && totalQty() < capOf(chosenCat())) qty[v] = (qty[v] || 1) + 1;
+    else if (act === 'minus' && qty[v] > 1) qty[v] -= 1;
+    refreshDragees();
+    var rows = $('cfg-qty-list').querySelectorAll('.cfg-qty__row');
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].getAttribute('data-value') !== v) continue;
+      var again = rows[i].querySelector('[data-act="' + act + '"]');
+      if (again && !again.disabled) again.focus();
+    }
+  });
   colorInputs.forEach(function(c) {
     c.addEventListener('change', function() {
-      if (c.checked) chosenColors.push(c.value);
-      else chosenColors = chosenColors.filter(function(v) { return v !== c.value; });
-      var full = chosenColors.length >= MAX_COLORS;
-      colorInputs.forEach(function(o) { if (!o.checked) o.disabled = full; });
-      $('cfg-colors-limit').hidden = !full;
-      var cnt = $('cfg-colors-count');
-      if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', full); }
-      updateTabCounts();
-      paint();
+      if (c.checked) { chosenColors.push(c.value); qty[c.value] = 1; }
+      else { chosenColors = chosenColors.filter(function(v) { return v !== c.value; }); delete qty[c.value]; }
+      refreshDragees();
     });
   });
+  refreshDragees();
   document.querySelectorAll('input[name="dragees"]').forEach(function(r) {
     r.addEventListener('change', function() {
       $('cfg-colors').hidden = checkedValue('dragees') !== 'Avec dragées';
@@ -314,7 +401,9 @@
   function drageesText() {
     var d = checkedValue('dragees');
     if (d !== 'Avec dragées') return d;
-    return chosenColors.length ? d + ' · ' + chosenColors.join(', ') : d + ' · couleurs à définir';
+    if (!chosenColors.length) return d + ' · couleurs à définir';
+    return d + ' · ' + chosenColors.map(function(v) { return v + ' ×' + (qty[v] || 1); }).join(', ') +
+      ' (' + totalQty() + ' dragées sur ' + capOf(chosenCat()) + ' max)';
   }
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
