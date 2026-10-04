@@ -662,6 +662,7 @@
   function totalNet() { var r = remiseFor(nbBoites()), t = totalBrut(); return r ? Math.round(t * (1 - r.taux) * 100) / 100 : t; }
   var PRIX_DRAGEE_SUP = 0.10;   // par dragée (minimum 5 par boîte)
   var NB_MAX = 5000;
+  var NB_MIN = 20;          // minimum de commande
   function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
   function avecDragees() { return checkedValue('dragees') === 'Avec dragées'; }
@@ -700,7 +701,9 @@
         : euros(PRIX_DRAGEE_SUP) + ' par dragée, en plus du prix de la boîte';
     }
     var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
-    $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(totalNet()) : '';
+    $('w-nb-total').textContent = pu && n >= NB_MIN ? 'Total : ' + euros(totalNet()) : '';
+    var nbNeed = $('w-nb-need');
+    if (nbNeed) { nbNeed.hidden = !(n > 0 && n < NB_MIN); nbNeed.textContent = 'Commande à partir de ' + NB_MIN + ' boîtes : ajoutez-en ' + (NB_MIN - n) + ' pour continuer.'; }
     if (rem) {
       if (pu && n && r) rem.textContent = 'Remise ' + Math.round(r.taux * 100) + ' % dès ' + r.des + ' boîtes : − ' + euros(totalBrut() - totalNet());
       else if (pu && n && next && n >= next.des - 20) rem.textContent = 'Plus que ' + (next.des - n) + ' boîte' + (next.des - n > 1 ? 's' : '') + ' pour bénéficier de − ' + Math.round(next.taux * 100) + ' %';
@@ -708,7 +711,7 @@
       rem.classList.toggle('is-on', !!r);
     }
     updatePriceTag();
-    $('w-nb-minus').disabled = n <= 1;
+    $('w-nb-minus').disabled = n <= NB_MIN;
     $('w-nb-plus').disabled = n >= NB_MAX;
     Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
       b.classList.toggle('is-active', parseInt(b.getAttribute('data-n'), 10) === n);
@@ -753,12 +756,12 @@
     lastTagPrice = pu;
   }
   function setNb(n) {
-    $('w-nb').value = Math.max(1, Math.min(NB_MAX, n));
+    $('w-nb').value = Math.max(NB_MIN, Math.min(NB_MAX, n));
     updatePrix();
     updateNextState();
   }
   $('w-nb').addEventListener('input', function() { updatePrix(); updateNextState(); });
-  $('w-nb').addEventListener('change', function() { if (val('w-nb')) setNb(nbBoites() || 1); });
+  $('w-nb').addEventListener('change', function() { if (val('w-nb')) setNb(nbBoites() || NB_MIN); });
   $('w-nb-minus').addEventListener('click', function() { setNb(nbBoites() - 1); });
   $('w-nb-plus').addEventListener('click', function() { setNb(nbBoites() + 1); });
   Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
@@ -888,7 +891,7 @@
     if (n === 1) return !!checkedValue('evenement');
     if (n === 3) return !!checkedValue('dragees') && drageesComplete();
     if (n === 4) return !!val('cfg-l1') && !!val('cfg-l2');
-    if (n === 6) return nbBoites() > 0;
+    if (n === 6) return nbBoites() >= NB_MIN;
     return true;
   }
   function updateNextState() { nextBtn.disabled = current < TOTAL && !validateStep(current); }

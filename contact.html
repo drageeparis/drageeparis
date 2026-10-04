@@ -560,11 +560,11 @@
           <p class="wizard__step-sub">Combien de boîtes souhaitez-vous&nbsp;? En général, une par invité. Le prix s'affiche au fur et à mesure.</p>
 
           <div class="wizard__field cfg-boxes">
-            <label class="wizard__label" for="w-nb">Nombre de boîtes</label>
+            <label class="wizard__label" for="w-nb">Nombre de boîtes <span class="wizard__optional">(minimum 20)</span></label>
             <div class="cfg-boxes__row">
               <div class="cfg-boxes__step">
                 <button type="button" class="cfg-boxes__btn" id="w-nb-minus" aria-label="Une boîte de moins">−</button>
-                <input class="cfg-boxes__input" type="number" id="w-nb" name="nombre_boites" min="1" max="5000" step="1" inputmode="numeric" placeholder="0" autocomplete="off">
+                <input class="cfg-boxes__input" type="number" id="w-nb" name="nombre_boites" min="20" max="5000" step="1" inputmode="numeric" placeholder="0" autocomplete="off">
                 <button type="button" class="cfg-boxes__btn" id="w-nb-plus" aria-label="Une boîte de plus">+</button>
               </div>
               <div class="cfg-boxes__price" aria-live="polite">
@@ -582,6 +582,7 @@
               <button type="button" class="cfg-boxes__preset" data-n="150">150</button>
               <button type="button" class="cfg-boxes__preset" data-n="200">200</button>
             </div>
+            <p class="cfg-dg-need" id="w-nb-need" aria-live="polite" hidden></p>
             <p class="wizard__hint">Prix indicatif, confirmé avec votre maquette. Remise de 10&nbsp;% dès 100&nbsp;boîtes.</p>
           </div>
 
@@ -766,6 +767,6 @@
   </footer>
 
   <script src="main.js?v=20261002f"></script>
-  <script src="contact-wizard.js?v=20261005q"></script>
+  <script src="contact-wizard.js?v=20261005r"></script>
 </body>
 </html>
