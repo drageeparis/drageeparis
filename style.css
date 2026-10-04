@@ -6649,3 +6649,10 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 #cfg-tag-fond-field[hidden] { display: none; }
 .cfg-dg-price { margin: 10px 0 0; font-size: 12.5px; font-weight: 300; color: var(--ink-60); text-align: right; }
 .cfg-dg-price[hidden] { display: none; }
+
+/* Remise dégressive (configurateur et commande) */
+.cfg-boxes__remise { font-size: 12.5px; color: var(--ink-60); }
+.cfg-boxes__remise:empty { display: none; }
+.cfg-boxes__remise.is-on { color: var(--caramel); }
+.order-line__remise { font-size: 11px; font-weight: 400; color: #965F36; }
+.order-line__remise.is-hint { font-weight: 300; color: var(--ink-60); }

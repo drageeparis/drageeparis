@@ -655,6 +655,11 @@
   var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
   var DRAGEES_INCLUSES = 5;     // dragées comprises dans le prix de la boîte
+  // Remises dégressives sur la quantité (du palier le plus haut au plus bas) : à compléter ici
+  var REMISES = [{ des: 100, taux: 0.10 }];
+  function remiseFor(n) { for (var i = 0; i < REMISES.length; i++) if (n >= REMISES[i].des) return REMISES[i]; return null; }
+  function totalBrut() { return Math.round(nbBoites() * prixUnitaire() * 100) / 100; }
+  function totalNet() { var r = remiseFor(nbBoites()), t = totalBrut(); return r ? Math.round(t * (1 - r.taux) * 100) / 100 : t; }
   var PRIX_DRAGEE_SUP = 0.10;   // par dragée au-delà des 5 incluses
   var NB_MAX = 5000;
   function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
@@ -694,7 +699,14 @@
       dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus des ' + DRAGEES_INCLUSES + ' incluses : + ' + euros(o.sup) + ' par boîte'
         : DRAGEES_INCLUSES + ' dragées incluses dans le prix de la boîte · + ' + euros(PRIX_DRAGEE_SUP) + ' par dragée supplémentaire';
     }
-    $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(n * pu) : '';
+    var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
+    $('w-nb-total').textContent = pu && n ? 'Total : ' + euros(totalNet()) : '';
+    if (rem) {
+      if (pu && n && r) rem.textContent = 'Remise ' + Math.round(r.taux * 100) + ' % dès ' + r.des + ' boîtes : − ' + euros(totalBrut() - totalNet());
+      else if (pu && n && next && n >= next.des - 20) rem.textContent = 'Plus que ' + (next.des - n) + ' boîte' + (next.des - n > 1 ? 's' : '') + ' pour bénéficier de − ' + Math.round(next.taux * 100) + ' %';
+      else rem.textContent = '';
+      rem.classList.toggle('is-on', !!r);
+    }
     $('w-nb-minus').disabled = n <= 1;
     $('w-nb-plus').disabled = n >= NB_MAX;
     Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
@@ -716,12 +728,13 @@
   updatePrix();
   function nbBoitesText() { var n = nbBoites(); return n ? n + ' boîte' + (n > 1 ? 's' : '') : ''; }
   function prixText() {
-    var n = nbBoites(), pu = prixUnitaire();
-    return n && pu ? euros(n * pu) : '';
+    var n = nbBoites(), pu = prixUnitaire(), r = remiseFor(n);
+    return n && pu ? euros(totalNet()) + (r ? ' (remise ' + Math.round(r.taux * 100) + ' % incluse)' : '') : '';
   }
   function prixDetailMail() {
     var n = nbBoites(), pu = prixUnitaire();
-    return n && pu ? euros(n * pu) + ' — ' + n + ' × ' + euros(pu) + ' (' + detailPrix() + ')' : '';
+    var r = remiseFor(n);
+    return n && pu ? euros(totalNet()) + ' — ' + n + ' × ' + euros(pu) + ' (' + detailPrix() + ')' + (r ? ', remise ' + Math.round(r.taux * 100) + ' % (− ' + euros(totalBrut() - totalNet()) + ')' : '') : '';
   }
   function quantiteText() {
     var n = nbBoites(), pu = prixUnitaire();

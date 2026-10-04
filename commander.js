@@ -103,10 +103,17 @@
   updateLead();
 
   /* ---------- calculs ---------- */
+  /* Remises dégressives sur les créations (par modèle), du palier le plus haut au plus bas : à compléter ici */
+  var REMISES_CREA = [{ des: 100, taux: 0.10 }];
+  function remiseCrea(n) { for (var i = 0; i < REMISES_CREA.length; i++) if (n >= REMISES_CREA[i].des) return REMISES_CREA[i].taux; return 0; }
   function lineData(l) {
     var p = CATALOGUE[l.ref];
     var f = findFormat(p, l.format);
-    return { prod: p, fmt: f, crea: p.kind === 'creation', total: f.price == null ? null : f.price * l.qty, grams: f.grams ? f.grams * l.qty : 0 };
+    var crea = p.kind === 'creation';
+    var brut = f.price == null ? null : f.price * l.qty;
+    var remise = crea && brut != null ? remiseCrea(l.qty) : 0; // remise dégressive sur les créations
+    var total = brut == null ? null : Math.round(brut * (1 - remise) * 100) / 100;
+    return { prod: p, fmt: f, crea: crea, brut: brut, remise: remise, total: total, grams: f.grams ? f.grams * l.qty : 0 };
   }
   function productsTotal() {
     return lines.reduce(function (s, l) { return s + (lineData(l).total || 0); }, 0);
@@ -434,6 +441,8 @@
       qty.appendChild(stepper);
       qty.appendChild(el('span', 'order-line__price', linePrice(d)));
       qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + ' la pièce' : '') : weight(d.grams) + ' au total'));
+      if (d.remise) qty.appendChild(el('span', 'order-line__remise', 'Remise ' + Math.round(d.remise * 100) + ' % dès ' + REMISES_CREA[REMISES_CREA.length - 1].des + ' pièces : − ' + euro(d.brut - d.total)));
+      else if (d.crea && d.fmt.price != null && l.qty >= REMISES_CREA[REMISES_CREA.length - 1].des - 20) qty.appendChild(el('span', 'order-line__remise is-hint', 'Plus que ' + (REMISES_CREA[REMISES_CREA.length - 1].des - l.qty) + ' pour bénéficier de − ' + Math.round(REMISES_CREA[REMISES_CREA.length - 1].taux * 100) + ' %'));
       row.appendChild(qty);
 
       if (d.crea) row.appendChild(persoBlock(l, i));
@@ -817,7 +826,7 @@
 
     var detail = lines.map(function (l) {
       var d = lineData(l);
-      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d) +
+      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d) + (d.remise ? ' (remise ' + Math.round(d.remise * 100) + ' % incluse)' : '') +
         (d.crea && wantsDragees(l) ? '\n   Dragées : ' + (dgText(l) || 'à définir') : '') +
         (d.crea ? '\n   Étiquette : ' + (persoText(l) || 'à définir') : '');
     }).join('\n');
