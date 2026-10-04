@@ -69,6 +69,7 @@
   }
   function updateCaption() {
     $('cfg-name').textContent = containers[idx].name;
+    updateSizes();
     $('cfg-desc').textContent = containers[idx].desc;
     dots.forEach(function(d, i) { d.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
   }
@@ -120,6 +121,82 @@
       }
     });
   }
+  /* ---------- Bouquet : petit (5 pétales), moyen (7), grand (10) ---------- */
+  var BOUQUET_SIZES = [
+    { id: 'petit', name: 'Petit', n: 5, span: 58, scale: 0.86 },
+    { id: 'moyen', name: 'Moyen', n: 7, span: 78, scale: 1 },
+    { id: 'grand', name: 'Grand', n: 10, span: 86, scale: 1.1 }
+  ];
+  var bouquetSize = 'moyen';
+  var petalsG = stage.querySelector('.cfg-svg[data-key="bouquet"] .cfg-petals');
+  var DG_PETAL = ['#FAF9F7', '#F4F2EE', '#E9E6E1'];
+  function sizeOf(id) { return BOUQUET_SIZES.filter(function(b) { return b.id === id; })[0] || BOUQUET_SIZES[1]; }
+  function petalAngles(b) {
+    var a = [];
+    for (var k = 0; k < b.n; k++) a.push(-b.span + k * (2 * b.span) / (b.n - 1));
+    return a.sort(function(x, y) { return Math.abs(y) - Math.abs(x); }); // pétales du bord d'abord, le centre devant
+  }
+  function buildPetals() {
+    if (!petalsG) return;
+    var b = sizeOf(bouquetSize);
+    petalsG.innerHTML = petalAngles(b).map(function(ang, k) {
+      return '<g transform="translate(200 226) rotate(' + ang.toFixed(1) + ') scale(' + b.scale + ')">' +
+        '<use href="#cfg-dg" class="dg dg--in" style="color:' + DG_PETAL[k % 3] + '" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/>' +
+        '<path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/>' +
+        '<path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g>';
+    }).join('');
+  }
+  function miniFan(b) {
+    var paths = petalAngles(b).map(function(ang) {
+      return '<path d="M0,0 C-3.2,-3.6 -3.4,-10 0,-13 C3.4,-10 3.2,-3.6 0,0 Z" transform="rotate(' + ang.toFixed(1) + ')"/>';
+    }).join('');
+    return '<svg class="cfg-size-opt__fan" viewBox="-17 -16 34 22" aria-hidden="true"><g transform="translate(0 4)" fill="var(--paper)" stroke="currentColor" stroke-width=".8">' + paths + '</g></svg>';
+  }
+  var sizesBox = $('cfg-sizes');
+  function renderSizes() {
+    if (!sizesBox) return;
+    sizesBox.innerHTML = '';
+    BOUQUET_SIZES.forEach(function(b) {
+      var on = b.id === bouquetSize;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cfg-size-opt';
+      btn.setAttribute('role', 'radio');
+      btn.setAttribute('aria-checked', on ? 'true' : 'false');
+      btn.tabIndex = on ? 0 : -1;
+      btn.setAttribute('data-size', b.id);
+      btn.innerHTML = miniFan(b) + '<span class="cfg-size-opt__name">' + b.name + '</span><span class="cfg-size-opt__sub">' + b.n + ' pétales</span>';
+      btn.addEventListener('click', function() { setBouquetSize(b.id, true); });
+      btn.addEventListener('keydown', function(e) {
+        var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var i = BOUQUET_SIZES.indexOf(sizeOf(bouquetSize));
+        setBouquetSize(BOUQUET_SIZES[(i + d + BOUQUET_SIZES.length) % BOUQUET_SIZES.length].id, true);
+      });
+      sizesBox.appendChild(btn);
+    });
+  }
+  function setBouquetSize(id, focus) {
+    bouquetSize = id;
+    buildPetals();
+    renderSizes();
+    paint();
+    if (focus) { var f = sizesBox.querySelector('[data-size="' + id + '"]'); if (f) f.focus(); }
+    if (typeof updatePrix === 'function') updatePrix();
+  }
+  function updateSizes() {
+    if (sizesBox) sizesBox.hidden = conseil || containers[idx].key !== 'bouquet';
+  }
+  function bouquetText() { var b = sizeOf(bouquetSize); return b.name + ' bouquet (' + b.n + ' pétales)'; }
+  function containerLabel() {
+    return containers[idx].key === 'bouquet' ? containers[idx].name + ' · ' + bouquetText() : containers[idx].name;
+  }
+  buildPetals();
+  renderSizes();
+  updateSizes();
+
+
 
   /* ---------- Boîte en papier : 4 rabats ----------
      La boîte s'ouvre dès l'étape 3 quand le client choisit « Avec dragées ».
@@ -482,7 +559,7 @@
     return n + ' boîte' + (n > 1 ? 's' : '') + (pu ? ' × ' + euros(pu) + ' = ' + euros(n * pu) + ' (prix indicatif)' : '');
   }
 
-  function contenantText() { return conseil ? 'À définir ensemble (conseil demandé)' : containers[idx].name; }
+  function contenantText() { return conseil ? 'À définir ensemble (conseil demandé)' : containerLabel(); }
   function drageesText() {
     var d = checkedValue('dragees');
     if (d !== 'Avec dragées') return d;
@@ -534,6 +611,7 @@
     setBoxOpen();
     updatePrix();
     $('cfg-name').textContent = (n !== 2 && conseil) ? 'Contenant à définir ensemble' : containers[idx].name;
+    updateSizes();
   }
 
   function showStep(n, direction) {
@@ -634,7 +712,7 @@
     var date = readDate(), days = date ? daysUntil(date) : null;
     var urgent = days !== null && days >= 0 && days < 28;
     var p = {
-      'subject': 'Création sur mesure · ' + occasion + ' · ' + (conseil ? 'contenant à définir' : containers[idx].name) + ' · ' +
+      'subject': 'Création sur mesure · ' + occasion + ' · ' + (conseil ? 'contenant à définir' : containerLabel()) + ' · ' +
         nbBoites() + ' boîtes · ' + (date ? formatDate(date) : 'date non fixée') + ' · ' + prenom + ' ' + nom + (urgent ? ' · DÉLAI COURT' : ''),
       'email': email,
       '_replyto': email,

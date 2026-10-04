@@ -6510,3 +6510,18 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (max-width: 768px) {
   .order-dg .wizard__colors--choco { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* Configurateur : taille du bouquet */
+.cfg-sizes { display: flex; justify-content: center; gap: 10px; margin: 4px auto 14px; }
+.cfg-sizes[hidden] { display: none; }
+.cfg-size-opt { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 92px; padding: 10px 14px 9px; border: 1px solid var(--ink-20); background: var(--paper); cursor: pointer; font-family: var(--font); color: var(--ink-60); transition: border-color 0.25s, background 0.25s, color 0.25s; }
+.cfg-size-opt:hover { border-color: rgba(26, 24, 22, 0.35); color: var(--ink); }
+.cfg-size-opt[aria-checked="true"] { border-color: var(--caramel); background: rgba(150, 95, 54, 0.06); box-shadow: inset 0 0 0 1px var(--caramel); color: var(--ink); }
+.cfg-size-opt:focus-visible { outline: 2px solid var(--caramel); outline-offset: 2px; }
+.cfg-size-opt__fan { width: 40px; height: 26px; color: var(--caramel); margin-bottom: 2px; }
+.cfg-size-opt__name { font-size: 13px; font-weight: 400; letter-spacing: 0.02em; }
+.cfg-size-opt__sub { font-size: 11px; font-weight: 300; letter-spacing: 0.04em; }
+@media (max-width: 768px) {
+  .cfg-sizes { gap: 6px; }
+  .cfg-size-opt { min-width: 0; flex: 1; padding: 8px 6px; }
+}
