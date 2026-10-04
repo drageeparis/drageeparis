@@ -6687,3 +6687,17 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-palier__btn { flex: none; padding: 9px 14px; font: inherit; font-size: 12.5px; letter-spacing: .02em; color: var(--color-primary-button-text); background: var(--color-primary-button-background); border: 1px solid var(--color-primary-button-border); cursor: pointer; transition: background .2s, color .2s; }
 .cfg-palier__btn:hover { color: var(--color-primary-button-hover-text); background: var(--color-primary-button-hover-background); }
 @media (max-width: 600px) { .cfg-palier { flex-direction: column; align-items: stretch; } .cfg-palier__btn { width: 100%; } }
+
+/* Fin de parcours : réassurance et suite */
+.wizard__reassure { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 14px 0 0; font-size: 12.5px; font-weight: 300; color: var(--ink-60); }
+.wizard__reassure[hidden] { display: none; }
+.wizard__reassure span { display: inline-flex; align-items: center; gap: 6px; }
+.wizard__reassure span::before { content: ''; width: 9px; height: 5px; border-left: 1.3px solid var(--caramel); border-bottom: 1.3px solid var(--caramel); transform: rotate(-45deg) translateY(-2px); }
+.wizard__next-steps { list-style: none; counter-reset: ns; max-width: 440px; margin: 0 auto 28px; padding: 0; text-align: left; }
+.wizard__next-steps li { counter-increment: ns; position: relative; padding: 0 0 18px 46px; }
+.wizard__next-steps li::before { content: counter(ns); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border: 1px solid var(--caramel); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--caramel); }
+.wizard__next-steps li:not(:last-child)::after { content: ''; position: absolute; left: 15px; top: 32px; bottom: 4px; width: 1px; background: rgba(150, 95, 54, 0.25); }
+.wizard__next-steps strong { display: block; font-size: 14px; font-weight: 500; color: var(--color-foreground); margin-bottom: 2px; }
+.wizard__next-steps span { font-size: 13px; font-weight: 300; line-height: 1.6; color: var(--ink-60); }
+.wizard__success p.wizard__success-note { font-size: 12.5px; margin-bottom: 28px; }
+.wizard__success-note a { color: inherit; }

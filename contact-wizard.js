@@ -897,7 +897,7 @@
   }
   function labelFor(n) {
     if (n === 2) return 'Choisir ce contenant';
-    if (n === TOTAL) return 'Recevoir ma proposition';
+    if (n === TOTAL) return 'Recevoir ma maquette gratuite';
     return 'Continuer';
   }
   function validateStep(n) {
@@ -942,6 +942,7 @@
     backBtn.hidden = (n === 1);
     setNextLabel(labelFor(n));
     if (n === TOTAL) updateSummary();
+    var reassure = $('wizard-reassure'); if (reassure) reassure.hidden = n !== TOTAL;
     if (typeof queueSave === 'function') queueSave();
     updateNextState();
     fitAllTags();
@@ -1051,6 +1052,9 @@
     if (typeof clearSave === 'function') clearSave(); // demande envoyée : on oublie la création en cours
     body.style.display = 'none';
     nav.style.display = 'none';
+    var em = val('w-email'), emEl = $('wizard-success-email');
+    if (emEl) emEl.textContent = em ? ' à ' + em : '';
+    var rs = $('wizard-reassure'); if (rs) rs.hidden = true;
     success.classList.add('visible');
     setProgress(TOTAL);
   }

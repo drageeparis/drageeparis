@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lancer ma création · Dragée Paris</title>
   <meta name="description" content="Lancez votre création personnalisée étape par étape, événement, quantité, date, couleurs et coordonnées. Réponse sous 48h.">
-  <link rel="stylesheet" href="style.css?v=20261005o">
+  <link rel="stylesheet" href="style.css?v=20261005p">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -716,6 +716,10 @@
         </button>
       </div>
 
+      <p class="wizard__reassure" id="wizard-reassure" hidden>
+        <span>Gratuit et sans engagement</span><span>Aucun paiement à cette étape</span><span>Votre maquette sous 48&nbsp;h</span>
+      </p>
+
       <!-- Message d'erreur envoi -->
       <p id="wizard-send-error" hidden style="font-size:13px;color:#c0392b;text-align:center;margin-top:8px;font-family:var(--font);font-weight:300;">
         Une erreur est survenue. Réessayez ou contactez-nous à <a href="mailto:drageeparis@gmail.com" style="color:inherit">drageeparis@gmail.com</a>.
@@ -730,7 +734,13 @@
           </svg>
         </div>
         <h2>Votre demande<br>a bien été envoyée !</h2>
-        <p>Merci pour votre confiance. Nous avons reçu votre projet et vous recontacterons dans les 48 heures ouvrées avec une proposition sur mesure.</p>
+        <p>Merci pour votre confiance. Votre projet est entre nos mains&nbsp;; voici la suite.</p>
+        <ol class="wizard__next-steps">
+          <li><strong>Votre maquette sous 48&nbsp;h ouvrées</strong><span>Nous vous l'envoyons par e-mail<span id="wizard-success-email"></span>, avec le prix définitif.</span></li>
+          <li><strong>Vous l'ajustez librement</strong><span>Texte, couleurs, dragées&nbsp;: nous la modifions jusqu'à ce qu'elle vous plaise.</span></li>
+          <li><strong>Vous validez, nous préparons</strong><span>Rien à payer à ce stade&nbsp;: la commande n'est lancée qu'après votre accord.</span></li>
+        </ol>
+        <p class="wizard__success-note">Pensez à vérifier vos courriers indésirables. Une question&nbsp;? <a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a> · <a href="tel:+33608671443">06&nbsp;08&nbsp;67&nbsp;14&nbsp;43</a></p>
         <a href="/" class="btn btn--outline" style="display:inline-flex;">Retour à l'accueil <span class="btn-arrow">→</span></a>
       </div>
 
@@ -768,6 +778,6 @@
   </footer>
 
   <script src="main.js?v=20261002f"></script>
-  <script src="contact-wizard.js?v=20261005s"></script>
+  <script src="contact-wizard.js?v=20261005t"></script>
 </body>
 </html>
