@@ -1,5 +1,5 @@
 /* Configurateur « Lancer ma création » — 6 étapes
-   1. Occasion · 2. Contenant (carrousel) · 3. Dragées et couleurs · 4. Étiquette
+   1. Occasion · 2. Contenant (carrousel) · 3. Dragées (par catégorie) · 4. Étiquette
    5. Contenants & date · 6. Coordonnées (+ envoi Formspree) */
 (function() {
   var TOTAL = 6;
@@ -182,6 +182,36 @@
   }
   drawBox(0);
 
+  /* Catégories de dragées (onglets) : les choix sont conservés d'un onglet à l'autre */
+  var dgTabs = Array.prototype.slice.call(document.querySelectorAll('.cfg-dg-tab'));
+  var dgPanels = Array.prototype.slice.call(document.querySelectorAll('.cfg-dg-panel'));
+  function selectTab(cat, focus) {
+    dgTabs.forEach(function(t) {
+      var on = t.getAttribute('data-cat') === cat;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    dgPanels.forEach(function(p) { p.hidden = p.getAttribute('data-cat') !== cat; });
+  }
+  function updateTabCounts() {
+    dgTabs.forEach(function(t) {
+      var panel = $('cfg-panel-' + t.getAttribute('data-cat'));
+      var n = panel ? panel.querySelectorAll('input[name="couleurs"]:checked').length : 0;
+      t.querySelector('.cfg-dg-tab__n').textContent = n ? String(n) : '';
+    });
+  }
+  dgTabs.forEach(function(t, i) {
+    t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+    t.addEventListener('click', function() { selectTab(t.getAttribute('data-cat')); });
+    t.addEventListener('keydown', function(e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      var j = (i + (e.key === 'ArrowRight' ? 1 : -1) + dgTabs.length) % dgTabs.length;
+      selectTab(dgTabs[j].getAttribute('data-cat'), true);
+    });
+  });
+
   colorInputs.forEach(function(c) {
     c.addEventListener('change', function() {
       if (c.checked) chosenColors.push(c.value);
@@ -191,6 +221,7 @@
       $('cfg-colors-limit').hidden = !full;
       var cnt = $('cfg-colors-count');
       if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', full); }
+      updateTabCounts();
       paint();
     });
   });
