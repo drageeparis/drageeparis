@@ -434,14 +434,15 @@
 
           <div class="wizard__row">
             <div class="wizard__field">
-              <label class="wizard__label" for="cfg-l1">Prénoms ou nom <span class="wizard__optional">(facultatif)</span></label>
-              <input class="wizard__input" type="text" id="cfg-l1" maxlength="28" autocomplete="off" placeholder="Ex. : Camille &amp; Louis">
+              <label class="wizard__label" for="cfg-l1">Prénoms ou nom <span class="req">*</span></label>
+              <input class="wizard__input" type="text" id="cfg-l1" maxlength="28" autocomplete="off" required aria-required="true" placeholder="Ex. : Camille &amp; Louis">
             </div>
             <div class="wizard__field">
-              <label class="wizard__label" for="cfg-l2">Date ou petit mot <span class="wizard__optional">(facultatif)</span></label>
-              <input class="wizard__input" type="text" id="cfg-l2" maxlength="24" autocomplete="off" placeholder="Ex. : 14.06.2027">
+              <label class="wizard__label" for="cfg-l2">Date ou petit mot <span class="req">*</span></label>
+              <input class="wizard__input" type="text" id="cfg-l2" maxlength="24" autocomplete="off" required aria-required="true" placeholder="Ex. : 14.06.2027">
             </div>
           </div>
+          <p class="cfg-dg-need" id="cfg-tag-need" aria-live="polite" hidden></p>
         </div>
 
         <!-- Étape 5 : Décoration de la boîte (boîte en papier uniquement) -->
@@ -708,6 +709,6 @@
   </footer>
 
   <script src="main.js?v=20261002f"></script>
-  <script src="contact-wizard.js?v=20261004t"></script>
+  <script src="contact-wizard.js?v=20261004u"></script>
 </body>
 </html>

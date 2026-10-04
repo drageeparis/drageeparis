@@ -547,6 +547,18 @@
     tags.forEach(function(g) { setTagText(g, l1, l2); });
   }
   ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', fitAllTags); });
+  // Prénoms et date obligatoires pour passer à l'étape suivante
+  function updateTagNeed() {
+    var need = $('cfg-tag-need'); if (!need) return;
+    var a = !!val('cfg-l1'), b = !!val('cfg-l2');
+    need.hidden = a && b;
+    need.textContent = !a && !b ? 'Indiquez les prénoms (ou le nom) et la date (ou un petit mot) pour passer à l’étape suivante.'
+      : !a ? 'Indiquez les prénoms ou le nom pour passer à l’étape suivante.'
+      : 'Indiquez la date ou un petit mot pour passer à l’étape suivante.';
+    if (typeof updateNextState === 'function') updateNextState();
+  }
+  ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', updateTagNeed); });
+  updateTagNeed();
   document.querySelectorAll('input[name="etiquette_forme"]').forEach(function(r) { r.addEventListener('change', renderTagShapes); });
   if ($('cfg-tag-size')) $('cfg-tag-size').addEventListener('input', renderTagShapes);
   renderTagShapes();
@@ -727,6 +739,7 @@
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
     if (n === 3) return !!checkedValue('dragees') && drageesComplete();
+    if (n === 4) return !!val('cfg-l1') && !!val('cfg-l2');
     if (n === 6) return nbBoites() > 0;
     return true;
   }
