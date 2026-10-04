@@ -127,3 +127,11 @@ Exports de la marque (symbole seul + lockup horizontal, en noir/blanc, avec/sans
 
 - **Coordonnées / réseaux sociaux** : présents dans le footer (dupliqué sur chaque page) et dans le schema `LocalBusiness` de `index.html`
 - **SIRET / infos légales** : `mentions-legales.html`
+
+## Version anglaise (`en/`)
+
+- Chaque page existe en anglais dans `en/` (même nom de fichier). Les ressources (CSS, JS, images) restent à la racine ; les pages anglaises y pointent avec `../`.
+- Le choix FR / EN (en-tête et menu) et la suggestion « View in English » pour les navigateurs non francophones sont gérés par `main.js` (section 17).
+- Les scripts détectent la langue avec `<html lang="en">`. Les demandes et commandes envoyées à l'atelier restent rédigées en français, avec un champ « Langue du client : Anglais ».
+- Nouvelle page ou page française refaite : `python3 outils/build-en.py page.html` crée la copie anglaise (chemins corrigés, hreflang), puis traduire le texte en suivant `outils/glossaire-en.md` et `outils/consignes-traduction-en.md`. Attention : la commande écrase la traduction existante.
+- Après une modification de fiche produit (FR ou EN) : `python3 outils/catalogue-commande.py` (le catalogue contient aussi les noms anglais).

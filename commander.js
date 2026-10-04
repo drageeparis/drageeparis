@@ -32,7 +32,19 @@
   var CATALOGUE = window.DP_CATALOGUE || {};
   var FAMILLES = window.DP_FAMILLES || [];
 
-  var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  /* Version anglaise (/en/) : textes traduits ; la commande envoyée à l'atelier reste en français */
+  var EN = document.documentElement.lang === 'en';
+  var IN_EN_DIR = EN; /* les images du catalogue sont à la racine du site */
+  function T(fr, en) { return EN ? en : fr; }
+  function pn(p) { return EN && p.name_en ? p.name_en : p.name; }
+  function pf(p) { return EN && p.family_en ? p.family_en : p.family; }
+  function pd(p) { return EN && p.detail_en ? p.detail_en : p.detail; }
+  function fl(f) { return EN && f.label_en ? f.label_en : f.label; }
+  function famName(f) { return EN && f.name_en ? f.name_en : f.name; }
+  function img(src) { return (IN_EN_DIR && !/^(\/|https?:)/.test(src) ? '../' : '') + src; }
+
+  var MOIS_FR = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  var MOIS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   /* ---------- utilitaires ---------- */
   function el(tag, cls, text) {
@@ -42,17 +54,18 @@
     return n;
   }
   function euro(v) {
-    var s = (Math.round(v * 100) / 100).toFixed(2).replace('.', ',');
-    return s.replace(/,00$/, '') + ' €';
+    var s = (Math.round(v * 100) / 100).toFixed(2);
+    if (EN) return '€' + s.replace(/\.00$/, '');
+    return s.replace('.', ',').replace(/,00$/, '') + ' €';
   }
   function weight(g) {
-    return g >= 1000 ? String(g / 1000).replace('.', ',') + ' kg' : g + ' g';
+    return g >= 1000 ? (EN ? String(g / 1000) : String(g / 1000).replace('.', ',')) + ' kg' : g + ' g';
   }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function isoDate(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
   function longDate(iso) {
     var p = iso.split('-');
-    return parseInt(p[2], 10) + ' ' + MOIS[parseInt(p[1], 10) - 1] + ' ' + p[0];
+    return parseInt(p[2], 10) + ' ' + (EN ? MOIS_EN : MOIS_FR)[parseInt(p[1], 10) - 1] + ' ' + p[0];
   }
   function findFormat(prod, id) {
     for (var i = 0; i < prod.formats.length; i++) if (prod.formats[i].id === id) return prod.formats[i];
@@ -78,11 +91,11 @@
   var dateInput = document.getElementById('o-date');
 
   var crumb = document.getElementById('crumb-family');
-  crumb.textContent = firstProd.family;
+  crumb.textContent = pf(firstProd);
   crumb.setAttribute('href', firstProd.familyUrl);
   if (firstProd.kind === 'creation') {
     var root = document.getElementById('crumb-root');
-    root.textContent = 'Les créations';
+    root.textContent = T('Les créations', 'Our creations');
     root.setAttribute('href', 'creations.html');
   }
 
@@ -97,7 +110,9 @@
     d.setDate(d.getDate() + (crea ? CREA_LEAD_DAYS : LEAD_DAYS));
     minIso = isoDate(d);
     dateInput.setAttribute('min', minIso);
-    document.getElementById('o-date-help').textContent = 'Délai de préparation : ' + (crea ? CREA_LEAD_LABEL : LEAD_LABEL) + '. Dates possibles à partir du ' + longDate(minIso) + '.';
+    document.getElementById('o-date-help').textContent = EN
+      ? 'Preparation time: ' + (crea ? '4 to 6 weeks' : '5 to 10 days') + '. Dates available from ' + longDate(minIso) + '.'
+      : 'Délai de préparation : ' + (crea ? CREA_LEAD_LABEL : LEAD_LABEL) + '. Dates possibles à partir du ' + longDate(minIso) + '.';
     document.getElementById('err-date-min').textContent = longDate(minIso);
   }
   updateLead();
@@ -139,16 +154,16 @@
     var f = shippingFee();
     return productsTotal() + (typeof f === 'number' ? f : 0);
   }
-  function totalLabel() { return euro(grandTotal()) + (hasDevis() ? ' + devis' : ''); }
-  function feeLabel(f) { return f === 'tbd' ? 'Confirmés par e-mail' : f === 0 ? 'Offerts' : euro(f); }
-  function pieces(n) { return n + ' pièce' + (n > 1 ? 's' : ''); }
+  function totalLabel() { return euro(grandTotal()) + (hasDevis() ? T(' + devis', ' + quotation') : ''); }
+  function feeLabel(f) { return f === 'tbd' ? T('Confirmés par e-mail', 'Confirmed by email') : f === 0 ? T('Offerts', 'Free') : euro(f); }
+  function pieces(n) { return n + T(' pièce', ' piece') + (n > 1 ? 's' : ''); }
   function lineLabel(l) {
     var d = lineData(l);
-    if (d.crea) return (d.fmt.price == null ? '' : d.fmt.label + ' × ') + pieces(l.qty);
-    return d.fmt.label + (l.qty > 1 ? ' × ' + l.qty + ' (' + weight(d.grams) + ')' : '');
+    if (d.crea) return (d.fmt.price == null ? '' : fl(d.fmt) + ' × ') + pieces(l.qty);
+    return fl(d.fmt) + (l.qty > 1 ? ' × ' + l.qty + ' (' + weight(d.grams) + ')' : '');
   }
-  function linePrice(d) { return d.total == null ? 'Sur devis' : euro(d.total); }
-  function chipLabel(f) { return f.price == null ? f.label : f.label + ' · ' + (f.from ? 'dès ' : '') + euro(f.price); }
+  function linePrice(d) { return d.total == null ? T('Sur devis', 'On quotation') : euro(d.total); }
+  function chipLabel(f) { return f.price == null ? fl(f) : fl(f) + ' · ' + (f.from ? T('dès ', 'from ') : '') + euro(f.price); }
 
   /* ---------- personnalisation des créations : un ou deux prénoms + une date ou un nom ---------- */
   function persoOf(l) {
@@ -179,11 +194,11 @@
   function persoBlock(l, i) {
     var p = persoOf(l);
     var box = el('div', 'order-perso');
-    box.appendChild(el('p', 'order-perso__title', 'Texte de l\u2019étiquette'));
+    box.appendChild(el('p', 'order-perso__title', T('Texte de l\u2019étiquette', 'Label text')));
     var modes = el('div', 'order-perso__modes');
     modes.setAttribute('role', 'group');
-    modes.setAttribute('aria-label', 'Nombre de prénoms');
-    [['un', 'Un prénom ou nom'], ['deux', 'Deux prénoms']].forEach(function (m) {
+    modes.setAttribute('aria-label', T('Nombre de prénoms', 'Number of names'));
+    [['un', T('Un prénom ou nom', 'One name')], ['deux', T('Deux prénoms', 'Two names')]].forEach(function (m) {
       var b = el('button', 'order-chip order-chip--sm', m[1]);
       b.type = 'button';
       b.setAttribute('aria-pressed', p.mode === m[0] ? 'true' : 'false');
@@ -198,13 +213,13 @@
     });
     box.appendChild(modes);
     var grid = el('div', 'order-perso__grid' + (p.mode === 'deux' ? ' is-deux' : ''));
-    grid.appendChild(persoField(p.mode === 'deux' ? 'Premier prénom' : 'Prénom ou nom', p.n1, p.mode === 'deux' ? 'Ex. : Camille' : 'Ex. : Camille ou Famille Martin', 24, function (v) { p.n1 = v; }, 'perso-' + i + '-n1'));
+    grid.appendChild(persoField(p.mode === 'deux' ? T('Premier prénom', 'First name') : T('Prénom ou nom', 'Name'), p.n1, p.mode === 'deux' ? T('Ex. : Camille', 'e.g. Camille') : T('Ex. : Camille ou Famille Martin', 'e.g. Camille or The Martin Family'), 24, function (v) { p.n1 = v; }, 'perso-' + i + '-n1'));
     if (p.mode === 'deux') {
       grid.appendChild(el('span', 'order-perso__amp', '&'));
-      grid.appendChild(persoField('Second prénom', p.n2, 'Ex. : Louis', 24, function (v) { p.n2 = v; }, 'perso-' + i + '-n2'));
+      grid.appendChild(persoField(T('Second prénom', 'Second name'), p.n2, T('Ex. : Louis', 'e.g. Louis'), 24, function (v) { p.n2 = v; }, 'perso-' + i + '-n2'));
     }
     box.appendChild(grid);
-    box.appendChild(persoField('Date ou nom (facultatif)', p.extra, 'Ex. : 14.06.2027 ou Baptême de Léa', 32, function (v) { p.extra = v; }, 'perso-' + i + '-extra'));
+    box.appendChild(persoField(T('Date ou nom (facultatif)', 'Date or name (optional)'), p.extra, T('Ex. : 14.06.2027 ou Baptême de Léa', 'e.g. 14.06.2027 or Léa’s Christening'), 32, function (v) { p.extra = v; }, 'perso-' + i + '-extra'));
     return box;
   }
 
@@ -212,29 +227,37 @@
   var DG_MAX = 10;        /* dragées au total par pièce */
   var DG_MAX_COLORS = 3;  /* couleurs différentes au maximum */
   var DG_CATS = [
-    { id: 'chocolats', name: 'Chocolats' },
-    { id: 'avola', name: 'Amandes Avola' },
-    { id: 'traditionnelles', name: 'Amandes traditionnelles' }
+    { id: 'chocolats', name: T('Chocolats', 'Chocolate dragées') },
+    { id: 'avola', name: T('Amandes Avola', 'Avola almonds') },
+    { id: 'traditionnelles', name: T('Amandes traditionnelles', 'Traditional almonds') }
   ];
   var DG_PREFIX = /^(Dragées Chocolat |Prali Amande Chocolat Noir |Prali Amande Chocolat au Lait |Dragées Avola |Dragées Amande Traditionnelle )/;
+  var DG_PREFIX_EN = /^Prali Amande (Milk|Dark) Chocolate | Chocolate Dragées$| Avola Dragées$| Traditional Almond Dragées$/g;
+  function isMilk(p) { return /au Lait/.test(p.name); }
   function dgShort(ref) {
-    var n = CATALOGUE[ref].name.replace(DG_PREFIX, '');
+    var p = CATALOGUE[ref];
+    if (EN && p.name_en) { var e = p.name_en.replace(DG_PREFIX_EN, '').trim(); return e.charAt(0).toUpperCase() + e.slice(1).toLowerCase(); }
+    var n = p.name.replace(DG_PREFIX, '');
     if (n === 'Nature') n = 'Chocolat nature';
     return n.charAt(0) + n.slice(1).toLowerCase();
   }
   function dgSub(ref) {
     var p = CATALOGUE[ref];
     if (p.familyId !== 'gourmandes') return '';
-    return /au Lait/.test(p.name) ? 'Chocolat au lait' : 'Chocolat noir 70 %';
+    return isMilk(p) ? T('Chocolat au lait', 'Milk chocolate') : T('Chocolat noir 70 %', '70% dark chocolate');
   }
   function dgLabel(ref) {
     var p = CATALOGUE[ref], sub = dgSub(ref);
+    if (EN) {
+      var short = dgShort(ref);
+      return { chocolats: short + ' chocolate', gourmandes: 'Prali Amande ' + (isMilk(p) ? 'milk' : 'dark') + ' ' + short.toLowerCase(), avola: 'Avola ' + short, traditionnelles: 'Traditional ' + short }[p.familyId] || short;
+    }
     var fam = { chocolats: 'Chocolat', gourmandes: 'Prali amande ' + sub.replace(' 70 %', '').toLowerCase(), avola: 'Avola', traditionnelles: 'Amande traditionnelle' }[p.familyId] || '';
     return (fam + ' ' + dgShort(ref).toLowerCase()).trim();
   }
   function dgRefs(cat) {
     var refs = Object.keys(CATALOGUE).filter(function (r) { return CATALOGUE[r].kind === 'dragee' && CATALOGUE[r].familyId === cat; });
-    if (cat === 'gourmandes') refs.sort(function (a, b) { return (dgSub(a) === 'Chocolat au lait') - (dgSub(b) === 'Chocolat au lait'); });
+    if (cat === 'gourmandes') refs.sort(function (a, b) { return isMilk(CATALOGUE[a]) - isMilk(CATALOGUE[b]); });
     return refs;
   }
   function wantsDragees(l) { return !/^sans/i.test(l.format || ''); }
@@ -259,13 +282,13 @@
     var fullColors = g.order.length >= DG_MAX_COLORS, fullQty = tot >= DG_MAX;
     var box = el('div', 'order-perso order-dg');
     var head = el('p', 'order-perso__title cfg-colors__head');
-    head.appendChild(el('span', '', onlyChoco ? 'Vos dragées au chocolat' : 'Vos dragées'));
+    head.appendChild(el('span', '', onlyChoco ? T('Vos dragées au chocolat', 'Your chocolate dragées') : T('Vos dragées', 'Your dragées')));
     head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + DG_MAX));
     box.appendChild(head);
 
     var tabs = el('div', 'cfg-dg-tabs');
     tabs.setAttribute('role', 'tablist');
-    tabs.setAttribute('aria-label', 'Catégories de dragées');
+    tabs.setAttribute('aria-label', T('Catégories de dragées', 'Dragée categories'));
     DG_CATS.forEach(function (c) {
       var t = el('button', 'cfg-dg-tab', c.name);
       t.type = 'button';
@@ -292,9 +315,9 @@
       cb.checked = g.order.indexOf(r) !== -1;
       cb.disabled = !cb.checked && (fullColors || fullQty || (!!cat && cat !== g.tab));
       var tipTxt = '';
-      if (!cb.checked && !!cat && cat !== g.tab) tipTxt = 'Une seule catégorie par création : vous avez choisi des « ' + DG_CATS.filter(function (c) { return c.id === cat; })[0].name + ' ». Retirez-les pour choisir dans cette catégorie.';
-      else if (!cb.checked && fullColors) tipTxt = 'Trois couleurs maximum : retirez-en une pour choisir celle-ci.';
-      else if (!cb.checked && fullQty) tipTxt = 'Maximum atteint : diminuez une quantité pour ajouter cette couleur.';
+      if (!cb.checked && !!cat && cat !== g.tab) tipTxt = T('Une seule catégorie par création : vous avez choisi des « ' + DG_CATS.filter(function (c) { return c.id === cat; })[0].name + ' ». Retirez-les pour choisir dans cette catégorie.', 'One category per creation: you have chosen “' + DG_CATS.filter(function (c) { return c.id === cat; })[0].name + '”. Remove them to choose from this category.');
+      else if (!cb.checked && fullColors) tipTxt = T('Trois couleurs maximum : retirez-en une pour choisir celle-ci.', 'Three colours maximum: remove one to choose this one.');
+      else if (!cb.checked && fullQty) tipTxt = T('Maximum atteint : diminuez une quantité pour ajouter cette couleur.', 'Maximum reached: reduce a quantity to add this colour.');
       cb.addEventListener('change', function () {
         if (cb.checked) { g.order.push(r); g.qty[r] = 1; }
         else { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; }
@@ -302,7 +325,7 @@
       });
       var sw = el('div', 'wizard__color-swatch');
       var bg = el('span', 'wizard__color-swatch-bg');
-      bg.style.background = "#F3F1EC url('" + CATALOGUE[r].image + "') center/185% no-repeat";
+      bg.style.background = "#F3F1EC url('" + img(CATALOGUE[r].image) + "') center/185% no-repeat";
       sw.appendChild(bg);
       sw.appendChild(el('span', 'wizard__color-swatch-name', dgShort(r)));
       item.appendChild(cb);
@@ -318,10 +341,10 @@
 
     if (cat && cat !== g.tab) {
       var catName = DG_CATS.filter(function (c) { return c.id === cat; })[0].name;
-      box.appendChild(el('p', 'wizard__hint', 'Une seule catégorie par création : retirez vos « ' + catName + ' » pour choisir dans une autre.'));
+      box.appendChild(el('p', 'wizard__hint', T('Une seule catégorie par création : retirez vos « ' + catName + ' » pour choisir dans une autre.', 'One category per creation: remove your “' + catName + '” to choose from another.')));
     }
     if (fullColors || fullQty) {
-      box.appendChild(el('p', 'wizard__hint', fullQty ? 'Maximum atteint : ' + DG_MAX + ' dragées. Diminuez une quantité pour ajouter une couleur.' : 'Trois couleurs maximum : retirez-en une pour en choisir une autre.'));
+      box.appendChild(el('p', 'wizard__hint', fullQty ? T('Maximum atteint : ' + DG_MAX + ' dragées. Diminuez une quantité pour ajouter une couleur.', 'Maximum reached: ' + DG_MAX + ' dragées. Reduce a quantity to add a colour.') : T('Trois couleurs maximum : retirez-en une pour en choisir une autre.', 'Three colours maximum: remove one to choose another.')));
     }
 
     if (g.order.length) {
@@ -329,26 +352,26 @@
       g.order.forEach(function (r) {
         var li = el('li', 'cfg-qty__row');
         var dot = el('span', 'cfg-qty__dot');
-        dot.style.background = "#F3F1EC url('" + CATALOGUE[r].image + "') center/185% no-repeat";
+        dot.style.background = "#F3F1EC url('" + img(CATALOGUE[r].image) + "') center/185% no-repeat";
         li.appendChild(dot);
         li.appendChild(el('span', 'cfg-qty__name', dgShort(r) + (dgSub(r) ? ' · ' + dgSub(r).toLowerCase() : '')));
         var step = el('div', 'cfg-qty__step');
         var mi = el('button', 'cfg-qty__btn', '−');
         mi.type = 'button'; mi.id = 'dgm-' + i + '-' + r;
-        mi.setAttribute('aria-label', 'Une de moins');
+        mi.setAttribute('aria-label', T('Une de moins', 'One less'));
         mi.disabled = g.qty[r] <= 1;
         mi.addEventListener('click', function () { if (g.qty[r] > 1) { g.qty[r]--; render(); refocus(mi.id); } });
         var out = el('output', 'cfg-qty__n', String(g.qty[r]));
         var pl = el('button', 'cfg-qty__btn', '+');
         pl.type = 'button'; pl.id = 'dgp-' + i + '-' + r;
-        pl.setAttribute('aria-label', 'Une de plus');
+        pl.setAttribute('aria-label', T('Une de plus', 'One more'));
         pl.disabled = fullQty;
         pl.addEventListener('click', function () { if (dgTotal(g) < DG_MAX) { g.qty[r]++; render(); refocus(pl.id); } });
         step.appendChild(mi); step.appendChild(out); step.appendChild(pl);
         li.appendChild(step);
         var del = el('button', 'cfg-qty__del', '×');
         del.type = 'button';
-        del.setAttribute('aria-label', 'Retirer ' + dgShort(r));
+        del.setAttribute('aria-label', T('Retirer ', 'Remove ') + dgShort(r));
         del.addEventListener('click', function () { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; render(); });
         li.appendChild(del);
         list.appendChild(li);
@@ -367,19 +390,19 @@
 
       var imgLink = el('a', 'order-line__img');
       imgLink.href = d.prod.url;
-      imgLink.setAttribute('aria-label', 'Voir la fiche ' + d.prod.name);
-      var img = el('img');
-      img.src = d.prod.image;
-      img.alt = '';
-      imgLink.appendChild(img);
+      imgLink.setAttribute('aria-label', T('Voir la fiche ', 'View ') + pn(d.prod));
+      var im = el('img');
+      im.src = img(d.prod.image);
+      im.alt = '';
+      imgLink.appendChild(im);
       row.appendChild(imgLink);
 
       var info = el('div', 'order-line__info');
-      info.appendChild(el('span', 'order-line__family', d.prod.family));
-      var name = el('a', 'order-line__name', d.prod.name);
+      info.appendChild(el('span', 'order-line__family', pf(d.prod)));
+      var name = el('a', 'order-line__name', pn(d.prod));
       name.href = d.prod.url;
       info.appendChild(name);
-      info.appendChild(el('span', 'order-line__detail', d.prod.detail));
+      info.appendChild(el('span', 'order-line__detail', pd(d.prod)));
 
       var formats = el('div', 'order-line__formats');
       formats.setAttribute('role', 'group');
@@ -394,7 +417,7 @@
       if (!(d.prod.formats.length === 1 && d.prod.formats[0].price == null)) info.appendChild(formats);
 
       if (lines.length > 1) {
-        var rm = el('button', 'order-line__remove', 'Retirer');
+        var rm = el('button', 'order-line__remove', T('Retirer', 'Remove'));
         rm.type = 'button';
         rm.addEventListener('click', function () { lines.splice(i, 1); render(); });
         info.appendChild(rm);
@@ -406,7 +429,7 @@
       var max = d.crea ? MAX_QTY_CREA : MAX_QTY;
       var minus = el('button', 'order-stepper__btn', '−');
       minus.type = 'button';
-      minus.setAttribute('aria-label', d.crea ? 'Retirer une pièce' : 'Retirer un sachet');
+      minus.setAttribute('aria-label', d.crea ? T('Retirer une pièce', 'Remove one piece') : T('Retirer un sachet', 'Remove one bag'));
       minus.disabled = l.qty <= 1;
       minus.addEventListener('click', function () { if (l.qty > 1) { l.qty--; render(); } });
       var val;
@@ -418,7 +441,7 @@
         val.max = String(max);
         val.inputMode = 'numeric';
         val.value = String(l.qty);
-        val.setAttribute('aria-label', 'Nombre de pièces');
+        val.setAttribute('aria-label', T('Nombre de pièces', 'Number of pieces'));
         val.addEventListener('change', function () {
           var n = parseInt(val.value, 10);
           l.qty = isNaN(n) ? 1 : Math.max(1, Math.min(max, n));
@@ -427,11 +450,11 @@
       } else {
         val = el('span', 'order-stepper__val', String(l.qty));
         val.setAttribute('aria-live', 'polite');
-        val.setAttribute('aria-label', l.qty + ' sachet' + (l.qty > 1 ? 's' : '') + ' de ' + d.fmt.label);
+        val.setAttribute('aria-label', l.qty + T(' sachet', ' bag') + (l.qty > 1 ? 's' : '') + T(' de ', ' of ') + fl(d.fmt));
       }
       var plus = el('button', 'order-stepper__btn', '+');
       plus.type = 'button';
-      plus.setAttribute('aria-label', d.crea ? 'Ajouter une pièce' : 'Ajouter un sachet');
+      plus.setAttribute('aria-label', d.crea ? T('Ajouter une pièce', 'Add one piece') : T('Ajouter un sachet', 'Add one bag'));
       plus.disabled = l.qty >= max;
       plus.addEventListener('click', function () { if (l.qty < max) { l.qty++; render(); } });
       stepper.appendChild(minus);
@@ -439,9 +462,10 @@
       stepper.appendChild(plus);
       qty.appendChild(stepper);
       qty.appendChild(el('span', 'order-line__price', linePrice(d)));
-      qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + ' la pièce' : '') : weight(d.grams) + ' au total'));
-      if (d.remise) qty.appendChild(el('span', 'order-line__remise', 'Remise ' + Math.round(d.remise * 100) + ' % dès ' + REMISES_CREA[REMISES_CREA.length - 1].des + ' pièces : − ' + euro(d.brut - d.total)));
-      else if (d.crea && d.fmt.price != null && l.qty >= REMISES_CREA[REMISES_CREA.length - 1].des - 20) qty.appendChild(el('span', 'order-line__remise is-hint', 'Plus que ' + (REMISES_CREA[REMISES_CREA.length - 1].des - l.qty) + ' pour bénéficier de − ' + Math.round(REMISES_CREA[REMISES_CREA.length - 1].taux * 100) + ' %'));
+      qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + T(' la pièce', ' each') : '') : weight(d.grams) + T(' au total', ' in total')));
+      var lastR = REMISES_CREA[REMISES_CREA.length - 1];
+      if (d.remise) qty.appendChild(el('span', 'order-line__remise', T('Remise ' + Math.round(d.remise * 100) + ' % dès ' + lastR.des + ' pièces : − ', Math.round(d.remise * 100) + '% discount from ' + lastR.des + ' pieces: − ') + euro(d.brut - d.total)));
+      else if (d.crea && d.fmt.price != null && l.qty >= lastR.des - 20) qty.appendChild(el('span', 'order-line__remise is-hint', T('Plus que ' + (lastR.des - l.qty) + ' pour bénéficier de − ' + Math.round(lastR.taux * 100) + ' %', 'Just ' + (lastR.des - l.qty) + ' more to get −' + Math.round(lastR.taux * 100) + '%')));
       row.appendChild(qty);
 
       if (d.crea) row.appendChild(persoBlock(l, i));
@@ -457,34 +481,36 @@
       var d = lineData(l);
       var li = el('li', 'order__sum-line');
       var left = el('span');
-      left.appendChild(el('span', 'order__sum-name', d.prod.name));
+      left.appendChild(el('span', 'order__sum-name', pn(d.prod)));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
-      if (d.crea && persoText(l)) left.appendChild(el('span', 'order__sum-meta order__sum-perso', '« ' + persoText(l) + ' »'));
+      if (d.crea && persoText(l)) left.appendChild(el('span', 'order__sum-meta order__sum-perso', T('« ', '“') + persoText(l) + T(' »', '”')));
       if (d.crea && wantsDragees(l) && dgText(l)) left.appendChild(el('span', 'order__sum-meta', dgText(l)));
       li.appendChild(left);
       li.appendChild(el('span', 'order__sum-price', linePrice(d)));
       sumLines.appendChild(li);
     });
     var mode = form.querySelector('input[name="reception"]:checked');
-    sumMode.textContent = mode ? mode.parentNode.querySelector('.order__mode-title').textContent : 'À choisir';
+    sumMode.textContent = mode ? mode.parentNode.querySelector('.order__mode-title').textContent : T('À choisir', 'To be chosen');
 
     var rf = relaisFee();
-    document.getElementById('mode-relais-desc').textContent = 'Mondial Relay, France et Europe · ' + (rf === 'tbd' ? 'frais confirmés par e-mail' : rf === 0 ? 'frais offerts' : euro(rf));
+    document.getElementById('mode-relais-desc').textContent = T('Mondial Relay, France et Europe · ', 'Mondial Relay, France and Europe · ') + (rf === 'tbd' ? T('frais confirmés par e-mail', 'fees confirmed by email') : rf === 0 ? T('frais offerts', 'free delivery') : euro(rf));
     var fee = shippingFee();
     var shipRow = document.getElementById('sum-ship-row');
     var note = document.getElementById('sum-note');
-    var devis = hasDevis() ? ' Les créations sur devis sont chiffrées dans notre réponse.' : '';
+    var devis = hasDevis() ? T(' Les créations sur devis sont chiffrées dans notre réponse.', ' Creations on quotation are priced in our reply.') : '';
     if (fee === 'tbd') {
       shipRow.hidden = false;
       document.getElementById('sum-ship').textContent = feeLabel(fee);
-      note.textContent = 'Prix définitif et frais de point relais confirmés par e-mail.' + devis;
+      note.textContent = T('Prix définitif et frais de point relais confirmés par e-mail.', 'Final price and pick-up point fees confirmed by email.') + devis;
     } else if (fee !== null) {
       shipRow.hidden = false;
       document.getElementById('sum-ship').textContent = feeLabel(fee);
-      note.textContent = 'Frais de point relais inclus' + (fee === 0 ? ' (offerts sous 1 kg)' : ' : ' + RELAIS_PRIX_KG + ' € par kilo entamé') + '. Prix définitif confirmé par e-mail.' + devis;
+      note.textContent = EN
+        ? 'Pick-up point fees included' + (fee === 0 ? ' (free under 1 kg)' : ': €' + RELAIS_PRIX_KG + ' per kilo or part thereof') + '. Final price confirmed by email.' + devis
+        : 'Frais de point relais inclus' + (fee === 0 ? ' (offerts sous 1 kg)' : ' : ' + RELAIS_PRIX_KG + ' € par kilo entamé') + '. Prix définitif confirmé par e-mail.' + devis;
     } else {
       shipRow.hidden = true;
-      note.textContent = 'Prix définitif confirmé par e-mail.' + devis;
+      note.textContent = T('Prix définitif confirmé par e-mail.', 'Final price confirmed by email.') + devis;
     }
     sumTotal.textContent = totalLabel();
     var bt = document.getElementById('bar-total');
@@ -508,7 +534,7 @@
 
     var kinds = document.getElementById('order-picker-kinds');
     kinds.textContent = '';
-    [{ id: 'dragee', name: 'Dragées' }, { id: 'creation', name: 'Créations' }].forEach(function (k) {
+    [{ id: 'dragee', name: 'Dragées' }, { id: 'creation', name: T('Créations', 'Creations') }].forEach(function (k) {
       var b = el('button', 'order-kind', k.name);
       b.type = 'button';
       b.setAttribute('aria-pressed', k.id === pickerKind ? 'true' : 'false');
@@ -518,8 +544,8 @@
 
     var tabs = document.getElementById('order-picker-tabs');
     tabs.textContent = '';
-    [{ id: 'all', name: 'Tout' }].concat(FAMILLES.filter(function (f) { return (f.kind || 'dragee') === pickerKind; })).forEach(function (f) {
-      var b = el('button', 'order-chip order-chip--sm', f.name);
+    [{ id: 'all', name: T('Tout', 'All') }].concat(FAMILLES.filter(function (f) { return (f.kind || 'dragee') === pickerKind; })).forEach(function (f) {
+      var b = el('button', 'order-chip order-chip--sm', famName(f));
       b.type = 'button';
       b.setAttribute('aria-pressed', f.id === pickerFamily ? 'true' : 'false');
       b.addEventListener('click', function () { pickerFamily = f.id; renderPicker(); });
@@ -534,16 +560,16 @@
       var added = used.indexOf(r) !== -1;
       var b = el('button', 'order-pick');
       b.type = 'button';
-      if (added) { b.disabled = true; b.setAttribute('aria-label', p.name + ' (déjà dans votre sélection)'); }
+      if (added) { b.disabled = true; b.setAttribute('aria-label', pn(p) + T(' (déjà dans votre sélection)', ' (already in your selection)')); }
       var media = el('span', 'order-pick__img');
-      var img = el('img');
-      img.src = p.image;
-      img.alt = '';
-      img.loading = 'lazy';
-      media.appendChild(img);
-      if (added) media.appendChild(el('span', 'order-pick__badge', 'Ajouté'));
+      var im = el('img');
+      im.src = img(p.image);
+      im.alt = '';
+      im.loading = 'lazy';
+      media.appendChild(im);
+      if (added) media.appendChild(el('span', 'order-pick__badge', T('Ajouté', 'Added')));
       b.appendChild(media);
-      b.appendChild(el('span', 'order-pick__name', p.name));
+      b.appendChild(el('span', 'order-pick__name', pn(p)));
       b.addEventListener('click', function () {
         lines.push({ ref: r, format: p.formats[0].id, qty: 1 });
         pickerOpen = false;
@@ -768,7 +794,7 @@
       var d = lineData(l);
       var li = el('li', 'order__sum-line');
       var left = el('span');
-      left.appendChild(el('span', 'order__sum-name', d.prod.name));
+      left.appendChild(el('span', 'order__sum-name', pn(d.prod)));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
       li.appendChild(left);
       li.appendChild(el('span', 'order__sum-price', linePrice(d)));
@@ -780,7 +806,9 @@
     document.getElementById('done-ship-row').hidden = fee === null;
     if (fee !== null) document.getElementById('done-ship').textContent = feeLabel(fee);
     document.getElementById('done-total').textContent = totalLabel();
-    document.getElementById('done-text').textContent = AUTORESPONSE_ACTIVE
+    document.getElementById('done-text').textContent = EN
+      ? (AUTORESPONSE_ACTIVE ? 'A confirmation email has just been sent to ' + data.email + '. We will get back to you' : 'We will get back to you at ' + data.email) + ' within 48 hours to confirm availability, price and delivery date.'
+      : AUTORESPONSE_ACTIVE
       ? 'Un e-mail de confirmation vient de vous être envoyé à ' + data.email + '. Nous revenons vers vous sous 48 heures pour confirmer la disponibilité, le prix et la date de réception.'
       : 'Nous revenons vers vous à ' + data.email + ' sous 48 heures pour confirmer la disponibilité, le prix et la date de réception.';
     document.getElementById('order-view').hidden = true;
@@ -823,9 +851,11 @@
       return;
     }
 
+    /* La commande envoyée à l'atelier est toujours rédigée en français */
+    var wasEN = EN; EN = false;
     var detail = lines.map(function (l) {
       var d = lineData(l);
-      return '• ' + d.prod.name + ' — ' + lineLabel(l) + ' — ' + linePrice(d) + (d.remise ? ' (remise ' + Math.round(d.remise * 100) + ' % incluse)' : '') +
+      return '• ' + pn(d.prod) + ' — ' + lineLabel(l) + ' — ' + linePrice(d) + (d.remise ? ' (remise ' + Math.round(d.remise * 100) + ' % incluse)' : '') +
         (d.crea && wantsDragees(l) ? '\n   Dragées : ' + (dgText(l) || 'à définir') : '') +
         (d.crea ? '\n   Étiquette : ' + (persoText(l) || 'à définir') : '');
     }).join('\n');
@@ -834,7 +864,7 @@
     var kindsInCart = lines.map(function (l) { return isCrea(l.ref) ? 'Atelier' : 'Boutique'; });
     var payload = {
       'Type de demande': kindsInCart.indexOf('Atelier') === -1 ? 'Commande Boutique' : kindsInCart.indexOf('Boutique') === -1 ? 'Commande Atelier (créations)' : 'Commande Boutique + Atelier',
-      _subject: 'Nouvelle commande — ' + first.prod.name + (lines.length > 1 ? ' + ' + (lines.length - 1) + ' autre(s)' : '') + ' — ' + data.prenom + ' ' + data.nom,
+      _subject: 'Nouvelle commande — ' + pn(first.prod) + (lines.length > 1 ? ' + ' + (lines.length - 1) + ' autre(s)' : '') + ' — ' + data.prenom + ' ' + data.nom,
       'Prénom': data.prenom,
       'Nom': data.nom,
       email: data.email,
@@ -846,14 +876,16 @@
       'Total indicatif': totalLabel() + (typeof shippingFee() === 'number' ? ' (frais de point relais inclus)' : '') + (hasDevis() ? ' — certaines créations sont sur devis' : ''),
       'Mode de réception': data.mode,
       'Date souhaitée': longDate(data.date) + ' (' + data.date + ')',
-      'Photo du produit': new URL(first.prod.image, window.location.href).href,
+      'Photo du produit': new URL(img(first.prod.image), window.location.href).href,
       'Fiche produit': new URL(first.prod.url, window.location.href).href,
       _gotcha: ''
     };
+    EN = wasEN;
+    if (EN) payload['Langue du client'] = 'Anglais (commande passée sur la version anglaise du site : répondre en anglais)';
 
     var btn = form.querySelector('.order__submit');
     btn.disabled = true;
-    btn.textContent = 'Envoi en cours…';
+    btn.textContent = T('Envoi en cours…', 'Sending…');
 
     fetch(FORMSPREE_URL, {
       method: 'POST',
@@ -866,7 +898,7 @@
       })
       .catch(function () {
         btn.disabled = false;
-        btn.textContent = 'Commander';
+        btn.textContent = T('Commander', 'Order');
         sendErr.hidden = false;
       });
   });

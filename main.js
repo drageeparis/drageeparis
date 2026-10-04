@@ -4,6 +4,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* Langue de la page (version anglaise : /en/) */
+  const EN = document.documentElement.lang === 'en';
+  const T = (fr, en) => (EN ? en : fr);
+
   /* ---- 1. Header sticky scroll + hide-on-scroll-down ---- */
   const header = document.getElementById('header');
   if (header) {
@@ -429,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileLabel = document.getElementById('file-label-text');
   if (fileInput && fileLabel) {
     fileInput.addEventListener('change', () => {
-      fileLabel.textContent = fileInput.files[0]?.name ?? "Cliquez pour ajouter une image d'inspiration";
+      fileLabel.textContent = fileInput.files[0]?.name ?? T("Cliquez pour ajouter une image d'inspiration", 'Click to add an inspiration image');
     });
   }
 
@@ -459,8 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const original = btn.textContent;
         btn.textContent = '✓';
         input.value = '';
-        input.placeholder = 'Merci pour votre inscription !';
-        setTimeout(() => { btn.textContent = original; input.placeholder = 'Votre adresse e-mail'; }, 4000);
+        input.placeholder = T('Merci pour votre inscription !', 'Thank you for subscribing!');
+        setTimeout(() => { btn.textContent = original; input.placeholder = T('Votre adresse e-mail', 'Your email address'); }, 4000);
       }
     });
   });
@@ -478,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lb.setAttribute('aria-modal', 'true');
     lb.setAttribute('aria-label', 'Vue agrandie');
     lb.innerHTML =
-      '<button class="lightbox__close" aria-label="Fermer">' +
+      '<button class="lightbox__close" aria-label="' + T('Fermer', 'Close') + '">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
       '</button>' +
       '<img class="lightbox__img" alt="">';
@@ -549,6 +553,18 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   /* ---- 14. Fiche produit : dropdown quantité -> prix ---- */
+  /* Version anglaise : « 7,50 € » -> « €7.50 », unités traduites (les valeurs restent en français) */
+  function enPrice(v) {
+    var m = String(v).match(/([\d\s.]+(?:,\d+)?)\s*€/);
+    if (!m) return v;
+    var n = parseFloat(m[1].replace(/[\s.]/g, '').replace(',', '.'));
+    return '€' + (n % 1 ? n.toFixed(2) : String(n));
+  }
+  function enUnit(u) {
+    if (/unité/.test(u)) return 'per unit';
+    if (/^sans dragée/i.test(u)) return 'without dragées';
+    return u;
+  }
   (function() {
     document.querySelectorAll('[data-price-select]').forEach(function(select) {
       var block = select.closest('[data-qty-block]');
@@ -557,8 +573,8 @@ document.addEventListener('DOMContentLoaded', () => {
       var unitEl = block.querySelector('[data-unit-display]');
       function update() {
         var opt = select.options[select.selectedIndex];
-        if (priceEl) priceEl.textContent = opt.value;
-        if (unitEl) unitEl.textContent = opt.dataset.unit || '';
+        if (priceEl) priceEl.textContent = EN ? enPrice(opt.value) : opt.value;
+        if (unitEl) unitEl.textContent = EN ? enUnit(opt.dataset.unit || '') : (opt.dataset.unit || '');
         /* Transmet le format choisi à la page commander.html (?format=500g / 1kg) */
         var orderLink = document.querySelector('a[data-order-link]');
         if (orderLink) {
@@ -620,6 +636,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
+  /* ---- 17. Choix de la langue (FR / EN) ---- */
+  (function() {
+    var path = window.location.pathname;
+    var page = path.split('/').pop() || 'index.html';
+    var rest = window.location.search + window.location.hash;
+    var other = EN ? '../' + page + rest : 'en/' + page + rest;
+    function remember(lang) { try { localStorage.setItem('dp-lang', lang); } catch (e) {} }
+
+    function makeSwitch(extraClass) {
+      var wrap = document.createElement('div');
+      wrap.className = 'lang-switch' + (extraClass ? ' ' + extraClass : '');
+      wrap.setAttribute('role', 'navigation');
+      wrap.setAttribute('aria-label', T('Langue', 'Language'));
+      [['fr', 'FR', 'Français'], ['en', 'EN', 'English']].forEach(function(l, i) {
+        if (i) { var sep = document.createElement('span'); sep.className = 'lang-switch__sep'; sep.setAttribute('aria-hidden', 'true'); sep.textContent = '/'; wrap.appendChild(sep); }
+        var current = (l[0] === 'en') === EN;
+        var a = document.createElement(current ? 'span' : 'a');
+        a.className = 'lang-switch__item' + (current ? ' is-active' : '');
+        a.textContent = l[1];
+        a.setAttribute('lang', l[0]);
+        if (current) a.setAttribute('aria-current', 'true');
+        else {
+          a.href = other; a.setAttribute('hreflang', l[0]); a.title = l[2];
+          a.addEventListener('click', function() { remember(l[0]); });
+        }
+        wrap.appendChild(a);
+      });
+      return wrap;
+    }
+    var actions = document.querySelector('.header__actions');
+    if (actions) actions.insertBefore(makeSwitch(), actions.firstChild);
+    var drawerLeft = document.querySelector('.drawer__left');
+    if (drawerLeft) drawerLeft.appendChild(makeSwitch('lang-switch--drawer'));
+
+    /* Visiteur étranger sur la version française : suggestion discrète de la version anglaise */
+    if (EN) return;
+    var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'fr']);
+    if (/^fr/i.test(langs[0] || 'fr')) return;
+    var stored = null;
+    try { stored = localStorage.getItem('dp-lang'); } catch (e) {}
+    if (stored) return;
+    var bar = document.createElement('div');
+    bar.className = 'lang-suggest';
+    bar.setAttribute('lang', 'en');
+    bar.innerHTML = '<p class="lang-suggest__txt">This website is also available in English.</p>' +
+      '<a class="lang-suggest__go" href="' + other + '" hreflang="en">View in English</a>' +
+      '<button type="button" class="lang-suggest__close" aria-label="Stay on the French version">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
+    bar.querySelector('.lang-suggest__go').addEventListener('click', function() { remember('en'); });
+    bar.querySelector('.lang-suggest__close').addEventListener('click', function() { remember('fr'); bar.remove(); });
+    document.body.appendChild(bar);
+  })();
+
   /* ---- 16. FAB — bouton flottant mobile (bas-droite) ---- */
   (function() {
     if (window.innerWidth > 768) return;
@@ -628,7 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var fab = document.createElement('a');
     fab.href = 'contact.html';
     fab.className = 'fab';
-    fab.setAttribute('aria-label', 'Lancer ma création');
+    fab.setAttribute('aria-label', T('Lancer ma création', 'Start my creation'));
     // Même étoile que le bouton « Lancer ma création » de l'en-tête
     fab.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg>';
     document.body.appendChild(fab);

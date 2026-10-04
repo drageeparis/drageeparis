@@ -1,4 +1,5 @@
 (function () {
+  var EN = document.documentElement.lang === 'en';
   var form = document.getElementById('boutique-order-form');
   var confirmation = document.getElementById('bo-confirmation');
   var backBtn = document.getElementById('bo-back');
@@ -91,12 +92,13 @@
 
     var submitBtn = form.querySelector('.msg-form__submit');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
+    submitBtn.textContent = (EN ? 'Sending…' : 'Envoi en cours…');
 
     fetch('https://formspree.io/f/xeeyjnae', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
+        'Langue du client': EN ? 'Anglais' : 'Français',
         'Nom': nom,
         'Email': email,
         'Téléphone': tel,
@@ -117,14 +119,14 @@
         if (errEl) errEl.hidden = true;
       } else {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Envoyer ma demande';
+        submitBtn.textContent = (EN ? 'Send my request' : 'Envoyer ma demande');
         var errEl = document.getElementById('bo-send-error');
         if (errEl) errEl.hidden = false;
       }
     })
     .catch(function() {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer ma demande';
+      submitBtn.textContent = (EN ? 'Send my request' : 'Envoyer ma demande');
       var errEl = document.getElementById('bo-send-error');
       if (errEl) errEl.hidden = false;
     });

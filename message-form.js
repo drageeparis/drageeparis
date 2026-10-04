@@ -1,4 +1,5 @@
 (function () {
+  var EN = document.documentElement.lang === 'en';
   var form = document.getElementById('msg-form');
   var confirmation = document.getElementById('msg-confirmation');
   var backBtn = document.getElementById('msg-back');
@@ -51,12 +52,12 @@
 
     var submitBtn = form.querySelector('.msg-form__submit');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
+    submitBtn.textContent = (EN ? 'Sending…' : 'Envoi en cours…');
 
     fetch('https://formspree.io/f/xzdnpoez', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ 'Nom': nom, 'Email': email, 'Téléphone': tel, 'Message': message, '_gotcha': gotcha })
+      body: JSON.stringify({ 'Nom': nom, 'Email': email, 'Téléphone': tel, 'Message': message, 'Langue du client': EN ? 'Anglais' : 'Français', '_gotcha': gotcha })
     })
     .then(function(r) { return r.json().then(function(d) { return { ok: r.ok }; }); })
     .then(function(res) {
@@ -67,14 +68,14 @@
         if (errEl) errEl.hidden = true;
       } else {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Envoyer le message';
+        submitBtn.textContent = (EN ? 'Send message' : 'Envoyer le message');
         var errEl = document.getElementById('msg-send-error');
         if (errEl) errEl.hidden = false;
       }
     })
     .catch(function() {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer le message';
+      submitBtn.textContent = (EN ? 'Send message' : 'Envoyer le message');
       var errEl = document.getElementById('msg-send-error');
       if (errEl) errEl.hidden = false;
     });

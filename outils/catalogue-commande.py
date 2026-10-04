@@ -106,6 +106,9 @@ for chemin in sorted(glob.glob(os.path.join(ROOT, 'produit-*.html'))):
             mm = re.match(r'À partir de ([\d,]+) € les (.+)', l)
             if mm:
                 formats.append({'id': fmt_id(mm.group(2)), 'label': mm.group(2), 'price': prix(mm.group(1)), 'from': True}); continue
+            mm = re.match(r'(.+?) — à partir de ([\d,]+) €', l)
+            if mm:
+                formats.append({'id': fmt_id(mm.group(1)), 'label': mm.group(1), 'price': prix(mm.group(2)), 'from': True}); continue
             mm = re.match(r'([\d,]+) €$', l)
             if mm:
                 formats.append({'id': 'piece', 'label': 'À la pièce', 'price': prix(mm.group(1))}); continue
@@ -118,9 +121,36 @@ creations.sort(key=lambda p: (ORDRE_CREA.index(p['familyId']), p['name']))
 for p in produits:
     p['kind'] = 'dragee'
 produits.sort(key=lambda p: (ORDRE.index(p['familyId']), p['name']))
+
+# ---------- Version anglaise : noms et détails lus dans en/produit-*.html ----------
+FAM_EN = {'avola': 'Avola almonds', 'traditionnelles': 'Traditional almonds', 'chocolats': 'Chocolate dragées',
+          'gourmandes': 'Chocolate almonds', 'mariage': 'Wedding', 'premiers-instants': 'First moments',
+          'fetes-religieuses': 'Religious celebrations', 'anniversaires': 'Birthdays', 'bouquets': 'Bouquets & gift boxes'}
+
+def label_en(label):
+    m = re.match(r'Avec (\d+) dragées?$', label)
+    if m: return 'With ' + m.group(1) + ' dragées'
+    m = re.match(r'(\d+) dragées au chocolat$', label)
+    if m: return m.group(1) + ' chocolate dragées'
+    return {'Avec dragées': 'With dragées', 'Sans dragée': 'Without dragées', 'Sans dragées': 'Without dragées',
+            'À la pièce': 'Per piece', 'Sur devis': 'On quotation'}.get(label, label)
+
+for p in produits + creations:
+    p['family_en'] = FAM_EN[p['familyId']]
+    for f in p['formats']:
+        f['label_en'] = label_en(f['label'])
+    chemin_en = os.path.join(ROOT, 'en', p['url'])
+    if os.path.exists(chemin_en):
+        s_en = open(chemin_en, encoding='utf-8').read()
+        t = re.search(r'class="pdp__title">(.*?)</h1>', s_en, re.S)
+        if t: p['name_en'] = re.sub(r'\s+', ' ', re.sub(r'<br\s*/?>', ' ', t.group(1))).strip()
+        d = re.search(r'class="pdp__weight">(.*?)</p>', s_en, re.S)
+        if p['kind'] == 'creation': p['detail_en'] = 'Price per piece'
+        elif d: p['detail_en'] = re.sub(r'\s+', ' ', d.group(1)).strip()
+
 catalogue = {p.pop('ref'): p for p in produits + creations}
-familles = [{'id': FAMILLES[k][0], 'name': FAMILLES[k][1], 'kind': 'dragee'} for k in ORDRE] + \
-           [{'id': v[0], 'name': v[1], 'kind': 'creation'} for k, v in sorted(FAM_CREA.items(), key=lambda kv: ORDRE_CREA.index(kv[1][0]))]
+familles = [{'id': FAMILLES[k][0], 'name': FAMILLES[k][1], 'name_en': FAM_EN[FAMILLES[k][0]], 'kind': 'dragee'} for k in ORDRE] + \
+           [{'id': v[0], 'name': v[1], 'name_en': FAM_EN[v[0]], 'kind': 'creation'} for k, v in sorted(FAM_CREA.items(), key=lambda kv: ORDRE_CREA.index(kv[1][0]))]
 js = ('/* Fichier généré par outils/catalogue-commande.py à partir des fiches produit. Ne pas modifier à la main. */\n'
       'window.DP_FAMILLES = ' + json.dumps(familles, ensure_ascii=False) + ';\n'
       'window.DP_CATALOGUE = ' + json.dumps(catalogue, ensure_ascii=False, indent=1) + ';\n')

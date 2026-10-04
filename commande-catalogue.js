@@ -1,5 +1,5 @@
 /* Fichier généré par outils/catalogue-commande.py à partir des fiches produit. Ne pas modifier à la main. */
-window.DP_FAMILLES = [{"id": "avola", "name": "Amandes Avola", "kind": "dragee"}, {"id": "traditionnelles", "name": "Amandes traditionnelles", "kind": "dragee"}, {"id": "chocolats", "name": "Chocolats", "kind": "dragee"}, {"id": "gourmandes", "name": "Chocolats amandes", "kind": "dragee"}, {"id": "mariage", "name": "Mariage", "kind": "creation"}, {"id": "premiers-instants", "name": "Premiers instants", "kind": "creation"}, {"id": "fetes-religieuses", "name": "Fêtes religieuses", "kind": "creation"}, {"id": "anniversaires", "name": "Anniversaires", "kind": "creation"}, {"id": "bouquets", "name": "Bouquets & écrins", "kind": "creation"}];
+window.DP_FAMILLES = [{"id": "avola", "name": "Amandes Avola", "name_en": "Avola almonds", "kind": "dragee"}, {"id": "traditionnelles", "name": "Amandes traditionnelles", "name_en": "Traditional almonds", "kind": "dragee"}, {"id": "chocolats", "name": "Chocolats", "name_en": "Chocolate dragées", "kind": "dragee"}, {"id": "gourmandes", "name": "Chocolats amandes", "name_en": "Chocolate almonds", "kind": "dragee"}, {"id": "mariage", "name": "Mariage", "name_en": "Wedding", "kind": "creation"}, {"id": "premiers-instants", "name": "Premiers instants", "name_en": "First moments", "kind": "creation"}, {"id": "fetes-religieuses", "name": "Fêtes religieuses", "name_en": "Religious celebrations", "kind": "creation"}, {"id": "anniversaires", "name": "Anniversaires", "name_en": "Birthdays", "kind": "creation"}, {"id": "bouquets", "name": "Bouquets & écrins", "name_en": "Bouquets & gift boxes", "kind": "creation"}];
 window.DP_CATALOGUE = {
  "avola-excellence": {
   "name": "Dragées Avola Excellence",
@@ -14,16 +14,21 @@ window.DP_CATALOGUE = {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 43.5
+    "price": 43.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 87.0
+    "price": 87.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Avola almonds",
+  "name_en": "Excellence Avola Dragées",
+  "detail_en": "Calibre 38 · Sicilian Avola almonds"
  },
  "avola-elegance": {
   "name": "Dragées Avola Élégance",
@@ -38,22 +43,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 17.0
+    "price": 17.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 33.5
+    "price": 33.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 67.0
+    "price": 67.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Avola almonds",
+  "name_en": "Élégance Avola Dragées",
+  "detail_en": "Calibre 36 · Sicilian Avola almonds"
  },
  "avola-eminence": {
   "name": "Dragées Avola Éminence",
@@ -68,16 +79,21 @@ window.DP_CATALOGUE = {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 34.0
+    "price": 34.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 68.5
+    "price": 68.5,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Avola almonds",
+  "name_en": "Éminence Avola Dragées",
+  "detail_en": "Calibre 37 · Sicilian Avola almonds"
  },
  "traditionnelle-esperance": {
   "name": "Dragées Amande Traditionnelle Espérance",
@@ -92,22 +108,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 22.5
+    "price": 22.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 45.0
+    "price": 45.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 90.0
+    "price": 90.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Traditional almonds",
+  "name_en": "Espérance Traditional Almond Dragées",
+  "detail_en": "500 g · Traditional almond"
  },
  "traditionnelle-evidence": {
   "name": "Dragées Amande Traditionnelle Évidence",
@@ -122,22 +144,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 22.5
+    "price": 22.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 45.0
+    "price": 45.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 90.0
+    "price": 90.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Traditional almonds",
+  "name_en": "Évidence Traditional Almond Dragées",
+  "detail_en": "500 g · Traditional almond"
  },
  "chocolat-blanc-nacre": {
   "name": "Dragées Chocolat Blanc Nacré",
@@ -152,22 +180,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Pearl White Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-bleu-marine": {
   "name": "Dragées Chocolat Bleu Marine",
@@ -182,22 +216,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Navy Blue Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-bleu-poudre": {
   "name": "Dragées Chocolat Bleu Poudré",
@@ -212,22 +252,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Powder Blue Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-bleu-roi": {
   "name": "Dragées Chocolat Bleu Roi",
@@ -242,22 +288,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Royal Blue Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-bordeaux": {
   "name": "Dragées Chocolat Bordeaux",
@@ -272,22 +324,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Burgundy Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-brique": {
   "name": "Dragées Chocolat Brique",
@@ -302,22 +360,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Brick Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-jaune-moutarde": {
   "name": "Dragées Chocolat Jaune Moutarde",
@@ -332,22 +396,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Mustard Yellow Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-jaune-soleil": {
   "name": "Dragées Chocolat Jaune Soleil",
@@ -362,22 +432,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Sunshine Yellow Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-chocolat-nature": {
   "name": "Dragées Chocolat Nature",
@@ -392,22 +468,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Natural Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-orange": {
   "name": "Dragées Chocolat Orange",
@@ -422,22 +504,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Orange Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-rouge": {
   "name": "Dragées Chocolat Rouge",
@@ -452,22 +540,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Red Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-turquoise": {
   "name": "Dragées Chocolat Turquoise",
@@ -482,22 +576,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Turquoise Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-anis": {
   "name": "Dragées Chocolat Vert Anis",
@@ -512,22 +612,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Aniseed Green Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-pomme": {
   "name": "Dragées Chocolat Vert Pomme",
@@ -542,22 +648,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Apple Green Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-sapin": {
   "name": "Dragées Chocolat Vert Sapin",
@@ -572,22 +684,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 7.5
+    "price": 7.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 15.0
+    "price": 15.0,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 30.0
+    "price": 30.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Fir Green Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
  },
  "chocolat-anthracite": {
   "name": "Prali Amande Chocolat Noir Anthracite",
@@ -602,22 +720,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Charcoal",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "chocolat-fuchsia": {
   "name": "Prali Amande Chocolat Noir Fuchsia",
@@ -632,22 +756,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Fuchsia",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "chocolat-rouge-grenat": {
   "name": "Prali Amande Chocolat Noir Rouge Grenat",
@@ -662,22 +792,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Garnet Red",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "chocolat-taupe": {
   "name": "Prali Amande Chocolat Noir Taupe",
@@ -692,22 +828,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Taupe",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "chocolat-turquoise-marbre": {
   "name": "Prali Amande Chocolat Noir Turquoise Marbré",
@@ -722,22 +864,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Marbled Turquoise",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "chocolat-vert-lime": {
   "name": "Prali Amande Chocolat Noir Vert Lime",
@@ -752,22 +900,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Lime Green",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "chocolat-vert-sauge": {
   "name": "Prali Amande Chocolat Noir Vert Sauge",
@@ -782,22 +936,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 11.0
+    "price": 11.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 21.5
+    "price": 21.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 43.0
+    "price": 43.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Dark Chocolate Sage Green",
+  "detail_en": "Avola almond · 70% dark chocolate"
  },
  "amande-chocolat-jaune-soleil": {
   "name": "Prali Amande Chocolat au Lait Jaune Soleil",
@@ -812,22 +972,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 10.0
+    "price": 10.0,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 18.5
+    "price": 18.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 37.0
+    "price": 37.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Milk Chocolate Sunshine Yellow",
+  "detail_en": "Avola almond · Milk chocolate"
  },
  "amande-chocolat-noir": {
   "name": "Prali Amande Chocolat au Lait Noir",
@@ -842,22 +1008,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 9.5
+    "price": 9.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 18.5
+    "price": 18.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 37.0
+    "price": 37.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Milk Chocolate Black",
+  "detail_en": "Avola almond · Milk chocolate"
  },
  "amande-chocolat-orange": {
   "name": "Prali Amande Chocolat au Lait Orange",
@@ -872,22 +1044,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 9.5
+    "price": 9.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 18.5
+    "price": 18.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 37.0
+    "price": 37.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Milk Chocolate Orange",
+  "detail_en": "Avola almond · Milk chocolate"
  },
  "amande-chocolat-rouge": {
   "name": "Prali Amande Chocolat au Lait Rouge",
@@ -902,22 +1080,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 9.5
+    "price": 9.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 18.5
+    "price": 18.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 37.0
+    "price": 37.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Milk Chocolate Red",
+  "detail_en": "Avola almond · Milk chocolate"
  },
  "amande-chocolat-vert-anis": {
   "name": "Prali Amande Chocolat au Lait Vert Anis",
@@ -932,22 +1116,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 9.5
+    "price": 9.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 18.5
+    "price": 18.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 37.0
+    "price": 37.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Milk Chocolate Aniseed Green",
+  "detail_en": "Avola almond · Milk chocolate"
  },
  "amande-chocolat-vert-sapin": {
   "name": "Prali Amande Chocolat au Lait Vert Sapin",
@@ -962,22 +1152,28 @@ window.DP_CATALOGUE = {
     "id": "250g",
     "label": "250 g",
     "grams": 250,
-    "price": 9.5
+    "price": 9.5,
+    "label_en": "250 g"
    },
    {
     "id": "500g",
     "label": "500 g",
     "grams": 500,
-    "price": 18.5
+    "price": 18.5,
+    "label_en": "500 g"
    },
    {
     "id": "1kg",
     "label": "1 kg",
     "grams": 1000,
-    "price": 37.0
+    "price": 37.0,
+    "label_en": "1 kg"
    }
   ],
-  "kind": "dragee"
+  "kind": "dragee",
+  "family_en": "Chocolate almonds",
+  "name_en": "Prali Amande Milk Chocolate Fir Green",
+  "detail_en": "Avola almond · Milk chocolate"
  },
  "mariage-beaute": {
   "kind": "creation",
@@ -992,14 +1188,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Beauté Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-chic": {
   "kind": "creation",
@@ -1014,14 +1215,19 @@ window.DP_CATALOGUE = {
    {
     "id": "10dragées",
     "label": "Avec 10 dragées",
-    "price": 5.5
+    "price": 5.5,
+    "label_en": "With 10 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Chic Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-coeur": {
   "kind": "creation",
@@ -1036,14 +1242,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Cœur Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-douceur": {
   "kind": "creation",
@@ -1058,14 +1269,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Douceur Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-fleur": {
   "kind": "creation",
@@ -1080,14 +1296,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Fleur Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-pampas": {
   "kind": "creation",
@@ -1102,9 +1323,13 @@ window.DP_CATALOGUE = {
    {
     "id": "10dragées",
     "label": "10 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "10 dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Pampas Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-poetique": {
   "kind": "creation",
@@ -1119,14 +1344,19 @@ window.DP_CATALOGUE = {
    {
     "id": "10dragées",
     "label": "Avec 10 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 10 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Poétique Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-purete": {
   "kind": "creation",
@@ -1141,14 +1371,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Pureté Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-romantique": {
   "kind": "creation",
@@ -1163,14 +1398,19 @@ window.DP_CATALOGUE = {
    {
     "id": "7dragées",
     "label": "Avec 7 dragées",
-    "price": 5.5
+    "price": 5.5,
+    "label_en": "With 7 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Romantique Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "mariage-eternite": {
   "kind": "creation",
@@ -1185,14 +1425,19 @@ window.DP_CATALOGUE = {
    {
     "id": "10dragées",
     "label": "Avec 10 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 10 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Wedding",
+  "name_en": "Éternité Wedding Dragées",
+  "detail_en": "Price per piece"
  },
  "baby-shower-bleu": {
   "kind": "creation",
@@ -1207,14 +1452,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "First moments",
+  "name_en": "Blue Baby Shower Dragées",
+  "detail_en": "Price per piece"
  },
  "baby-shower-rose": {
   "kind": "creation",
@@ -1229,14 +1479,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "First moments",
+  "name_en": "Pink Baby Shower Dragées",
+  "detail_en": "Price per piece"
  },
  "gender-reveal-mixte": {
   "kind": "creation",
@@ -1251,14 +1506,19 @@ window.DP_CATALOGUE = {
    {
     "id": "6dragées",
     "label": "Avec 6 dragées",
-    "price": 5.5
+    "price": 5.5,
+    "label_en": "With 6 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "First moments",
+  "name_en": "Mixed Gender Reveal Dragées",
+  "detail_en": "Price per piece"
  },
  "naissance-amande-avola": {
   "kind": "creation",
@@ -1273,14 +1533,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "First moments",
+  "name_en": "Avola Almond Birth Dragées",
+  "detail_en": "Price per piece"
  },
  "naissance-rose-pastel": {
   "kind": "creation",
@@ -1295,14 +1560,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "First moments",
+  "name_en": "Pastel Pink Birth Dragées",
+  "detail_en": "Price per piece"
  },
  "naissance-ecru-taupe": {
   "kind": "creation",
@@ -1317,14 +1587,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "First moments",
+  "name_en": "Ecru & Taupe Birth Dragées",
+  "detail_en": "Price per piece"
  },
  "bapteme-bleu-ciel": {
   "kind": "creation",
@@ -1340,9 +1615,13 @@ window.DP_CATALOGUE = {
     "id": "10dragéesauchocolat",
     "label": "10 dragées au chocolat",
     "price": 5.0,
-    "from": true
+    "from": true,
+    "label_en": "10 chocolate dragées"
    }
-  ]
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Sky Blue Christening Dragées",
+  "detail_en": "Price per piece"
  },
  "bapteme-bouquet-rose": {
   "kind": "creation",
@@ -1357,9 +1636,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Pink Bouquet Christening Dragées",
+  "detail_en": "Price per piece"
  },
  "bapteme-rose-tendre": {
   "kind": "creation",
@@ -1375,9 +1658,13 @@ window.DP_CATALOGUE = {
     "id": "10dragéesauchocolat",
     "label": "10 dragées au chocolat",
     "price": 5.0,
-    "from": true
+    "from": true,
+    "label_en": "10 chocolate dragées"
    }
-  ]
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Soft Pink Christening Dragées",
+  "detail_en": "Price per piece"
  },
  "bapteme-vert-amande": {
   "kind": "creation",
@@ -1393,9 +1680,13 @@ window.DP_CATALOGUE = {
     "id": "10dragéesauchocolat",
     "label": "10 dragées au chocolat",
     "price": 5.0,
-    "from": true
+    "from": true,
+    "label_en": "10 chocolate dragées"
    }
-  ]
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Almond Green Christening Dragées",
+  "detail_en": "Price per piece"
  },
  "communion-chapelet-or": {
   "kind": "creation",
@@ -1410,14 +1701,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Gold Rosary First Communion Dragées",
+  "detail_en": "Price per piece"
  },
  "communion-croix-ivoire": {
   "kind": "creation",
@@ -1432,14 +1728,19 @@ window.DP_CATALOGUE = {
    {
     "id": "5dragées",
     "label": "Avec 5 dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With 5 dragées"
    },
    {
     "id": "sansdragée",
     "label": "Sans dragée",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Ivory Cross First Communion Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-banquise": {
   "kind": "creation",
@@ -1454,14 +1755,19 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Ice Floe Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-coccinelle": {
   "kind": "creation",
@@ -1476,14 +1782,19 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Ladybird Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-flamant-rose": {
   "kind": "creation",
@@ -1498,14 +1809,19 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Flamingo Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-licorne": {
   "kind": "creation",
@@ -1520,14 +1836,19 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Unicorn Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-panda": {
   "kind": "creation",
@@ -1542,14 +1863,19 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Panda Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-petit-indien": {
   "kind": "creation",
@@ -1564,14 +1890,19 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.0
+    "price": 4.0,
+    "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 3.5
+    "price": 3.5,
+    "label_en": "Without dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Little Chief Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "anniversaire-univers-marin": {
   "kind": "creation",
@@ -1586,9 +1917,13 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "With dragées"
    }
-  ]
+  ],
+  "family_en": "Birthdays",
+  "name_en": "Under the Sea Birthday Dragées",
+  "detail_en": "Price per piece"
  },
  "bouquet-bleu": {
   "kind": "creation",
@@ -1603,9 +1938,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Blue Bouquet",
+  "detail_en": "Price per piece"
  },
  "bouquet-jaune": {
   "kind": "creation",
@@ -1620,9 +1959,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Yellow Bouquet",
+  "detail_en": "Price per piece"
  },
  "bouquet-violet": {
   "kind": "creation",
@@ -1637,9 +1980,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Purple Bouquet",
+  "detail_en": "Price per piece"
  },
  "grand-bouquet": {
   "kind": "creation",
@@ -1654,9 +2001,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 10.0
+    "price": 10.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Large bouquet",
+  "detail_en": "Price per piece"
  },
  "moyen-bouquet": {
   "kind": "creation",
@@ -1671,9 +2022,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 7.0
+    "price": 7.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Medium bouquet",
+  "detail_en": "Price per piece"
  },
  "petit-bouquet": {
   "kind": "creation",
@@ -1688,9 +2043,13 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 5.0
+    "price": 5.0,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Small bouquet",
+  "detail_en": "Price per piece"
  },
  "ecrin-fleuri": {
   "kind": "creation",
@@ -1705,8 +2064,12 @@ window.DP_CATALOGUE = {
    {
     "id": "piece",
     "label": "À la pièce",
-    "price": 4.5
+    "price": 4.5,
+    "label_en": "Per piece"
    }
-  ]
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Écrin Fleuri",
+  "detail_en": "Price per piece"
  }
 };

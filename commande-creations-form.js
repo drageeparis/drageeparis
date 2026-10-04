@@ -1,4 +1,5 @@
 (function () {
+  var EN = document.documentElement.lang === 'en';
   var form = document.getElementById('atelier-order-form');
   var confirmation = document.getElementById('at-confirmation');
   var backBtn = document.getElementById('at-back');
@@ -95,12 +96,13 @@
 
     var submitBtn = form.querySelector('.msg-form__submit');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
+    submitBtn.textContent = (EN ? 'Sending…' : 'Envoi en cours…');
 
     fetch('https://formspree.io/f/xeeyjnae', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
+        'Langue du client': EN ? 'Anglais' : 'Français',
         'Type de demande': 'Commande Atelier',
         'Nom': nom,
         'Email': email,
@@ -123,14 +125,14 @@
         if (errEl) errEl.hidden = true;
       } else {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Envoyer ma demande';
+        submitBtn.textContent = (EN ? 'Send my request' : 'Envoyer ma demande');
         var errEl = document.getElementById('at-send-error');
         if (errEl) errEl.hidden = false;
       }
     })
     .catch(function() {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer ma demande';
+      submitBtn.textContent = (EN ? 'Send my request' : 'Envoyer ma demande');
       var errEl = document.getElementById('at-send-error');
       if (errEl) errEl.hidden = false;
     });

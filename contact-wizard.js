@@ -5,7 +5,9 @@
 (function() {
   var TOTAL = 7;
   var FORMSPREE_ID = 'mlgqrzed';
-  var PHONE_LABEL = '06 08 67 14 43';
+  var EN = document.documentElement.lang === 'en'; // version anglaise (/en/)
+  function T(fr, en) { return EN ? en : fr; }
+  var PHONE_LABEL = EN ? '+33 6 08 67 14 43' : '06 08 67 14 43';
   var PHONE_HREF = 'tel:+33608671443';
   var MAX_COLORS = 3;
   var DEFAULT_DG = ['#F4F2EE', '#E9E6E1', '#FAF9F7']; // blanc nacré par défaut
@@ -28,6 +30,26 @@
     return el ? el.value : '';
   }
   function val(id) { var el = $(id); return el ? el.value.trim() : ''; }
+  // Libellé affiché d'un choix : la valeur (française) sur le site FR, le libellé traduit sur le site EN
+  function dispName(el) {
+    if (!el) return '';
+    if (!EN) return el.value;
+    var lab = el.closest('label');
+    if (!lab) return el.value;
+    if (lab.getAttribute('title')) return lab.getAttribute('title');
+    var sels = ['.wizard__card-name', '.wizard__color-swatch-name', '.cfg-font__name', 'span'];
+    for (var i = 0; i < sels.length; i++) {
+      var n = lab.querySelector(sels[i]);
+      if (n && n.textContent.trim()) return n.textContent.trim();
+    }
+    return el.value;
+  }
+  function checkedName(name) { return dispName(document.querySelector('input[name="' + name + '"]:checked')); }
+  function nameOfValue(name, v) {
+    return dispName(Array.prototype.filter.call(document.querySelectorAll('input[name="' + name + '"]'), function(e) { return e.value === v; })[0]) || v;
+  }
+  // Noms français des contenants (pour la demande envoyée à l'atelier)
+  var CONTAINER_FR = { boite: 'Boîte en carton', pot: 'Pot en verre', tube: 'Tube', pochon: 'Pochon en tissu', bouquet: 'Bouquet de dragées' };
   function isSafeImageUrl(url) {
     if (!url) return false;
     try {
@@ -124,9 +146,9 @@
   }
   /* ---------- Bouquet : petit (5 pétales), moyen (7), grand (10) ---------- */
   var BOUQUET_SIZES = [
-    { id: 'petit', name: 'Petit', n: 5, span: 58, scale: 0.86 },
-    { id: 'moyen', name: 'Moyen', n: 7, span: 78, scale: 1 },
-    { id: 'grand', name: 'Grand', n: 10, span: 86, scale: 1.1 }
+    { id: 'petit', name: 'Petit', en: 'Small', n: 5, span: 58, scale: 0.86 },
+    { id: 'moyen', name: 'Moyen', en: 'Medium', n: 7, span: 78, scale: 1 },
+    { id: 'grand', name: 'Grand', en: 'Large', n: 10, span: 86, scale: 1.1 }
   ];
   var bouquetSize = 'moyen';
   var petalsG = stage.querySelector('.cfg-svg[data-key="bouquet"] .cfg-petals');
@@ -166,7 +188,7 @@
       btn.setAttribute('aria-checked', on ? 'true' : 'false');
       btn.tabIndex = on ? 0 : -1;
       btn.setAttribute('data-size', b.id);
-      btn.innerHTML = miniFan(b) + '<span class="cfg-size-opt__name">' + b.name + '</span><span class="cfg-size-opt__sub">' + b.n + ' pétales</span>';
+      btn.innerHTML = miniFan(b) + '<span class="cfg-size-opt__name">' + T(b.name, b.en) + '</span><span class="cfg-size-opt__sub">' + b.n + T(' pétales', ' petals') + '</span>';
       btn.addEventListener('click', function() { setBouquetSize(b.id, true); });
       btn.addEventListener('keydown', function(e) {
         var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
@@ -197,9 +219,10 @@
       if (sf.hidden !== fixed) { sf.hidden = fixed; if (typeof renderTagShapes === 'function' && tags) renderTagShapes(); }
     }
   }
-  function bouquetText() { var b = sizeOf(bouquetSize); return b.name + ' bouquet (' + b.n + ' pétales)'; }
+  function bouquetText() { var b = sizeOf(bouquetSize); return EN ? b.en + ' bouquet (' + b.n + ' petals)' : b.name + ' bouquet (' + b.n + ' pétales)'; }
+  function containerName() { return EN ? containers[idx].name : (CONTAINER_FR[containers[idx].key] || containers[idx].name); }
   function containerLabel() {
-    return containers[idx].key === 'bouquet' ? containers[idx].name + ' · ' + bouquetText() : containers[idx].name;
+    return containers[idx].key === 'bouquet' ? containerName() + ' · ' + bouquetText() : containerName();
   }
   buildPetals();
   renderSizes();
@@ -317,7 +340,7 @@
   function capOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
   // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
   function minOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
-  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); return mn < mx ? 'De ' + mn + ' à ' + mx + ' dragées par contenant.' : 'Jusqu’à ' + mx + ' dragées par contenant.'; }
+  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
   function chosenCat() { return chosenColors.length ? catOf(inputOf(chosenColors[0])) : ''; }
   function totalQty() { return chosenColors.reduce(function(n, v) { return n + (qty[v] || 0); }, 0); }
   function shortName(el) {
@@ -334,18 +357,18 @@
       o.disabled = !o.checked && (fullColors || fullQty || (!!cat && catOf(o) !== cat));
       // bulle d'explication au survol (ou au toucher) d'une dragée indisponible
       var tip = '';
-      if (!o.checked && !!cat && catOf(o) !== cat) tip = 'Une seule catégorie par contenant : vous avez choisi des « ' + catName(cat) + ' ». Retirez-les pour choisir des « ' + catName(catOf(o)) + ' ».';
-      else if (!o.checked && fullColors) tip = 'Trois couleurs maximum : retirez-en une pour choisir celle-ci.';
-      else if (!o.checked && fullQty) tip = 'Contenant complet : diminuez une quantité pour ajouter cette couleur.';
+      if (!o.checked && !!cat && catOf(o) !== cat) tip = T('Une seule catégorie par contenant : vous avez choisi des « ' + catName(cat) + ' ». Retirez-les pour choisir des « ' + catName(catOf(o)) + ' ».', 'One category per container: you have chosen “' + catName(cat) + '”. Remove them to choose “' + catName(catOf(o)) + '”.');
+      else if (!o.checked && fullColors) tip = T('Trois couleurs maximum : retirez-en une pour choisir celle-ci.', 'Three colours maximum: remove one to choose this one.');
+      else if (!o.checked && fullQty) tip = T('Contenant complet : diminuez une quantité pour ajouter cette couleur.', 'Container full: reduce a quantity to add this colour.');
       if (tip) o.parentNode.setAttribute('data-tip', tip); else o.parentNode.removeAttribute('data-tip');
     });
     var lim = $('cfg-colors-limit');
     lim.hidden = !(fullColors || fullQty);
-    lim.textContent = fullColors ? 'Trois couleurs maximum : retirez-en une pour en choisir une autre.'
-      : 'Contenant complet (' + cap + ' dragées) : vous pouvez continuer. Pour ajouter une couleur, diminuez d’abord une quantité.';
+    lim.textContent = fullColors ? T('Trois couleurs maximum : retirez-en une pour en choisir une autre.', 'Three colours maximum: remove one to choose another.')
+      : T('Contenant complet (' + cap + ' dragées) : vous pouvez continuer. Pour ajouter une couleur, diminuez d’abord une quantité.', 'Container full (' + cap + ' dragées): you can continue. To add a colour, first reduce a quantity.');
     var one = $('cfg-dg-onecat');
     one.hidden = !cat || cat === activeCat;
-    if (cat) one.textContent = 'Une seule catégorie par contenant : retirez vos « ' + catName(cat) + ' » pour choisir dans une autre.';
+    if (cat) one.textContent = T('Une seule catégorie par contenant : retirez vos « ' + catName(cat) + ' » pour choisir dans une autre.', 'One category per container: remove your “' + catName(cat) + '” to choose from another.');
     $('cfg-dg-cap').textContent = rangeText(activeCat);
     var cnt = $('cfg-colors-count');
     if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', fullColors); }
@@ -368,9 +391,9 @@
       name.textContent = shortName(el);
       var step = document.createElement('div');
       step.className = 'cfg-qty__step';
-      step.innerHTML = '<button type="button" class="cfg-qty__btn" data-act="minus" aria-label="Une de moins">−</button>' +
+      step.innerHTML = '<button type="button" class="cfg-qty__btn" data-act="minus" aria-label="' + T('Une de moins', 'One less') + '">−</button>' +
         '<output class="cfg-qty__n" aria-live="polite"></output>' +
-        '<button type="button" class="cfg-qty__btn" data-act="plus" aria-label="Une de plus">+</button>';
+        '<button type="button" class="cfg-qty__btn" data-act="plus" aria-label="' + T('Une de plus', 'One more') + '">+</button>';
       step.querySelector('output').textContent = n;
       step.querySelector('[data-act="minus"]').disabled = n <= 1 || tot <= floorOf(cat);
       step.querySelector('[data-act="plus"]').disabled = fullQty;
@@ -378,7 +401,7 @@
       del.type = 'button';
       del.className = 'cfg-qty__del';
       del.setAttribute('data-act', 'del');
-      del.setAttribute('aria-label', 'Retirer ' + shortName(el));
+      del.setAttribute('aria-label', T('Retirer ', 'Remove ') + shortName(el));
       del.textContent = '×';
       li.appendChild(dot); li.appendChild(name); li.appendChild(step); li.appendChild(del);
       list.appendChild(li);
@@ -405,10 +428,11 @@
     var c = chosenCat() || activeCat, cap = capOf(c), mn = minOf(c), left = mn - totalQty();
     need.hidden = !avec || drageesComplete();
     if (need.hidden) return;
-    var regle = mn < cap ? 'entre ' + mn + ' et ' + cap + ' dragées' : cap + ' dragées';
+    var regle = mn < cap ? T('entre ' + mn + ' et ' + cap + ' dragées', 'between ' + mn + ' and ' + cap + ' dragées') : cap + ' dragées';
     need.textContent = !chosenCat()
-      ? 'Choisissez ' + regle + ' pour passer à l’étape suivante.'
-      : 'Il reste ' + left + ' dragée' + (left > 1 ? 's' : '') + ' à choisir : votre contenant doit en compter ' + (mn < cap ? 'au moins ' + mn : cap) + ' pour passer à l’étape suivante.';
+      ? T('Choisissez ' + regle + ' pour passer à l’étape suivante.', 'Choose ' + regle + ' to continue to the next step.')
+      : T('Il reste ' + left + ' dragée' + (left > 1 ? 's' : '') + ' à choisir : votre contenant doit en compter ' + (mn < cap ? 'au moins ' + mn : cap) + ' pour passer à l’étape suivante.',
+          left + ' more dragée' + (left > 1 ? 's' : '') + ' to choose: your container needs ' + (mn < cap ? 'at least ' + mn : cap) + ' to continue to the next step.');
   }
   $('cfg-qty-list').addEventListener('click', function(e) {
     var btn = e.target.closest('button');
@@ -520,7 +544,7 @@
   ['etiquette_fond', 'etiquette_texte', 'etiquette_bord'].forEach(function(name) {
     var label = $(TAG_IDS[name][0]);
     document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
-      r.addEventListener('change', function() { if (label) label.textContent = r.value; renderTagShapes(); });
+      r.addEventListener('change', function() { if (label) label.textContent = dispName(r); renderTagShapes(); });
     });
     var picker = $(TAG_IDS[name][1]);
     if (picker) picker.addEventListener('input', function() {
@@ -528,7 +552,7 @@
       radio.setAttribute('data-hex', picker.value);
       picker.parentNode.style.background = picker.value;
       if (!radio.checked) { radio.checked = true; }
-      if (label) label.textContent = 'Personnalisée (' + picker.value.toUpperCase() + ')';
+      if (label) label.textContent = T('Personnalisée (', 'Custom (') + picker.value.toUpperCase() + ')';
       renderTagShapes();
     });
   });
@@ -546,15 +570,15 @@
     });
   });
   function updateFontSamples() {
-    var t = val('cfg-l1') || 'Vos prénoms';
+    var t = val('cfg-l1') || T('Vos prénoms', 'Your names');
     Array.prototype.forEach.call(document.querySelectorAll('.cfg-font__sample'), function(s) { s.textContent = t; });
   }
   if ($('cfg-l1')) $('cfg-l1').addEventListener('input', updateFontSamples);
   function setTagText(g, l1, l2) {
     var r = parseFloat(g.getAttribute('data-r')), wf = tagWidthFactor();
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
-    t1.textContent = l1 || 'Vos prénoms';
-    t2.textContent = l2 || 'jj.mm.aaaa';
+    t1.textContent = l1 || T('Vos prénoms', 'Your names');
+    t2.textContent = l2 || T('jj.mm.aaaa', 'dd.mm.yyyy');
     var ink = tagColor('etiquette_texte', '');
     t1.style.fill = ink; t2.style.fill = ink;
     t1.classList.toggle('is-placeholder', !l1);
@@ -583,9 +607,9 @@
     var need = $('cfg-tag-need'); if (!need) return;
     var a = !!val('cfg-l1'), b = !!val('cfg-l2');
     need.hidden = a && b;
-    need.textContent = !a && !b ? 'Indiquez les prénoms (ou le nom) et la date (ou un petit mot) pour passer à l’étape suivante.'
-      : !a ? 'Indiquez les prénoms ou le nom pour passer à l’étape suivante.'
-      : 'Indiquez la date ou un petit mot pour passer à l’étape suivante.';
+    need.textContent = !a && !b ? T('Indiquez les prénoms (ou le nom) et la date (ou un petit mot) pour passer à l’étape suivante.', 'Enter the names (or surname) and the date (or a short message) to continue to the next step.')
+      : !a ? T('Indiquez les prénoms ou le nom pour passer à l’étape suivante.', 'Enter the names or surname to continue to the next step.')
+      : T('Indiquez la date ou un petit mot pour passer à l’étape suivante.', 'Enter the date or a short message to continue to the next step.');
     if (typeof updateNextState === 'function') updateNextState();
   }
   ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', updateTagNeed); });
@@ -625,21 +649,21 @@
   function formatDate(date) { return pad(date.getDate()) + '/' + pad(date.getMonth() + 1) + '/' + date.getFullYear(); }
   function daysUntil(date) { var t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((date - t) / 86400000); }
   function relativeDelay(days) {
-    if (days < 0) return 'date passée, à vérifier';
-    if (days === 0) return "aujourd'hui";
-    if (days < 28) return 'DÉLAI COURT : dans ' + days + ' jour' + (days > 1 ? 's' : '');
-    if (days < 70) return 'dans ' + Math.round(days / 7) + ' semaines';
-    return 'dans environ ' + Math.round(days / 30.4) + ' mois';
+    if (days < 0) return T('date passée, à vérifier', 'date in the past, please check');
+    if (days === 0) return T("aujourd'hui", 'today');
+    if (days < 28) return T('DÉLAI COURT : dans ' + days + ' jour' + (days > 1 ? 's' : ''), 'SHORT NOTICE: in ' + days + ' day' + (days > 1 ? 's' : ''));
+    if (days < 70) return T('dans ' + Math.round(days / 7) + ' semaines', 'in ' + Math.round(days / 7) + ' weeks');
+    return T('dans environ ' + Math.round(days / 30.4) + ' mois', 'in about ' + Math.round(days / 30.4) + ' months');
   }
   function updateDateAlert() {
     var date = readDate();
     if (!date) { dateAlert.hidden = true; return; }
     var days = daysUntil(date);
     if (days < 0) {
-      dateAlert.textContent = 'Cette date est déjà passée : pouvez-vous la vérifier ?';
+      dateAlert.textContent = T('Cette date est déjà passée : pouvez-vous la vérifier ?', 'This date has already passed: could you check it?');
       dateAlert.hidden = false;
     } else if (days < 28) {
-      dateAlert.textContent = 'Votre événement approche : nous ferons tout notre possible. Pour un délai court, appelez-nous au ';
+      dateAlert.textContent = T('Votre événement approche : nous ferons tout notre possible. Pour un délai court, appelez-nous au ', 'Your event is coming up soon: we will do our very best. For short notice, please call us on ');
       var a = document.createElement('a'); a.href = PHONE_HREF; a.textContent = PHONE_LABEL;
       dateAlert.appendChild(a); dateAlert.appendChild(document.createTextNode('.'));
       dateAlert.hidden = false;
@@ -663,7 +687,7 @@
   var PRIX_DRAGEE_SUP = 0.10;   // par dragée (minimum 5 par boîte)
   var NB_MAX = 5000;
   var NB_MIN = 20;          // minimum de commande
-  function euros(n) { return n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
+  function euros(n) { return n.toLocaleString(EN ? 'en-GB' : 'fr-FR', { style: 'currency', currency: 'EUR' }); }
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
   function avecDragees() { return checkedValue('dragees') === 'Avec dragées'; }
   function prixOptions() {
@@ -682,30 +706,30 @@
   }
   function detailPrix() {
     var base = PRIX_CONTENANT[containers[idx].key] || 0, o = prixOptions();
-    var parts = ['boîte et étiquette ' + euros(base)];
+    var parts = [T('boîte et étiquette ', 'box and label ') + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' ' + euros(o.sup));
-    if (o.noeud) parts.push('nœud ' + euros(o.noeud));
+    if (o.noeud) parts.push(T('nœud ', 'bow ') + euros(o.noeud));
     if (o.bouquet) parts.push('bouquet ' + euros(o.bouquet));
     return parts.join(' + ');
   }
   function updatePrix() {
     var n = nbBoites(), pu = prixUnitaire();
-    $('w-nb-unit').textContent = pu ? euros(pu) + ' la boîte' + (avecDragees() ? ', dragées comprises' : '') : (conseil ? 'Prix selon le contenant choisi ensemble' : 'Prix communiqué avec votre proposition');
+    $('w-nb-unit').textContent = pu ? euros(pu) + T(' la boîte', ' per box') + (avecDragees() ? T(', dragées comprises', ', dragées included') : '') : (conseil ? T('Prix selon le contenant choisi ensemble', 'Price depends on the container we choose together') : T('Prix communiqué avec votre proposition', 'Price given with your proposal'));
     var det = $('w-nb-detail');
     if (det) det.textContent = pu ? detailPrix() : '';
     // étape dragées : prix des dragées supplémentaires (boîte en carton)
     var dp = $('cfg-dg-price'), o = prixOptions();
     if (dp) {
       dp.hidden = !isBoite() || !avecDragees();
-      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + ' : + ' + euros(o.sup) + ' par boîte'
-        : euros(PRIX_DRAGEE_SUP) + ' par dragée, en plus du prix de la boîte';
+      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + T(' par boîte', ' per box')
+        : euros(PRIX_DRAGEE_SUP) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price');
     }
     var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
-    $('w-nb-total').textContent = pu && n >= NB_MIN ? 'Total : ' + euros(totalNet()) : '';
+    $('w-nb-total').textContent = pu && n >= NB_MIN ? T('Total : ', 'Total: ') + euros(totalNet()) : '';
     var nbNeed = $('w-nb-need');
-    if (nbNeed) { nbNeed.hidden = !(n > 0 && n < NB_MIN); nbNeed.textContent = 'Commande à partir de ' + NB_MIN + ' boîtes : ajoutez-en ' + (NB_MIN - n) + ' pour continuer.'; }
+    if (nbNeed) { nbNeed.hidden = !(n > 0 && n < NB_MIN); nbNeed.textContent = T('Commande à partir de ' + NB_MIN + ' boîtes : ajoutez-en ' + (NB_MIN - n) + ' pour continuer.', 'Minimum order ' + NB_MIN + ' boxes: add ' + (NB_MIN - n) + ' more to continue.'); }
     if (rem) {
-      if (pu && n && r) rem.textContent = 'Remise ' + Math.round(r.taux * 100) + ' % dès ' + r.des + ' boîtes : − ' + euros(totalBrut() - totalNet());
+      if (pu && n && r) rem.textContent = T('Remise ' + Math.round(r.taux * 100) + ' % dès ' + r.des + ' boîtes : − ', Math.round(r.taux * 100) + '% discount from ' + r.des + ' boxes: − ') + euros(totalBrut() - totalNet());
       else rem.textContent = '';
       rem.classList.toggle('is-on', !!r);
     }
@@ -716,9 +740,12 @@
       pal.hidden = !showPal;
       if (showPal) {
         var manque = next.des - n, totPal = Math.round(next.des * pu * (1 - next.taux) * 100) / 100, diff = Math.round((totPal - totalNet()) * 100) / 100;
-        $('w-nb-palier-txt').innerHTML = 'Plus que <strong>' + manque + ' boîte' + (manque > 1 ? 's' : '') + '</strong> pour bénéficier de −' + Math.round(next.taux * 100) + '&nbsp;%&nbsp;: ' +
-          next.des + ' boîtes pour ' + euros(totPal) + (diff > 0 ? ', soit seulement ' + euros(diff) + ' de plus' : diff < 0 ? ', soit ' + euros(-diff) + ' de moins' : ', pour le même prix') + '.';
-        $('w-nb-palier-btn').textContent = 'Passer à ' + next.des + ' boîtes';
+        $('w-nb-palier-txt').innerHTML = EN
+          ? 'Just <strong>' + manque + ' more box' + (manque > 1 ? 'es' : '') + '</strong> to get −' + Math.round(next.taux * 100) + '%: ' +
+            next.des + ' boxes for ' + euros(totPal) + (diff > 0 ? ', only ' + euros(diff) + ' more' : diff < 0 ? ', which is ' + euros(-diff) + ' less' : ', for the same price') + '.'
+          : 'Plus que <strong>' + manque + ' boîte' + (manque > 1 ? 's' : '') + '</strong> pour bénéficier de −' + Math.round(next.taux * 100) + '&nbsp;%&nbsp;: ' +
+            next.des + ' boîtes pour ' + euros(totPal) + (diff > 0 ? ', soit seulement ' + euros(diff) + ' de plus' : diff < 0 ? ', soit ' + euros(-diff) + ' de moins' : ', pour le même prix') + '.';
+        $('w-nb-palier-btn').textContent = T('Passer à ' + next.des + ' boîtes', 'Switch to ' + next.des + ' boxes');
         $('w-nb-palier-btn').setAttribute('data-n', next.des);
       }
     }
@@ -740,24 +767,24 @@
     var amt = $('cfg-pt-amount'), unit = $('cfg-pt-unit'), det = $('cfg-pt-detail'), dl = $('cfg-pt-delta');
     var base = conseil ? 0 : (PRIX_CONTENANT[containers[idx].key] || 0);
     if (!base) {
-      amt.textContent = conseil ? 'Prix selon le contenant' : 'Prix sur devis';
-      unit.textContent = ''; det.textContent = conseil ? '' : 'Communiqué avec votre maquette';
+      amt.textContent = conseil ? T('Prix selon le contenant', 'Price depends on the container') : T('Prix sur devis', 'Price on quotation');
+      unit.textContent = ''; det.textContent = conseil ? '' : T('Communiqué avec votre maquette', 'Given with your mock-up');
       box.classList.add('is-quote'); lastTagPrice = null; return;
     }
     box.classList.remove('is-quote');
     var pu = prixUnitaire();
     if (current === 2) {
-      amt.textContent = 'dès ' + euros(base); unit.textContent = ' / boîte';
-      det.textContent = 'Étiquette personnalisée et nœud satiné inclus';
+      amt.textContent = T('dès ', 'from ') + euros(base); unit.textContent = T(' / boîte', ' / box');
+      det.textContent = T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included');
       lastTagPrice = null; return;
     }
-    amt.textContent = euros(pu); unit.textContent = ' / boîte';
-    var o = prixOptions(), parts = ['Boîte ' + euros(base)];
+    amt.textContent = euros(pu); unit.textContent = T(' / boîte', ' / box');
+    var o = prixOptions(), parts = [T('Boîte ', 'Box ') + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' +' + euros(o.sup));
     if (o.bouquet) parts.push('Bouquet +' + euros(o.bouquet));
     det.innerHTML = '';
     if (parts.length > 1) parts.forEach(function(t) { var sp = document.createElement('span'); sp.textContent = t; det.appendChild(sp); });
-    else det.textContent = 'Étiquette personnalisée et nœud satiné inclus';
+    else det.textContent = T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included');
     if (lastTagPrice !== null && Math.abs(pu - lastTagPrice) > 0.001) {
       var d = Math.round((pu - lastTagPrice) * 100) / 100;
       dl.textContent = (d > 0 ? '+' : '−') + euros(Math.abs(d));
@@ -781,10 +808,10 @@
     b.addEventListener('click', function() { setNb(parseInt(b.getAttribute('data-n'), 10)); });
   });
   updatePrix();
-  function nbBoitesText() { var n = nbBoites(); return n ? n + ' boîte' + (n > 1 ? 's' : '') : ''; }
+  function nbBoitesText() { var n = nbBoites(); return n ? n + (EN ? ' box' + (n > 1 ? 'es' : '') : ' boîte' + (n > 1 ? 's' : '')) : ''; }
   function prixText() {
     var n = nbBoites(), pu = prixUnitaire(), r = remiseFor(n);
-    return n && pu ? euros(totalNet()) + (r ? ' (remise ' + Math.round(r.taux * 100) + ' % incluse)' : '') : '';
+    return n && pu ? euros(totalNet()) + (r ? T(' (remise ' + Math.round(r.taux * 100) + ' % incluse)', ' (' + Math.round(r.taux * 100) + '% discount included)') : '') : '';
   }
   function prixDetailMail() {
     var n = nbBoites(), pu = prixUnitaire();
@@ -794,26 +821,29 @@
   function quantiteText() {
     var n = nbBoites(), pu = prixUnitaire();
     if (!n) return '';
-    return n + ' boîte' + (n > 1 ? 's' : '') + (pu ? ' × ' + euros(pu) + ' = ' + euros(n * pu) + ' (prix indicatif)' : '');
+    return EN ? n + ' box' + (n > 1 ? 'es' : '') + (pu ? ' × ' + euros(pu) + ' = ' + euros(n * pu) + ' (indicative price)' : '')
+      : n + ' boîte' + (n > 1 ? 's' : '') + (pu ? ' × ' + euros(pu) + ' = ' + euros(n * pu) + ' (prix indicatif)' : '');
   }
 
-  function contenantText() { return conseil ? 'À définir ensemble (conseil demandé)' : containerLabel(); }
+  function contenantText() { return conseil ? T('À définir ensemble (conseil demandé)', 'To be decided together (advice requested)') : containerLabel(); }
   function drageesText() {
     var d = checkedValue('dragees');
-    if (d !== 'Avec dragées') return d;
-    if (!chosenColors.length) return d + ' · couleurs à définir';
-    return d + ' · ' + chosenColors.map(function(v) { return v + ' ×' + (qty[v] || 1); }).join(', ');
+    var dn = checkedName('dragees');
+    if (d !== 'Avec dragées') return dn;
+    if (!chosenColors.length) return dn + T(' · couleurs à définir', ' · colours to be decided');
+    return dn + ' · ' + (EN ? catName(chosenCat()) + ': ' : '') + chosenColors.map(function(v) { return nameOfValue('couleurs', v) + ' ×' + (qty[v] || 1); }).join(', ');
   }
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
   }
   function colorLabel(name) {
     var v = tagColorName(name);
-    return v === 'Personnalisée' ? 'personnalisée ' + tagColor(name, '').toUpperCase() : v.toLowerCase();
+    return v === 'Personnalisée' ? T('personnalisée ', 'custom ') + tagColor(name, '').toUpperCase() : checkedName(name).toLowerCase();
   }
   function etiquetteFormat() {
-    var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? 'sans bordure' : 'bordures ' + colorLabel('etiquette_bord');
+    var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? T('sans bordure', 'no border') : (EN ? colorLabel('etiquette_bord') + ' border' : 'bordures ' + colorLabel('etiquette_bord'));
     // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
+    if (EN) return checkedName('etiquette_forme') + (tagSizeFixed() ? '' : ', size ' + Math.round(tagScale() * 100) + '%') + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagSizeFixed() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
     return tagShape() + (tagSizeFixed() ? '' : ', taille ' + Math.round(tagScale() * 100) + ' %') + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagSizeFixed() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
@@ -822,6 +852,7 @@
   function isBoite() { return !conseil && containers[idx].key === 'boite'; }
   function stepUsable(n) { return n !== 5 || isBoite(); } // l'étape décoration ne concerne que la boîte en carton
   function decoChoice() { return checkedValue('decoration') || 'Sans décoration'; }
+  function decoName() { return checkedName('decoration') || T('Sans décoration', 'No decoration'); }
   function rubanHex() { var el = document.querySelector('input[name="ruban"]:checked'); return el ? el.getAttribute('data-hex') : '#D9C29A'; }
   function shadeHex(h, f) {
     var n = parseInt(h.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
@@ -865,18 +896,18 @@
     return { base: t[0], light: t[1], dark: t[2] };
   }
   document.querySelectorAll('input[name="bouquet_couleur"]').forEach(function(r) {
-    r.addEventListener('change', function() { var l = $('label-bouquet-name'); if (l) l.textContent = r.value; applyDeco(); });
+    r.addEventListener('change', function() { var l = $('label-bouquet-name'); if (l) l.textContent = dispName(r); applyDeco(); });
   });
   function decoText() {
     if (!isBoite()) return '';
     var d = decoChoice();
-    if (d === 'Nœud satiné') return d + ' (ruban ' + checkedValue('ruban').toLowerCase() + ')';
-    if (d === 'Nœud + bouquet') return d + ' (ruban ' + checkedValue('ruban').toLowerCase() + ', bouquet ' + (checkedValue('bouquet_couleur') || 'Beige').toLowerCase() + ')';
+    if (d === 'Nœud satiné') return decoName() + T(' (ruban ', ' (ribbon ') + checkedName('ruban').toLowerCase() + ')';
+    if (d === 'Nœud + bouquet') return decoName() + T(' (ruban ', ' (ribbon ') + checkedName('ruban').toLowerCase() + ', bouquet ' + (checkedName('bouquet_couleur') || 'Beige').toLowerCase() + ')';
     return d;
   }
   document.querySelectorAll('input[name="decoration"]').forEach(function(r) { r.addEventListener('change', applyDeco); });
   document.querySelectorAll('input[name="ruban"]').forEach(function(r) {
-    r.addEventListener('change', function() { var l = $('label-ruban-name'); if (l) l.textContent = r.value; applyDeco(); });
+    r.addEventListener('change', function() { var l = $('label-ruban-name'); if (l) l.textContent = dispName(r); applyDeco(); });
   });
 
   /* ---------- Navigation ---------- */
@@ -896,9 +927,9 @@
     nextBtn.setAttribute('aria-label', label);
   }
   function labelFor(n) {
-    if (n === 2) return 'Choisir ce contenant';
-    if (n === TOTAL) return 'Recevoir ma maquette gratuite';
-    return 'Continuer';
+    if (n === 2) return T('Choisir ce contenant', 'Choose this container');
+    if (n === TOTAL) return T('Recevoir ma maquette gratuite', 'Get my free mock-up');
+    return T('Continuer', 'Continue');
   }
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
@@ -919,7 +950,7 @@
     setBoxOpen();
     applyDeco();
     updatePrix();
-    $('cfg-name').textContent = (n !== 2 && conseil) ? 'Contenant à définir ensemble' : containers[idx].name;
+    $('cfg-name').textContent = (n !== 2 && conseil) ? T('Contenant à définir ensemble', 'Container to be decided together') : containers[idx].name;
     updateSizes();
   }
 
@@ -970,14 +1001,14 @@
   }
   function updateSummary() {
     var date = readDate();
-    setRow('sum-event', checkedValue('evenement'));
+    setRow('sum-event', checkedName('evenement'));
     setRow('sum-contenant', contenantText());
     setRow('sum-dragees', drageesText());
     setRow('sum-etiquette', [etiquetteText(), etiquetteFormat()].filter(Boolean).join(' · '), true);
     setRow('sum-deco', decoText(), true);
     setRow('sum-qty', nbBoitesText());
     setRow('sum-prix', prixText(), true);
-    setRow('sum-date', date ? formatDate(date) : '', false, 'Non précisée');
+    setRow('sum-date', date ? formatDate(date) : '', false, T('Non précisée', 'Not specified'));
     // Miniature de la création
     var art = $('cfg-summary-art');
     art.innerHTML = '';
@@ -1018,7 +1049,14 @@
     r.addEventListener('change', function() { markField('field-reception', true); });
   });
 
+  // La demande envoyée à l'atelier reste toujours en français (même depuis la version anglaise)
   function buildPayload() {
+    var wasEN = EN; EN = false;
+    try { var p = buildPayloadFr(); } finally { EN = wasEN; }
+    if (wasEN) p['Langue du client'] = 'Anglais (demande faite sur la version anglaise du site : répondre en anglais)';
+    return p;
+  }
+  function buildPayloadFr() {
     var prenom = val('w-prenom'), nom = val('w-nom'), email = val('w-email');
     var occasion = checkedValue('evenement'), quantite = quantiteText();
     var date = readDate(), days = date ? daysUntil(date) : null;
@@ -1054,7 +1092,7 @@
     body.style.display = 'none';
     nav.style.display = 'none';
     var em = val('w-email'), emEl = $('wizard-success-email');
-    if (emEl) emEl.textContent = em ? ' à ' + em : '';
+    if (emEl) emEl.textContent = em ? T(' à ', ' at ') + em : '';
     var rs = $('wizard-reassure'); if (rs) rs.hidden = true;
     var pf = $('wizard-proof'); if (pf) pf.hidden = true;
     success.classList.add('visible');
@@ -1074,7 +1112,7 @@
     if (val('w-company')) { showSuccess(); return; } // champ piège rempli : robot
     var errEl = $('wizard-send-error'); if (errEl) errEl.hidden = true;
     nextBtn.disabled = true;
-    nextBtn.textContent = 'Envoi en cours…';
+    nextBtn.textContent = T('Envoi en cours…', 'Sending…');
     fetch('https://formspree.io/f/' + FORMSPREE_ID, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1240,7 +1278,7 @@
       var n = Math.min(Math.max(1, s.step | 0), TOTAL);
       while (n > 1 && !stepUsable(n)) n--;
       showStep(n, 'next');
-      if (conseil) $('cfg-name').textContent = 'Contenant à définir ensemble';
+      if (conseil) $('cfg-name').textContent = T('Contenant à définir ensemble', 'Container to be decided together');
     } finally {
       restoring = false;
     }
@@ -1252,17 +1290,17 @@
     var s = readSave();
     if (!s) return;
     saveOn = false; // on ne remplace pas la création en cours tant que le client n'a pas choisi
-    var occ = s.r && s.r.evenement;
-    var cont = s.conseil ? 'contenant à définir' : (containers[s.idx] ? containers[s.idx].name : '');
+    var occ = s.r && s.r.evenement && nameOfValue('evenement', s.r.evenement);
+    var cont = s.conseil ? T('contenant à définir', 'container to be decided') : (containers[s.idx] ? containers[s.idx].name : '');
     var bar = document.createElement('div');
     bar.className = 'cfg-resume';
     bar.setAttribute('role', 'region');
-    bar.setAttribute('aria-label', 'Création en cours');
-    bar.innerHTML = '<div class="cfg-resume__txt"><p class="cfg-resume__title">Votre création vous attend</p>' +
+    bar.setAttribute('aria-label', T('Création en cours', 'Creation in progress'));
+    bar.innerHTML = '<div class="cfg-resume__txt"><p class="cfg-resume__title">' + T('Votre création vous attend', 'Your creation is waiting for you') + '</p>' +
       '<p class="cfg-resume__meta"></p></div>' +
-      '<div class="cfg-resume__actions"><button type="button" class="cfg-resume__go">Reprendre ma création</button>' +
-      '<button type="button" class="cfg-resume__new">Recommencer</button></div>';
-    bar.querySelector('.cfg-resume__meta').textContent = [occ, cont, 'étape ' + Math.min(s.step || 1, TOTAL) + ' / ' + TOTAL].filter(Boolean).join(' · ');
+      '<div class="cfg-resume__actions"><button type="button" class="cfg-resume__go">' + T('Reprendre ma création', 'Resume my creation') + '</button>' +
+      '<button type="button" class="cfg-resume__new">' + T('Recommencer', 'Start again') + '</button></div>';
+    bar.querySelector('.cfg-resume__meta').textContent = [occ, cont, T('étape ', 'step ') + Math.min(s.step || 1, TOTAL) + ' / ' + TOTAL].filter(Boolean).join(' · ');
     body.parentNode.insertBefore(bar, body);
     function close() { saveOn = true; bar.parentNode && bar.parentNode.removeChild(bar); }
     bar.querySelector('.cfg-resume__go').addEventListener('click', function() { close(); restoreState(s); });

@@ -6706,3 +6706,21 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .wizard__proof[hidden] { display: none; }
 .wizard__proof strong { font-weight: 500; color: var(--color-heading); }
 .wizard__proof + .wizard__reassure { margin-top: 8px; }
+
+/* ---- Choix de la langue ---- */
+.lang-switch { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; letter-spacing: .12em; margin-right: 14px; }
+.lang-switch__item { color: var(--color-foreground); opacity: .55; text-decoration: none; padding: 4px 1px; transition: opacity .2s; }
+a.lang-switch__item:hover { opacity: 1; }
+.lang-switch__item.is-active { opacity: 1; color: var(--color-heading); font-weight: 500; }
+.lang-switch__sep { opacity: .3; font-size: 11px; }
+.lang-switch--drawer { margin: 28px 0 0; font-size: 13px; }
+.header:not(.header--inner):not(.scrolled) .lang-switch__item { color: rgba(255, 255, 255, 0.85); }
+.header:not(.header--inner):not(.scrolled) .lang-switch__item.is-active { color: var(--blanc); }
+.header:not(.header--inner):not(.scrolled) .lang-switch__sep { color: rgba(255, 255, 255, 0.6); }
+@media (max-width: 768px) { .header .lang-switch { display: none; } }
+.lang-suggest { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 900; max-width: 520px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 12px 12px 12px 18px; background: var(--color-background); border: 1px solid rgba(150, 95, 54, 0.25); box-shadow: 0 10px 30px rgba(82, 54, 42, 0.12); animation: wizardIn .4s ease both; }
+.lang-suggest__txt { margin: 0; flex: 1; font-size: 13px; font-weight: 300; color: var(--color-foreground); }
+.lang-suggest__go { flex: none; padding: 8px 14px; font-size: 12.5px; letter-spacing: .03em; color: var(--color-primary-button-text); background: var(--color-primary-button-background); text-decoration: none; }
+.lang-suggest__close { flex: none; width: 32px; height: 32px; padding: 6px; background: none; border: 0; color: var(--color-foreground); cursor: pointer; opacity: .6; }
+.lang-suggest__close:hover { opacity: 1; }
+@media (max-width: 480px) { .lang-suggest { bottom: 84px; } .lang-suggest__txt { font-size: 12.5px; } }

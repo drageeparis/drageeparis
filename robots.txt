@@ -13,4 +13,14 @@ Disallow: /a-propos.html
 Disallow: /commande-boutique.html
 Disallow: /commande-atelier.html
 
+# Version anglaise
+Disallow: /en/dragees-avola.html
+Disallow: /en/dragees-chocolats.html
+Disallow: /en/dragees-gourmandes.html
+Disallow: /en/dragees-traditionnelles.html
+Disallow: /en/boutique.html
+Disallow: /en/a-propos.html
+Disallow: /en/commande-boutique.html
+Disallow: /en/commande-atelier.html
+
 Sitemap: https://drageeparis.fr/sitemap.xml
