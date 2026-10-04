@@ -6583,3 +6583,4 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @media (max-width: 768px) { .cfg-deco-cards { grid-template-columns: minmax(0, 1fr); } }
 .cfg-deco-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 768px) { .cfg-deco-cards { grid-template-columns: minmax(0, 1fr); } }
+.cfg-svg[data-key="boite"].has-fleurs { overflow: visible; }

@@ -701,7 +701,11 @@
     show('attache-ruban', noeud && fleurs); show('attache-raphia', fleurs && !noeud);
     // avec des fleurs, la boîte se réduit un peu pour laisser la place au bouquet
     var body = box.querySelector('.cfg-box-body');
-    if (body) body.setAttribute('transform', 'translate(200 ' + (fleurs ? 362 : 356) + ') scale(' + (fleurs ? 1.3 : 1.55) + ') translate(-214 -356)');
+    // même taille de boîte avec ou sans fleurs : on la descend un peu et le bouquet peut dépasser du cadre
+    if (body) body.setAttribute('transform', 'translate(200 ' + (fleurs ? 376 : 356) + ') scale(1.55) translate(-214 -356)');
+    var ombre = box.querySelector(':scope > ellipse');
+    if (ombre) ombre.setAttribute('cy', fleurs ? 380 : 360);
+    box.classList.toggle('has-fleurs', fleurs);
     var rb = $('cfg-ruban');
     if (rb) rb.hidden = !(d === 'Nœud satiné' || d === 'Nœud + fleurs');
   }
