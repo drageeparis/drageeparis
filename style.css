@@ -6656,3 +6656,18 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-boxes__remise.is-on { color: var(--caramel); }
 .order-line__remise { font-size: 11px; font-weight: 400; color: #965F36; }
 .order-line__remise.is-hint { font-weight: 300; color: var(--ink-60); }
+
+/* Encart prix sous l'aperçu */
+.cfg-pricetag { margin: 2px auto 14px; padding: 8px 18px 9px; max-width: 340px; text-align: center; background: rgba(150, 95, 54, 0.06); border-radius: 18px; transition: background .4s; }
+.cfg-pricetag[hidden] { display: none; }
+.cfg-pricetag__main { margin: 0; color: var(--color-heading); line-height: 1.2; position: relative; }
+.cfg-pricetag__amount { font-size: 19px; font-weight: 500; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.cfg-pricetag__unit { font-size: 13px; font-weight: 300; }
+.cfg-pricetag__delta { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 500; color: #4f7a52; opacity: 0; transform: translateY(4px); transition: opacity .25s, transform .25s; }
+.cfg-pricetag__delta.is-down { color: var(--color-heading); }
+.cfg-pricetag.is-flash { background: rgba(150, 95, 54, 0.12); }
+.cfg-pricetag.is-flash .cfg-pricetag__delta { opacity: 1; transform: none; }
+.cfg-pricetag__detail { margin: 2px 0 0; font-size: 11.5px; font-weight: 300; color: var(--color-foreground); opacity: .7; }
+.cfg-pricetag.is-quote .cfg-pricetag__amount { font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .cfg-pricetag, .cfg-pricetag__delta { transition: none; } }
+@media (max-width: 600px) { .cfg-pricetag { max-width: 92%; padding: 7px 14px 8px; } .cfg-pricetag__amount { font-size: 17px; } }

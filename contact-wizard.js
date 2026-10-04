@@ -707,11 +707,48 @@
       else rem.textContent = '';
       rem.classList.toggle('is-on', !!r);
     }
+    updatePriceTag();
     $('w-nb-minus').disabled = n <= 1;
     $('w-nb-plus').disabled = n >= NB_MAX;
     Array.prototype.forEach.call(document.querySelectorAll('.cfg-boxes__preset'), function(b) {
       b.classList.toggle('is-active', parseInt(b.getAttribute('data-n'), 10) === n);
     });
+  }
+  // Encart prix sous l'aperçu (étapes 2 à 6)
+  var lastTagPrice = null, deltaTimer = null;
+  function updatePriceTag() {
+    var box = $('cfg-pricetag');
+    if (!box) return;
+    var visible = current >= 2 && current < TOTAL;
+    box.hidden = !visible;
+    if (!visible) return;
+    var amt = $('cfg-pt-amount'), unit = $('cfg-pt-unit'), det = $('cfg-pt-detail'), dl = $('cfg-pt-delta');
+    var base = conseil ? 0 : (PRIX_CONTENANT[containers[idx].key] || 0);
+    if (!base) {
+      amt.textContent = conseil ? 'Prix selon le contenant' : 'Prix sur devis';
+      unit.textContent = ''; det.textContent = conseil ? '' : 'Communiqué avec votre maquette';
+      box.classList.add('is-quote'); lastTagPrice = null; return;
+    }
+    box.classList.remove('is-quote');
+    var pu = prixUnitaire();
+    if (current === 2) {
+      amt.textContent = 'dès ' + euros(base); unit.textContent = ' / boîte';
+      det.textContent = 'Étiquette personnalisée et nœud satiné inclus';
+      lastTagPrice = null; return;
+    }
+    amt.textContent = euros(pu); unit.textContent = ' / boîte';
+    var o = prixOptions(), parts = ['Boîte ' + euros(base)];
+    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus +' + euros(o.sup));
+    if (o.bouquet) parts.push('Bouquet +' + euros(o.bouquet));
+    det.textContent = parts.length > 1 ? parts.join(' · ') : 'Boîte en carton, étiquette et nœud inclus';
+    if (lastTagPrice !== null && Math.abs(pu - lastTagPrice) > 0.001) {
+      var d = Math.round((pu - lastTagPrice) * 100) / 100;
+      dl.textContent = (d > 0 ? '+' : '−') + euros(Math.abs(d));
+      dl.classList.toggle('is-down', d < 0);
+      box.classList.remove('is-flash'); void box.offsetWidth; box.classList.add('is-flash');
+      clearTimeout(deltaTimer); deltaTimer = setTimeout(function() { box.classList.remove('is-flash'); }, 1400);
+    }
+    lastTagPrice = pu;
   }
   function setNb(n) {
     $('w-nb').value = Math.max(1, Math.min(NB_MAX, n));
