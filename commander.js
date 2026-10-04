@@ -244,12 +244,16 @@
     return g.order.map(function (r) { return dgLabel(r) + ' ×' + g.qty[r]; }).join(', ') + ' (' + dgTotal(g) + '/' + DG_MAX + ')';
   }
   function refocus(id) { var f = document.getElementById(id); if (f) f.focus(); }
+  /* Bouquets : uniquement des dragées au chocolat */
+  function isBouquet(ref) { var p = CATALOGUE[ref]; return !!p && p.familyId === 'bouquets' && /bouquet/.test(ref); }
   function dgBlock(l, i) {
     var g = dgOf(l), cat = dgCat(g), tot = dgTotal(g);
+    var onlyChoco = isBouquet(l.ref);
+    if (onlyChoco) g.tab = 'chocolats';
     var fullColors = g.order.length >= DG_MAX_COLORS, fullQty = tot >= DG_MAX;
     var box = el('div', 'order-perso order-dg');
     var head = el('p', 'order-perso__title cfg-colors__head');
-    head.appendChild(el('span', '', 'Vos dragées'));
+    head.appendChild(el('span', '', onlyChoco ? 'Vos dragées au chocolat' : 'Vos dragées'));
     head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + DG_MAX));
     box.appendChild(head);
 
@@ -267,7 +271,7 @@
       t.addEventListener('click', function () { g.tab = c.id; render(); refocus(t.id); });
       tabs.appendChild(t);
     });
-    box.appendChild(tabs);
+    if (!onlyChoco) box.appendChild(tabs);
 
     var panel = el('div', 'wizard__colors wizard__colors--choco cfg-dg-panel');
     panel.setAttribute('role', 'tabpanel');
