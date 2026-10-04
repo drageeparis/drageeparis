@@ -324,6 +324,12 @@
     var fullColors = chosenColors.length >= MAX_COLORS, fullQty = !!cat && tot >= cap;
     colorInputs.forEach(function(o) {
       o.disabled = !o.checked && (fullColors || fullQty || (!!cat && catOf(o) !== cat));
+      // bulle d'explication au survol (ou au toucher) d'une dragée indisponible
+      var tip = '';
+      if (!o.checked && !!cat && catOf(o) !== cat) tip = 'Une seule catégorie par contenant : vous avez choisi des « ' + catName(cat) + ' ». Retirez-les pour choisir des « ' + catName(catOf(o)) + ' ».';
+      else if (!o.checked && fullColors) tip = 'Trois couleurs maximum : retirez-en une pour choisir celle-ci.';
+      else if (!o.checked && fullQty) tip = 'Contenant complet : diminuez une quantité pour ajouter cette couleur.';
+      if (tip) o.parentNode.setAttribute('data-tip', tip); else o.parentNode.removeAttribute('data-tip');
     });
     var lim = $('cfg-colors-limit');
     lim.hidden = !(fullColors || fullQty);
@@ -982,6 +988,23 @@
         }
         nextBtn.classList.remove('is-nudge'); void nextBtn.offsetWidth; nextBtn.classList.add('is-nudge');
       }, 150);
+    });
+  });
+
+  /* Bulles d'aide sur les dragées indisponibles : placement et affichage au toucher */
+  function placeTip(lab) {
+    var r = lab.getBoundingClientRect(), mid = r.left + r.width / 2;
+    lab.classList.toggle('tip-left', mid < 140);
+    lab.classList.toggle('tip-right', mid > window.innerWidth - 140);
+  }
+  document.querySelectorAll('.cfg-dg-panel .wizard__color-item').forEach(function(lab) {
+    lab.addEventListener('mouseenter', function() { if (lab.hasAttribute('data-tip')) placeTip(lab); });
+    lab.addEventListener('click', function() {
+      if (!lab.hasAttribute('data-tip')) return;
+      placeTip(lab);
+      lab.classList.add('is-tip');
+      clearTimeout(lab._tipT);
+      lab._tipT = setTimeout(function() { lab.classList.remove('is-tip'); }, 2800);
     });
   });
 

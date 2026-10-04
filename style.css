@@ -6597,3 +6597,31 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 @keyframes cfgNudge { 0%, 100% { transform: none; } 35% { transform: translateX(4px); } 65% { transform: translateX(-2px); } }
 #wizard-next.is-nudge { animation: cfgNudge 0.7s var(--ease-soft) 0.35s 1; }
 @media (prefers-reduced-motion: reduce) { #wizard-next.is-nudge { animation: none; } }
+
+/* Bulle d'aide sur une dragée indisponible (autre catégorie, maximum atteint) */
+.wizard__color-item[data-tip] { position: relative; }
+.wizard__color-item[data-tip]::after,
+.wizard__color-item[data-tip]::before { position: absolute; left: 50%; pointer-events: none; opacity: 0; transition: opacity 0.18s var(--ease-soft), transform 0.18s var(--ease-soft); z-index: 20; }
+.wizard__color-item[data-tip]::after {
+  content: attr(data-tip);
+  bottom: calc(100% + 10px);
+  width: min(230px, 70vw);
+  transform: translate(-50%, 4px);
+  padding: 10px 12px;
+  background: #52362A; color: #FBF8F3;
+  font-size: 12px; font-weight: 300; line-height: 1.45; letter-spacing: 0.01em; text-align: left; white-space: normal;
+  box-shadow: 0 6px 18px rgba(82, 54, 42, 0.18);
+}
+.wizard__color-item[data-tip]::before {
+  content: ''; bottom: calc(100% + 4px); width: 10px; height: 10px; background: #52362A;
+  transform: translate(-50%, 4px) rotate(45deg);
+}
+.wizard__color-item[data-tip].tip-left::after { left: 0; transform: translate(0, 4px); }
+.wizard__color-item[data-tip].tip-right::after { left: auto; right: 0; transform: translate(0, 4px); }
+.wizard__color-item[data-tip]:hover::after, .wizard__color-item[data-tip]:hover::before,
+.wizard__color-item[data-tip].is-tip::after, .wizard__color-item[data-tip].is-tip::before { opacity: 1; }
+.wizard__color-item[data-tip]:hover::after, .wizard__color-item[data-tip].is-tip::after { transform: translate(-50%, 0); }
+.wizard__color-item[data-tip].tip-left:hover::after, .wizard__color-item[data-tip].tip-left.is-tip::after,
+.wizard__color-item[data-tip].tip-right:hover::after, .wizard__color-item[data-tip].tip-right.is-tip::after { transform: none; }
+.wizard__color-item[data-tip]:hover::before, .wizard__color-item[data-tip].is-tip::before { transform: translate(-50%, 0) rotate(45deg); }
+@media (hover: none) { .wizard__color-item[data-tip]:hover::after, .wizard__color-item[data-tip]:hover::before { opacity: 0; } .wizard__color-item[data-tip].is-tip::after, .wizard__color-item[data-tip].is-tip::before { opacity: 1; } }

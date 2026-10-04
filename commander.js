@@ -285,6 +285,10 @@
       cb.id = 'dg-' + i + '-' + r;
       cb.checked = g.order.indexOf(r) !== -1;
       cb.disabled = !cb.checked && (fullColors || fullQty || (!!cat && cat !== g.tab));
+      var tipTxt = '';
+      if (!cb.checked && !!cat && cat !== g.tab) tipTxt = 'Une seule catégorie par création : vous avez choisi des « ' + DG_CATS.filter(function (c) { return c.id === cat; })[0].name + ' ». Retirez-les pour choisir dans cette catégorie.';
+      else if (!cb.checked && fullColors) tipTxt = 'Trois couleurs maximum : retirez-en une pour choisir celle-ci.';
+      else if (!cb.checked && fullQty) tipTxt = 'Maximum atteint : diminuez une quantité pour ajouter cette couleur.';
       cb.addEventListener('change', function () {
         if (cb.checked) { g.order.push(r); g.qty[r] = 1; }
         else { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; }
@@ -297,6 +301,11 @@
       sw.appendChild(el('span', 'wizard__color-swatch-name', dgShort(r)));
       item.appendChild(cb);
       item.appendChild(sw);
+      if (tipTxt) {
+        item.setAttribute('data-tip', tipTxt);
+        item.addEventListener('mouseenter', function () { var r = item.getBoundingClientRect(), m = r.left + r.width / 2; item.classList.toggle('tip-left', m < 140); item.classList.toggle('tip-right', m > window.innerWidth - 140); });
+        item.addEventListener('click', function () { item.classList.add('is-tip'); setTimeout(function () { item.classList.remove('is-tip'); }, 2800); });
+      }
       panel.appendChild(item);
     });
     box.appendChild(panel);
