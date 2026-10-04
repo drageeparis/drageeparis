@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lancer ma création · Dragée Paris</title>
   <meta name="description" content="Lancez votre création personnalisée étape par étape, événement, quantité, date, couleurs et coordonnées. Réponse sous 48h.">
-  <link rel="stylesheet" href="style.css?v=20261004n">
+  <link rel="stylesheet" href="style.css?v=20261004o">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -403,6 +403,25 @@
             </div>
           </div>
 
+          <div class="wizard__row cfg-tagopts cfg-tagcolors">
+            <div class="wizard__field">
+              <p class="wizard__label cfg-swatch__label" id="label-tag-bord"><span>Couleur des bordures</span><span class="cfg-swatch__current" id="label-tag-bord-name">Caramel</span></p>
+              <div class="cfg-swatches" role="radiogroup" aria-labelledby="label-tag-bord">
+                <label class="cfg-swatch" title="Caramel"><input type="radio" name="etiquette_bord" value="Caramel" data-hex="#965F36" checked><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#965F36"></span><span class="sr-only">Caramel</span></label>
+                <label class="cfg-swatch" title="Chocolat"><input type="radio" name="etiquette_bord" value="Chocolat" data-hex="#52362A"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#52362A"></span><span class="sr-only">Chocolat</span></label>
+                <label class="cfg-swatch" title="Doré"><input type="radio" name="etiquette_bord" value="Doré" data-hex="#B8963E"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#B8963E"></span><span class="sr-only">Doré</span></label>
+                <label class="cfg-swatch" title="Argenté"><input type="radio" name="etiquette_bord" value="Argenté" data-hex="#A7A9AC"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#A7A9AC"></span><span class="sr-only">Argenté</span></label>
+                <label class="cfg-swatch" title="Noir"><input type="radio" name="etiquette_bord" value="Noir" data-hex="#1A1816"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#1A1816"></span><span class="sr-only">Noir</span></label>
+                <label class="cfg-swatch" title="Blanc"><input type="radio" name="etiquette_bord" value="Blanc" data-hex="#FFFFFF"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#FFFFFF"></span><span class="sr-only">Blanc</span></label>
+                <label class="cfg-swatch" title="Bordeaux"><input type="radio" name="etiquette_bord" value="Bordeaux" data-hex="#6B1E2A"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#6B1E2A"></span><span class="sr-only">Bordeaux</span></label>
+                <label class="cfg-swatch" title="Bleu marine"><input type="radio" name="etiquette_bord" value="Bleu marine" data-hex="#1F2E4A"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#1F2E4A"></span><span class="sr-only">Bleu marine</span></label>
+                <label class="cfg-swatch" title="Rose"><input type="radio" name="etiquette_bord" value="Rose" data-hex="#B5677A"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#B5677A"></span><span class="sr-only">Rose</span></label>
+                <label class="cfg-swatch" title="Vert sauge"><input type="radio" name="etiquette_bord" value="Vert sauge" data-hex="#5E6E52"><span class="cfg-swatch__dot cfg-swatch__dot--ring" style="--c:#5E6E52"></span><span class="sr-only">Vert sauge</span></label>
+                <label class="cfg-swatch cfg-swatch--custom" title="Autre couleur"><input type="radio" name="etiquette_bord" value="Personnalisée" data-hex="#888888"><span class="cfg-swatch__dot"><input type="color" class="cfg-swatch__picker" id="cfg-bord-custom" value="#888888" aria-label="Choisir une autre couleur"></span><span class="sr-only">Autre couleur</span></label>
+              </div>
+            </div>
+          </div>
+
           <div class="wizard__row">
             <div class="wizard__field">
               <label class="wizard__label" for="cfg-l1">Prénoms ou nom <span class="wizard__optional">(facultatif)</span></label>
@@ -641,6 +660,6 @@
   </footer>
 
   <script src="main.js?v=20261002f"></script>
-  <script src="contact-wizard.js?v=20261004n"></script>
+  <script src="contact-wizard.js?v=20261004o"></script>
 </body>
 </html>

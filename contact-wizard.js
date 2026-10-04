@@ -467,8 +467,11 @@
       var r = parseFloat(g.getAttribute('data-r'));
       Array.prototype.forEach.call(g.querySelectorAll('.cfg-tag__shape'), function(c) { c.parentNode.removeChild(c); });
       var first = g.firstChild;
-      g.insertBefore(tagShapeEl(shape, r, 0, tagColor('etiquette_fond', TAG_FILL), TAG_STROKE, '1'), first);
-      g.insertBefore(tagShapeEl(shape, r, r * 0.0875, 'none', TAG_STROKE_IN, '.7'), first);
+      var bord = tagColor('etiquette_bord', TAG_STROKE);
+      g.insertBefore(tagShapeEl(shape, r, 0, tagColor('etiquette_fond', TAG_FILL), bord, '1'), first);
+      var inner = tagShapeEl(shape, r, r * 0.0875, 'none', bord, '.7');
+      inner.setAttribute('stroke-opacity', '.45');
+      g.insertBefore(inner, first);
       g.setAttribute('transform', (g.getAttribute('data-base') + ' scale(' + k + ')').trim());
     });
     var out = $('cfg-tag-size-val');
@@ -482,12 +485,13 @@
     return el ? el.getAttribute('data-hex') : fallback;
   }
   function tagColorName(name) { return checkedValue(name) || ''; }
-  ['etiquette_fond', 'etiquette_texte'].forEach(function(name) {
-    var label = $(name === 'etiquette_fond' ? 'label-tag-fond-name' : 'label-tag-texte-name');
+  var TAG_IDS = { etiquette_fond: ['label-tag-fond-name', 'cfg-fond-custom'], etiquette_texte: ['label-tag-texte-name', 'cfg-texte-custom'], etiquette_bord: ['label-tag-bord-name', 'cfg-bord-custom'] };
+  ['etiquette_fond', 'etiquette_texte', 'etiquette_bord'].forEach(function(name) {
+    var label = $(TAG_IDS[name][0]);
     document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
       r.addEventListener('change', function() { if (label) label.textContent = r.value; renderTagShapes(); });
     });
-    var picker = $(name === 'etiquette_fond' ? 'cfg-fond-custom' : 'cfg-texte-custom');
+    var picker = $(TAG_IDS[name][1]);
     if (picker) picker.addEventListener('input', function() {
       var radio = picker.closest('.cfg-swatch').querySelector('input[type="radio"]');
       radio.setAttribute('data-hex', picker.value);
@@ -635,7 +639,7 @@
     return v === 'Personnalisée' ? 'personnalisée ' + tagColor(name, '').toUpperCase() : v.toLowerCase();
   }
   function etiquetteFormat() {
-    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte');
+    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', bordures ' + colorLabel('etiquette_bord');
   }
 
   /* ---------- Navigation ---------- */
