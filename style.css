@@ -6547,3 +6547,5 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-swatch__dot--ring { background: var(--paper); box-shadow: inset 0 0 0 3px var(--c), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--c); }
 .cfg-swatch > input:checked + .cfg-swatch__dot--ring { box-shadow: inset 0 0 0 3px var(--c), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--c), 0 0 0 3px var(--paper), 0 0 0 4px var(--caramel); }
 .cfg-swatch > input:focus-visible + .cfg-swatch__dot--ring { box-shadow: inset 0 0 0 3px var(--c), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--c), 0 0 0 3px var(--paper), 0 0 0 5px var(--caramel); }
+.cfg-swatch__dot--none { background: var(--paper); overflow: hidden; }
+.cfg-swatch__dot--none::after { content: ''; position: absolute; left: 50%; top: 4px; bottom: 4px; width: 1px; background: rgba(82, 54, 42, 0.55); transform: translateX(-50%) rotate(45deg); }

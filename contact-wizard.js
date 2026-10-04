@@ -467,7 +467,7 @@
       var r = parseFloat(g.getAttribute('data-r'));
       Array.prototype.forEach.call(g.querySelectorAll('.cfg-tag__shape'), function(c) { c.parentNode.removeChild(c); });
       var first = g.firstChild;
-      var bord = tagColor('etiquette_bord', TAG_STROKE);
+      var bord = tagColor('etiquette_bord', TAG_STROKE); // « none » = sans bordure
       g.insertBefore(tagShapeEl(shape, r, 0, tagColor('etiquette_fond', TAG_FILL), bord, '1'), first);
       var inner = tagShapeEl(shape, r, r * 0.0875, 'none', bord, '.7');
       inner.setAttribute('stroke-opacity', '.45');
@@ -639,7 +639,8 @@
     return v === 'Personnalisée' ? 'personnalisée ' + tagColor(name, '').toUpperCase() : v.toLowerCase();
   }
   function etiquetteFormat() {
-    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', bordures ' + colorLabel('etiquette_bord');
+    var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? 'sans bordure' : 'bordures ' + colorLabel('etiquette_bord');
+    return tagShape() + ', taille ' + Math.round(tagScale() * 100) + ' %, fond ' + colorLabel('etiquette_fond') + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
   /* ---------- Navigation ---------- */
