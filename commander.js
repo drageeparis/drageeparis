@@ -423,8 +423,8 @@
       qty.appendChild(el('span', 'order-line__weight', d.crea ? pieces(l.qty) + (d.fmt.price != null ? ' · ' + euro(d.fmt.price) + ' la pièce' : '') : weight(d.grams) + ' au total'));
       row.appendChild(qty);
 
-      if (d.crea && wantsDragees(l)) row.appendChild(dgBlock(l, i));
       if (d.crea) row.appendChild(persoBlock(l, i));
+      if (d.crea && wantsDragees(l)) row.appendChild(dgBlock(l, i));
 
       linesBox.appendChild(row);
     });
@@ -438,8 +438,8 @@
       var left = el('span');
       left.appendChild(el('span', 'order__sum-name', d.prod.name));
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
-      if (d.crea && wantsDragees(l) && dgText(l)) left.appendChild(el('span', 'order__sum-meta', dgText(l)));
       if (d.crea && persoText(l)) left.appendChild(el('span', 'order__sum-meta order__sum-perso', '« ' + persoText(l) + ' »'));
+      if (d.crea && wantsDragees(l) && dgText(l)) left.appendChild(el('span', 'order__sum-meta', dgText(l)));
       li.appendChild(left);
       li.appendChild(el('span', 'order__sum-price', linePrice(d)));
       sumLines.appendChild(li);
