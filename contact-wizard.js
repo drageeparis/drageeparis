@@ -738,9 +738,11 @@
     }
     amt.textContent = euros(pu); unit.textContent = ' / boîte';
     var o = prixOptions(), parts = ['Boîte ' + euros(base)];
-    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' en plus +' + euros(o.sup));
+    if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' sup. +' + euros(o.sup));
     if (o.bouquet) parts.push('Bouquet +' + euros(o.bouquet));
-    det.textContent = parts.length > 1 ? parts.join(' · ') : 'Boîte en carton, étiquette et nœud inclus';
+    det.innerHTML = '';
+    if (parts.length > 1) parts.forEach(function(t) { var sp = document.createElement('span'); sp.textContent = t; det.appendChild(sp); });
+    else det.textContent = 'Étiquette personnalisée et nœud satiné inclus';
     if (lastTagPrice !== null && Math.abs(pu - lastTagPrice) > 0.001) {
       var d = Math.round((pu - lastTagPrice) * 100) / 100;
       dl.textContent = (d > 0 ? '+' : '−') + euros(Math.abs(d));

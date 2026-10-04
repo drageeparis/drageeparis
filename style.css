@@ -6671,3 +6671,6 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 .cfg-pricetag.is-quote .cfg-pricetag__amount { font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .cfg-pricetag, .cfg-pricetag__delta { transition: none; } }
 @media (max-width: 600px) { .cfg-pricetag { max-width: 92%; padding: 7px 14px 8px; } .cfg-pricetag__amount { font-size: 17px; } }
+
+.cfg-pricetag__detail span { white-space: nowrap; }
+.cfg-pricetag__detail span + span::before { content: '·'; margin: 0 6px; opacity: .6; }
