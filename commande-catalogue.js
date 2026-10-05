@@ -1967,6 +1967,27 @@ window.DP_CATALOGUE = {
   "name_en": "Yellow Bouquet",
   "detail_en": "Price per piece"
  },
+ "bouquet-rose-amande": {
+  "kind": "creation",
+  "name": "Bouquet Rose Amande",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-rose-amande.html",
+  "image": "images/bouquets/bouquet-rose-amande-800w.webp",
+  "formats": [
+   {
+    "id": "piece",
+    "label": "À la pièce",
+    "price": 5.0,
+    "label_en": "Per piece"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Pink and Almond Green Bouquet",
+  "detail_en": "Price per piece"
+ },
  "bouquet-violet": {
   "kind": "creation",
   "name": "Bouquet Violet",
