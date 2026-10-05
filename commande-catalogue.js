@@ -1644,6 +1644,33 @@ window.DP_CATALOGUE = {
   "name_en": "Pink Bouquet Christening Dragées",
   "detail_en": "Price per piece"
  },
+ "bapteme-eucalyptus": {
+  "kind": "creation",
+  "name": "Dragées Baptême Eucalyptus",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
+  "detail": "Prix à la pièce",
+  "url": "produit-bapteme-eucalyptus.html",
+  "image": "images/fetes-religieuses/bapteme-eucalyptus-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.0,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 3.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Eucalyptus Christening Dragées",
+  "detail_en": "Price per piece"
+ },
  "bapteme-rose-tendre": {
   "kind": "creation",
   "name": "Dragées Baptême Rose Tendre",
