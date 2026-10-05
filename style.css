@@ -6769,3 +6769,40 @@ a.lang-switch__item:hover { opacity: 1; }
 .order-dg__min::before { content: "● "; font-size: 9px; vertical-align: 2px; }
 .order-dg.has-error .order-dg__min { color: #A33A2B; font-weight: 600; }
 .order-dg.has-error { border-color: #A33A2B; }
+
+/* Fiche bouquet : accès au configurateur « Lancer ma création » */
+.pdp__custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px 10px 12px;
+  margin: -8px 0 28px;
+  border: 1px solid rgba(150, 95, 54, 0.35);
+  border-radius: var(--border-radius--button);
+  color: var(--caramel);
+  text-decoration: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.pdp__custom:hover,
+.pdp__custom:focus-visible { border-color: var(--caramel); background-color: rgba(150, 95, 54, 0.06); }
+.pdp__custom-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(150, 95, 54, 0.10);
+  flex-shrink: 0;
+}
+.pdp__custom-text { display: flex; flex-direction: column; gap: 2px; }
+.pdp__custom-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.pdp__custom-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ink);
+}

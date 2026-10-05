@@ -228,6 +228,19 @@
   renderSizes();
   updateSizes();
 
+  /* ---------- Préselection depuis une fiche produit (?contenant=bouquet&taille=moyen) ---------- */
+  (function() {
+    var cParam = (params.get('contenant') || '').toLowerCase();
+    var tParam = (params.get('taille') || '').toLowerCase();
+    var start = containers.map(function(c) { return c.key; }).indexOf(cParam);
+    if (start > 0) {
+      svgs.forEach(function(s, i) { s.setAttribute('data-pos', i === start ? 'active' : (i < start ? 'prev' : 'next')); });
+      idx = start;
+      updateCaption();
+    }
+    if (cParam === 'bouquet' && BOUQUET_SIZES.some(function(b) { return b.id === tParam; })) { bouquetSize = tParam; buildPetals(); renderSizes(); }
+  })();
+
 
 
   /* ---------- Boîte en carton : 4 rabats ----------

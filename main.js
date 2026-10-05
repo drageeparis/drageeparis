@@ -592,6 +592,15 @@ document.addEventListener('DOMContentLoaded', () => {
           if (unit) q.set('format', unit.replace(/\s+/g, '').toLowerCase());
           orderLink.setAttribute('href', parts[0] + '?' + q.toString());
         }
+        /* Bouquets : transmet la taille choisie au configurateur (?taille=petit/moyen/grand) */
+        var customLink = document.querySelector('a[data-custom-link]');
+        if (customLink) {
+          var m = /^(petit|moyen|grand)/i.exec(opt.dataset.unit || '');
+          var cp = customLink.getAttribute('href').split('?');
+          var cq = new URLSearchParams(cp[1] || '');
+          if (m) cq.set('taille', m[1].toLowerCase());
+          customLink.setAttribute('href', cp[0] + '?' + cq.toString());
+        }
       }
       select.addEventListener('change', update);
       update();
