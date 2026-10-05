@@ -300,7 +300,8 @@
     if (!g.order.length) return '';
     return g.order.map(function (r) { return dgLabel(r) + ' ×' + g.qty[r]; }).join(', ') + ' (' + dgTotal(g) + '/' + dgMax(l) + ')';
   }
-  function refocus(id) { var f = document.getElementById(id); if (f) f.focus(); }
+  /* preventScroll : le navigateur ne fait pas défiler la page vers l'élément */
+  function refocus(id) { var f = document.getElementById(id); if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } } }
   /* Bouquets : uniquement des dragées au chocolat */
   function isBouquet(ref) { var p = CATALOGUE[ref]; return !!p && p.familyId === 'bouquets' && /bouquet/.test(ref); }
   function dgBlock(l, i) {
@@ -628,10 +629,16 @@
     });
   }
 
+  /* La liste est redessinée à chaque clic : on garde la hauteur et la position de la page
+     (Safari ne conserve pas la position quand le contenu change sous l'utilisateur) */
   function render() {
+    var x = window.scrollX, y = window.scrollY;
+    linesBox.style.minHeight = linesBox.offsetHeight + 'px';
     renderLines();
     renderSummary();
     renderPicker();
+    linesBox.style.minHeight = '';
+    if (window.scrollY !== y || window.scrollX !== x) window.scrollTo(x, y);
   }
 
   addBtn.addEventListener('click', function () { pickerOpen = true; renderPicker(); picker.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
