@@ -131,6 +131,8 @@
   }
   /* Moins que le minimum choisi (hors « pas encore choisi ») */
   function dgSousMin(l) {
+    var fixe = dgFixe(l);
+    if (fixe) return !l.dg || l.dg.order.reduce(function (s, r) { return s + (l.dg.qty[r] || 0); }, 0) < fixe;
     var c = dgChoix(l); if (!c) return false;
     if (!l.dg) return true;
     var n = l.dg.order.reduce(function (s, r) { return s + (l.dg.qty[r] || 0); }, 0);
@@ -292,7 +294,17 @@
   }
   /* Bouquets : 1 dragée par pétale (petit 5, moyen 7, grand 10) */
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
-  function dgMax(l) { return (l && dgChoix(l) && dgChoix(l).max) || (l && BQ_MAX[l.format]) || DG_MAX; }
+  /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
+     Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
+  var DG_FIXE = { 'ecrin-fleuri': 10 };
+  function dgFixe(l) {
+    if (!l || dgChoix(l) || !wantsDragees(l)) return 0;
+    if (BQ_MAX[l.format]) return BQ_MAX[l.format];
+    var m = /^(?:avec)?(\d+)dragée/.exec(l.format || '');
+    if (m) return parseInt(m[1], 10);
+    return DG_FIXE[l.ref] || 0;
+  }
+  function dgMax(l) { return (l && dgChoix(l) && dgChoix(l).max) || dgFixe(l) || DG_MAX; }
   function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
   function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
   function dgText(l) {
@@ -321,7 +333,13 @@
     head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + MAX));
     box.appendChild(head);
 
-    var choix = dgChoix(l);
+    var choix = dgChoix(l), fixe = dgFixe(l);
+    if (fixe) {
+      var manque = fixe - tot;
+      box.appendChild(manque > 0
+        ? el('p', 'order-dg__min', T('Sélectionnez ' + fixe + ' dragées pour passer commande' + (tot ? ' : encore ' + manque + ' à choisir.' : '.'), 'Select ' + fixe + ' dragées to place your order' + (tot ? ': ' + manque + ' more to choose.' : '.')))
+        : el('p', 'order-dg__ok', T('Sélection complète : ' + fixe + ' dragées.', 'Selection complete: ' + fixe + ' dragées.')));
+    }
     if (choix) {
       var reste = choix.min - tot;
       if (reste > 0) {
