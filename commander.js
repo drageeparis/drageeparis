@@ -265,25 +265,34 @@
     if (!l.dg) l.dg = { tab: 'chocolats', order: [], qty: {} };
     return l.dg;
   }
+  /* Bouquets : 1 dragée par pétale (petit 5, moyen 7, grand 10) */
+  var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
+  function dgMax(l) { return (l && BQ_MAX[l.format]) || DG_MAX; }
   function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
   function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
   function dgText(l) {
     var g = dgOf(l);
     if (!g.order.length) return '';
-    return g.order.map(function (r) { return dgLabel(r) + ' ×' + g.qty[r]; }).join(', ') + ' (' + dgTotal(g) + '/' + DG_MAX + ')';
+    return g.order.map(function (r) { return dgLabel(r) + ' ×' + g.qty[r]; }).join(', ') + ' (' + dgTotal(g) + '/' + dgMax(l) + ')';
   }
   function refocus(id) { var f = document.getElementById(id); if (f) f.focus(); }
   /* Bouquets : uniquement des dragées au chocolat */
   function isBouquet(ref) { var p = CATALOGUE[ref]; return !!p && p.familyId === 'bouquets' && /bouquet/.test(ref); }
   function dgBlock(l, i) {
-    var g = dgOf(l), cat = dgCat(g), tot = dgTotal(g);
+    var g = dgOf(l), MAX = dgMax(l);
+    /* Taille réduite (ex. grand -> petit) : on retire les dragées en trop */
+    while (dgTotal(g) > MAX && g.order.length) {
+      var last = g.order[g.order.length - 1];
+      if (--g.qty[last] <= 0) { delete g.qty[last]; g.order.pop(); }
+    }
+    var cat = dgCat(g), tot = dgTotal(g);
     var onlyChoco = isBouquet(l.ref);
     if (onlyChoco) g.tab = 'chocolats';
-    var fullColors = g.order.length >= DG_MAX_COLORS, fullQty = tot >= DG_MAX;
+    var fullColors = g.order.length >= DG_MAX_COLORS, fullQty = tot >= MAX;
     var box = el('div', 'order-perso order-dg');
     var head = el('p', 'order-perso__title cfg-colors__head');
     head.appendChild(el('span', '', onlyChoco ? T('Vos dragées au chocolat', 'Your chocolate dragées') : T('Vos dragées', 'Your dragées')));
-    head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + DG_MAX));
+    head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + MAX));
     box.appendChild(head);
 
     var tabs = el('div', 'cfg-dg-tabs');
@@ -344,7 +353,7 @@
       box.appendChild(el('p', 'wizard__hint', T('Une seule catégorie par création : retirez vos « ' + catName + ' » pour choisir dans une autre.', 'One category per creation: remove your “' + catName + '” to choose from another.')));
     }
     if (fullColors || fullQty) {
-      box.appendChild(el('p', 'wizard__hint', fullQty ? T('Maximum atteint : ' + DG_MAX + ' dragées. Diminuez une quantité pour ajouter une couleur.', 'Maximum reached: ' + DG_MAX + ' dragées. Reduce a quantity to add a colour.') : T('Trois couleurs maximum : retirez-en une pour en choisir une autre.', 'Three colours maximum: remove one to choose another.')));
+      box.appendChild(el('p', 'wizard__hint', fullQty ? T('Maximum atteint : ' + MAX + ' dragées. Diminuez une quantité pour ajouter une couleur.', 'Maximum reached: ' + MAX + ' dragées. Reduce a quantity to add a colour.') : T('Trois couleurs maximum : retirez-en une pour en choisir une autre.', 'Three colours maximum: remove one to choose another.')));
     }
 
     if (g.order.length) {
@@ -366,7 +375,7 @@
         pl.type = 'button'; pl.id = 'dgp-' + i + '-' + r;
         pl.setAttribute('aria-label', T('Une de plus', 'One more'));
         pl.disabled = fullQty;
-        pl.addEventListener('click', function () { if (dgTotal(g) < DG_MAX) { g.qty[r]++; render(); refocus(pl.id); } });
+        pl.addEventListener('click', function () { if (dgTotal(g) < MAX) { g.qty[r]++; render(); refocus(pl.id); } });
         step.appendChild(mi); step.appendChild(out); step.appendChild(pl);
         li.appendChild(step);
         var del = el('button', 'cfg-qty__del', '×');

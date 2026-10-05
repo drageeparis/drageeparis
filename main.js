@@ -563,6 +563,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function enUnit(u) {
     if (/unité/.test(u)) return 'per unit';
     if (/^sans dragée/i.test(u)) return 'without dragées';
+    var tailles = { 'Petit bouquet': 'Small bouquet', 'Moyen bouquet': 'Medium bouquet', 'Grand bouquet': 'Large bouquet' };
+    if (tailles[u]) return tailles[u];
     return u;
   }
   (function() {

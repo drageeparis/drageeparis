@@ -1936,14 +1936,59 @@ window.DP_CATALOGUE = {
   "image": "images/bouquets/bouquet-bleu-800w.webp",
   "formats": [
    {
-    "id": "piece",
-    "label": "À la pièce",
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
     "price": 5.0,
-    "label_en": "Per piece"
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
    }
   ],
   "family_en": "Bouquets & gift boxes",
   "name_en": "Blue Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "bouquet-ivoire": {
+  "kind": "creation",
+  "name": "Bouquet Ivoire",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-ivoire.html",
+  "image": "images/bouquets/bouquet-ivoire-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Ivory Bouquet",
   "detail_en": "Price per piece"
  },
  "bouquet-jaune": {
@@ -1957,10 +2002,22 @@ window.DP_CATALOGUE = {
   "image": "images/bouquets/bouquet-jaune-800w.webp",
   "formats": [
    {
-    "id": "piece",
-    "label": "À la pièce",
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
     "price": 5.0,
-    "label_en": "Per piece"
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
    }
   ],
   "family_en": "Bouquets & gift boxes",
@@ -1978,14 +2035,92 @@ window.DP_CATALOGUE = {
   "image": "images/bouquets/bouquet-rose-amande-800w.webp",
   "formats": [
    {
-    "id": "piece",
-    "label": "À la pièce",
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
     "price": 5.0,
-    "label_en": "Per piece"
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
    }
   ],
   "family_en": "Bouquets & gift boxes",
   "name_en": "Pink and Almond Green Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "bouquet-rose-poudre": {
+  "kind": "creation",
+  "name": "Bouquet Rose Poudré",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-rose-poudre.html",
+  "image": "images/bouquets/bouquet-rose-poudre-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Powder Pink Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "bouquet-vert-sauge": {
+  "kind": "creation",
+  "name": "Bouquet Vert Sauge",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-vert-sauge.html",
+  "image": "images/bouquets/bouquet-vert-sauge-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Sage Green Bouquet",
   "detail_en": "Price per piece"
  },
  "bouquet-violet": {
@@ -1999,77 +2134,26 @@ window.DP_CATALOGUE = {
   "image": "images/bouquets/bouquet-violet-800w.webp",
   "formats": [
    {
-    "id": "piece",
-    "label": "À la pièce",
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
     "price": 5.0,
-    "label_en": "Per piece"
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
    }
   ],
   "family_en": "Bouquets & gift boxes",
   "name_en": "Purple Bouquet",
-  "detail_en": "Price per piece"
- },
- "grand-bouquet": {
-  "kind": "creation",
-  "name": "Grand bouquet",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-grand-bouquet.html",
-  "image": "images/bouquets/grand-bouquet-800w.webp",
-  "formats": [
-   {
-    "id": "piece",
-    "label": "À la pièce",
-    "price": 10.0,
-    "label_en": "Per piece"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Large bouquet",
-  "detail_en": "Price per piece"
- },
- "moyen-bouquet": {
-  "kind": "creation",
-  "name": "Moyen bouquet",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-moyen-bouquet.html",
-  "image": "images/bouquets/moyen-bouquet-800w.webp",
-  "formats": [
-   {
-    "id": "piece",
-    "label": "À la pièce",
-    "price": 7.0,
-    "label_en": "Per piece"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Medium bouquet",
-  "detail_en": "Price per piece"
- },
- "petit-bouquet": {
-  "kind": "creation",
-  "name": "Petit bouquet",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-petit-bouquet.html",
-  "image": "images/bouquets/petit-bouquet-800w.webp",
-  "formats": [
-   {
-    "id": "piece",
-    "label": "À la pièce",
-    "price": 5.0,
-    "label_en": "Per piece"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Small bouquet",
   "detail_en": "Price per piece"
  },
  "ecrin-fleuri": {

@@ -158,9 +158,30 @@
         <a href="creations.html" class="pdp__back">← Our creations</a>
       <h1 class="pdp__title">Blue Bouquet</h1>
         <p class="pdp__tagline">A bouquet of dragées, carefully assembled and personalised in our workshop in Île-de-France. Its blue tones, delicate flowers and natural finishing touches make it an elegant creation to grace your event.</p>
-       <p class="pdp__price">€5</p>
+        <p class="pdp__weight">3 sizes · 1 chocolate dragée per petal</p>
+        <div class="pdp__qty-block" data-qty-block>
+          <select class="pdp__qty-select" data-price-select aria-label="Bouquet size">
+            <option value="5 €" data-unit="Petit bouquet" selected>Small · 5 petals, 5 dragées — €5</option>
+            <option value="7 €" data-unit="Moyen bouquet">Medium · 7 petals, 7 dragées — €7</option>
+            <option value="10 €" data-unit="Grand bouquet">Large · 10 petals, 10 dragées — €10</option>
+          </select>
+          <p class="pdp__price"><span data-price-display>€5</span><span class="pdp__price-unit" data-unit-display>Small bouquet</span></p>
+        </div>
 
-        <a href="commander.html?ref=bouquet-bleu" class="pdp__cta" data-order-link>Order this creation →</a>
+        <a href="commander.html?ref=bouquet-bleu&amp;format=petitbouquet" class="pdp__cta" data-order-link>Order this creation →</a>
+
+        <details class="pdp__acc-item">
+          <summary class="pdp__acc-trigger">Sizes &amp; contents</summary>
+          <div class="pdp__acc-body">
+            <p>Each petal holds one chocolate dragée in the colours of the design.</p>
+            <ul>
+              <li>Small bouquet: 5 petals, 5 dragées — €5</li>
+              <li>Medium bouquet: 7 petals, 7 dragées — €7</li>
+              <li>Large bouquet: 10 petals, 10 dragées — €10</li>
+            </ul>
+            <p>Personalised label (name and date), dried flowers and jute-wrapped stem.</p>
+          </div>
+        </details>
 
         <details class="pdp__acc-item">
           <summary class="pdp__acc-trigger">Delivery & ordering</summary>
@@ -199,7 +220,7 @@
             <div class="prod-card__row">
               <span class="prod-card__name">Yellow Bouquet</span>
             </div>
-            <p class="prod-card__price">€5</p>
+            <p class="prod-card__price">From €5</p>
           </div>
         </a>
         <a href="produit-bouquet-violet.html" class="prod-card">
@@ -213,7 +234,7 @@
             <div class="prod-card__row">
               <span class="prod-card__name">Purple Bouquet</span>
             </div>
-            <p class="prod-card__price">€5</p>
+            <p class="prod-card__price">From €5</p>
           </div>
         </a>
       </div>
@@ -249,7 +270,7 @@
       <p>© 2026 Dragée Paris · Personalised dragée creations in Île-de-France, Paris · All rights reserved</p>
     </div>
   </footer>
-  <script src="../main.js?v=20261005m2"></script>
+  <script src="../main.js?v=20261005bq"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -260,10 +281,12 @@
     "brand": { "@type": "Brand", "name": "Dragée Paris" },
     "category": "Dragées",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       "availability": "https://schema.org/InStock",
       "priceCurrency": "EUR",
-      "price": "5",
+      "lowPrice": "5",
+      "highPrice": "10",
+      "offerCount": "3",
       "seller": { "@type": "Organization", "name": "Dragée Paris" }
     }
   }

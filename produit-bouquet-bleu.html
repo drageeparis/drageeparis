@@ -158,9 +158,30 @@
         <a href="creations.html" class="pdp__back">← Les créations</a>
       <h1 class="pdp__title">Bouquet Bleu</h1>
         <p class="pdp__tagline">Bouquet de dragées assemblé et personnalisé avec soin dans notre atelier d’Île-de-France. Ses tons bleus, ses fleurs délicates et ses finitions naturelles en font une création élégante pour sublimer votre événement.</p>
-       <p class="pdp__price">5 €</p>
+        <p class="pdp__weight">3 tailles · 1 dragée au chocolat par pétale</p>
+        <div class="pdp__qty-block" data-qty-block>
+          <select class="pdp__qty-select" data-price-select aria-label="Taille du bouquet">
+            <option value="5 €" data-unit="Petit bouquet" selected>Petit · 5 pétales, 5 dragées — 5 €</option>
+            <option value="7 €" data-unit="Moyen bouquet">Moyen · 7 pétales, 7 dragées — 7 €</option>
+            <option value="10 €" data-unit="Grand bouquet">Grand · 10 pétales, 10 dragées — 10 €</option>
+          </select>
+          <p class="pdp__price"><span data-price-display>5 €</span><span class="pdp__price-unit" data-unit-display>Petit bouquet</span></p>
+        </div>
 
-        <a href="commander.html?ref=bouquet-bleu" class="pdp__cta" data-order-link>Commander cette création →</a>
+        <a href="commander.html?ref=bouquet-bleu&amp;format=petitbouquet" class="pdp__cta" data-order-link>Commander cette création →</a>
+
+        <details class="pdp__acc-item">
+          <summary class="pdp__acc-trigger">Tailles &amp; contenu</summary>
+          <div class="pdp__acc-body">
+            <p>Chaque pétale contient une dragée au chocolat, aux couleurs du modèle.</p>
+            <ul>
+              <li>Petit bouquet : 5 pétales, 5 dragées — 5 €</li>
+              <li>Moyen bouquet : 7 pétales, 7 dragées — 7 €</li>
+              <li>Grand bouquet : 10 pétales, 10 dragées — 10 €</li>
+            </ul>
+            <p>Étiquette personnalisée (prénom et date), fleurs séchées et tige habillée de jute.</p>
+          </div>
+        </details>
 
         <details class="pdp__acc-item">
           <summary class="pdp__acc-trigger">Livraison & Commande</summary>
@@ -199,7 +220,7 @@
             <div class="prod-card__row">
               <span class="prod-card__name">Bouquet Jaune</span>
             </div>
-            <p class="prod-card__price">5 €</p>
+            <p class="prod-card__price">À partir de 5 €</p>
           </div>
         </a>
         <a href="produit-bouquet-violet.html" class="prod-card">
@@ -213,7 +234,7 @@
             <div class="prod-card__row">
               <span class="prod-card__name">Bouquet Violet</span>
             </div>
-            <p class="prod-card__price">5 €</p>
+            <p class="prod-card__price">À partir de 5 €</p>
           </div>
         </a>
       </div>
@@ -249,7 +270,7 @@
       <p>© 2026 Dragée Paris · Créations de dragées personnalisées en Île-de-France · Tous droits réservés</p>
     </div>
   </footer>
-  <script src="main.js?v=20261005m2"></script>
+  <script src="main.js?v=20261005bq"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -260,10 +281,12 @@
     "brand": { "@type": "Brand", "name": "Dragée Paris" },
     "category": "Dragées",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       "availability": "https://schema.org/InStock",
       "priceCurrency": "EUR",
-      "price": "5",
+      "lowPrice": "5",
+      "highPrice": "10",
+      "offerCount": "3",
       "seller": { "@type": "Organization", "name": "Dragée Paris" }
     }
   }

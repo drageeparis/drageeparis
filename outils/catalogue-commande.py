@@ -78,6 +78,8 @@ for chemin in sorted(glob.glob(os.path.join(ROOT, 'produit-*.html'))):
     if fichier.startswith(BOUTIQUE):
         continue
     s = open(chemin, encoding='utf-8').read()
+    if 'http-equiv="refresh"' in s:
+        continue
     ref = fichier[len('produit-'):-len('.html')]
     titre = re.search(r'class="pdp__title">(.*?)</h1>', s, re.S).group(1)
     titre = re.sub(r'\s+', ' ', re.sub(r'<br\s*/?>', ' ', titre)).strip()
@@ -133,7 +135,8 @@ def label_en(label):
     m = re.match(r'(\d+) dragées au chocolat$', label)
     if m: return m.group(1) + ' chocolate dragées'
     return {'Avec dragées': 'With dragées', 'Sans dragée': 'Without dragées', 'Sans dragées': 'Without dragées',
-            'À la pièce': 'Per piece', 'Sur devis': 'On quotation'}.get(label, label)
+            'À la pièce': 'Per piece', 'Petit bouquet': 'Small bouquet', 'Moyen bouquet': 'Medium bouquet',
+            'Grand bouquet': 'Large bouquet', 'Sur devis': 'On quotation'}.get(label, label)
 
 for p in produits + creations:
     p['family_en'] = FAM_EN[p['familyId']]

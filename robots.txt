@@ -12,6 +12,9 @@ Disallow: /boutique.html
 Disallow: /a-propos.html
 Disallow: /commande-boutique.html
 Disallow: /commande-atelier.html
+Disallow: /produit-petit-bouquet.html
+Disallow: /produit-moyen-bouquet.html
+Disallow: /produit-grand-bouquet.html
 
 # Version anglaise
 Disallow: /en/dragees-avola.html
@@ -22,5 +25,8 @@ Disallow: /en/boutique.html
 Disallow: /en/a-propos.html
 Disallow: /en/commande-boutique.html
 Disallow: /en/commande-atelier.html
+Disallow: /en/produit-petit-bouquet.html
+Disallow: /en/produit-moyen-bouquet.html
+Disallow: /en/produit-grand-bouquet.html
 
 Sitemap: https://drageeparis.fr/sitemap.xml
