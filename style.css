@@ -6765,4 +6765,5 @@ a.lang-switch__item:hover { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .maint__icon { animation: none; } }
 
 /* Commande : nombre de dragées au choix par boîte */
-.order-dg__nombre { margin: 4px 0 2px; }
+.order-dg__min { color: #A33A2B; }
+.order-dg.has-error { border-color: #A33A2B; }

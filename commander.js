@@ -123,11 +123,17 @@
     'bapteme-eucalyptus': { min: 5, max: 15, base: 3.5, parDragee: 0.1 }
   };
   function dgChoix(l) { return DG_AU_CHOIX[l.ref] && !/^sans/i.test(l.format || '') ? DG_AU_CHOIX[l.ref] : null; }
+  /* Nombre facturé = dragées choisies, au minimum c.min (incluses dans le prix de base) */
   function dgNombre(l) {
     var c = dgChoix(l); if (!c) return 0;
-    if (!l.nDg) l.nDg = c.min;
-    l.nDg = Math.max(c.min, Math.min(c.max, l.nDg));
-    return l.nDg;
+    var g = l.dg, n = g ? g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0) : 0;
+    return Math.max(c.min, Math.min(c.max, n));
+  }
+  /* Moins que le minimum choisi (hors « pas encore choisi ») */
+  function dgSousMin(l) {
+    var c = dgChoix(l); if (!c || !l.dg) return false;
+    var n = l.dg.order.reduce(function (s, r) { return s + (l.dg.qty[r] || 0); }, 0);
+    return n > 0 && n < c.min;
   }
 
   /* ---------- calculs ---------- */
@@ -285,7 +291,7 @@
   }
   /* Bouquets : 1 dragée par pétale (petit 5, moyen 7, grand 10) */
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
-  function dgMax(l) { return (l && dgChoix(l) && dgNombre(l)) || (l && BQ_MAX[l.format]) || DG_MAX; }
+  function dgMax(l) { return (l && dgChoix(l) && dgChoix(l).max) || (l && BQ_MAX[l.format]) || DG_MAX; }
   function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
   function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
   function dgText(l) {
@@ -315,24 +321,8 @@
 
     var choix = dgChoix(l);
     if (choix) {
-      var nb = el('div', 'cfg-qty__row order-dg__nombre');
-      nb.appendChild(el('span', 'cfg-qty__name', T('Dragées par boîte', 'Dragées per box')));
-      var st = el('div', 'cfg-qty__step');
-      var nm = el('button', 'cfg-qty__btn', '−');
-      nm.type = 'button'; nm.id = 'dgn-m-' + i;
-      nm.setAttribute('aria-label', T('Une dragée de moins par boîte', 'One dragée less per box'));
-      nm.disabled = MAX <= choix.min;
-      nm.addEventListener('click', function () { if (l.nDg > choix.min) { l.nDg--; render(); refocus(nm.id); } });
-      var no = el('output', 'cfg-qty__n', String(MAX));
-      var np = el('button', 'cfg-qty__btn', '+');
-      np.type = 'button'; np.id = 'dgn-p-' + i;
-      np.setAttribute('aria-label', T('Une dragée de plus par boîte', 'One more dragée per box'));
-      np.disabled = MAX >= choix.max;
-      np.addEventListener('click', function () { if (l.nDg < choix.max) { l.nDg++; render(); refocus(np.id); } });
-      st.appendChild(nm); st.appendChild(no); st.appendChild(np);
-      nb.appendChild(st);
-      box.appendChild(nb);
-      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées incluses. Jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire.', choix.min + ' dragées included. Up to ' + choix.max + ' dragées per box: + ' + euro(choix.parDragee) + ' per extra dragée.')));
+      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées minimum, incluses dans le prix. Jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire.', 'Minimum ' + choix.min + ' dragées, included in the price. Up to ' + choix.max + ' dragées per box: + ' + euro(choix.parDragee) + ' per extra dragée.')));
+      if (dgSousMin(l)) box.appendChild(el('p', 'wizard__hint order-dg__min', T('Encore ' + (choix.min - tot) + ' dragée' + (choix.min - tot > 1 ? 's' : '') + ' à choisir : ' + choix.min + ' minimum par boîte.', (choix.min - tot) + ' more dragée' + (choix.min - tot > 1 ? 's' : '') + ' to choose: minimum ' + choix.min + ' per box.')));
     }
 
     var tabs = el('div', 'cfg-dg-tabs');
@@ -368,7 +358,7 @@
       else if (!cb.checked && fullColors) tipTxt = T('Trois couleurs maximum : retirez-en une pour choisir celle-ci.', 'Three colours maximum: remove one to choose this one.');
       else if (!cb.checked && fullQty) tipTxt = T('Maximum atteint : diminuez une quantité pour ajouter cette couleur.', 'Maximum reached: reduce a quantity to add this colour.');
       cb.addEventListener('change', function () {
-        if (cb.checked) { g.order.push(r); g.qty[r] = 1; }
+        if (cb.checked) { var premier = !g.order.length; g.order.push(r); g.qty[r] = (choix && premier) ? Math.min(choix.min, MAX) : 1; }
         else { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; }
         render(); refocus(cb.id);
       });
@@ -408,8 +398,9 @@
         var mi = el('button', 'cfg-qty__btn', '−');
         mi.type = 'button'; mi.id = 'dgm-' + i + '-' + r;
         mi.setAttribute('aria-label', T('Une de moins', 'One less'));
-        mi.disabled = g.qty[r] <= 1;
-        mi.addEventListener('click', function () { if (g.qty[r] > 1) { g.qty[r]--; render(); refocus(mi.id); } });
+        var plancher = function () { return g.qty[r] <= 1 || (choix && dgTotal(g) <= choix.min); };
+        mi.disabled = plancher();
+        mi.addEventListener('click', function () { if (!plancher()) { g.qty[r]--; render(); refocus(mi.id); } });
         var out = el('output', 'cfg-qty__n', String(g.qty[r]));
         var pl = el('button', 'cfg-qty__btn', '+');
         pl.type = 'button'; pl.id = 'dgp-' + i + '-' + r;
@@ -828,6 +819,14 @@
     ok = setErr(nom.closest('.form__group'), !nom.value.trim()) && ok;
     ok = setErr(tel.closest('.form__group'), tel.value.replace(/\D/g, '').length < 9) && ok;
     ok = setErr(email.closest('.form__group'), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) && ok;
+    /* Boîtes à dragées au choix : pas moins que le minimum */
+    var dgBlocks = linesBox.querySelectorAll('.order-dg');
+    lines.forEach(function (l) {
+      if (dgSousMin(l)) {
+        ok = false;
+        dgBlocks.forEach(function (b) { if (b.querySelector('.order-dg__min')) b.classList.add('has-error'); });
+      }
+    });
     return ok;
   }
   form.querySelectorAll('.form__input').forEach(function (inp) {
