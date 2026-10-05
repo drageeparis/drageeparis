@@ -6763,3 +6763,6 @@ a.lang-switch__item:hover { opacity: 1; }
 .maint__note { margin: 0; padding-top: 22px; border-top: 1px solid var(--color-border); font-size: 12.5px; font-weight: 300; color: var(--color-foreground); opacity: .7; }
 @media (max-width: 600px) { .maint { padding: 118px 20px 80px; } .maint__btn { width: 100%; justify-content: center; } }
 @media (prefers-reduced-motion: reduce) { .maint__icon { animation: none; } }
+
+/* Commande : nombre de dragées au choix par boîte */
+.order-dg__nombre { margin: 4px 0 2px; }

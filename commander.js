@@ -117,6 +117,19 @@
   }
   updateLead();
 
+  /* ---------- Boîtes à nombre de dragées au choix ----------
+     Prix de la pièce = boîte (sans dragées) + prix par dragée × nombre choisi. À compléter ici pour d'autres modèles. */
+  var DG_AU_CHOIX = {
+    'bapteme-eucalyptus': { min: 5, max: 15, base: 3.5, parDragee: 0.1 }
+  };
+  function dgChoix(l) { return DG_AU_CHOIX[l.ref] && !/^sans/i.test(l.format || '') ? DG_AU_CHOIX[l.ref] : null; }
+  function dgNombre(l) {
+    var c = dgChoix(l); if (!c) return 0;
+    if (!l.nDg) l.nDg = c.min;
+    l.nDg = Math.max(c.min, Math.min(c.max, l.nDg));
+    return l.nDg;
+  }
+
   /* ---------- calculs ---------- */
   /* Remises dégressives sur les créations (par modèle), du palier le plus haut au plus bas : à compléter ici */
   var REMISES_CREA = [{ des: 100, taux: 0.10 }];
@@ -124,6 +137,11 @@
   function lineData(l) {
     var p = CATALOGUE[l.ref];
     var f = findFormat(p, l.format);
+    var c = dgChoix(l);
+    if (c) {
+      var n = dgNombre(l);
+      f = { id: f.id, label: 'Avec ' + n + ' dragées', label_en: 'With ' + n + ' dragées', price: Math.round((c.base + c.parDragee * n) * 100) / 100 };
+    }
     var crea = p.kind === 'creation';
     var brut = f.price == null ? null : f.price * l.qty;
     var remise = crea && brut != null ? remiseCrea(l.qty) : 0; // remise dégressive sur les créations
@@ -267,7 +285,7 @@
   }
   /* Bouquets : 1 dragée par pétale (petit 5, moyen 7, grand 10) */
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
-  function dgMax(l) { return (l && BQ_MAX[l.format]) || DG_MAX; }
+  function dgMax(l) { return (l && dgChoix(l) && dgNombre(l)) || (l && BQ_MAX[l.format]) || DG_MAX; }
   function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
   function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
   function dgText(l) {
@@ -294,6 +312,28 @@
     head.appendChild(el('span', '', onlyChoco ? T('Vos dragées au chocolat', 'Your chocolate dragées') : T('Vos dragées', 'Your dragées')));
     head.appendChild(el('span', 'cfg-colors__count' + (fullQty ? ' is-full' : ''), tot + ' / ' + MAX));
     box.appendChild(head);
+
+    var choix = dgChoix(l);
+    if (choix) {
+      var nb = el('div', 'cfg-qty__row order-dg__nombre');
+      nb.appendChild(el('span', 'cfg-qty__name', T('Dragées par boîte', 'Dragées per box')));
+      var st = el('div', 'cfg-qty__step');
+      var nm = el('button', 'cfg-qty__btn', '−');
+      nm.type = 'button'; nm.id = 'dgn-m-' + i;
+      nm.setAttribute('aria-label', T('Une dragée de moins par boîte', 'One dragée less per box'));
+      nm.disabled = MAX <= choix.min;
+      nm.addEventListener('click', function () { if (l.nDg > choix.min) { l.nDg--; render(); refocus(nm.id); } });
+      var no = el('output', 'cfg-qty__n', String(MAX));
+      var np = el('button', 'cfg-qty__btn', '+');
+      np.type = 'button'; np.id = 'dgn-p-' + i;
+      np.setAttribute('aria-label', T('Une dragée de plus par boîte', 'One more dragée per box'));
+      np.disabled = MAX >= choix.max;
+      np.addEventListener('click', function () { if (l.nDg < choix.max) { l.nDg++; render(); refocus(np.id); } });
+      st.appendChild(nm); st.appendChild(no); st.appendChild(np);
+      nb.appendChild(st);
+      box.appendChild(nb);
+      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées incluses. Jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire.', choix.min + ' dragées included. Up to ' + choix.max + ' dragées per box: + ' + euro(choix.parDragee) + ' per extra dragée.')));
+    }
 
     var tabs = el('div', 'cfg-dg-tabs');
     tabs.setAttribute('role', 'tablist');
