@@ -131,9 +131,10 @@
   }
   /* Moins que le minimum choisi (hors « pas encore choisi ») */
   function dgSousMin(l) {
-    var c = dgChoix(l); if (!c || !l.dg) return false;
+    var c = dgChoix(l); if (!c) return false;
+    if (!l.dg) return true;
     var n = l.dg.order.reduce(function (s, r) { return s + (l.dg.qty[r] || 0); }, 0);
-    return n > 0 && n < c.min;
+    return n < c.min;
   }
 
   /* ---------- calculs ---------- */
@@ -321,8 +322,13 @@
 
     var choix = dgChoix(l);
     if (choix) {
-      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées minimum, incluses dans le prix. Jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire.', 'Minimum ' + choix.min + ' dragées, included in the price. Up to ' + choix.max + ' dragées per box: + ' + euro(choix.parDragee) + ' per extra dragée.')));
-      if (dgSousMin(l)) box.appendChild(el('p', 'wizard__hint order-dg__min', T('Encore ' + (choix.min - tot) + ' dragée' + (choix.min - tot > 1 ? 's' : '') + ' à choisir : ' + choix.min + ' minimum par boîte.', (choix.min - tot) + ' more dragée' + (choix.min - tot > 1 ? 's' : '') + ' to choose: minimum ' + choix.min + ' per box.')));
+      var reste = choix.min - tot;
+      if (reste > 0) {
+        box.appendChild(el('p', 'order-dg__min', T('Sélectionnez au moins ' + choix.min + ' dragées pour passer commande' + (tot ? ' : encore ' + reste + ' à choisir.' : '.'), 'Select at least ' + choix.min + ' dragées to place your order' + (tot ? ': ' + reste + ' more to choose.' : '.'))));
+      } else {
+        box.appendChild(el('p', 'order-dg__ok', T('Minimum atteint. Vous pouvez ajouter des dragées jusqu\'à ' + choix.max + '.', 'Minimum reached. You can add dragées up to ' + choix.max + '.')));
+      }
+      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées incluses dans le prix. Au-delà, jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire.', choix.min + ' dragées included in the price. Beyond that, up to ' + choix.max + ' per box: + ' + euro(choix.parDragee) + ' per extra dragée.')));
     }
 
     var tabs = el('div', 'cfg-dg-tabs');
@@ -358,7 +364,7 @@
       else if (!cb.checked && fullColors) tipTxt = T('Trois couleurs maximum : retirez-en une pour choisir celle-ci.', 'Three colours maximum: remove one to choose this one.');
       else if (!cb.checked && fullQty) tipTxt = T('Maximum atteint : diminuez une quantité pour ajouter cette couleur.', 'Maximum reached: reduce a quantity to add this colour.');
       cb.addEventListener('change', function () {
-        if (cb.checked) { var premier = !g.order.length; g.order.push(r); g.qty[r] = (choix && premier) ? Math.min(choix.min, MAX) : 1; }
+        if (cb.checked) { g.order.push(r); g.qty[r] = 1; }
         else { g.order = g.order.filter(function (x) { return x !== r; }); delete g.qty[r]; }
         render(); refocus(cb.id);
       });
@@ -398,7 +404,7 @@
         var mi = el('button', 'cfg-qty__btn', '−');
         mi.type = 'button'; mi.id = 'dgm-' + i + '-' + r;
         mi.setAttribute('aria-label', T('Une de moins', 'One less'));
-        var plancher = function () { return g.qty[r] <= 1 || (choix && dgTotal(g) <= choix.min); };
+        var plancher = function () { return g.qty[r] <= 1; };
         mi.disabled = plancher();
         mi.addEventListener('click', function () { if (!plancher()) { g.qty[r]--; render(); refocus(mi.id); } });
         var out = el('output', 'cfg-qty__n', String(g.qty[r]));
