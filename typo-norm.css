@@ -1,0 +1,21 @@
+/* Test typographique « Norm » : EB Garamond (titres) + Jost (texte) — licences OFL.
+   Chargé uniquement sur les pages dont le <body> porte la classe .typo-norm. */
+@font-face { font-family: 'EB Garamond'; src: url('./fonts/eb-garamond.woff') format('woff'); font-weight: 400 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('./fonts/jost.woff') format('woff'); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+:root:has(body.typo-norm) {
+  --font-body--family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading--family: 'EB Garamond', Georgia, serif;
+}
+.typo-norm, .typo-norm button, .typo-norm input, .typo-norm select, .typo-norm textarea,
+.typo-norm span.btn--outline, .typo-norm .product-card__title, .typo-norm .product-card__actions .btn--outline { font-family: var(--font-body--family); }
+
+.typo-norm .header__logo { font-weight: 500; font-size: 17px; letter-spacing: 0.32em; text-transform: uppercase; }
+.typo-norm .prefooter__logo { font-weight: 500; font-size: 30px; letter-spacing: 0.3em; text-transform: uppercase; }
+.typo-norm .pdp__title { font-weight: 500; font-size: 26px; line-height: 1.35; letter-spacing: 0.2em; color: var(--ink); }
+.typo-norm .pdp__price { font-weight: 500; letter-spacing: 0.06em; }
+.typo-norm .pdp-related__title, .typo-norm .cedric-products__title { font-weight: 500; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: 0.22em; color: var(--ink); }
+@media (max-width: 480px) {
+  .typo-norm .pdp__title { font-size: 22px; letter-spacing: 0.16em; }
+  .typo-norm .header__logo { font-size: 15px; letter-spacing: 0.24em; }
+}
