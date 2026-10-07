@@ -1148,4 +1148,18 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-pochon-chapelet-or.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-pochon-chapelet-or.html"/>
   </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-bapteme-sachet-sauge.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-sachet-sauge.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-sachet-sauge.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bapteme-sachet-sauge.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-sachet-sauge.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-sachet-sauge.html"/>
+  </url>
 </urlset>

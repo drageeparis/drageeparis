@@ -1742,6 +1742,27 @@ window.DP_CATALOGUE = {
   "name_en": "Rustic Jar Christening Dragées",
   "detail_en": "Price per piece"
  },
+ "bapteme-sachet-sauge": {
+  "kind": "creation",
+  "name": "Dragées Baptême Sachet Sauge",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
+  "detail": "Prix à la pièce",
+  "url": "produit-bapteme-sachet-sauge.html",
+  "image": "images/fetes-religieuses/bapteme-sachet-sauge-800w.webp",
+  "formats": [
+   {
+    "id": "10dragées",
+    "label": "10 dragées",
+    "price": 4.5,
+    "label_en": "10 dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Sage Sachet Christening Dragées",
+  "detail_en": "Price per piece"
+ },
  "communion-croix-ivoire": {
   "kind": "creation",
   "name": "Dragées Communion Croix Ivoire",
