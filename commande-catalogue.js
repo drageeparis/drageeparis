@@ -1601,49 +1601,6 @@ window.DP_CATALOGUE = {
   "name_en": "Ecru & Taupe Birth Dragées",
   "detail_en": "Price per piece"
  },
- "bapteme-bleu-ciel": {
-  "kind": "creation",
-  "name": "Dragées Baptême Bleu Ciel",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-bleu-ciel.html",
-  "image": "images/fetes-religieuses/bapteme-bleu-ciel-800w.webp",
-  "formats": [
-   {
-    "id": "10dragéesauchocolat",
-    "label": "10 dragées au chocolat",
-    "price": 5.0,
-    "from": true,
-    "label_en": "10 chocolate dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Sky Blue Christening Dragées",
-  "detail_en": "Price per piece"
- },
- "bapteme-bouquet-rose": {
-  "kind": "creation",
-  "name": "Dragées Baptême Bouquet Rose",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-bouquet-rose.html",
-  "image": "images/fetes-religieuses/bapteme-bouquet-rose-800w.webp",
-  "formats": [
-   {
-    "id": "piece",
-    "label": "À la pièce",
-    "price": 5.0,
-    "label_en": "Per piece"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Pink Bouquet Christening Dragées",
-  "detail_en": "Price per piece"
- },
  "bapteme-eucalyptus": {
   "kind": "creation",
   "name": "Dragées Baptême Eucalyptus",
@@ -1723,77 +1680,6 @@ window.DP_CATALOGUE = {
   ],
   "family_en": "Religious celebrations",
   "name_en": "Rustic Jar Christening Dragées",
-  "detail_en": "Price per piece"
- },
- "bapteme-rose-tendre": {
-  "kind": "creation",
-  "name": "Dragées Baptême Rose Tendre",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-rose-tendre.html",
-  "image": "images/fetes-religieuses/bapteme-rose-tendre-800w.webp",
-  "formats": [
-   {
-    "id": "10dragéesauchocolat",
-    "label": "10 dragées au chocolat",
-    "price": 5.0,
-    "from": true,
-    "label_en": "10 chocolate dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Soft Pink Christening Dragées",
-  "detail_en": "Price per piece"
- },
- "bapteme-vert-amande": {
-  "kind": "creation",
-  "name": "Dragées Baptême Vert Amande",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
-  "detail": "Prix à la pièce",
-  "url": "produit-bapteme-vert-amande.html",
-  "image": "images/fetes-religieuses/bapteme-vert-amande-800w.webp",
-  "formats": [
-   {
-    "id": "10dragéesauchocolat",
-    "label": "10 dragées au chocolat",
-    "price": 5.0,
-    "from": true,
-    "label_en": "10 chocolate dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Almond Green Christening Dragées",
-  "detail_en": "Price per piece"
- },
- "communion-chapelet-or": {
-  "kind": "creation",
-  "name": "Dragées Communion Chapelet Or",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
-  "detail": "Prix à la pièce",
-  "url": "produit-communion-chapelet-or.html",
-  "image": "images/fetes-religieuses/communion-chapelet-or-800w.webp",
-  "formats": [
-   {
-    "id": "5dragées",
-    "label": "Avec 5 dragées",
-    "price": 4.5,
-    "label_en": "With 5 dragées"
-   },
-   {
-    "id": "sansdragée",
-    "label": "Sans dragée",
-    "price": 4.0,
-    "label_en": "Without dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Gold Rosary First Communion Dragées",
   "detail_en": "Price per piece"
  },
  "communion-croix-ivoire": {
