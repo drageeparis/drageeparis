@@ -1,5 +1,5 @@
-   DRAGÉE PARIS — Direction Artistique Premium
-   Typographie : Akkurat (Light / Regular / Bold)
+/* DRAGÉE PARIS — Direction Artistique Premium
+   Typographie : EB Garamond (titres) + Jost (texte) — voir fin de fichier
    Palette : voir "Système Cédric" ci-dessous
 ================================================ */
 
@@ -6872,4 +6872,57 @@ a.lang-switch__item:hover { opacity: 1; }
 @media (max-width: 480px) {
   .header__social--fb { display: none; }
   .occasions .cedric-products__title { font-size: 30px; }
+}
+
+
+/* ==============================================
+   TYPOGRAPHIE DE MARQUE (oct. 2026)
+   EB Garamond (titres, majuscules espacées) + Jost (texte) — licences OFL
+============================================== */
+@font-face { font-family: 'EB Garamond'; src: url('./fonts/eb-garamond.woff') format('woff'); font-weight: 400 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Jost'; src: url('./fonts/jost.woff') format('woff'); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+:root {
+  --font-body--family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading--family: 'EB Garamond', Georgia, serif;
+}
+body, button, input, select, textarea,
+span.btn--outline, .product-card__title, .product-card__actions .btn--outline { font-family: var(--font-body--family); }
+
+/* Logo texte */
+.header__logo { font-weight: 500; font-size: 17px; letter-spacing: 0.32em; text-transform: uppercase; }
+.prefooter__logo { font-weight: 500; font-size: 30px; letter-spacing: 0.3em; text-transform: uppercase; }
+
+/* Hero */
+.hero__title-main { font-family: var(--font-heading--family); font-weight: 500; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.3; letter-spacing: 0.14em; }
+
+/* Grands titres de section et de page */
+.cedric-products__title, .cedric-section-header__title, .cedric-collection__title, .collection-header__title,
+.cedric-cats__title, .product-section__title, .collection-grid .page-title, .divider-title, .pdp-related__title,
+.cedric-split__title, .guide-cell__title, .editorial-3col__heading, .legal-content h1 {
+  font-weight: 500; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; letter-spacing: 0.22em; color: var(--ink);
+}
+.cedric-collection__title, .collection-grid .page-title { font-size: clamp(26px, 3vw, 40px); }
+.collection-card__title { font-weight: 500; letter-spacing: 0.16em; color: var(--ink); }
+.legal-content h2, .order__title { font-weight: 500; letter-spacing: 0.12em; color: var(--ink); }
+
+/* Fiche produit */
+.pdp__title { font-weight: 500; font-size: 26px; line-height: 1.35; letter-spacing: 0.2em; color: var(--ink); }
+.pdp__price { font-weight: 500; letter-spacing: 0.06em; }
+
+/* Chiffres et étapes (accueil) */
+.chiffre__num { font-weight: 500; letter-spacing: 0.06em; }
+.etape__num { font-weight: 500; }
+
+@media (max-width: 768px) {
+  .hero__title-main { font-size: 30px; letter-spacing: 0.1em; }
+}
+@media (max-width: 480px) {
+  .hero__title-main { font-size: 26px; letter-spacing: 0.08em; }
+  .header__logo { font-size: 15px; letter-spacing: 0.24em; }
+  .pdp__title { font-size: 22px; letter-spacing: 0.16em; }
+  .cedric-products__title, .cedric-section-header__title, .cedric-collection__title, .collection-header__title,
+  .cedric-cats__title, .product-section__title, .collection-grid .page-title, .divider-title, .pdp-related__title,
+  .cedric-split__title, .guide-cell__title, .editorial-3col__heading, .legal-content h1 { font-size: 21px; letter-spacing: 0.16em; }
+  .occasions .cedric-products__title { font-size: 21px; }
 }
