@@ -1688,6 +1688,33 @@ window.DP_CATALOGUE = {
   "name_en": "Bohemian Vial Christening Dragées",
   "detail_en": "Price per piece"
  },
+ "bapteme-pochon-chapelet-or": {
+  "kind": "creation",
+  "name": "Dragées Baptême Pochon Chapelet Or",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
+  "detail": "Prix à la pièce",
+  "url": "produit-bapteme-pochon-chapelet-or.html",
+  "image": "images/fetes-religieuses/bapteme-pochon-chapelet-or-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 5.0,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Gold Rosary Pouch Christening Dragées",
+  "detail_en": "Price per piece"
+ },
  "bapteme-pot-champetre": {
   "kind": "creation",
   "name": "Dragées Baptême Pot Champêtre",
