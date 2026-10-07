@@ -1671,6 +1671,33 @@ window.DP_CATALOGUE = {
   "name_en": "Eucalyptus Christening Dragées",
   "detail_en": "Price per piece"
  },
+ "bapteme-fiole-boheme": {
+  "kind": "creation",
+  "name": "Dragées Baptême Fiole Bohème",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
+  "detail": "Prix à la pièce",
+  "url": "produit-bapteme-fiole-boheme.html",
+  "image": "images/fetes-religieuses/bapteme-fiole-boheme-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.6,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.0,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Bohemian Vial Christening Dragées",
+  "detail_en": "Price per piece"
+ },
  "bapteme-rose-tendre": {
   "kind": "creation",
   "name": "Dragées Baptême Rose Tendre",

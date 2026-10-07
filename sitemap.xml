@@ -1162,4 +1162,18 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-eucalyptus.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-eucalyptus.html"/>
   </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-bapteme-fiole-boheme.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-fiole-boheme.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-fiole-boheme.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bapteme-fiole-boheme.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-fiole-boheme.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-fiole-boheme.html"/>
+  </url>
 </urlset>
