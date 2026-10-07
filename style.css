@@ -6926,3 +6926,39 @@ span.btn--outline, .product-card__title, .product-card__actions .btn--outline { 
   .cedric-split__title, .guide-cell__title, .editorial-3col__heading, .legal-content h1 { font-size: 21px; letter-spacing: 0.16em; }
   .occasions .cedric-products__title { font-size: 21px; }
 }
+
+/* ==============================================
+   HERO CLAIR — photo bouquet sur fond pierre (accueil)
+============================================== */
+.hero--light { background: #D9C3A5; }
+.hero--light .hero__bg img { object-position: 70% 50%; animation-name: heroScaleLight; }
+@keyframes heroScaleLight { from { transform: scale(1.04); opacity: 0.85; } to { transform: scale(1); opacity: 1; } }
+.hero--light .hero__overlay { background: linear-gradient(90deg, rgba(243, 236, 230, 0.35) 0%, rgba(243, 236, 230, 0) 55%); }
+.hero--light .hero__content { justify-content: center; padding-bottom: 0; }
+.hero--light .hero__eyebrow { color: var(--ink); }
+.hero--light .hero__title-main { color: var(--ink); max-width: 620px; text-shadow: none; }
+.hero--light .btn--outline { border-color: var(--ink); color: var(--ink); }
+.hero--light .btn--outline:hover { background: var(--ink); color: var(--blanc); }
+.hero--light .hero__arrow svg { color: rgba(82, 54, 42, 0.55); }
+
+/* Header transparent posé sur le hero clair : éléments en brun */
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__logo,
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__social,
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__cta-icon,
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .lang-switch__item,
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .lang-switch__sep { color: var(--ink); }
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .lang-switch__item.is-active { color: var(--caramel); }
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .hamburger-line { background: var(--ink); }
+body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__cta {
+  background-color: var(--caramel); color: var(--blanc); border-color: var(--caramel);
+}
+
+@media (max-width: 768px) {
+  .hero--light { min-height: 0; background: var(--paper); }
+  .hero--light .hero__bg { position: relative; inset: auto; aspect-ratio: 4 / 5; margin-top: 72px; }
+  .hero--light .hero__bg img { object-position: 80% 45%; }
+  .hero--light .hero__overlay { display: none; }
+  .hero--light .hero__content { min-height: 0; justify-content: flex-start; padding: 36px 24px 56px; text-align: center; align-items: center; }
+  .hero--light .hero__ctas { width: 100%; }
+  .hero--light .hero__arrow { display: none; }
+}
