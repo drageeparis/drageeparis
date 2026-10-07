@@ -1601,6 +1601,39 @@ window.DP_CATALOGUE = {
   "name_en": "Ecru & Taupe Birth Dragées",
   "detail_en": "Price per piece"
  },
+ "bapteme-bouquet-grace": {
+  "kind": "creation",
+  "name": "Dragées Baptême Bouquet Grâce",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=bapteme",
+  "detail": "Prix à la pièce",
+  "url": "produit-bapteme-bouquet-grace.html",
+  "image": "images/fetes-religieuses/bapteme-bouquet-grace-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Grace Bouquet Christening Dragées",
+  "detail_en": "Price per piece"
+ },
  "bapteme-eucalyptus": {
   "kind": "creation",
   "name": "Dragées Baptême Eucalyptus",

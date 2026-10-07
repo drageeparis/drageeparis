@@ -1120,4 +1120,18 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-pot-champetre.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-pot-champetre.html"/>
   </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-bapteme-bouquet-grace.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-bouquet-grace.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-bouquet-grace.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bapteme-bouquet-grace.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bapteme-bouquet-grace.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bapteme-bouquet-grace.html"/>
+  </url>
 </urlset>
