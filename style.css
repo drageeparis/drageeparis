@@ -1,15 +1,7 @@
-/* DRAGÉE PARIS — Direction Artistique Premium
-   Typographie : Gloock (titres) + Poppins (texte)
+   DRAGÉE PARIS — Direction Artistique Premium
+   Typographie : Akkurat (Light / Regular / Bold)
    Palette : voir "Système Cédric" ci-dessous
 ================================================ */
-
-/* ---- Polices de marque : Gloock (titres) + Poppins (texte) — licence OFL ---- */
-@font-face { font-family: 'Gloock'; src: url('./fonts/gloock-regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Poppins'; src: url('./fonts/poppins-200.woff') format('woff'); font-weight: 200; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Poppins'; src: url('./fonts/poppins-300.woff') format('woff'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Poppins'; src: url('./fonts/poppins-400.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Poppins'; src: url('./fonts/poppins-500.woff') format('woff'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Poppins'; src: url('./fonts/poppins-600.woff') format('woff'); font-weight: 600 700; font-style: normal; font-display: swap; }
 
 /* ---- Akkurat ---- */
 @font-face {
@@ -108,8 +100,8 @@ input, textarea, select { font-family: inherit; }
   --color-outofstock: #C8C8C8;
 
   /* === TYPOGRAPHIE === */
-  --font-body--family:    'Poppins', 'Helvetica Neue', Arial, sans-serif;
-  --font-heading--family: 'Gloock', Georgia, 'Times New Roman', serif;
+  --font-body--family:    'Akkurat', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading--family: 'Akkurat', 'Helvetica Neue', Arial, sans-serif;
 
   --font-size--micro:     clamp(0.5625rem, 0.64vw, 0.625rem);
   --font-size--paragraph: clamp(0.75rem, 1.12vw, 0.875rem);
@@ -1025,7 +1017,7 @@ span.btn--outline {
   background-color: transparent;
   color: rgb(82, 54, 42);
   border-color: #836d63;
-  font-family: var(--font);
+  font-family: 'Akkurat', sans-serif;
   font-style: normal;
   font-size: 12px;
   font-weight: 400;
@@ -5156,7 +5148,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   margin-bottom: 10px;
 }
 .product-card__title {
-  font-family: var(--font);
+  font-family: 'Akkurat', sans-serif;
   font-style: normal;
   font-size: 14px;
   font-weight: 400;
@@ -5215,7 +5207,7 @@ a.contact__sidebar-value:hover { opacity: 0.6; }
   color: rgb(82, 54, 42);
   border: 1px solid #836d63;
   border-radius: 12px;
-  font-family: var(--font);
+  font-family: 'Akkurat', sans-serif;
   font-style: normal;
   font-size: 12px;
   font-weight: 400;
@@ -6881,16 +6873,3 @@ a.lang-switch__item:hover { opacity: 1; }
   .header__social--fb { display: none; }
   .occasions .cedric-products__title { font-size: 30px; }
 }
-
-
-/* ==============================================
-   TYPOGRAPHIE DE MARQUE — ajustements Gloock / Poppins
-============================================== */
-.hero__title-main { font-family: var(--heading); letter-spacing: -0.005em; line-height: 1.05; }
-.header__logo, .prefooter__logo, .guide-cell__title, .cedric-cats__title, .cedric-split__title,
-.cedric-section-header__title, .editorial-3col__heading, .cedric-collection__title, .cedric-products__title,
-.collection-header__title, .product-section__title, .collection-grid .page-title, .collection-card__title,
-.divider-title, .pdp__title, .pdp-related__title, .order__title, .chiffre__num { letter-spacing: -0.005em; }
-.header__logo, .prefooter__logo { letter-spacing: 0.02em; }
-@media (max-width: 768px) { .hero__title-main { font-size: 44px; letter-spacing: -0.005em; } }
-@media (max-width: 480px) { .hero__title-main { font-size: 38px; letter-spacing: -0.005em; } }
