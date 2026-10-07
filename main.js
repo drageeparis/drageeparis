@@ -712,6 +712,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- 16. FAB — bouton flottant mobile (bas-droite) ---- */
   (function() {
+    // Désactivé (oct. 2026) : faisait doublon avec l'étoile « Lancer ma création » du header mobile
+    // et masquait les prix et les boutons des fiches. Supprimer ce return pour le réactiver.
+    return;
     if (window.innerWidth > 768) return;
     // Inutile sur la page du formulaire elle-même (et il masquait les champs)
     if (document.body.classList.contains('wizard-page')) return;

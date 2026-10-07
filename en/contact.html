@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Start my creation · Dragée Paris</title>
   <meta name="description" content="Design your personalised creation step by step: occasion, quantity, date, colours and contact details. Reply within 48 hours.">
-  <link rel="stylesheet" href="../style.css?v=20261007hero">
+  <link rel="stylesheet" href="../style.css?v=20261007audit">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dragée Paris">
@@ -39,11 +39,30 @@
 
   <header class="header header--inner" id="header">
     <div class="header__container">
-      <button class="header__menu-toggle" id="drawer-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
+      <div class="header__left">
+        <button class="header__menu-toggle" id="drawer-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        <nav class="header__nav" aria-label="Main navigation">
+          <div class="header__nav-item header__nav-item--mega">
+            <a href="creations.html" class="header__nav-link" aria-haspopup="true">Creations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+            <div class="mega" role="region" aria-label="Creations by occasion">
+              <div class="mega__grid">
+                <a href="creations.html?filter=mariage" class="mega__item"><span class="mega__img"><img src="../images/mariage/mariage-dore-perle-800w.webp" alt="" loading="lazy"></span><span class="mega__label">Wedding</span></a>
+                <a href="creations.html?filter=premiers-instants&amp;sub=naissance" class="mega__item"><span class="mega__img"><img src="../images/premiers-instants/naissance-avola-blanc-800w.webp" alt="" loading="lazy"></span><span class="mega__label">Birth</span></a>
+                <a href="creations.html?filter=fetes-religieuses" class="mega__item"><span class="mega__img"><img src="../images/fetes-religieuses/bapteme-fiole-boheme-800w.webp" alt="" loading="lazy"></span><span class="mega__label">Christening &amp; communion</span></a>
+                <a href="creations.html?filter=anniversaires" class="mega__item"><span class="mega__img"><img src="../images/anniversaire/anniv-8-800w.webp" alt="" loading="lazy"></span><span class="mega__label">Birthday</span></a>
+                <a href="creations.html?filter=bouquets" class="mega__item"><span class="mega__img"><img src="../images/bouquets/bouquet-ivoire-800w.webp" alt="" loading="lazy"></span><span class="mega__label">Bouquets</span></a>
+              </div>
+              <a href="creations.html" class="mega__all">All creations →</a>
+            </div>
+          </div>
+          <a href="dragees.html" class="header__nav-link">Dragées by weight</a>
+          <a href="atelier.html" class="header__nav-link">The workshop</a>
+        </nav>
+      </div>
       <a href="index.html" class="header__logo" aria-label="Dragée Paris, Home">Dragée Paris</a>
       <div class="header__actions">
         <div class="header__socials">
@@ -51,6 +70,7 @@
           <a href="https://www.tiktok.com/@drageeparis" class="header__social" aria-label="TikTok Dragée Paris" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.02v11.9a2.42 2.42 0 1 1-2.42-2.42c.25 0 .5.04.72.11V9.5a5.44 5.44 0 0 0-.72-.05 5.44 5.44 0 1 0 5.44 5.44V8.6a7.14 7.14 0 0 0 4.16 1.33V6.9a4.28 4.28 0 0 1-3.1-1.08z"/></svg></a>
         </div>
 
+        <a href="message.html" class="header__contact">Contact</a>
         <a href="contact.html" class="header__cta">Start my creation</a>
       <a href="contact.html" class="header__cta-icon" aria-label="Start my creation">
         <svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg>
@@ -66,30 +86,24 @@
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
           Close
         </button>
+        <p class="drawer__label">Creations</p>
         <ul class="drawer__main-list">
-          <li class="drawer__main-item" data-sub="sub-boutique">
-            <button class="drawer__main-btn" type="button">
-              Our dragées
-              <svg class="drawer__main-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </button>
-          </li>
-          <li class="drawer__main-item" data-sub="sub-atelier">
-            <button class="drawer__main-btn" type="button">
-              Our creations
-              <svg class="drawer__main-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </button>
-          </li>
-          <li class="drawer__main-item">
-            <a href="atelier.html" class="drawer__main-btn">The workshop</a>
-          </li>
-          <li class="drawer__main-item">
-            <a href="message.html" class="drawer__main-btn">Contact</a>
-          </li>
+          <li class="drawer__main-item"><a href="creations.html?filter=mariage" class="drawer__main-btn">Wedding</a></li>
+          <li class="drawer__main-item"><a href="creations.html?filter=premiers-instants&amp;sub=naissance" class="drawer__main-btn">Birth</a></li>
+          <li class="drawer__main-item"><a href="creations.html?filter=fetes-religieuses" class="drawer__main-btn">Christening &amp; communion</a></li>
+          <li class="drawer__main-item"><a href="creations.html?filter=anniversaires" class="drawer__main-btn">Birthday</a></li>
+          <li class="drawer__main-item"><a href="creations.html?filter=bouquets" class="drawer__main-btn">Bouquets</a></li>
+          <li class="drawer__main-item drawer__main-item--all"><a href="creations.html" class="drawer__main-btn">All creations</a></li>
+          <li class="drawer__sep" aria-hidden="true"></li>
+          <li class="drawer__main-item"><a href="dragees.html" class="drawer__main-btn">Dragées by weight</a></li>
+          <li class="drawer__main-item"><a href="atelier.html" class="drawer__main-btn">The workshop</a></li>
+          <li class="drawer__main-item"><a href="message.html" class="drawer__main-btn">Contact</a></li>
         </ul>
         <a href="contact.html" class="drawer__cta">Start my creation</a>
         <div class="drawer__secondary">
           <a href="faq.html">FAQ</a>
           <a href="mentions-legales.html">Legal notice</a>
+          <span class="drawer__socials"><a href="https://www.instagram.com/drageeparis/" rel="noopener noreferrer" target="_blank">Instagram</a> · <a href="https://www.tiktok.com/@drageeparis" rel="noopener noreferrer" target="_blank">TikTok</a> · <a href="https://www.facebook.com/drageeparis" rel="noopener noreferrer" target="_blank">Facebook</a></span>
         </div>
       </div>
       <div class="drawer__divider"></div>
@@ -147,21 +161,107 @@
   <main id="main">
     <!-- Configurateur en maintenance : retirer la classe « is-maintenance » du <body> pour le réactiver.
          Aperçu réservé : ajouter ?apercu=1 à l'adresse (?apercu=0 pour revenir au message). -->
-    <section class="maint" aria-labelledby="maint-title">
-      <div class="maint__inner">
-        <svg class="maint__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2c0 0 1.3 6.3 8 8c-6.7 1.7-8 8-8 8s-1.3-6.3-8-8C8.7 8.3 10 2 10 2z"/></svg>
-        <p class="maint__eyebrow">Start my creation</p>
-        <h1 class="maint__title" id="maint-title">Our configurator<br>is getting a makeover</h1>
-        <p class="maint__text">We are fine-tuning our online creation tool to give you an experience worthy of your celebrations. It will be available again very soon.</p>
-        <p class="maint__text">In the meantime, we will prepare your project with you, as always: tell us about it and receive a bespoke proposal within 48 hours, free and with no obligation.</p>
-        <div class="maint__btns">
-          <a href="message.html" class="maint__btn maint__btn--primary">Tell us about my project <span aria-hidden="true">→</span></a>
-          <a href="creations.html" class="maint__btn">See our creations</a>
+    <div class="maint maint--form">
+    <div class="section-intro fade-in">
+      <h1 class="section-intro__title">Start my creation</h1>
+      <p class="section-intro__sub">Tell us about your celebration: we will send you a bespoke proposal within 48 hours, free and with no obligation. A mock-up is submitted to you before anything is prepared.</p>
+    </div>
+
+    <section class="form-section fade-in">
+      <div class="contact__layout">
+
+        <aside class="contact__sidebar">
+          <div class="contact__sidebar-item">
+            <span class="contact__sidebar-label">Email</span>
+            <a href="mailto:drageeparis@gmail.com" class="contact__sidebar-value">drageeparis@gmail.com</a>
+          </div>
+          <div class="contact__sidebar-item">
+            <span class="contact__sidebar-label">Phone</span>
+            <a href="tel:+33608671443" class="contact__sidebar-value">+33 6 08 67 14 43</a>
+            <p class="contact__sidebar-note">Monday to Friday, 9 am to 6 pm (Paris time)</p>
+          </div>
+          <div class="contact__sidebar-item">
+            <span class="contact__sidebar-label">Workshop</span>
+            <span class="contact__sidebar-value">145 Ter, Av. Jacques Chirac</span>
+            <p class="contact__sidebar-note">91200 Athis-Mons, Île-de-France</p>
+          </div>
+          <div class="contact__sidebar-box contact__steps">
+            <p class="contact__steps-title">Step by step</p>
+            <ol>
+              <li><strong>Your request</strong>We get back to you within 48 hours with a proposal.</li>
+              <li><strong>Your mock-up</strong>Nothing starts without your approval.</li>
+              <li><strong>Preparation &amp; delivery</strong>Relay point in France and Europe, or collection from the workshop.</li>
+            </ol>
+          </div>
+        </aside>
+
+        <div>
+          <form class="form" id="msg-form" data-source="Lancer ma création" novalidate>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="msg-nom">Name <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="text" id="msg-nom" name="nom" autocomplete="name" placeholder="Your name" required>
+                <span class="form__error" id="err-nom">This field is required.</span>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="msg-email">Email <span class="required" aria-hidden="true">*</span></label>
+                <input class="form__input" type="email" id="msg-email" name="email" autocomplete="email" placeholder="your@email.com" required>
+                <span class="form__error" id="err-email">Please enter a valid email address.</span>
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="msg-tel">Phone <span class="required" aria-hidden="true">*</span></label>
+              <input class="form__input" type="tel" id="msg-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="+33 6 12 34 56 78" required>
+              <span class="form__error" id="err-tel">Please enter a phone number.</span>
+            </div>
+            <div class="form__row form__row--3">
+              <div class="form__group">
+                <label class="form__label" for="msg-occasion">Occasion</label>
+                <select class="form__input" id="msg-occasion" name="occasion"><option value="">Choose an occasion</option><option>Wedding</option><option>Engagement</option><option>Birth</option><option>Baby shower / Gender reveal</option><option>Christening</option><option>First Communion</option><option>Birthday</option><option>Other event</option></select>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="msg-date">Event date <span class="form__opt">(optional)</span></label>
+                <input class="form__input" type="date" id="msg-date" name="date_evenement">
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="msg-qte">Number of favours <span class="form__opt">(optional)</span></label>
+                <input class="form__input" type="number" min="1" inputmode="numeric" id="msg-qte" name="quantite" placeholder="e.g. 80">
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="msg-message">Your project <span class="required" aria-hidden="true">*</span></label>
+              <textarea class="form__textarea msg-textarea" id="msg-message" name="message" placeholder="Colours, style, type of container, label text…" required></textarea>
+              <span class="form__error" id="err-message">Please enter your message.</span>
+            </div>
+            <div class="form__honeypot" aria-hidden="true">
+              <label for="msg-company">Do not fill in this field</label>
+              <input type="text" id="msg-company" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="msg-form__footer">
+              <p class="msg-form__note">Fields marked <span aria-hidden="true">*</span> are required. Guaranteed reply within 48 hours.</p>
+              <button type="submit" class="msg-form__submit">Send my request</button>
+            </div>
+            <p id="msg-send-error" hidden style="font-size:13px;color:#c0392b;margin-top:12px;font-family:var(--font);font-weight:300;">
+              Something went wrong. Please try again or contact us directly at <a href="mailto:drageeparis@gmail.com" style="color:inherit">drageeparis@gmail.com</a>.
+            </p>
+          </form>
+
+          <div class="msg-confirmation" id="msg-confirmation" hidden>
+            <div class="msg-confirmation__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h2 class="msg-confirmation__title">Request sent</h2>
+            <p class="msg-confirmation__text">Thank you! We will get back to you within 48 hours with a bespoke proposal.</p>
+            <button class="msg-confirmation__back" id="msg-back">Send another request <span class="btn-arrow">→</span></button>
+          </div>
         </div>
-        <p class="maint__contact">Or call us: <a href="tel:+33608671443">+33 6 08 67 14 43</a>, Monday to Friday, 9 am to 6 pm (Paris time)<br><a href="mailto:drageeparis@gmail.com">drageeparis@gmail.com</a></p>
-        <p class="maint__note">You can also order a creation or dragées directly from our product pages.</p>
+
       </div>
     </section>
+    </div>
 
     <div class="wizard-wrap">
 
@@ -776,8 +876,8 @@
       <nav aria-label="Footer navigation pages">
         <span class="footer__col-title">Pages</span>
         <ul class="footer__nav-list">
-          <li><a href="dragees.html">Our dragées</a></li>
-          <li><a href="creations.html">Our creations</a></li>
+          <li><a href="dragees.html">Dragées by weight</a></li>
+          <li><a href="creations.html">Creations</a></li>
           <li><a href="atelier.html">The workshop</a></li>
           <li><a href="message.html">Contact</a></li>
           <li><a href="faq.html">FAQ</a></li>
@@ -801,7 +901,8 @@
     </div>
   </footer>
 
-  <script src="../main.js?v=20261005pz"></script>
+  <script src="../main.js?v=20261007"></script>
   <script src="../contact-wizard.js?v=20261005pz"></script>
+  <script src="../message-form.js?v=20261007"></script>
 </body>
 </html>

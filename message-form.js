@@ -50,6 +50,14 @@
       return;
     }
 
+    var payload = { 'Nom': nom, 'Email': email, 'Téléphone': tel, 'Message': message, 'Langue du client': EN ? 'Anglais' : 'Français', '_gotcha': gotcha };
+    /* Champs projet (formulaire « Lancer ma création ») : envoyés seulement s'ils existent et sont remplis */
+    [['msg-occasion', 'Occasion'], ['msg-date', "Date de l'événement"], ['msg-qte', 'Nombre de contenants']].forEach(function (f) {
+      var el = document.getElementById(f[0]);
+      if (el && el.value.trim()) payload[f[1]] = el.value.trim();
+    });
+    if (form.dataset.source) { payload['Formulaire'] = form.dataset.source; payload._subject = 'Nouvelle demande de création · Dragée Paris'; }
+
     var submitBtn = form.querySelector('.msg-form__submit');
     submitBtn.disabled = true;
     submitBtn.textContent = (EN ? 'Sending…' : 'Envoi en cours…');
@@ -57,7 +65,7 @@
     fetch('https://formspree.io/f/xzdnpoez', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ 'Nom': nom, 'Email': email, 'Téléphone': tel, 'Message': message, 'Langue du client': EN ? 'Anglais' : 'Français', '_gotcha': gotcha })
+      body: JSON.stringify(payload)
     })
     .then(function(r) { return r.json().then(function(d) { return { ok: r.ok }; }); })
     .then(function(res) {
