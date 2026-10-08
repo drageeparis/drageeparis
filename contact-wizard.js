@@ -629,14 +629,12 @@
     tags.forEach(function(g) { setTagText(g, l1, l2); });
   }
   ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', fitAllTags); });
-  // Prénoms et date obligatoires pour passer à l'étape suivante
+  // Prénoms (ou nom) obligatoires pour passer à l'étape suivante ; la date ou le petit mot est facultatif
   function updateTagNeed() {
     var need = $('cfg-tag-need'); if (!need) return;
-    var a = !!val('cfg-l1'), b = !!val('cfg-l2');
-    need.hidden = a && b;
-    need.textContent = !a && !b ? T('Indiquez les prénoms (ou le nom) et la date (ou un petit mot) pour passer à l’étape suivante.', 'Enter the names (or surname) and the date (or a short message) to continue to the next step.')
-      : !a ? T('Indiquez les prénoms ou le nom pour passer à l’étape suivante.', 'Enter the names or surname to continue to the next step.')
-      : T('Indiquez la date ou un petit mot pour passer à l’étape suivante.', 'Enter the date or a short message to continue to the next step.');
+    var a = !!val('cfg-l1');
+    need.hidden = a;
+    need.textContent = T('Indiquez les prénoms ou le nom pour passer à l’étape suivante.', 'Enter the names or surname to continue to the next step.');
     if (typeof updateNextState === 'function') updateNextState();
   }
   ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', updateTagNeed); });
@@ -973,7 +971,7 @@
   function validateStep(n) {
     if (n === 1) return !!checkedValue('evenement');
     if (n === 3) return !!checkedValue('dragees') && drageesComplete();
-    if (n === 4) return !!val('cfg-l1') && !!val('cfg-l2');
+    if (n === 4) return !!val('cfg-l1');
     if (n === 6) return nbBoites() >= NB_MIN;
     return true;
   }
