@@ -146,9 +146,9 @@
   }
   /* ---------- Bouquet : petit (5 pétales), moyen (7), grand (10) ---------- */
   var BOUQUET_SIZES = [
-    { id: 'petit', name: 'Petit', en: 'Small', n: 5, span: 58, scale: 0.86 },
-    { id: 'moyen', name: 'Moyen', en: 'Medium', n: 7, span: 78, scale: 1 },
-    { id: 'grand', name: 'Grand', en: 'Large', n: 10, span: 86, scale: 1.1 }
+    { id: 'petit', name: 'Petit', en: 'Small', n: 5, span: 58, scale: 0.86, prix: 5 },
+    { id: 'moyen', name: 'Moyen', en: 'Medium', n: 7, span: 78, scale: 1, prix: 7 },
+    { id: 'grand', name: 'Grand', en: 'Large', n: 10, span: 86, scale: 1.1, prix: 10 }
   ];
   var bouquetSize = 'moyen';
   var petalsG = stage.querySelector('.cfg-svg[data-key="bouquet"] .cfg-petals');
@@ -188,7 +188,7 @@
       btn.setAttribute('aria-checked', on ? 'true' : 'false');
       btn.tabIndex = on ? 0 : -1;
       btn.setAttribute('data-size', b.id);
-      btn.innerHTML = miniFan(b) + '<span class="cfg-size-opt__name">' + T(b.name, b.en) + '</span><span class="cfg-size-opt__sub">' + b.n + T(' pétales', ' petals') + '</span>';
+      btn.innerHTML = miniFan(b) + '<span class="cfg-size-opt__name">' + T(b.name, b.en) + '</span><span class="cfg-size-opt__sub">' + b.n + T(' pétales', ' petals') + '</span><span class="cfg-size-opt__price">' + T(b.prix + '\u00a0€', '€' + b.prix) + '</span>';
       btn.addEventListener('click', function() { setBouquetSize(b.id, true); });
       btn.addEventListener('keydown', function(e) {
         var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
@@ -707,15 +707,21 @@
     return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: d === 'Nœud + bouquet' ? PRIX_BOUQUET : 0,
       sup: Math.round(nbSup * PRIX_DRAGEE_SUP * 100) / 100, nbSup: nbSup };
   }
+  function isBouquetC() { return !conseil && containers[idx].key === 'bouquet'; }
+  // Bouquet : prix selon la taille (1 dragée au chocolat par pétale, étiquette comprise)
+  function prixBase() { return conseil ? 0 : isBouquetC() ? sizeOf(bouquetSize).prix : (PRIX_CONTENANT[containers[idx].key] || 0); }
+  function uniteFR() { return isBouquetC() ? ' le bouquet' : ' la boîte'; }
+  function uniteEN() { return isBouquetC() ? ' per bouquet' : ' per box'; }
   function prixUnitaire() {
     if (conseil) return 0;
-    var base = PRIX_CONTENANT[containers[idx].key] || 0;
+    var base = prixBase();
     if (!base) return 0;
     var o = prixOptions();
     return Math.round((base + o.noeud + o.bouquet + o.sup) * 100) / 100;
   }
   function detailPrix() {
-    var base = PRIX_CONTENANT[containers[idx].key] || 0, o = prixOptions();
+    var base = prixBase(), o = prixOptions();
+    if (isBouquetC()) { var sb = sizeOf(bouquetSize); return T(sb.name + ' bouquet : ' + sb.n + ' pétales, ' + sb.n + ' dragées au chocolat et étiquette compris', sb.en + ' bouquet: ' + sb.n + ' petals, ' + sb.n + ' chocolate dragées and label included'); }
     var parts = [T('boîte et étiquette ', 'box and label ') + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' ' + euros(o.sup));
     if (o.noeud) parts.push(T('nœud ', 'bow ') + euros(o.noeud));
@@ -724,7 +730,7 @@
   }
   function updatePrix() {
     var n = nbBoites(), pu = prixUnitaire();
-    $('w-nb-unit').textContent = pu ? euros(pu) + T(' la boîte', ' per box') + (avecDragees() ? T(', dragées comprises', ', dragées included') : '') : (conseil ? T('Prix selon le contenant choisi ensemble', 'Price depends on the container we choose together') : T('Prix communiqué avec votre proposition', 'Price given with your proposal'));
+    $('w-nb-unit').textContent = pu ? euros(pu) + T(uniteFR(), uniteEN()) + (isBouquetC() || avecDragees() ? T(', dragées comprises', ', dragées included') : '') : (conseil ? T('Prix selon le contenant choisi ensemble', 'Price depends on the container we choose together') : T('Prix communiqué avec votre proposition', 'Price given with your proposal'));
     var det = $('w-nb-detail');
     if (det) det.textContent = pu ? detailPrix() : '';
     // étape dragées : prix des dragées supplémentaires (boîte en carton)
@@ -775,7 +781,14 @@
     box.hidden = !visible;
     if (!visible) return;
     var amt = $('cfg-pt-amount'), unit = $('cfg-pt-unit'), det = $('cfg-pt-detail'), dl = $('cfg-pt-delta');
-    var base = conseil ? 0 : (PRIX_CONTENANT[containers[idx].key] || 0);
+    var base = prixBase();
+    if (isBouquetC()) {
+      var sb = sizeOf(bouquetSize);
+      box.classList.remove('is-quote');
+      amt.textContent = euros(sb.prix); unit.textContent = ' / bouquet';
+      det.textContent = T(sb.n + ' pétales, ' + sb.n + ' dragées au chocolat et étiquette compris', sb.n + ' petals, ' + sb.n + ' chocolate dragées and label included');
+      lastTagPrice = null; return;
+    }
     if (!base) {
       amt.textContent = conseil ? T('Prix selon le contenant', 'Price depends on the container') : T('Prix sur devis', 'Price on quotation');
       unit.textContent = ''; det.textContent = conseil ? '' : T('Communiqué avec votre maquette', 'Given with your mock-up');

@@ -7098,3 +7098,5 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .maj-notice__ok:focus-visible, .maj-notice__link:focus-visible { outline: 2px solid #965F36; outline-offset: 3px; }
 .maj-notice__link { font-size: 12.5px; letter-spacing: 0.04em; color: #52362A; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 480px) { .maj-notice__panel { padding: 32px 22px 28px; } .maj-notice__title { font-size: 19px; } }
+
+.cfg-size-opt__price { margin-top: 3px; font-size: 12.5px; font-weight: 400; letter-spacing: 0.02em; color: var(--caramel); }
