@@ -521,12 +521,10 @@
     return el;
   }
   function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
-  var TAG_SIZE_DEFAUT = 120; // taille par défaut (%), fixe pour la boîte en carton
+  var TAG_SIZE_DEFAUT = 120; // taille de l'étiquette (%), identique pour tous les contenants
   function tagSizeFixed() { return !conseil && containers[idx].key === 'boite'; }
   function tagScale() {
-    var el = $('cfg-tag-size');
-    if (tagSizeFixed() || !el) return TAG_SIZE_DEFAUT / 100;
-    return (parseInt(el.value, 10) || TAG_SIZE_DEFAUT) / 100;
+    return TAG_SIZE_DEFAUT / 100; // taille fixe pour tous les contenants (curseur retiré)
   }
   function renderTagShapes() {
     var shape = tagShape(), k = tagScale();
@@ -628,7 +626,6 @@
   ['cfg-l1', 'cfg-l2'].forEach(function(id) { $(id).addEventListener('input', updateTagNeed); });
   updateTagNeed();
   document.querySelectorAll('input[name="etiquette_forme"]').forEach(function(r) { r.addEventListener('change', renderTagShapes); });
-  if ($('cfg-tag-size')) $('cfg-tag-size').addEventListener('input', renderTagShapes);
   renderTagShapes();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAllTags);
   window.addEventListener('load', fitAllTags);
@@ -856,8 +853,8 @@
   function etiquetteFormat() {
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? T('sans bordure', 'no border') : (EN ? colorLabel('etiquette_bord') + ' border' : 'bordures ' + colorLabel('etiquette_bord'));
     // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
-    if (EN) return checkedName('etiquette_forme') + (tagSizeFixed() ? '' : ', size ' + Math.round(tagScale() * 100) + '%') + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagSizeFixed() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
-    return tagShape() + (tagSizeFixed() ? '' : ', taille ' + Math.round(tagScale() * 100) + ' %') + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagSizeFixed() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
+    if (EN) return checkedName('etiquette_forme') + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagSizeFixed() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
+    return tagShape() + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagSizeFixed() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
 
@@ -1227,7 +1224,7 @@
   var SAVE_DAYS = 60;
   var SAVE_RADIOS = ['evenement', 'dragees', 'decoration', 'ruban', 'bouquet_couleur', 'etiquette_forme',
     'etiquette_police', 'etiquette_fond', 'etiquette_texte', 'etiquette_bord'];
-  var SAVE_FIELDS = ['cfg-l1', 'cfg-l2', 'cfg-tag-size', 'w-nb', 'wizard-date'];
+  var SAVE_FIELDS = ['cfg-l1', 'cfg-l2', 'w-nb', 'wizard-date'];
   var saveOn = true, saveTimer = 0, restoring = false;
   function store() { try { return window.localStorage; } catch (e) { return null; } }
   function readSave() {
