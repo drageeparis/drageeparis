@@ -1763,33 +1763,6 @@ window.DP_CATALOGUE = {
   "name_en": "Sage Sachet Christening Dragées",
   "detail_en": "Price per piece"
  },
- "communion-croix-ivoire": {
-  "kind": "creation",
-  "name": "Dragées Communion Croix Ivoire",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
-  "detail": "Prix à la pièce",
-  "url": "produit-communion-croix-ivoire.html",
-  "image": "images/fetes-religieuses/communion-croix-ivoire-800w.webp",
-  "formats": [
-   {
-    "id": "5dragées",
-    "label": "Avec 5 dragées",
-    "price": 4.5,
-    "label_en": "With 5 dragées"
-   },
-   {
-    "id": "sansdragée",
-    "label": "Sans dragée",
-    "price": 4.0,
-    "label_en": "Without dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Ivory Cross First Communion Dragées",
-  "detail_en": "Price per piece"
- },
  "communion-fiole-rubis": {
   "kind": "creation",
   "name": "Dragées Communion Fiole Rubis",
