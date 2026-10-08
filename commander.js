@@ -296,7 +296,7 @@
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
   /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
      Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
-  var DG_FIXE = { 'ecrin-fleuri': 10, 'bapteme-fiole-boheme': 6, 'bapteme-pot-champetre': 7, 'bapteme-pochon-chapelet-or': 5 };
+  var DG_FIXE = { 'ecrin-fleuri': 10, 'bapteme-fiole-boheme': 6, 'communion-fiole-rubis': 6, 'bapteme-pot-champetre': 7, 'bapteme-pochon-chapelet-or': 5 };
   function dgFixe(l) {
     if (!l || dgChoix(l) || !wantsDragees(l)) return 0;
     if (BQ_MAX[l.format]) return BQ_MAX[l.format];
