@@ -7078,3 +7078,10 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   .contact__layout { display: flex; flex-direction: column; }
   .contact__layout > aside { order: 2; margin-top: 48px; }
 }
+
+/* L'atelier : photo « colonne de couleurs » entière sur mobile */
+@media (max-width: 768px) {
+  .cedric-split--story .cedric-split__visual { height: auto; max-height: none; aspect-ratio: auto; padding: 28px 20px; }
+  .cedric-split--story .cedric-split__visual picture { display: block; aspect-ratio: 4 / 5; }
+  .cedric-split--story .cedric-split__visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+}
