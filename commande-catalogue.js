@@ -1877,6 +1877,33 @@ window.DP_CATALOGUE = {
   "name_en": "Chalice First Communion Dragées",
   "detail_en": "Price per piece"
  },
+ "communion-pot-prairie": {
+  "kind": "creation",
+  "name": "Dragées Communion Pot Prairie",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-pot-prairie.html",
+  "image": "images/fetes-religieuses/communion-pot-prairie-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 5.3,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Meadow Jar First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
  "anniversaire-banquise": {
   "kind": "creation",
   "name": "Dragées Anniversaire Banquise",
