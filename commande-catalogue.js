@@ -1701,13 +1701,13 @@ window.DP_CATALOGUE = {
    {
     "id": "avecdragées",
     "label": "Avec dragées",
-    "price": 5.0,
+    "price": 4.5,
     "label_en": "With dragées"
    },
    {
     "id": "sansdragées",
     "label": "Sans dragées",
-    "price": 4.5,
+    "price": 4.0,
     "label_en": "Without dragées"
    }
   ],

@@ -296,7 +296,7 @@
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
   /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
      Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
-  var DG_FIXE = { 'ecrin-fleuri': 10, 'bapteme-fiole-boheme': 6, 'bapteme-pot-champetre': 8, 'bapteme-pochon-chapelet-or': 5 };
+  var DG_FIXE = { 'ecrin-fleuri': 10, 'bapteme-fiole-boheme': 6, 'bapteme-pot-champetre': 7, 'bapteme-pochon-chapelet-or': 5 };
   function dgFixe(l) {
     if (!l || dgChoix(l) || !wantsDragees(l)) return 0;
     if (BQ_MAX[l.format]) return BQ_MAX[l.format];
@@ -314,8 +314,9 @@
   }
   /* preventScroll : le navigateur ne fait pas défiler la page vers l'élément */
   function refocus(id) { var f = document.getElementById(id); if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } } }
-  /* Bouquets : uniquement des dragées au chocolat */
-  function isBouquet(ref) { var p = CATALOGUE[ref]; return !!p && p.familyId === 'bouquets' && /bouquet/.test(ref); }
+  /* Bouquets et créations listées dans CHOCO_ONLY : uniquement des dragées au chocolat */
+  var CHOCO_ONLY = { 'bapteme-sachet-sauge': true };
+  function isBouquet(ref) { var p = CATALOGUE[ref]; return !!p && ((p.familyId === 'bouquets' && /bouquet/.test(ref)) || !!CHOCO_ONLY[ref]); }
   function dgBlock(l, i) {
     var g = dgOf(l), MAX = dgMax(l);
     /* Taille réduite (ex. grand -> petit) : on retire les dragées en trop */
