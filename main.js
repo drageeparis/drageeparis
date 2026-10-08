@@ -710,6 +710,43 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(bar);
   })();
 
+  /* ---- 18. Message « site en cours de mise à jour » : affiché une fois par visite ----
+     Pour le retirer : passer MAINTENANCE_MSG à false. */
+  (function() {
+    var MAINTENANCE_MSG = true;
+    if (!MAINTENANCE_MSG) return;
+    var KEY = 'dp-maj-vu';
+    try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
+    var contact = EN ? 'message.html' : 'message.html';
+    var box = document.createElement('div');
+    box.className = 'maj-notice';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-labelledby', 'maj-notice-title');
+    box.innerHTML = '<div class="maj-notice__panel">' +
+      '<p class="maj-notice__kicker">' + T('Mise à jour en cours', 'Update in progress') + '</p>' +
+      '<h2 class="maj-notice__title" id="maj-notice-title">' + T('Notre site fait peau neuve', 'Our website is being refreshed') + '</h2>' +
+      '<p class="maj-notice__txt">' + T(
+        'Nous mettons actuellement à jour notre site : toutes nos créations et tous nos contenants ne sont pas encore affichés. Vous ne trouvez pas le modèle que vous cherchez&nbsp;? Contactez-nous ou lancez votre création sur mesure, nous vous répondons sous 48&nbsp;heures.',
+        'We are currently updating our website, so not all of our creations and containers are displayed yet. Can’t find the design you are looking for? Get in touch or start a bespoke creation, and we will reply within 48 hours.') + '</p>' +
+      '<div class="maj-notice__actions">' +
+        '<button type="button" class="maj-notice__ok">' + T('Continuer la visite', 'Continue browsing') + '</button>' +
+        '<a class="maj-notice__link" href="' + contact + '">' + T('Nous contacter', 'Contact us') + '</a>' +
+      '</div></div>';
+    function close() {
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      document.removeEventListener('keydown', onKey);
+      box.remove();
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    box.addEventListener('click', function(e) { if (e.target === box) close(); });
+    box.querySelector('.maj-notice__ok').addEventListener('click', close);
+    box.querySelector('.maj-notice__link').addEventListener('click', function() { try { sessionStorage.setItem(KEY, '1'); } catch (e) {} });
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(box);
+    box.querySelector('.maj-notice__ok').focus({ preventScroll: true });
+  })();
+
   /* ---- 16. FAB — bouton flottant mobile (bas-droite) ---- */
   (function() {
     // Désactivé (oct. 2026) : faisait doublon avec l'étoile « Lancer ma création » du header mobile

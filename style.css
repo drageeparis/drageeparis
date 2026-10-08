@@ -7085,3 +7085,16 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   .cedric-split--story .cedric-split__visual picture { display: block; aspect-ratio: 4 / 5; }
   .cedric-split--story .cedric-split__visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 }
+
+/* Message « site en cours de mise à jour » (main.js §18) */
+.maj-notice { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(82, 54, 42, 0.28); animation: wizardIn .4s ease both; }
+.maj-notice__panel { width: 100%; max-width: 460px; padding: 40px 36px 34px; background: var(--color-background); border: 1px solid rgba(150, 95, 54, 0.25); box-shadow: 0 20px 50px rgba(82, 54, 42, 0.18); text-align: center; }
+.maj-notice__kicker { margin: 0 0 14px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #965F36; }
+.maj-notice__title { margin: 0 0 18px; font-family: var(--font-heading--family); font-weight: 500; font-size: 22px; line-height: 1.35; letter-spacing: 0.16em; text-transform: uppercase; color: #52362A; }
+.maj-notice__txt { margin: 0 0 28px; font-size: 14px; font-weight: 300; line-height: 1.7; color: #52362A; }
+.maj-notice__actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.maj-notice__ok { padding: 14px 32px; border-radius: 999px; background: #52362A; color: #F3ECE6; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; }
+.maj-notice__ok:hover { background: #965F36; }
+.maj-notice__ok:focus-visible, .maj-notice__link:focus-visible { outline: 2px solid #965F36; outline-offset: 3px; }
+.maj-notice__link { font-size: 12.5px; letter-spacing: 0.04em; color: #52362A; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 480px) { .maj-notice__panel { padding: 32px 22px 28px; } .maj-notice__title { font-size: 19px; } }
