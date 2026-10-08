@@ -1790,6 +1790,33 @@ window.DP_CATALOGUE = {
   "name_en": "Ruby Vial First Communion Dragées",
   "detail_en": "Price per piece"
  },
+ "communion-pochon-epis": {
+  "kind": "creation",
+  "name": "Dragées Communion Pochon Épis",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-pochon-epis.html",
+  "image": "images/fetes-religieuses/communion-pochon-epis-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.5,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.0,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Wheat Ear Pouch First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
  "anniversaire-banquise": {
   "kind": "creation",
   "name": "Dragées Anniversaire Banquise",
