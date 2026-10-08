@@ -1904,6 +1904,27 @@ window.DP_CATALOGUE = {
   "name_en": "Meadow Jar First Communion Dragées",
   "detail_en": "Price per piece"
  },
+ "communion-sachet-sable": {
+  "kind": "creation",
+  "name": "Dragées Communion Sachet Sable",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-sachet-sable.html",
+  "image": "images/fetes-religieuses/communion-sachet-sable-800w.webp",
+  "formats": [
+   {
+    "id": "10dragées",
+    "label": "10 dragées",
+    "price": 4.5,
+    "label_en": "10 dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Sand Sachet First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
  "anniversaire-banquise": {
   "kind": "creation",
   "name": "Dragées Anniversaire Banquise",

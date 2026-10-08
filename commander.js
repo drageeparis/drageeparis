@@ -316,7 +316,7 @@
   /* preventScroll : le navigateur ne fait pas défiler la page vers l'élément */
   function refocus(id) { var f = document.getElementById(id); if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } } }
   /* Bouquets et créations listées dans CHOCO_ONLY : uniquement des dragées au chocolat */
-  var CHOCO_ONLY = { 'bapteme-sachet-sauge': true };
+  var CHOCO_ONLY = { 'bapteme-sachet-sauge': true, 'communion-sachet-sable': true };
   function isBouquet(ref) { var p = CATALOGUE[ref]; return !!p && ((p.familyId === 'bouquets' && /bouquet/.test(ref)) || !!CHOCO_ONLY[ref]); }
   function dgBlock(l, i) {
     var g = dgOf(l), MAX = dgMax(l);
