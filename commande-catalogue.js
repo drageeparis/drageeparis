@@ -1850,6 +1850,33 @@ window.DP_CATALOGUE = {
   "name_en": "Celestial Bouquet First Communion Dragées",
   "detail_en": "Price per piece"
  },
+ "communion-calice": {
+  "kind": "creation",
+  "name": "Dragées Communion Calice",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-calice.html",
+  "image": "images/fetes-religieuses/communion-calice-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.0,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 3.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Chalice First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
  "anniversaire-banquise": {
   "kind": "creation",
   "name": "Dragées Anniversaire Banquise",

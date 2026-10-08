@@ -120,7 +120,8 @@
   /* ---------- Boîtes à nombre de dragées au choix ----------
      Prix de la pièce = boîte (sans dragées) + prix par dragée × nombre choisi. À compléter ici pour d'autres modèles. */
   var DG_AU_CHOIX = {
-    'bapteme-eucalyptus': { min: 5, max: 15, base: 3.5, parDragee: 0.1 }
+    'bapteme-eucalyptus': { min: 5, max: 15, base: 3.5, parDragee: 0.1 },
+    'communion-calice': { min: 5, max: 15, base: 3.5, parDragee: 0.1 }
   };
   function dgChoix(l) { return DG_AU_CHOIX[l.ref] && !/^sans/i.test(l.format || '') ? DG_AU_CHOIX[l.ref] : null; }
   /* Nombre facturé = dragées choisies, au minimum c.min (incluses dans le prix de base) */
