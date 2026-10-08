@@ -1817,6 +1817,39 @@ window.DP_CATALOGUE = {
   "name_en": "Wheat Ear Pouch First Communion Dragées",
   "detail_en": "Price per piece"
  },
+ "communion-bouquet-celeste": {
+  "kind": "creation",
+  "name": "Dragées Communion Bouquet Céleste",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-bouquet-celeste.html",
+  "image": "images/fetes-religieuses/communion-bouquet-celeste-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Celestial Bouquet First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
  "anniversaire-banquise": {
   "kind": "creation",
   "name": "Dragées Anniversaire Banquise",
