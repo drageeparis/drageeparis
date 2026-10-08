@@ -744,7 +744,6 @@ document.addEventListener('DOMContentLoaded', () => {
     box.querySelector('.maj-notice__link').addEventListener('click', function() { try { sessionStorage.setItem(KEY, '1'); } catch (e) {} });
     document.addEventListener('keydown', onKey);
     document.body.appendChild(box);
-    box.querySelector('.maj-notice__ok').focus({ preventScroll: true });
   })();
 
   /* ---- 16. FAB — bouton flottant mobile (bas-droite) ---- */
