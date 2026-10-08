@@ -151,6 +151,7 @@
     { id: 'grand', name: 'Grand', en: 'Large', n: 10, span: 86, scale: 1.1, prix: 10 }
   ];
   var bouquetSize = 'moyen';
+  var ajusterQuantites = null; // défini avec les quantités de dragées
   var petalsG = stage.querySelector('.cfg-svg[data-key="bouquet"] .cfg-petals');
   var DG_PETAL = ['#FAF9F7', '#F4F2EE', '#E9E6E1'];
   function sizeOf(id) { return BOUQUET_SIZES.filter(function(b) { return b.id === id; })[0] || BOUQUET_SIZES[1]; }
@@ -202,6 +203,7 @@
   }
   function setBouquetSize(id, focus) {
     bouquetSize = id;
+    if (typeof ajusterQuantites === 'function') ajusterQuantites();
     buildPetals();
     renderSizes();
     paint();
@@ -209,6 +211,7 @@
     if (typeof updatePrix === 'function') updatePrix();
   }
   function updateSizes() {
+    if (typeof ajusterQuantites === 'function') ajusterQuantites();
     if (sizesBox) sizesBox.hidden = conseil || containers[idx].key !== 'bouquet';
     // boîte en carton : taille d'étiquette fixe, le curseur est masqué
     var ff = $('cfg-tag-fond-field');
@@ -347,10 +350,12 @@
   function catName(cat) { var t = $('cfg-tab-' + cat); return t ? t.firstChild.textContent.trim() : ''; }
   var DG_START = 5; // jamais moins de 5 dragées dans un contenant
   function floorOf(cat) { return Math.min(DG_START, capOf(cat)); }
-  function capOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
+  // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
+  function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
+  function capOf(cat) { if (bqCap()) return bqCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
   // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
-  function minOf(cat) { var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
-  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
+  function minOf(cat) { if (bqCap()) return bqCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
+  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); if (bqCap()) return T(mx + ' dragées pour ce bouquet : une par pétale.', mx + ' dragées for this bouquet: one per petal.'); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
   function chosenCat() { return chosenColors.length ? catOf(inputOf(chosenColors[0])) : ''; }
   function totalQty() { return chosenColors.reduce(function(n, v) { return n + (qty[v] || 0); }, 0); }
   function shortName(el) {
@@ -431,7 +436,7 @@
   }
   function updateNeed() {
     var hint = $('cfg-dg-hint');
-    if (hint) hint.hidden = !(checkedValue('dragees') === 'Avec dragées' && totalQty() === 5);
+    if (hint) hint.hidden = !(checkedValue('dragees') === 'Avec dragées' && totalQty() === 5 && !bqCap());
     var need = $('cfg-dg-need');
     if (!need) return;
     var avec = checkedValue('dragees') === 'Avec dragées';
@@ -482,6 +487,19 @@
     });
   });
   refreshDragees();
+  // Changement de taille de bouquet ou de contenant : on ramène les quantités sous le nouveau maximum
+  ajusterQuantites = function() {
+    var cap = capOf(chosenCat()), over = totalQty() - cap;
+    for (var i = chosenColors.length - 1; i >= 0 && over > 0; i--) {
+      var v = chosenColors[i], r = Math.min(over, (qty[v] || 1) - 1);
+      qty[v] -= r; over -= r;
+    }
+    while (over > 0 && chosenColors.length > 1) { // trop de couleurs pour le contenant : on retire les dernières
+      var last = chosenColors[chosenColors.length - 1], el = inputOf(last);
+      over -= qty[last] || 1; delete qty[last]; chosenColors.pop(); if (el) el.checked = false;
+    }
+    refreshDragees();
+  };
   document.querySelectorAll('input[name="dragees"]').forEach(function(r) {
     r.addEventListener('change', function() {
       $('cfg-colors').hidden = checkedValue('dragees') !== 'Avec dragées';
