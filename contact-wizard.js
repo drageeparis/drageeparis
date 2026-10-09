@@ -1089,7 +1089,7 @@
     stage.classList.toggle('cfg-stage--choose', n === 2);
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
-    stage.classList.toggle('cfg-stage--pot-big', n >= 3 && n <= 5 && !conseil && (containers[idx].key === 'pot' || containers[idx].key === 'tube'));
+    stage.classList.toggle('cfg-stage--pot-big', n >= 3 && n <= 5 && !conseil && ['pot', 'tube', 'pochon'].indexOf(containers[idx].key) >= 0); // même taille qu'au choix du contenant
     setBoxOpen();
     applyDeco();
     updatePrix();
