@@ -352,7 +352,12 @@
   function floorOf(cat) { return Math.min(DG_START, capOf(cat)); }
   // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
   function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
-  function capOf(cat) { if (bqCap()) return bqCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-max'), 10)) || 10; }
+  var POT_MAX = 10; // pot en verre : 10 dragées maximum, quelle que soit la catégorie
+  function capOf(cat) {
+    if (bqCap()) return bqCap();
+    var p = $('cfg-panel-' + cat), cap = (p && parseInt(p.getAttribute('data-max'), 10)) || 10;
+    return !conseil && containers[idx].key === 'pot' ? Math.min(cap, POT_MAX) : cap;
+  }
   // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
   function minOf(cat) { if (bqCap()) return bqCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
   function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); if (bqCap()) return T(mx + ' dragées pour ce bouquet : une par pétale.', mx + ' dragées for this bouquet: one per petal.'); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
