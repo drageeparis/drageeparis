@@ -630,7 +630,7 @@
   }
   if ($('cfg-l1')) $('cfg-l1').addEventListener('input', updateFontSamples);
   function setTagText(g, l1, l2) {
-    var r = parseFloat(g.getAttribute('data-r')), wf = g.getAttribute('data-shape') ? 1.38 : tagWidthFactor();
+    var r = parseFloat(g.getAttribute('data-r')), wf = g.getAttribute('data-shape') ? 1.65 : tagWidthFactor(); // tube : texte vertical, le long de l'étiquette
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
     t1.textContent = l1 || T('Vos prénoms', 'Your names');
     t2.textContent = l2 || T('jj.mm.aaaa', 'dd.mm.yyyy');
