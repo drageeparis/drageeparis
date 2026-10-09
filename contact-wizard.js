@@ -686,11 +686,29 @@
     if (days < 70) return T('dans ' + Math.round(days / 7) + ' semaines', 'in ' + Math.round(days / 7) + ' weeks');
     return T('dans environ ' + Math.round(days / 30.4) + ' mois', 'in about ' + Math.round(days / 30.4) + ' months');
   }
+  // Pot en verre : date obligatoire, au moins 2 semaines à l'avance
+  var POT_DELAI = 14;
+  function dateRequise() { return typeof isPot === 'function' && isPot(); }
+  function dateOk() { if (!dateRequise()) return true; var d = readDate(); return !!d && daysUntil(d) >= POT_DELAI; }
+  function setupDateRule() {
+    if (!dateEl) return;
+    var req = dateRequise(), opt = $('wizard-date-opt');
+    if (opt) opt.textContent = req ? T('(obligatoire)', '(required)') : T('(facultatif)', '(optional)');
+    dateEl.required = req;
+    if (req) { var m = new Date(); m.setHours(0, 0, 0, 0); m.setDate(m.getDate() + POT_DELAI); dateEl.min = m.getFullYear() + '-' + pad(m.getMonth() + 1) + '-' + pad(m.getDate()); }
+    else dateEl.removeAttribute('min');
+    updateDateAlert();
+  }
   function updateDateAlert() {
     var date = readDate();
+    if (typeof updateNextState === 'function') updateNextState();
     if (!date) { dateAlert.hidden = true; return; }
     var days = daysUntil(date);
-    if (days < 0) {
+    if (dateRequise() && days < POT_DELAI) {
+      var m = new Date(); m.setHours(0, 0, 0, 0); m.setDate(m.getDate() + POT_DELAI);
+      dateAlert.textContent = T('Pour le pot en verre, comptez au moins 2 semaines : choisissez une date à partir du ' + formatDate(m) + '.', 'For the glass jar, allow at least 2 weeks: choose a date from ' + formatDate(m) + '.');
+      dateAlert.hidden = false;
+    } else if (days < 0) {
       dateAlert.textContent = T('Cette date est déjà passée : pouvez-vous la vérifier ?', 'This date has already passed: could you check it?');
       dateAlert.hidden = false;
     } else if (days < 28) {
@@ -1012,7 +1030,7 @@
     if (n === 1) return !!checkedValue('evenement');
     if (n === 3) return !!checkedValue('dragees') && drageesComplete();
     if (n === 4) return !!val('cfg-l1');
-    if (n === 6) return nbBoites() >= NB_MIN;
+    if (n === 6) return nbBoites() >= NB_MIN && dateOk();
     return true;
   }
   function updateNextState() { nextBtn.disabled = current < TOTAL && !validateStep(current); }
@@ -1042,6 +1060,7 @@
     }
     current = n;
     setProgress(n);
+    if (n === 6) setupDateRule();
     placeStage(n);
     var next = getPanel(n);
     if (next) {
