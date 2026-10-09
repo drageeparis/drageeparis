@@ -529,6 +529,24 @@
   });
   function tagShapeEl(shape, r, inset, fill, stroke, sw) {
     var el, R = r - inset;
+    if (shape === 'Etiquette') { // étiquette cartonnée à coins échancrés et œillet (tube)
+      var w = 1.6 * r - 2 * inset, h = 2 * r - 2 * inset, c = r * 0.22, x0 = -w / 2, y0 = -h / 2;
+      var d = 'M' + x0 + ',' + (y0 + c) + ' Q' + (x0 + c) + ',' + (y0 + c) + ' ' + (x0 + c) + ',' + y0 + ' L' + (-x0 - c) + ',' + y0 +
+        ' Q' + (-x0 - c) + ',' + (y0 + c) + ' ' + (-x0) + ',' + (y0 + c) + ' L' + (-x0) + ',' + (-y0 - 2) + ' Q' + (-x0) + ',' + (-y0) + ' ' + (-x0 - 2) + ',' + (-y0) +
+        ' L' + (x0 + 2) + ',' + (-y0) + ' Q' + x0 + ',' + (-y0) + ' ' + x0 + ',' + (-y0 - 2) + ' Z';
+      el = document.createElementNS(SVGNS, 'g');
+      el.setAttribute('class', 'cfg-tag__shape');
+      var p = document.createElementNS(SVGNS, 'path');
+      p.setAttribute('d', d); p.setAttribute('fill', fill); p.setAttribute('stroke', stroke); p.setAttribute('stroke-width', sw);
+      el.appendChild(p);
+      if (!inset) {
+        var hole = document.createElementNS(SVGNS, 'circle');
+        hole.setAttribute('cy', (-r + r * 0.24).toFixed(2)); hole.setAttribute('r', (r * 0.085).toFixed(2));
+        hole.setAttribute('fill', '#EFE7DE'); hole.setAttribute('stroke', stroke === 'none' ? 'rgba(82,54,42,0.35)' : stroke); hole.setAttribute('stroke-width', '.7');
+        el.appendChild(hole);
+      }
+      return el;
+    }
     if (shape === 'Ronde') {
       el = document.createElementNS(SVGNS, 'circle');
       el.setAttribute('r', R.toFixed(2));
@@ -558,8 +576,9 @@
       Array.prototype.forEach.call(g.querySelectorAll('.cfg-tag__shape'), function(c) { c.parentNode.removeChild(c); });
       var first = g.firstChild;
       var bord = tagColor('etiquette_bord', TAG_STROKE); // « none » = sans bordure
-      g.insertBefore(tagShapeEl(shape, r, 0, tagColor('etiquette_fond', TAG_FILL), bord, '1'), first);
-      var inner = tagShapeEl(shape, r, r * 0.0875, 'none', bord, '.7');
+      var gs = g.getAttribute('data-shape') || shape;
+      g.insertBefore(tagShapeEl(gs, r, 0, tagColor('etiquette_fond', TAG_FILL), bord, '1'), first);
+      var inner = tagShapeEl(gs, r, r * 0.0875, 'none', bord, '.7');
       inner.setAttribute('stroke-opacity', '.45');
       g.insertBefore(inner, first);
       g.setAttribute('transform', (g.getAttribute('data-base') + ' scale(' + k + ')').trim());
@@ -611,7 +630,7 @@
   }
   if ($('cfg-l1')) $('cfg-l1').addEventListener('input', updateFontSamples);
   function setTagText(g, l1, l2) {
-    var r = parseFloat(g.getAttribute('data-r')), wf = tagWidthFactor();
+    var r = parseFloat(g.getAttribute('data-r')), wf = g.getAttribute('data-shape') ? 1.38 : tagWidthFactor();
     var t1 = g.querySelector('.cfg-tag__l1'), t2 = g.querySelector('.cfg-tag__l2');
     t1.textContent = l1 || T('Vos prénoms', 'Your names');
     t2.textContent = l2 || T('jj.mm.aaaa', 'dd.mm.yyyy');
@@ -905,7 +924,6 @@
     return dn + ' · ' + (EN ? catName(chosenCat()) + ': ' : '') + chosenColors.map(function(v) { return nameOfValue('couleurs', v) + ' ×' + (qty[v] || 1); }).join(', ');
   }
   function etiquetteText() {
-    if (isTube()) return '';
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
   }
   function colorLabel(name) {
@@ -913,18 +931,16 @@
     return v === 'Personnalisée' ? T('personnalisée ', 'custom ') + tagColor(name, '').toUpperCase() : checkedName(name).toLowerCase();
   }
   function etiquetteFormat() {
-    if (isTube()) return T('Sans étiquette', 'No label');
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? T('sans bordure', 'no border') : (EN ? colorLabel('etiquette_bord') + ' border' : 'bordures ' + colorLabel('etiquette_bord'));
     // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
-    if (EN) return checkedName('etiquette_forme') + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagFondBlanc() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
-    return tagShape() + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagFondBlanc() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
+    if (EN) return (isTube() ? 'Hanging tag' : checkedName('etiquette_forme')) + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagFondBlanc() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
+    return (isTube() ? 'Étiquette suspendue' : tagShape()) + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagFondBlanc() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
   }
 
 
   /* ---------- Étape 5 : décoration de la boîte (nœud, fleurs champêtres) ---------- */
   function isBoite() { return !conseil && containers[idx].key === 'boite'; }
-  function stepUsable(n) { if (n === 4 && isTube()) return false; // tube : sans étiquette
-    return n !== 5 || isBoite() || isPot(); } // étape décoration : boîte en carton (nœud, bouquet) et pot en verre (fleurs)
+  function stepUsable(n) { return n !== 5 || isBoite() || isPot(); } // étape décoration : boîte en carton (nœud, bouquet) et pot en verre (fleurs)
   function potFleurs() { return checkedValue('fleurs_pot') === 'Avec fleurs'; }
   function decoChoice() { return checkedValue('decoration') || 'Sans décoration'; }
   function decoName() { return checkedName('decoration') || T('Sans décoration', 'No decoration'); }
@@ -1051,7 +1067,7 @@
     stage.classList.toggle('cfg-stage--choose', n === 2);
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
-    stage.classList.toggle('cfg-stage--pot-big', n >= 3 && n <= 5 && !conseil && containers[idx].key === 'pot');
+    stage.classList.toggle('cfg-stage--pot-big', n >= 3 && n <= 5 && !conseil && (containers[idx].key === 'pot' || containers[idx].key === 'tube'));
     setBoxOpen();
     applyDeco();
     updatePrix();
@@ -1070,6 +1086,7 @@
     current = n;
     setProgress(n);
     if (n === 6) setupDateRule();
+    if (n === 4) { var fo = $('label-tag-forme'), row = fo && fo.closest('.cfg-tagopts'); if (row) row.hidden = isTube(); } // tube : forme d'étiquette imposée
     placeStage(n);
     var next = getPanel(n);
     if (next) {
@@ -1180,7 +1197,7 @@
       'Occasion': occasion,
       'Contenant': contenantText(),
       'Dragées': drageesText(),
-      'Texte de l\'étiquette': etiquetteText() || (isTube() ? 'Sans étiquette (tube)' : 'À définir'),
+      'Texte de l\'étiquette': etiquetteText() || 'À définir',
       'Étiquette': etiquetteFormat(),
       'Décoration': decoText() || 'Sans objet (contenant autre que la boîte)',
       'Nombre de boîtes': nbBoitesText(),
