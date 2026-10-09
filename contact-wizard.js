@@ -164,10 +164,12 @@
     if (!petalsG) return;
     var b = sizeOf(bouquetSize);
     petalsG.innerHTML = petalAngles(b).map(function(ang, k) {
-      return '<g transform="translate(200 226) rotate(' + ang.toFixed(1) + ') scale(' + b.scale + ')">' +
+      // pétale de tulle en forme de feuille, pointe légèrement recourbée, une dragée à l'intérieur
+      return '<g transform="translate(200 238) rotate(' + (ang * 0.62).toFixed(1) + ') scale(' + (b.scale * 1.12).toFixed(3) + ')">' +
         '<use href="#cfg-dg" class="dg dg--in" style="color:' + DG_PETAL[k % 3] + '" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/>' +
-        '<path d="M0,-4 C-26,-26 -28,-78 0,-104 C28,-78 26,-26 0,-4 Z" fill="rgba(255,255,255,0.50)" stroke="rgba(82,54,42,0.35)" stroke-width=".9"/>' +
-        '<path d="M0,-14 C-10,-42 -10,-74 0,-96" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></g>';
+        '<path d="M0,-4 C-25,-24 -29,-76 -6,-100 C0,-106 8,-110 14,-114 C9,-104 25,-84 23,-60 C21,-30 9,-14 0,-4 Z" fill="rgba(255,255,255,0.32)" stroke="rgba(82,54,42,0.38)" stroke-width=".9" stroke-linejoin="round"/>' +
+        '<path d="M14,-114 C10,-108 6,-104 4,-98" fill="none" stroke="rgba(82,54,42,0.3)" stroke-width=".8"/>' +
+        '<path d="M-2,-14 C-13,-42 -13,-74 -2,-94" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.3"/></g>';
     }).join('');
   }
   function miniFan(b) {
