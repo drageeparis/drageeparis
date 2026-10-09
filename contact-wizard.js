@@ -565,7 +565,7 @@
   function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
   var TAG_SIZE_DEFAUT = 120; // taille de l'étiquette (%), identique pour tous les contenants
   function tagSizeFixed() { return !conseil && containers[idx].key === 'boite'; }
-  function tagFondBlanc() { return !conseil && (containers[idx].key === 'boite' || containers[idx].key === 'bouquet'); }
+  function tagFondBlanc() { return !conseil && (containers[idx].key === 'boite' || containers[idx].key === 'bouquet' || containers[idx].key === 'tube'); }
   function tagScale() {
     return TAG_SIZE_DEFAUT / 100; // taille fixe pour tous les contenants (curseur retiré)
   }
