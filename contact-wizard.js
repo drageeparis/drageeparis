@@ -645,6 +645,24 @@
     t2.style.fontFamily = tf.family;
     t2.style.letterSpacing = tf.name === 'Calligraphie' ? '0' : tf.name === 'Classique' ? '0.06em' : '0.02em';
     fitText(t2, r * 0.2 * (tf.size / 0.36) * (tf.name === 'Calligraphie' ? 1.45 : tf.name === 'Classique' ? 1.3 : 1.1), r * (wf - 0.2));
+    if (g.getAttribute('data-shape')) centerTagText(g, t1, t2, r);
+  }
+  // Étiquette suspendue (tube) : bloc de texte vertical recentré sur l'étiquette, sous l'œillet
+  function centerTagText(g, t1, t2, r) {
+    [t1, t2].forEach(function(t) {
+      if (!t.hasAttribute('data-x')) { t.setAttribute('data-x', t.getAttribute('x') || '0'); t.setAttribute('data-y', t.getAttribute('y') || '0'); }
+      t.setAttribute('x', t.getAttribute('data-x')); t.setAttribute('y', t.getAttribute('data-y'));
+    });
+    var b1, b2;
+    try { b1 = t1.getBBox(); b2 = t2.getBBox(); } catch (e) { return; }
+    if (!b1.width && !b2.width) return;
+    var x0 = Math.min(b1.x, b2.x), x1 = Math.max(b1.x + b1.width, b2.x + b2.width);
+    var y0 = Math.min(b1.y, b2.y), y1 = Math.max(b1.y + b1.height, b2.y + b2.height);
+    var dx = r * 0.14 - (x0 + x1) / 2, dy = -(y0 + y1) / 2; // le long de l'étiquette : un peu sous le centre (œillet en haut)
+    [t1, t2].forEach(function(t) {
+      t.setAttribute('x', (parseFloat(t.getAttribute('data-x')) + dx).toFixed(2));
+      t.setAttribute('y', (parseFloat(t.getAttribute('data-y')) + dy).toFixed(2));
+    });
   }
   function fitText(t, base, maxW) {
     t.setAttribute('font-size', base.toFixed(1));
