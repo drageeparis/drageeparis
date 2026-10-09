@@ -698,8 +698,8 @@
   /* ---------- Textes récapitulatifs ---------- */
   /* ---------- Nombre de boîtes et prix ---------- */
   // Prix unitaires (en euros), hors dragées : à ajuster ici.
-  // Seule la boîte en carton a un prix pour l'instant ; les autres contenants sont chiffrés sur devis (0).
-  var PRIX_CONTENANT = { boite: 3.50, pot: 0, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
+  // Boîte en carton et pot en verre : 3,50 € ; les autres contenants sont chiffrés sur devis (0).
+  var PRIX_CONTENANT = { boite: 3.50, pot: 3.50, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
   var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
   var DRAGEES_INCLUSES = 0;     // aucune dragée comprise : 3,50 € = boîte + étiquette + nœud
@@ -715,8 +715,8 @@
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
   function avecDragees() { return checkedValue('dragees') === 'Avec dragées'; }
   function prixOptions() {
-    if (!isBoite()) return { noeud: 0, bouquet: 0, sup: 0, nbSup: 0 };
-    var d = decoChoice();
+    if (!isBoite() && !isPot()) return { noeud: 0, bouquet: 0, sup: 0, nbSup: 0 };
+    var d = isBoite() ? decoChoice() : '';
     var nbSup = checkedValue('dragees') === 'Avec dragées' ? Math.max(0, totalQty() - DRAGEES_INCLUSES) : 0;
     return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: d === 'Nœud + bouquet' ? PRIX_BOUQUET : 0,
       sup: Math.round(nbSup * PRIX_DRAGEE_SUP * 100) / 100, nbSup: nbSup };
@@ -724,8 +724,11 @@
   function isBouquetC() { return !conseil && containers[idx].key === 'bouquet'; }
   // Bouquet : prix selon la taille (1 dragée au chocolat par pétale, étiquette comprise)
   function prixBase() { return conseil ? 0 : isBouquetC() ? sizeOf(bouquetSize).prix : (PRIX_CONTENANT[containers[idx].key] || 0); }
-  function uniteFR() { return isBouquetC() ? ' le bouquet' : ' la boîte'; }
-  function uniteEN() { return isBouquetC() ? ' per bouquet' : ' per box'; }
+  function isPot() { return !conseil && containers[idx].key === 'pot'; }
+  function uniteFR() { return isBouquetC() ? ' le bouquet' : isPot() ? ' le pot' : ' la boîte'; }
+  function uniteEN() { return isBouquetC() ? ' per bouquet' : isPot() ? ' per jar' : ' per box'; }
+  function slashU() { return isPot() ? T(' / pot', ' / jar') : T(' / boîte', ' / box'); }
+  function inclusTxt() { return isPot() ? T('Étiquette personnalisée incluse', 'Personalised label included') : T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included'); }
   function prixUnitaire() {
     if (conseil) return 0;
     var base = prixBase();
@@ -736,7 +739,7 @@
   function detailPrix() {
     var base = prixBase(), o = prixOptions();
     if (isBouquetC()) { var sb = sizeOf(bouquetSize); return T(sb.name + ' bouquet : ' + sb.n + ' pétales, ' + sb.n + ' dragées au chocolat et étiquette compris', sb.en + ' bouquet: ' + sb.n + ' petals, ' + sb.n + ' chocolate dragées and label included'); }
-    var parts = [T('boîte et étiquette ', 'box and label ') + euros(base)];
+    var parts = [(isPot() ? T('pot et étiquette ', 'jar and label ') : T('boîte et étiquette ', 'box and label ')) + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' ' + euros(o.sup));
     if (o.noeud) parts.push(T('nœud ', 'bow ') + euros(o.noeud));
     if (o.bouquet) parts.push('bouquet ' + euros(o.bouquet));
@@ -750,9 +753,9 @@
     // étape dragées : prix des dragées supplémentaires (boîte en carton)
     var dp = $('cfg-dg-price'), o = prixOptions();
     if (dp) {
-      dp.hidden = !isBoite() || !avecDragees();
-      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + T(' par boîte', ' per box')
-        : euros(PRIX_DRAGEE_SUP) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price');
+      dp.hidden = !(isBoite() || isPot()) || !avecDragees();
+      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + (isPot() ? T(' par pot', ' per jar') : T(' par boîte', ' per box'))
+        : euros(PRIX_DRAGEE_SUP) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price').replace('de la boîte', isPot() ? 'du pot' : 'de la boîte').replace('box price', isPot() ? 'jar price' : 'box price');
     }
     var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
     $('w-nb-total').textContent = pu && n >= NB_MIN ? T('Total : ', 'Total: ') + euros(totalNet()) : '';
@@ -811,17 +814,17 @@
     box.classList.remove('is-quote');
     var pu = prixUnitaire();
     if (current === 2) {
-      amt.textContent = T('dès ', 'from ') + euros(base); unit.textContent = T(' / boîte', ' / box');
-      det.textContent = T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included');
+      amt.textContent = T('dès ', 'from ') + euros(base); unit.textContent = slashU();
+      det.textContent = inclusTxt();
       lastTagPrice = null; return;
     }
-    amt.textContent = euros(pu); unit.textContent = T(' / boîte', ' / box');
-    var o = prixOptions(), parts = [T('Boîte ', 'Box ') + euros(base)];
+    amt.textContent = euros(pu); unit.textContent = slashU();
+    var o = prixOptions(), parts = [(isPot() ? T('Pot ', 'Jar ') : T('Boîte ', 'Box ')) + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' +' + euros(o.sup));
     if (o.bouquet) parts.push('Bouquet +' + euros(o.bouquet));
     det.innerHTML = '';
     if (parts.length > 1) parts.forEach(function(t) { var sp = document.createElement('span'); sp.textContent = t; det.appendChild(sp); });
-    else det.textContent = T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included');
+    else det.textContent = inclusTxt();
     if (lastTagPrice !== null && Math.abs(pu - lastTagPrice) > 0.001) {
       var d = Math.round((pu - lastTagPrice) * 100) / 100;
       dl.textContent = (d > 0 ? '+' : '−') + euros(Math.abs(d));
