@@ -167,9 +167,9 @@
       // pétale de tulle en forme de feuille, pointe légèrement recourbée, une dragée à l'intérieur
       return '<g transform="translate(200 238) rotate(' + (ang * 0.62).toFixed(1) + ') scale(' + (b.scale * 1.12).toFixed(3) + ')">' +
         '<use href="#cfg-dg" class="dg dg--in" style="color:' + DG_PETAL[k % 3] + '" transform="translate(0 -60) rotate(90) scale(1.3 1.5)"/>' +
-        '<path d="M0,-4 C-25,-24 -29,-76 -6,-100 C0,-106 8,-110 14,-114 C9,-104 25,-84 23,-60 C21,-30 9,-14 0,-4 Z" fill="rgba(255,255,255,0.32)" stroke="rgba(82,54,42,0.38)" stroke-width=".9" stroke-linejoin="round"/>' +
-        '<path d="M14,-114 C10,-108 6,-104 4,-98" fill="none" stroke="rgba(82,54,42,0.3)" stroke-width=".8"/>' +
-        '<path d="M-2,-14 C-13,-42 -13,-74 -2,-94" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.3"/></g>';
+        '<path d="M0,-2 C-3,-14 -5,-26 -9,-36 C-19,-50 -19,-72 -6,-84 C-2,-88 4,-91 9,-95 C6,-88 18,-74 16,-58 C15,-44 10,-30 3,-14 C2,-8 1,-4 0,-2 Z" fill="rgba(255,255,255,0.32)" stroke="rgba(82,54,42,0.38)" stroke-width=".9" stroke-linejoin="round"/>' +
+        '<path d="M9,-95 C6,-91 3,-88 2,-84" fill="none" stroke="rgba(82,54,42,0.3)" stroke-width=".8"/>' +
+        '<path d="M-11,-46 C-15,-56 -14,-70 -6,-79" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.3" stroke-linecap="round"/></g>';
     }).join('');
   }
   function miniFan(b) {
