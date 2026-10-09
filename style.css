@@ -7130,3 +7130,10 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .cfg-tagcolors .wizard__field[hidden] { display: none; }
 .cfg-shape--ovale { width: 16px; height: 10px; border-radius: 50%; }
 .wizard__chip[hidden] { display: none; }
+/* Note Google sous les avis (accueil) */
+.avis-google { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; margin: 32px auto 0; color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 300; }
+.avis-google__stars { display: inline-flex; gap: 2px; }
+.avis-google__stars svg { width: 15px; height: 15px; fill: #C9A45C; }
+.avis-google__note strong { font-weight: 500; }
+.avis-google__cta { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--caramel); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.avis-google:hover .avis-google__cta { color: var(--ink); }
