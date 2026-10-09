@@ -551,7 +551,7 @@
     }
     if (shape === 'Ovale') { // ovale à l'horizontale (bouquet)
       el = document.createElementNS(SVGNS, 'ellipse');
-      el.setAttribute('rx', (r * 1.3 - inset).toFixed(2)); el.setAttribute('ry', (r * 0.86 - inset).toFixed(2));
+      el.setAttribute('rx', (r * 1.1 - inset).toFixed(2)); el.setAttribute('ry', (r * 0.74 - inset).toFixed(2));
     } else if (shape === 'Ronde') {
       el = document.createElementNS(SVGNS, 'circle');
       el.setAttribute('r', R.toFixed(2));
@@ -604,7 +604,7 @@
     if (out) out.textContent = Math.round(k * 100) + '\u00a0%';
     fitAllTags();
   }
-  function tagWidthFactor() { var s = tagShape(); return s === 'Ovale' ? 2.05 : s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
+  function tagWidthFactor() { var s = tagShape(); return s === 'Ovale' ? 1.72 : s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
   // Couleurs de l'étiquette et de l'écriture (pastilles + couleur libre)
   function tagColor(name, fallback) {
     if (name === 'etiquette_fond' && tagFondBlanc()) return '#FFFFFF'; // boîte et bouquet : étiquettes toujours blanches
