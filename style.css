@@ -7115,7 +7115,7 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 @media (prefers-reduced-motion: reduce) {
   .cfg-svg[data-key="pot"] .cfg-cork, .cfg-svg[data-key="pot"] .cfg-cork-plug { transition: none; }
 }
-/* Pot en verre à l'étape Dragées : même taille qu'au choix du contenant */
+/* Pot en verre aux étapes Dragées et Étiquette : même taille qu’au choix du contenant */
 .cfg-stage--preview.cfg-stage--pot-big .cfg-viewport { width: min(100%, 440px); }
 @media (max-width: 768px) {
   .cfg-stage--preview.cfg-stage--pot-big .cfg-viewport { width: min(100%, 360px); }

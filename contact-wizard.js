@@ -994,7 +994,7 @@
     stage.classList.toggle('cfg-stage--choose', n === 2);
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
-    stage.classList.toggle('cfg-stage--pot-big', n === 3 && !conseil && containers[idx].key === 'pot');
+    stage.classList.toggle('cfg-stage--pot-big', (n === 3 || n === 4) && !conseil && containers[idx].key === 'pot');
     setBoxOpen();
     applyDeco();
     updatePrix();
