@@ -725,7 +725,7 @@
     if (!isBoite() && !isPot()) return { noeud: 0, bouquet: 0, sup: 0, nbSup: 0 };
     var d = isBoite() ? decoChoice() : '';
     var nbSup = checkedValue('dragees') === 'Avec dragées' ? Math.max(0, totalQty() - DRAGEES_INCLUSES) : 0;
-    return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: d === 'Nœud + bouquet' ? PRIX_BOUQUET : 0,
+    return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: (d === 'Nœud + bouquet' || (isPot() && potFleurs())) ? PRIX_BOUQUET : 0,
       sup: Math.round(nbSup * PRIX_DRAGEE_SUP * 100) / 100, nbSup: nbSup };
   }
   function isBouquetC() { return !conseil && containers[idx].key === 'bouquet'; }
@@ -897,7 +897,8 @@
 
   /* ---------- Étape 5 : décoration de la boîte (nœud, fleurs champêtres) ---------- */
   function isBoite() { return !conseil && containers[idx].key === 'boite'; }
-  function stepUsable(n) { return n !== 5 || isBoite(); } // l'étape décoration ne concerne que la boîte en carton
+  function stepUsable(n) { return n !== 5 || isBoite() || isPot(); } // étape décoration : boîte en carton (nœud, bouquet) et pot en verre (fleurs)
+  function potFleurs() { return checkedValue('fleurs_pot') === 'Avec fleurs'; }
   function decoChoice() { return checkedValue('decoration') || 'Sans décoration'; }
   function decoName() { return checkedName('decoration') || T('Sans décoration', 'No decoration'); }
   function rubanHex() { var el = document.querySelector('input[name="ruban"]:checked'); return el ? el.getAttribute('data-hex') : '#D9C29A'; }
@@ -930,6 +931,22 @@
     if (bb) bb.hidden = d !== 'Nœud + bouquet';
     var rb = $('cfg-ruban');
     if (rb) rb.hidden = !(d === 'Nœud satiné' || d === 'Nœud + bouquet');
+    // Pot en verre : avec ou sans petit bouquet séché glissé dans le nœud
+    var pot = isPot(), pf = pot && potFleurs();
+    if (potSvg) {
+      var pg = potSvg.querySelector('.cfg-pot-fleurs');
+      if (pg) pg.style.display = pf && current >= 5 ? 'inline' : 'none';
+      potSvg.style.setProperty('--bq', bc.base); potSvg.style.setProperty('--bq-l', bc.light); potSvg.style.setProperty('--bq-d', bc.dark);
+    }
+    var cb = $('cfg-deco-box'), cp = $('cfg-deco-pot');
+    if (cb) cb.hidden = pot;
+    if (cp) cp.hidden = !pot;
+    if (pot) { if (bb) bb.hidden = !pf; if (rb) rb.hidden = true; }
+    var tt = $('cfg-deco-title'), st = $('cfg-deco-sub');
+    if (tt && !tt.hasAttribute('data-box')) tt.setAttribute('data-box', tt.innerHTML);
+    if (st && !st.hasAttribute('data-box')) st.setAttribute('data-box', st.innerHTML);
+    if (tt) tt.innerHTML = pot ? T('Fleurissez<br>votre pot', 'Add flowers<br>to your jar') : tt.getAttribute('data-box');
+    if (st) st.innerHTML = pot ? T('Avec ou sans petit bouquet séché glissé dans le nœud&nbsp;: l’aperçu se met à jour en direct.', 'With or without a small dried bouquet tucked into the bow: the preview updates live.') : st.getAttribute('data-box');
   }
   // Couleurs du bouquet séché : teinte principale, claire et soutenue
   var BOUQUET_TONS = {
@@ -946,13 +963,14 @@
     r.addEventListener('change', function() { var l = $('label-bouquet-name'); if (l) l.textContent = dispName(r); applyDeco(); });
   });
   function decoText() {
+    if (isPot()) return potFleurs() ? checkedName('fleurs_pot') + ' (bouquet ' + (checkedName('bouquet_couleur') || 'Beige').toLowerCase() + ')' : checkedName('fleurs_pot');
     if (!isBoite()) return '';
     var d = decoChoice();
     if (d === 'Nœud satiné') return decoName() + T(' (ruban ', ' (ribbon ') + checkedName('ruban').toLowerCase() + ')';
     if (d === 'Nœud + bouquet') return decoName() + T(' (ruban ', ' (ribbon ') + checkedName('ruban').toLowerCase() + ', bouquet ' + (checkedName('bouquet_couleur') || 'Beige').toLowerCase() + ')';
     return d;
   }
-  document.querySelectorAll('input[name="decoration"]').forEach(function(r) { r.addEventListener('change', applyDeco); });
+  document.querySelectorAll('input[name="decoration"], input[name="fleurs_pot"]').forEach(function(r) { r.addEventListener('change', applyDeco); });
   document.querySelectorAll('input[name="ruban"]').forEach(function(r) {
     r.addEventListener('change', function() { var l = $('label-ruban-name'); if (l) l.textContent = dispName(r); applyDeco(); });
   });
@@ -994,7 +1012,7 @@
     stage.classList.toggle('cfg-stage--choose', n === 2);
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
-    stage.classList.toggle('cfg-stage--pot-big', (n === 3 || n === 4) && !conseil && containers[idx].key === 'pot');
+    stage.classList.toggle('cfg-stage--pot-big', n >= 3 && n <= 5 && !conseil && containers[idx].key === 'pot');
     setBoxOpen();
     applyDeco();
     updatePrix();
@@ -1260,7 +1278,7 @@
      les coordonnées personnelles de l'étape 7 ne sont pas enregistrées. */
   var SAVE_KEY = 'dp-creation-v1';
   var SAVE_DAYS = 60;
-  var SAVE_RADIOS = ['evenement', 'dragees', 'decoration', 'ruban', 'bouquet_couleur', 'etiquette_forme',
+  var SAVE_RADIOS = ['evenement', 'dragees', 'decoration', 'fleurs_pot', 'ruban', 'bouquet_couleur', 'etiquette_forme',
     'etiquette_police', 'etiquette_fond', 'etiquette_texte', 'etiquette_bord'];
   var SAVE_FIELDS = ['cfg-l1', 'cfg-l2', 'w-nb', 'wizard-date'];
   var saveOn = true, saveTimer = 0, restoring = false;

@@ -7120,3 +7120,8 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 @media (max-width: 768px) {
   .cfg-stage--preview.cfg-stage--pot-big .cfg-viewport { width: min(100%, 360px); }
 }
+/* Pot en verre : bouquet séché (étape 5, « Avec fleurs ») */
+.cfg-pot-fleurs { display: none; }
+.cfg-deco-cards[hidden] { display: none; }
+.cfg-deco-cards.cfg-deco-cards--pot { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 768px) { .cfg-deco-cards.cfg-deco-cards--pot { grid-template-columns: minmax(0, 1fr); } }
