@@ -353,16 +353,18 @@
   var DG_START = 5; // jamais moins de 5 dragées dans un contenant
   function floorOf(cat) { return Math.min(DG_START, capOf(cat)); }
   // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
+  function tubeCap() { return !conseil && containers[idx].key === 'tube' ? 6 : 0; } // tube : 6 dragées, ni plus ni moins
   function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
   var POT_MAX = 10; // pot en verre : 10 dragées maximum, quelle que soit la catégorie
   function capOf(cat) {
     if (bqCap()) return bqCap();
+    if (tubeCap()) return tubeCap();
     var p = $('cfg-panel-' + cat), cap = (p && parseInt(p.getAttribute('data-max'), 10)) || 10;
     return !conseil && containers[idx].key === 'pot' ? Math.min(cap, POT_MAX) : cap;
   }
   // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
-  function minOf(cat) { if (bqCap()) return bqCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
-  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); if (bqCap()) return T(mx + ' dragées pour ce bouquet : une par pétale.', mx + ' dragées for this bouquet: one per petal.'); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
+  function minOf(cat) { if (bqCap()) return bqCap(); if (tubeCap()) return tubeCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
+  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); if (tubeCap()) return T(mx + ' dragées pour ce tube.', mx + ' dragées for this tube.'); if (bqCap()) return T(mx + ' dragées pour ce bouquet : une par pétale.', mx + ' dragées for this bouquet: one per petal.'); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
   function chosenCat() { return chosenColors.length ? catOf(inputOf(chosenColors[0])) : ''; }
   function totalQty() { return chosenColors.reduce(function(n, v) { return n + (qty[v] || 0); }, 0); }
   function shortName(el) {
@@ -443,7 +445,7 @@
   }
   function updateNeed() {
     var hint = $('cfg-dg-hint');
-    if (hint) hint.hidden = !(checkedValue('dragees') === 'Avec dragées' && totalQty() === 5 && !bqCap());
+    if (hint) hint.hidden = !(checkedValue('dragees') === 'Avec dragées' && totalQty() === 5 && !bqCap() && !tubeCap());
     var need = $('cfg-dg-need');
     if (!need) return;
     var avec = checkedValue('dragees') === 'Avec dragées';
@@ -724,7 +726,8 @@
   /* ---------- Nombre de boîtes et prix ---------- */
   // Prix unitaires (en euros), hors dragées : à ajuster ici.
   // Boîte en carton et pot en verre : 3,50 € ; les autres contenants sont chiffrés sur devis (0).
-  var PRIX_CONTENANT = { boite: 3.50, pot: 3.50, tube: 0, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
+  var PRIX_TUBE_DRAGEES = 1.00; // tube : 3,50 € vide, 4,50 € avec ses 6 dragées
+  var PRIX_CONTENANT = { boite: 3.50, pot: 3.50, tube: 3.50, pochon: 0, bouquet: 0 }; // boîte + étiquette personnalisée
   var PRIX_NOEUD = 0;       // nœud satiné (boîte) : inclus
   var PRIX_BOUQUET = 0.50;  // bouquet champêtre, en plus du nœud (boîte)
   var DRAGEES_INCLUSES = 0;     // aucune dragée comprise : 3,50 € = boîte + étiquette + nœud
@@ -740,6 +743,7 @@
   function nbBoites() { var n = parseInt(val('w-nb'), 10); return n > 0 ? Math.min(n, NB_MAX) : 0; }
   function avecDragees() { return checkedValue('dragees') === 'Avec dragées'; }
   function prixOptions() {
+    if (isTube()) return { noeud: 0, bouquet: 0, sup: avecDragees() ? PRIX_TUBE_DRAGEES : 0, nbSup: avecDragees() ? 6 : 0 };
     if (!isBoite() && !isPot()) return { noeud: 0, bouquet: 0, sup: 0, nbSup: 0 };
     var d = isBoite() ? decoChoice() : '';
     var nbSup = checkedValue('dragees') === 'Avec dragées' ? Math.max(0, totalQty() - DRAGEES_INCLUSES) : 0;
@@ -749,11 +753,12 @@
   function isBouquetC() { return !conseil && containers[idx].key === 'bouquet'; }
   // Bouquet : prix selon la taille (1 dragée au chocolat par pétale, étiquette comprise)
   function prixBase() { return conseil ? 0 : isBouquetC() ? sizeOf(bouquetSize).prix : (PRIX_CONTENANT[containers[idx].key] || 0); }
+  function isTube() { return !conseil && containers[idx].key === 'tube'; }
   function isPot() { return !conseil && containers[idx].key === 'pot'; }
-  function uniteFR() { return isBouquetC() ? ' le bouquet' : isPot() ? ' le pot' : ' la boîte'; }
-  function uniteEN() { return isBouquetC() ? ' per bouquet' : isPot() ? ' per jar' : ' per box'; }
-  function slashU() { return isPot() ? T(' / pot', ' / jar') : T(' / boîte', ' / box'); }
-  function inclusTxt() { return isPot() ? T('Étiquette personnalisée incluse', 'Personalised label included') : T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included'); }
+  function uniteFR() { return isBouquetC() ? ' le bouquet' : isPot() ? ' le pot' : isTube() ? ' le tube' : ' la boîte'; }
+  function uniteEN() { return isBouquetC() ? ' per bouquet' : isPot() ? ' per jar' : isTube() ? ' per tube' : ' per box'; }
+  function slashU() { return isTube() ? ' / tube' : isPot() ? T(' / pot', ' / jar') : T(' / boîte', ' / box'); }
+  function inclusTxt() { if (isTube()) return current > 2 && !avecDragees() ? T('Tube vide, sans dragées', 'Empty tube, no dragées') : T('4,50\u00a0€ avec ses 6 dragées', '€4.50 with its 6 dragées'); return isPot() ? T('Étiquette personnalisée incluse', 'Personalised label included') : T('Étiquette personnalisée et nœud satiné inclus', 'Personalised label and satin bow included'); }
   function prixUnitaire() {
     if (conseil) return 0;
     var base = prixBase();
@@ -764,7 +769,7 @@
   function detailPrix() {
     var base = prixBase(), o = prixOptions();
     if (isBouquetC()) { var sb = sizeOf(bouquetSize); return T(sb.name + ' bouquet : ' + sb.n + ' pétales, ' + sb.n + ' dragées au chocolat et étiquette compris', sb.en + ' bouquet: ' + sb.n + ' petals, ' + sb.n + ' chocolate dragées and label included'); }
-    var parts = [(isPot() ? T('pot et étiquette ', 'jar and label ') : T('boîte et étiquette ', 'box and label ')) + euros(base)];
+    var parts = [(isTube() ? 'tube ' : isPot() ? T('pot et étiquette ', 'jar and label ') : T('boîte et étiquette ', 'box and label ')) + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' ' + euros(o.sup));
     if (o.noeud) parts.push(T('nœud ', 'bow ') + euros(o.noeud));
     if (o.bouquet) parts.push('bouquet ' + euros(o.bouquet));
@@ -778,8 +783,9 @@
     // étape dragées : prix des dragées supplémentaires (boîte en carton)
     var dp = $('cfg-dg-price'), o = prixOptions();
     if (dp) {
-      dp.hidden = !(isBoite() || isPot()) || !avecDragees();
-      dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + (isPot() ? T(' par pot', ' per jar') : T(' par boîte', ' per box'))
+      dp.hidden = !(isBoite() || isPot() || isTube()) || !avecDragees();
+      if (isTube()) dp.textContent = T('6 dragées : + ', '6 dragées: + ') + euros(PRIX_TUBE_DRAGEES) + T(' par tube', ' per tube');
+      else dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + (isPot() ? T(' par pot', ' per jar') : T(' par boîte', ' per box'))
         : euros(PRIX_DRAGEE_SUP) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price').replace('de la boîte', isPot() ? 'du pot' : 'de la boîte').replace('box price', isPot() ? 'jar price' : 'box price');
     }
     var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
@@ -844,7 +850,7 @@
       lastTagPrice = null; return;
     }
     amt.textContent = euros(pu); unit.textContent = slashU();
-    var o = prixOptions(), parts = [(isPot() ? T('Pot ', 'Jar ') : T('Boîte ', 'Box ')) + euros(base)];
+    var o = prixOptions(), parts = [(isTube() ? 'Tube ' : isPot() ? T('Pot ', 'Jar ') : T('Boîte ', 'Box ')) + euros(base)];
     if (o.sup) parts.push(o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' +' + euros(o.sup));
     if (o.bouquet) parts.push('Bouquet +' + euros(o.bouquet));
     det.innerHTML = '';
@@ -899,6 +905,7 @@
     return dn + ' · ' + (EN ? catName(chosenCat()) + ': ' : '') + chosenColors.map(function(v) { return nameOfValue('couleurs', v) + ' ×' + (qty[v] || 1); }).join(', ');
   }
   function etiquetteText() {
+    if (isTube()) return '';
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
   }
   function colorLabel(name) {
@@ -906,6 +913,7 @@
     return v === 'Personnalisée' ? T('personnalisée ', 'custom ') + tagColor(name, '').toUpperCase() : checkedName(name).toLowerCase();
   }
   function etiquetteFormat() {
+    if (isTube()) return T('Sans étiquette', 'No label');
     var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? T('sans bordure', 'no border') : (EN ? colorLabel('etiquette_bord') + ' border' : 'bordures ' + colorLabel('etiquette_bord'));
     // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
     if (EN) return checkedName('etiquette_forme') + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagFondBlanc() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
@@ -915,7 +923,8 @@
 
   /* ---------- Étape 5 : décoration de la boîte (nœud, fleurs champêtres) ---------- */
   function isBoite() { return !conseil && containers[idx].key === 'boite'; }
-  function stepUsable(n) { return n !== 5 || isBoite() || isPot(); } // étape décoration : boîte en carton (nœud, bouquet) et pot en verre (fleurs)
+  function stepUsable(n) { if (n === 4 && isTube()) return false; // tube : sans étiquette
+    return n !== 5 || isBoite() || isPot(); } // étape décoration : boîte en carton (nœud, bouquet) et pot en verre (fleurs)
   function potFleurs() { return checkedValue('fleurs_pot') === 'Avec fleurs'; }
   function decoChoice() { return checkedValue('decoration') || 'Sans décoration'; }
   function decoName() { return checkedName('decoration') || T('Sans décoration', 'No decoration'); }
@@ -1171,7 +1180,7 @@
       'Occasion': occasion,
       'Contenant': contenantText(),
       'Dragées': drageesText(),
-      'Texte de l\'étiquette': etiquetteText() || 'À définir',
+      'Texte de l\'étiquette': etiquetteText() || (isTube() ? 'Sans étiquette (tube)' : 'À définir'),
       'Étiquette': etiquetteFormat(),
       'Décoration': decoText() || 'Sans objet (contenant autre que la boîte)',
       'Nombre de boîtes': nbBoitesText(),
