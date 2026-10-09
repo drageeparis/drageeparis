@@ -265,6 +265,7 @@
     el.setAttribute('fill', outside ? '#F6F0E8' : '#E6DACA');
   }
   var boxLid = box && box.querySelector('.cfg-box-lid');
+  var potSvg = stage.querySelector('.cfg-svg[data-key="pot"]');
   function drawBox(p) {
     if (!boxFlapsG) return;
     // fermée : un dessus plein, sans fente ; dès que ça s'ouvre, les rabats prennent le relais
@@ -296,6 +297,7 @@
   }
   function setBoxOpen() {
     var open = current === 3 && checkedValue('dragees') === 'Avec dragées'; // ouverte seulement à l'étape Dragées
+    if (potSvg) potSvg.classList.toggle('is-open', open); // pot en verre : le bouchon se soulève
     if (!box) return;
     box.classList.toggle('is-open', open);
     var target = open ? 1 : 0;
@@ -992,6 +994,7 @@
     stage.classList.toggle('cfg-stage--choose', n === 2);
     stage.classList.toggle('cfg-stage--preview', n !== 2);
     stage.classList.toggle('cfg-stage--label', n === 4);
+    stage.classList.toggle('cfg-stage--pot-big', n === 3 && !conseil && containers[idx].key === 'pot');
     setBoxOpen();
     applyDeco();
     updatePrix();

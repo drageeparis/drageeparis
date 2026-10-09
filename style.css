@@ -7102,3 +7102,21 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .cfg-size-opt__price { margin-top: 3px; font-size: 12.5px; font-weight: 400; letter-spacing: 0.02em; color: var(--caramel); }
 
 .cfg-optional { text-transform: none; letter-spacing: 0.02em; opacity: 0.7; }
+
+/* Pot en verre : bouchon qui se soulève à l'étape Dragées (« Avec dragées ») */
+.cfg-svg[data-key="pot"] { overflow: visible; }
+.cfg-svg[data-key="pot"] .cfg-cork {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  transition: transform 0.75s cubic-bezier(0.34, 1.35, 0.5, 1);
+}
+.cfg-svg[data-key="pot"] .cfg-cork-plug { transition: opacity 0.3s ease; }
+.cfg-svg[data-key="pot"].is-open .cfg-cork { transform: translate(52px, -50px) rotate(18deg); }
+.cfg-svg[data-key="pot"].is-open .cfg-cork-plug { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .cfg-svg[data-key="pot"] .cfg-cork, .cfg-svg[data-key="pot"] .cfg-cork-plug { transition: none; }
+}
+/* Pot en verre à l'étape Dragées : même taille qu'au choix du contenant */
+.cfg-stage--preview.cfg-stage--pot-big .cfg-viewport { width: min(100%, 440px); }
+@media (max-width: 768px) {
+  .cfg-stage--preview.cfg-stage--pot-big .cfg-viewport { width: min(100%, 360px); }
+}
