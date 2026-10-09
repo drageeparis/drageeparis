@@ -7127,3 +7127,4 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 @media (max-width: 768px) { .cfg-deco-cards.cfg-deco-cards--pot { grid-template-columns: minmax(0, 1fr); } }
 .cfg-swatch[hidden] { display: none; }
 .cfg-tagopts[hidden] { display: none; }
+.cfg-tagcolors .wizard__field[hidden] { display: none; }

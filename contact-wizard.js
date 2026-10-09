@@ -577,10 +577,14 @@
       var first = g.firstChild;
       var bord = tagColor('etiquette_bord', TAG_STROKE); // « none » = sans bordure
       var gs = g.getAttribute('data-shape') || shape;
+      if (gs === 'Etiquette') { // étiquette suspendue (tube) : sans bordure, simple liseré discret
+        g.insertBefore(tagShapeEl(gs, r, 0, tagColor('etiquette_fond', TAG_FILL), 'rgba(82,54,42,0.3)', '.8'), first);
+      } else {
       g.insertBefore(tagShapeEl(gs, r, 0, tagColor('etiquette_fond', TAG_FILL), bord, '1'), first);
       var inner = tagShapeEl(gs, r, r * 0.0875, 'none', bord, '.7');
       inner.setAttribute('stroke-opacity', '.45');
       g.insertBefore(inner, first);
+      }
       g.setAttribute('transform', (g.getAttribute('data-base') + ' scale(' + k + ')').trim());
     });
     var out = $('cfg-tag-size-val');
@@ -949,7 +953,7 @@
     return v === 'Personnalisée' ? T('personnalisée ', 'custom ') + tagColor(name, '').toUpperCase() : checkedName(name).toLowerCase();
   }
   function etiquetteFormat() {
-    var bords = tagColorName('etiquette_bord') === 'Sans bordure' ? T('sans bordure', 'no border') : (EN ? colorLabel('etiquette_bord') + ' border' : 'bordures ' + colorLabel('etiquette_bord'));
+    var bords = (isTube() || tagColorName('etiquette_bord') === 'Sans bordure') ? T('sans bordure', 'no border') : (EN ? colorLabel('etiquette_bord') + ' border' : 'bordures ' + colorLabel('etiquette_bord'));
     // la taille n'est mentionnée que si le client a pu la régler (pas pour la boîte en carton)
     if (EN) return (isTube() ? 'Hanging tag' : checkedName('etiquette_forme')) + ', ' + checkedName('etiquette_police').toLowerCase() + ' script, ' + (tagFondBlanc() ? 'white' : colorLabel('etiquette_fond')) + ' background, ' + colorLabel('etiquette_texte') + ' lettering, ' + bords;
     return (isTube() ? 'Étiquette suspendue' : tagShape()) + ', écriture ' + tagFont().name.toLowerCase() + ', fond ' + (tagFondBlanc() ? 'blanc' : colorLabel('etiquette_fond')) + ', écriture ' + colorLabel('etiquette_texte') + ', ' + bords;
@@ -1104,7 +1108,7 @@
     current = n;
     setProgress(n);
     if (n === 6) setupDateRule();
-    if (n === 4) { var fo = $('label-tag-forme'), row = fo && fo.closest('.cfg-tagopts'); if (row) row.hidden = isTube(); } // tube : forme d'étiquette imposée
+    if (n === 4) { var fo = $('label-tag-forme'), row = fo && fo.closest('.cfg-tagopts'); if (row) row.hidden = isTube(); var bl = $('label-tag-bord'), bf = bl && bl.closest('.wizard__field'); if (bf) bf.hidden = isTube(); } // tube : forme d'étiquette imposée
     placeStage(n);
     var next = getPanel(n);
     if (next) {
