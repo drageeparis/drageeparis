@@ -942,6 +942,18 @@
     if (cb) cb.hidden = pot;
     if (cp) cp.hidden = !pot;
     if (pot) { if (bb) bb.hidden = !pf; if (rb) rb.hidden = true; }
+    // couleurs du bouquet : blanc ou beige uniquement pour le pot
+    var POT_BQ = ['Beige', 'Blanc'];
+    document.querySelectorAll('input[name="bouquet_couleur"]').forEach(function(r) {
+      var sw = r.closest('.cfg-swatch'); if (sw) sw.hidden = pot && POT_BQ.indexOf(r.value) < 0;
+    });
+    if (pot && POT_BQ.indexOf(checkedValue('bouquet_couleur')) < 0) {
+      var beige = document.querySelector('input[name="bouquet_couleur"][value="Beige"]');
+      if (beige) { beige.checked = true; var lb = $('label-bouquet-name'); if (lb) lb.textContent = dispName(beige); }
+      bc = bouquetColor();
+      if (potSvg) { potSvg.style.setProperty('--bq', bc.base); potSvg.style.setProperty('--bq-l', bc.light); potSvg.style.setProperty('--bq-d', bc.dark); }
+      if (typeof updatePrix === 'function') updatePrix();
+    }
     var tt = $('cfg-deco-title'), st = $('cfg-deco-sub');
     if (tt && !tt.hasAttribute('data-box')) tt.setAttribute('data-box', tt.innerHTML);
     if (st && !st.hasAttribute('data-box')) st.setAttribute('data-box', st.innerHTML);
