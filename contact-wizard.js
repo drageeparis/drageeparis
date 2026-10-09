@@ -549,7 +549,10 @@
       }
       return el;
     }
-    if (shape === 'Ronde') {
+    if (shape === 'Ovale') { // ovale à l'horizontale (bouquet)
+      el = document.createElementNS(SVGNS, 'ellipse');
+      el.setAttribute('rx', (r * 1.3 - inset).toFixed(2)); el.setAttribute('ry', (r * 0.86 - inset).toFixed(2));
+    } else if (shape === 'Ronde') {
       el = document.createElementNS(SVGNS, 'circle');
       el.setAttribute('r', R.toFixed(2));
     } else {
@@ -563,6 +566,14 @@
     el.setAttribute('class', 'cfg-tag__shape');
     el.setAttribute('fill', fill); el.setAttribute('stroke', stroke); el.setAttribute('stroke-width', sw);
     return el;
+  }
+  // Formes proposées : bouquet = ronde ou ovale ; autres contenants = ronde, carrée, rectangle
+  function limitShapes() {
+    var bq = !conseil && containers[idx].key === 'bouquet';
+    var ok = bq ? ['Ronde', 'Ovale'] : ['Ronde', 'Carrée', 'Rectangle'];
+    var radios = document.querySelectorAll('input[name="etiquette_forme"]');
+    Array.prototype.forEach.call(radios, function(r) { var c = r.closest('.wizard__chip'); if (c) c.hidden = ok.indexOf(r.value) < 0; });
+    if (ok.indexOf(tagShape()) < 0) { var rd = document.querySelector('input[name="etiquette_forme"][value="Ronde"]'); if (rd) { rd.checked = true; renderTagShapes(); } }
   }
   function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
   var TAG_SIZE_DEFAUT = 120; // taille de l'étiquette (%), identique pour tous les contenants
@@ -593,7 +604,7 @@
     if (out) out.textContent = Math.round(k * 100) + '\u00a0%';
     fitAllTags();
   }
-  function tagWidthFactor() { var s = tagShape(); return s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
+  function tagWidthFactor() { var s = tagShape(); return s === 'Ovale' ? 2.05 : s === 'Rectangle' ? 2.0 : s === 'Carrée' ? 1.55 : 1.62; }
   // Couleurs de l'étiquette et de l'écriture (pastilles + couleur libre)
   function tagColor(name, fallback) {
     if (name === 'etiquette_fond' && tagFondBlanc()) return '#FFFFFF'; // boîte et bouquet : étiquettes toujours blanches
@@ -1110,7 +1121,7 @@
     current = n;
     setProgress(n);
     if (n === 6) setupDateRule();
-    if (n === 4) { var fo = $('label-tag-forme'), row = fo && fo.closest('.cfg-tagopts'); if (row) row.hidden = isTube(); var bl = $('label-tag-bord'), bf = bl && bl.closest('.wizard__field'); if (bf) bf.hidden = isTube(); } // tube : forme d'étiquette imposée
+    if (n === 4) { var fo = $('label-tag-forme'), row = fo && fo.closest('.cfg-tagopts'); if (row) row.hidden = isTube(); limitShapes(); var bl = $('label-tag-bord'), bf = bl && bl.closest('.wizard__field'); if (bf) bf.hidden = isTube(); } // tube : forme d'étiquette imposée
     placeStage(n);
     var next = getPanel(n);
     if (next) {

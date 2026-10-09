@@ -7128,3 +7128,5 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .cfg-swatch[hidden] { display: none; }
 .cfg-tagopts[hidden] { display: none; }
 .cfg-tagcolors .wizard__field[hidden] { display: none; }
+.cfg-shape--ovale { width: 16px; height: 10px; border-radius: 50%; }
+.wizard__chip[hidden] { display: none; }
