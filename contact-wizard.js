@@ -747,14 +747,16 @@
   }
   // Pot en verre : date obligatoire, au moins 2 semaines à l'avance
   var POT_DELAI = 14;
-  function dateRequise() { return typeof isPot === 'function' && isPot(); }
-  function dateOk() { if (!dateRequise()) return true; var d = readDate(); return !!d && daysUntil(d) >= POT_DELAI; }
+  // Pot en verre et fiole (tube) : date obligatoire ; pot : au moins 2 semaines à l'avance
+  function dateRequise() { return typeof isPot === 'function' && (isPot() || isTube()); }
+  function delaiMin() { return isPot() ? POT_DELAI : 0; }
+  function dateOk() { if (!dateRequise()) return true; var d = readDate(); return !!d && daysUntil(d) >= delaiMin(); }
   function setupDateRule() {
     if (!dateEl) return;
     var req = dateRequise(), opt = $('wizard-date-opt');
     if (opt) opt.textContent = req ? T('(obligatoire)', '(required)') : T('(facultatif)', '(optional)');
     dateEl.required = req;
-    if (req) { var m = new Date(); m.setHours(0, 0, 0, 0); m.setDate(m.getDate() + POT_DELAI); dateEl.min = m.getFullYear() + '-' + pad(m.getMonth() + 1) + '-' + pad(m.getDate()); }
+    if (req && delaiMin()) { var m = new Date(); m.setHours(0, 0, 0, 0); m.setDate(m.getDate() + POT_DELAI); dateEl.min = m.getFullYear() + '-' + pad(m.getMonth() + 1) + '-' + pad(m.getDate()); }
     else dateEl.removeAttribute('min');
     updateDateAlert();
   }
@@ -763,7 +765,7 @@
     if (typeof updateNextState === 'function') updateNextState();
     if (!date) { dateAlert.hidden = true; return; }
     var days = daysUntil(date);
-    if (dateRequise() && days < POT_DELAI) {
+    if (dateRequise() && delaiMin() && days < delaiMin()) {
       var m = new Date(); m.setHours(0, 0, 0, 0); m.setDate(m.getDate() + POT_DELAI);
       dateAlert.textContent = T('Pour le pot en verre, comptez au moins 2 semaines : choisissez une date à partir du ' + formatDate(m) + '.', 'For the glass jar, allow at least 2 weeks: choose a date from ' + formatDate(m) + '.');
       dateAlert.hidden = false;
