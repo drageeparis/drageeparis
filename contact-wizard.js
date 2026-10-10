@@ -393,7 +393,7 @@
   function catOf(el) { var p = el && el.closest('.cfg-dg-panel'); return p ? p.getAttribute('data-cat') : ''; }
   function catName(cat) { var t = $('cfg-tab-' + cat); return t ? t.firstChild.textContent.trim() : ''; }
   var DG_START = 5; // jamais moins de 5 dragées dans un contenant
-  function floorOf(cat) { return Math.min(DG_START, capOf(cat)); }
+  function floorOf(cat) { return tubeCap() ? 1 : Math.min(DG_START, capOf(cat)); } // fiole : le client place ses 6 dragées une à une
   // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
   function tubeCap() { return !conseil && containers[idx].key === 'tube' ? 6 : 0; } // tube : 6 dragées, ni plus ni moins
   function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
@@ -525,7 +525,7 @@
       var cat = catOf(c);
       if (c.checked) {
         // première dragée : on part directement sur 5 (le minimum) ; les couleurs suivantes s'ajoutent une par une
-        qty[c.value] = chosenColors.length ? 1 : Math.min(DG_START, capOf(cat));
+        qty[c.value] = (chosenColors.length || tubeCap()) ? 1 : Math.min(DG_START, capOf(cat));
         chosenColors.push(c.value);
       } else {
         chosenColors = chosenColors.filter(function(v) { return v !== c.value; });
