@@ -94,6 +94,7 @@
     $('cfg-name').textContent = containers[idx].name;
     updateSizes();
     $('cfg-desc').textContent = containers[idx].desc;
+    if (typeof relabelSteps === 'function' && typeof current !== 'undefined') setProgress(current);
     dots.forEach(function(d, i) { d.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
   }
   svgs.forEach(function(s, i) { s.setAttribute('data-pos', i === 0 ? 'active' : 'next'); });
@@ -1071,8 +1072,22 @@
   });
 
   /* ---------- Navigation ---------- */
+  // Étapes réellement parcourues selon le contenant (la décoration n'existe que pour la boîte et le pot)
+  function usableSteps() { var a = []; for (var k = 1; k <= TOTAL; k++) if (stepUsable(k)) a.push(k); return a; }
+  function stepPos(n) { var a = usableSteps(), i = a.indexOf(n); return { pos: i < 0 ? a.length : i + 1, total: a.length }; }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function relabelSteps() {
+    for (var k = 1; k <= TOTAL; k++) {
+      var p = getPanel(k), lab = p && p.querySelector('.wizard__step-label');
+      if (!lab) continue;
+      var sp = stepPos(k);
+      lab.textContent = T('Étape ', 'Step ') + pad2(sp.pos) + ' / ' + pad2(sp.total);
+    }
+  }
   function setProgress(step) {
-    var pct = Math.round((step / TOTAL) * 100);
+    relabelSteps();
+    var sp = stepPos(step);
+    var pct = Math.round((sp.pos / sp.total) * 100);
     bar.style.width = pct + '%';
     barEl.setAttribute('aria-valuenow', pct);
   }
