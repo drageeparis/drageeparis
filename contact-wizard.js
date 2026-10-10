@@ -631,7 +631,10 @@
   // Style d'écriture du prénom : élégante, calligraphie ou classique
   function tagFont() {
     var el = document.querySelector('input[name="etiquette_police"]:checked');
-    return el ? { name: el.value, family: el.getAttribute('data-font'), size: parseFloat(el.getAttribute('data-size')) || 0.36 }
+    var sz = el ? parseFloat(el.getAttribute('data-size')) || 0.36 : 0.36;
+    // pot en verre : la calligraphie ressortait trop grande sur la petite étiquette ronde
+    if (el && el.value === 'Calligraphie' && !conseil && containers[idx].key === 'pot') sz *= 0.68;
+    return el ? { name: el.value, family: el.getAttribute('data-font'), size: sz }
               : { name: 'Élégante', family: "'Etiquette Italic', Georgia, serif", size: 0.36 };
   }
   document.querySelectorAll('input[name="etiquette_police"]').forEach(function(r) {
