@@ -148,6 +148,14 @@
   }
   /* ---------- Dragées visibles dans le pot, la fiole et devant le pochon ---------- */
   // Une dragée dessinée par dragée choisie, dans la couleur et la quantité choisies (couleurs alternées)
+  // Pot et pochon : couleurs servies à tour de rôle
+  function dgSequenceSimple() {
+    var seq = [], rest = chosenColors.map(function(v) { var el = inputOf(v); return { hex: el ? el.getAttribute('data-hex') : '#F4F2EE', n: qty[v] || 1 }; });
+    var more = true;
+    while (more) { more = false; rest.forEach(function(c) { if (c.n > 0) { seq.push(c.hex); c.n--; more = true; } }); }
+    return seq;
+  }
+  // Fiole : deux dragées de même couleur ne se touchent pas quand c'est possible
   function dgSequence() {
     var seq = [], rest = chosenColors.map(function(v) { var el = inputOf(v); return { hex: el ? el.getAttribute('data-hex') : '#F4F2EE', n: qty[v] || 1 }; });
     // deux dragées de même couleur ne se touchent jamais quand c'est possible :
@@ -163,9 +171,10 @@
   }
   function fillDragees() {
     var on = !conseil && current >= 3 && checkedValue('dragees') === 'Avec dragées';
-    var seq = on ? dgSequence() : [];
+    var seqFiole = on ? dgSequence() : [], seqAutres = on ? dgSequenceSimple() : [];
     Array.prototype.forEach.call(stage.querySelectorAll('.cfg-dgfill'), function(g) {
       var list = g.querySelectorAll('.dgf'), n = list.length, pochon = g.classList.contains('cfg-dgfill--pochon');
+      var seq = g.classList.contains('cfg-dgfill--tube') ? seqFiole : seqAutres;
       // pochon : quelques dragées posées devant, réparties selon les couleurs choisies
       var show = pochon ? (seq.length ? Math.min(n, Math.max(3, Math.ceil(seq.length / 2))) : 0) : Math.min(n, seq.length);
       for (var i = 0; i < n; i++) {
