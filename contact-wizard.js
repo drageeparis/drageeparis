@@ -144,6 +144,29 @@
         list[i].style.color = palette[(i * 2 + Math.floor(i / 3)) % palette.length];
       }
     });
+    if (typeof fillDragees === 'function') fillDragees();
+  }
+  /* ---------- Dragées visibles dans le pot, la fiole et devant le pochon ---------- */
+  // Une dragée dessinée par dragée choisie, dans la couleur et la quantité choisies (couleurs alternées)
+  function dgSequence() {
+    var seq = [], rest = chosenColors.map(function(v) { var el = inputOf(v); return { hex: el ? el.getAttribute('data-hex') : '#F4F2EE', n: qty[v] || 1 }; });
+    var more = true;
+    while (more) { more = false; rest.forEach(function(c) { if (c.n > 0) { seq.push(c.hex); c.n--; more = true; } }); }
+    return seq;
+  }
+  function fillDragees() {
+    var on = !conseil && current >= 3 && checkedValue('dragees') === 'Avec dragées';
+    var seq = on ? dgSequence() : [];
+    Array.prototype.forEach.call(stage.querySelectorAll('.cfg-dgfill'), function(g) {
+      var list = g.querySelectorAll('.dgf'), n = list.length, pochon = g.classList.contains('cfg-dgfill--pochon');
+      // pochon : quelques dragées posées devant, réparties selon les couleurs choisies
+      var show = pochon ? (seq.length ? Math.min(n, Math.max(3, Math.ceil(seq.length / 2))) : 0) : Math.min(n, seq.length);
+      for (var i = 0; i < n; i++) {
+        var vis = i < show;
+        list[i].style.display = vis ? '' : 'none';
+        if (vis) list[i].style.color = pochon ? seq[i % seq.length] : seq[i];
+      }
+    });
   }
   /* ---------- Bouquet : petit (5 pétales), moyen (7), grand (10) ---------- */
   var BOUQUET_SIZES = [
@@ -1125,6 +1148,7 @@
     stage.classList.toggle('cfg-stage--pot-big', n >= 3 && n <= 5 && !conseil && ['pot', 'tube', 'pochon', 'bouquet'].indexOf(containers[idx].key) >= 0); // même taille qu'au choix du contenant
     setBoxOpen();
     applyDeco();
+    fillDragees();
     updatePrix();
     $('cfg-name').textContent = (n !== 2 && conseil) ? T('Contenant à définir ensemble', 'Container to be decided together') : containers[idx].name;
     updateSizes();
