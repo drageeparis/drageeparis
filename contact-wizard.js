@@ -150,8 +150,15 @@
   // Une dragée dessinée par dragée choisie, dans la couleur et la quantité choisies (couleurs alternées)
   function dgSequence() {
     var seq = [], rest = chosenColors.map(function(v) { var el = inputOf(v); return { hex: el ? el.getAttribute('data-hex') : '#F4F2EE', n: qty[v] || 1 }; });
-    var more = true;
-    while (more) { more = false; rest.forEach(function(c) { if (c.n > 0) { seq.push(c.hex); c.n--; more = true; } }); }
+    // deux dragées de même couleur ne se touchent jamais quand c'est possible :
+    // on prend à chaque fois la couleur qui reste la plus nombreuse, sans répéter la précédente
+    var prev = -1, total = rest.reduce(function(n, c) { return n + c.n; }, 0);
+    for (var k = 0; k < total; k++) {
+      var best = -1;
+      rest.forEach(function(c, i) { if (c.n > 0 && i !== prev && (best < 0 || c.n > rest[best].n)) best = i; });
+      if (best < 0) best = prev; // seule la même couleur reste
+      seq.push(rest[best].hex); rest[best].n--; prev = best;
+    }
     return seq;
   }
   function fillDragees() {
