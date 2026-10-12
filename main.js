@@ -764,3 +764,106 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
 });
+
+/* ================================================
+   PIXEL META + CONSENTEMENT COOKIES (CNIL)
+   Le pixel ne se charge qu'après un clic sur « Accepter ».
+   Choix mémorisé 6 mois. Événements : PageView, ViewContent
+   (fiches produit), Lead (envoi réussi d'un formulaire Formspree).
+================================================ */
+(function () {
+  var PIXEL_ID = '953386344030306';
+  var KEY = 'dp_consent';
+  var MAX_AGE = 1000 * 60 * 60 * 24 * 182;
+  var EN = document.documentElement.lang === 'en';
+  var T = function (fr, en) { return EN ? en : fr; };
+
+  function getConsent() {
+    try {
+      var v = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (v && Date.now() - v.t < MAX_AGE) return v.c;
+    } catch (e) {}
+    return null;
+  }
+  function setConsent(c) {
+    try { localStorage.setItem(KEY, JSON.stringify({ c: c, t: Date.now() })); } catch (e) {}
+  }
+
+  var loaded = false;
+  function loadPixel() {
+    if (loaded) return; loaded = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL_ID);
+    fbq('track', 'PageView');
+    if (/\/produit-[^\/]+\.html/.test(location.pathname)) {
+      var h1 = document.querySelector('h1');
+      fbq('track', 'ViewContent', {
+        content_name: h1 ? h1.textContent.trim() : document.title,
+        content_type: 'product'
+      });
+    }
+  }
+
+  /* Lead : tout envoi Formspree réussi (commande, création, message) */
+  if (window.fetch) {
+    var _fetch = window.fetch;
+    window.fetch = function (input, init) {
+      var url = typeof input === 'string' ? input : (input && input.url) || '';
+      var p = _fetch.apply(this, arguments);
+      if (url.indexOf('formspree.io') !== -1 && (!init || (init.method || 'GET').toUpperCase() === 'POST')) {
+        p.then(function (r) {
+          if (r && r.ok && window.fbq) fbq('track', 'Lead', { content_name: location.pathname.replace(/^\/|\.html$/g, '') || 'accueil' });
+        }).catch(function () {});
+      }
+      return p;
+    };
+  }
+
+  function showBanner() {
+    if (document.getElementById('dp-cookies')) return;
+    var css = document.createElement('style');
+    css.textContent =
+      '#dp-cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:520px;margin-left:auto;' +
+      'background:#F3ECE6;color:#52362A;border:1px solid #965F36;padding:20px 22px;font-family:Jost,Poppins,sans-serif;' +
+      'font-size:14px;line-height:1.55;box-shadow:0 8px 30px rgba(82,54,42,.15)}' +
+      '#dp-cookies p{margin:0 0 14px}#dp-cookies a{color:#965F36;text-decoration:underline}' +
+      '#dp-cookies .dp-c-btns{display:flex;gap:10px;flex-wrap:wrap}' +
+      '#dp-cookies button{flex:1 1 0;min-width:120px;padding:11px 16px;font:inherit;font-size:12px;letter-spacing:.14em;' +
+      'text-transform:uppercase;cursor:pointer;border:1px solid #965F36;transition:background .2s,color .2s}' +
+      '#dp-cookies .dp-c-ok{background:#965F36;color:#F3ECE6}#dp-cookies .dp-c-ok:hover{background:#F3ECE6;color:#965F36}' +
+      '#dp-cookies .dp-c-no{background:transparent;color:#965F36}#dp-cookies .dp-c-no:hover{background:#965F36;color:#F3ECE6}';
+    document.head.appendChild(css);
+    var legal = (EN ? '/en/' : '/') + 'mentions-legales.html';
+    var box = document.createElement('div');
+    box.id = 'dp-cookies';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', T('Gestion des cookies', 'Cookie settings'));
+    box.innerHTML =
+      '<p>' + T('Avec votre accord, nous utilisons des cookies de mesure d’audience publicitaire (Meta) afin de mieux vous faire découvrir nos créations. ',
+                'With your consent, we use advertising measurement cookies (Meta) to help more people discover our creations. ') +
+      '<a href="' + legal + '">' + T('En savoir plus', 'Learn more') + '</a></p>' +
+      '<div class="dp-c-btns"><button type="button" class="dp-c-no">' + T('Refuser', 'Decline') + '</button>' +
+      '<button type="button" class="dp-c-ok">' + T('Accepter', 'Accept') + '</button></div>';
+    document.body.appendChild(box);
+    box.querySelector('.dp-c-ok').addEventListener('click', function () { setConsent(true); box.remove(); loadPixel(); });
+    box.querySelector('.dp-c-no').addEventListener('click', function () { setConsent(false); box.remove(); });
+  }
+
+  /* Lien « Gérer les cookies » possible : <a href="#" data-cookies>…</a> */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-cookies]');
+    if (a) { e.preventDefault(); try { localStorage.removeItem(KEY); } catch (x) {} showBanner(); }
+  });
+
+  function init() {
+    var c = getConsent();
+    if (c === true) loadPixel();
+    else if (c === null) showBanner();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
