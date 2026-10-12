@@ -7137,3 +7137,51 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .avis-google__note strong { font-weight: 500; }
 .avis-google__cta { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--caramel); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .avis-google:hover .avis-google__cta { color: var(--ink); }
+
+/* ==============================================
+   Configurateur mobile — aperçu collant compact (étapes Dragées et Étiquette)
+   Le contenant passe à gauche, nom et prix à droite : l'aperçu reste visible
+   pendant le défilement sans masquer les options à choisir.
+============================================== */
+@media (max-width: 768px) {
+  #wizard-step-3 .cfg-slot .cfg-stage--preview,
+  #wizard-step-4 .cfg-slot .cfg-stage--preview {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "view cap" "view price";
+    column-gap: 14px;
+    align-items: center;
+    margin: 0 0 6px;
+    text-align: left;
+  }
+  #wizard-step-3 .cfg-slot .cfg-view,
+  #wizard-step-4 .cfg-slot .cfg-view { grid-area: view; }
+  #wizard-step-3 .cfg-slot .cfg-stage--preview .cfg-viewport,
+  #wizard-step-4 .cfg-slot .cfg-stage--preview .cfg-viewport,
+  #wizard-step-3 .cfg-slot .cfg-stage--preview.cfg-stage--pot-big .cfg-viewport,
+  #wizard-step-4 .cfg-slot .cfg-stage--preview.cfg-stage--pot-big .cfg-viewport {
+    width: min(38vw, 160px, 24vh);
+  }
+  #wizard-step-3 .cfg-slot .cfg-caption,
+  #wizard-step-4 .cfg-slot .cfg-caption { grid-area: cap; align-self: end; min-height: 0; margin: 0; }
+  #wizard-step-3 .cfg-slot .cfg-name,
+  #wizard-step-4 .cfg-slot .cfg-name { font-size: 15px; color: var(--ink); margin: 0; }
+  /* La taille du bouquet se choisit à l'étape Contenant : inutile de l'empiler ici */
+  #wizard-step-3 .cfg-slot .cfg-sizes,
+  #wizard-step-4 .cfg-slot .cfg-sizes { display: none; }
+  #wizard-step-3 .cfg-slot .cfg-pricetag,
+  #wizard-step-4 .cfg-slot .cfg-pricetag {
+    grid-area: price;
+    align-self: start;
+    max-width: none;
+    margin: 8px 0 0;
+    padding: 6px 12px 7px;
+    border-radius: 12px;
+    text-align: left;
+  }
+  #wizard-step-3 .cfg-slot .cfg-pricetag__amount,
+  #wizard-step-4 .cfg-slot .cfg-pricetag__amount { font-size: 16px; }
+  #wizard-step-3 .cfg-slot .cfg-pricetag__detail,
+  #wizard-step-4 .cfg-slot .cfg-pricetag__detail { font-size: 11px; line-height: 1.45; }
+}
