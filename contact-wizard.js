@@ -392,8 +392,9 @@
   function inputOf(v) { return colorInputs.filter(function(c) { return c.value === v; })[0]; }
   function catOf(el) { var p = el && el.closest('.cfg-dg-panel'); return p ? p.getAttribute('data-cat') : ''; }
   function catName(cat) { var t = $('cfg-tab-' + cat); return t ? t.firstChild.textContent.trim() : ''; }
-  var DG_START = 5; // jamais moins de 5 dragées dans un contenant
-  function floorOf(cat) { return tubeCap() ? 1 : Math.min(DG_START, capOf(cat)); } // fiole : le client place ses 6 dragées une à une
+  // Aucune présélection : chaque couleur choisie démarre à 1 dragée ; le minimum (5, ou le contenant complet)
+  // n'est exigé que pour passer à l'étape suivante (voir drageesComplete)
+  function floorOf() { return 1; }
   // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
   function tubeCap() { return !conseil && containers[idx].key === 'tube' ? 6 : 0; } // tube : 6 dragées, ni plus ni moins
   function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
@@ -524,15 +525,12 @@
     c.addEventListener('change', function() {
       var cat = catOf(c);
       if (c.checked) {
-        // première dragée : on part directement sur 5 (le minimum) ; les couleurs suivantes s'ajoutent une par une
-        qty[c.value] = (chosenColors.length || tubeCap()) ? 1 : Math.min(DG_START, capOf(cat));
+        // chaque couleur s'ajoute avec 1 dragée : le client monte lui-même jusqu'au minimum
+        qty[c.value] = 1;
         chosenColors.push(c.value);
       } else {
         chosenColors = chosenColors.filter(function(v) { return v !== c.value; });
         delete qty[c.value];
-        // en retirant une couleur, le contenant ne descend pas sous 5 : la première couleur restante complète
-        var manque = floorOf(cat) - totalQty();
-        if (chosenColors.length && manque > 0) qty[chosenColors[0]] += manque;
       }
       refreshDragees();
     });
