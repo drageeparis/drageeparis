@@ -7211,8 +7211,7 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   .season-bar__text { font-size: 0.625rem; letter-spacing: 0.08em; }
 }
 
-/* ==========================================================================
-   PRODUIT MOMENTANÉMENT INDISPONIBLE
+/* ===================================================================   PRODUIT MOMENTANÉMENT INDISPONIBLE
    Fiche : ajouter data-unavailable sur <section class="pdp"> et remplacer le
    bouton Commander par .pdp__soldout. Cartes : classe .is-unavailable.
    Le catalogue de commande ignore les fiches marquées data-unavailable.
@@ -7268,4 +7267,40 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--caramel);
+}
+
+/* ================================================
+   PAGE PROFESSIONNELS · tableau des tarifs dégressifs
+================================================ */
+.pro-tiers {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body--family);
+  color: var(--color-foreground);
+}
+.pro-tiers th,
+.pro-tiers td {
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid rgba(82, 54, 42, 0.15);
+  text-align: left;
+  font-weight: 300;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+.pro-tiers thead th {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--caramel);
+  font-weight: 400;
+}
+.pro-tiers tbody th { font-weight: 400; }
+.pro-tiers__note {
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+@media (max-width: 40em) {
+  .pro-tiers th, .pro-tiers td { padding: 0.75rem 0.4rem; font-size: 0.8125rem; }
 }
