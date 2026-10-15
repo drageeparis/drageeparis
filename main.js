@@ -8,6 +8,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const EN = document.documentElement.lang === 'en';
   const T = (fr, en) => (EN ? en : fr);
 
+  /* ---- 0. Bandeau saisonnier (affiché jusqu'à la date de fin, puis disparaît seul) ----
+     Pour une nouvelle saison : modifier SEASON_BAR (texte, lien, date de fin). */
+  const SEASON_BAR = {
+    end:   '2026-11-01T00:00:00+01:00',
+    text:  "Palette d'automne · Dragées orange, blanc nacré et noir · Commandez avant le 21 octobre pour une livraison avant le 31",
+    short: "Palette d'automne · Commandez avant le 21 octobre",
+    label: 'Découvrir',
+    href:  'dragees.html?filter=chocolats',
+  };
+  (() => {
+    if (EN || Date.now() >= Date.parse(SEASON_BAR.end)) return;
+    const hdr = document.getElementById('header');
+    if (!hdr) return;
+    const bar = document.createElement('div');
+    bar.className = 'season-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Information saisonnière');
+    const p = document.createElement('p');
+    p.className = 'season-bar__text';
+    const long = document.createElement('span');
+    long.className = 'season-bar__long';
+    long.textContent = SEASON_BAR.text;
+    const short = document.createElement('span');
+    short.className = 'season-bar__short';
+    short.textContent = SEASON_BAR.short;
+    p.append(long, short);
+    const a = document.createElement('a');
+    a.className = 'season-bar__link';
+    a.href = SEASON_BAR.href;
+    a.textContent = SEASON_BAR.label;
+    p.appendChild(a);
+    bar.appendChild(p);
+    document.body.insertBefore(bar, document.body.firstChild);
+    /* Le header (fixe) se place sous le bandeau, puis remonte quand on fait défiler */
+    const place = () => {
+      const h = bar.offsetHeight;
+      hdr.style.top = Math.max(0, h - window.scrollY) + 'px';
+    };
+    place();
+    window.addEventListener('scroll', place, { passive: true });
+    window.addEventListener('resize', place);
+  })();
+
   /* ---- 1. Header sticky scroll + hide-on-scroll-down ---- */
   const header = document.getElementById('header');
   if (header) {

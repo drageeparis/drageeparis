@@ -7173,3 +7173,40 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   #wizard-step-3 .cfg-slot .cfg-pricetag__detail,
   #wizard-step-4 .cfg-slot .cfg-pricetag__detail { font-size: 11px; line-height: 1.45; }
 }
+
+/* ================================================
+   BANDEAU SAISONNIER (injecté par main.js, section 0)
+================================================ */
+.season-bar {
+  position: relative;
+  z-index: 13;
+  background: var(--color-background-dark);
+  color: var(--color-foreground-light);
+  text-align: center;
+  padding: 0.55rem var(--container-padding, 1.25rem);
+}
+.season-bar .season-bar__text {
+  margin: 0;
+  color: var(--color-foreground-light);
+  font-family: var(--font-body--family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.season-bar .season-bar__link {
+  color: var(--color-foreground-light);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  white-space: nowrap;
+  margin-left: 0.5em;
+}
+.season-bar__link:hover,
+.season-bar__link:focus-visible { opacity: 0.75; }
+.season-bar__short { display: none; }
+@media (max-width: 40em) {
+  .season-bar__long { display: none; }
+  .season-bar__short { display: inline; }
+  .season-bar { padding: 0.5rem 1rem; }
+  .season-bar__text { font-size: 0.625rem; letter-spacing: 0.08em; }
+}
