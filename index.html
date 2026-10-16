@@ -260,7 +260,63 @@
       </div>
     </section>
 
-    <section class="cedric-products fade-in" aria-label="Une sélection de nos dragées Boutique">
+    <!-- Bloc saisonnier : remplace « Nos dragées » jusqu'à data-season-end (géré par main.js, section 0b) -->
+    <section class="cedric-products fade-in" id="palette-automne" data-season-end="2026-11-01T00:00:00+01:00" aria-label="Palette d'automne" hidden>
+      <div class="cedric-products__header">
+        <h2 class="cedric-products__title">Palette d'automne</h2>
+        <a href="dragees.html?filter=chocolats" class="cedric-products__link">Voir toutes nos dragées →</a>
+      </div>
+      <p class="season-products__note">Orange, blanc nacré et noir · Commandez avant le 21 octobre pour une livraison avant le 31</p>
+      <div class="cedric-products__grid">
+        <a href="produit-chocolat-orange.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <source type="image/webp" srcset="./images/dragee-chocolat/dragee-chocolat-1-800w.webp 800w, ./images/dragee-chocolat/dragee-chocolat-1.webp 1254w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px">
+              <img src="./images/dragee-chocolat/dragee-chocolat-1.png" alt="Dragées Chocolat Orange" loading="lazy">
+            </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Chocolat Orange</span>
+              <span class="prod-card__weight">250 g</span>
+            </div>
+            <p class="prod-card__price">À partir de 7,50 €</p>
+          </div>
+        </a>
+        <a href="produit-chocolat-blanc-nacre.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <source type="image/webp" srcset="./images/dragee-chocolat/dragee-chocolat-16-800w.webp 800w, ./images/dragee-chocolat/dragee-chocolat-16.webp 1254w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px">
+              <img src="./images/dragee-chocolat/dragee-chocolat-16.png" alt="Dragées Chocolat Blanc Nacré" loading="lazy">
+            </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Chocolat Blanc Nacré</span>
+              <span class="prod-card__weight">250 g</span>
+            </div>
+            <p class="prod-card__price">À partir de 7,50 €</p>
+          </div>
+        </a>
+        <a href="produit-chocolat-noir.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+              <source type="image/webp" srcset="./images/dragee-chocolat/chocolat-noir-800w.webp 800w, ./images/dragee-chocolat/chocolat-noir.webp 1254w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px">
+              <img src="./images/dragee-chocolat/chocolat-noir.png" alt="Dragées Chocolat Noir" loading="lazy">
+            </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Dragées Chocolat Noir</span>
+              <span class="prod-card__weight">250 g</span>
+            </div>
+            <p class="prod-card__price">À partir de 7,50 €</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="cedric-products fade-in" data-season-default aria-label="Une sélection de nos dragées Boutique">
       <div class="cedric-products__header">
         <h2 class="cedric-products__title">Nos dragées</h2>
         <a href="dragees.html" class="cedric-products__link">Voir toutes nos dragées →</a>
@@ -469,7 +525,7 @@
       <p>© 2026 Dragée Paris · Créations de dragées personnalisées en Île-de-France · Tous droits réservés</p>
     </div>
   </footer>
-  <script src="main.js?v=20261015a"></script>
+  <script src="main.js?v=20261016a"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

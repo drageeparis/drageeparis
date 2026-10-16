@@ -7258,3 +7258,14 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   text-transform: uppercase;
   color: var(--ink-60);
 }
+
+/* Bloc produits saisonnier (accueil) */
+.cedric-products[hidden] { display: none !important; }
+.season-products__note {
+  text-align: center;
+  margin: -32px 0 40px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--caramel);
+}
