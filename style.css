@@ -7210,3 +7210,51 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   .season-bar { padding: 0.5rem 1rem; }
   .season-bar__text { font-size: 0.625rem; letter-spacing: 0.08em; }
 }
+
+/* ==========================================================================
+   PRODUIT MOMENTANÉMENT INDISPONIBLE
+   Fiche : ajouter data-unavailable sur <section class="pdp"> et remplacer le
+   bouton Commander par .pdp__soldout. Cartes : classe .is-unavailable.
+   Le catalogue de commande ignore les fiches marquées data-unavailable.
+   ========================================================================== */
+.pdp[data-unavailable] .pdp__qty-block { display: none; }
+.pdp__soldout {
+  margin-bottom: 56px;
+  max-width: 380px;
+}
+.pdp__soldout-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: 12px;
+}
+.pdp__soldout-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.pdp__soldout-text {
+  font-size: 13px;
+  line-height: 21px;
+  font-weight: 300;
+  color: var(--ink-60);
+}
+.pdp__soldout-text a {
+  color: var(--caramel);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.product-card__price--soldout,
+.prod-card__price--soldout {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}

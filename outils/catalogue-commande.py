@@ -32,6 +32,8 @@ motifs = ['produit-avola-*.html', 'produit-traditionnelle-*.html', 'produit-choc
 for motif in motifs:
     for chemin in sorted(glob.glob(os.path.join(ROOT, motif))):
         s = open(chemin, encoding='utf-8').read()
+        if 'data-unavailable' in s:
+            continue  # fiche marquée momentanément indisponible
         fichier = os.path.basename(chemin)
         ref = fichier[len('produit-'):-len('.html')]
         titre = re.search(r'class="pdp__title">(.*?)</h1>', s, re.S).group(1)

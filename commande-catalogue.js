@@ -707,42 +707,6 @@ window.DP_CATALOGUE = {
   "name_en": "Fir Green Chocolate Dragées",
   "detail_en": "70% dark chocolate centre · Almond-free"
  },
- "chocolat-anthracite": {
-  "name": "Prali Amande Chocolat Noir Anthracite",
-  "familyId": "gourmandes",
-  "family": "Chocolats amandes",
-  "familyUrl": "dragees.html?filter=gourmandes",
-  "detail": "Amande Avola · Chocolat noir 70%",
-  "url": "produit-chocolat-anthracite.html",
-  "image": "images/dragee-chocolat/chocolat-anthracite-800w.webp",
-  "formats": [
-   {
-    "id": "250g",
-    "label": "250 g",
-    "grams": 250,
-    "price": 11.0,
-    "label_en": "250 g"
-   },
-   {
-    "id": "500g",
-    "label": "500 g",
-    "grams": 500,
-    "price": 21.5,
-    "label_en": "500 g"
-   },
-   {
-    "id": "1kg",
-    "label": "1 kg",
-    "grams": 1000,
-    "price": 43.0,
-    "label_en": "1 kg"
-   }
-  ],
-  "kind": "dragee",
-  "family_en": "Chocolate almonds",
-  "name_en": "Prali Amande Dark Chocolate Charcoal",
-  "detail_en": "Avola almond · 70% dark chocolate"
- },
  "chocolat-fuchsia": {
   "name": "Prali Amande Chocolat Noir Fuchsia",
   "familyId": "gourmandes",
@@ -1763,60 +1727,6 @@ window.DP_CATALOGUE = {
   "name_en": "Sage Sachet Christening Dragées",
   "detail_en": "Price per piece"
  },
- "communion-fiole-rubis": {
-  "kind": "creation",
-  "name": "Dragées Communion Fiole Rubis",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
-  "detail": "Prix à la pièce",
-  "url": "produit-communion-fiole-rubis.html",
-  "image": "images/fetes-religieuses/communion-fiole-rubis-800w.webp",
-  "formats": [
-   {
-    "id": "avecdragées",
-    "label": "Avec dragées",
-    "price": 4.6,
-    "label_en": "With dragées"
-   },
-   {
-    "id": "sansdragées",
-    "label": "Sans dragées",
-    "price": 4.0,
-    "label_en": "Without dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Ruby Vial First Communion Dragées",
-  "detail_en": "Price per piece"
- },
- "communion-pochon-epis": {
-  "kind": "creation",
-  "name": "Dragées Communion Pochon Épis",
-  "familyId": "fetes-religieuses",
-  "family": "Fêtes religieuses",
-  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
-  "detail": "Prix à la pièce",
-  "url": "produit-communion-pochon-epis.html",
-  "image": "images/fetes-religieuses/communion-pochon-epis-800w.webp",
-  "formats": [
-   {
-    "id": "avecdragées",
-    "label": "Avec dragées",
-    "price": 4.5,
-    "label_en": "With dragées"
-   },
-   {
-    "id": "sansdragées",
-    "label": "Sans dragées",
-    "price": 4.0,
-    "label_en": "Without dragées"
-   }
-  ],
-  "family_en": "Religious celebrations",
-  "name_en": "Wheat Ear Pouch First Communion Dragées",
-  "detail_en": "Price per piece"
- },
  "communion-bouquet-celeste": {
   "kind": "creation",
   "name": "Dragées Communion Bouquet Céleste",
@@ -1875,6 +1785,60 @@ window.DP_CATALOGUE = {
   ],
   "family_en": "Religious celebrations",
   "name_en": "Chalice First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
+ "communion-fiole-rubis": {
+  "kind": "creation",
+  "name": "Dragées Communion Fiole Rubis",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-fiole-rubis.html",
+  "image": "images/fetes-religieuses/communion-fiole-rubis-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.6,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.0,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Ruby Vial First Communion Dragées",
+  "detail_en": "Price per piece"
+ },
+ "communion-pochon-epis": {
+  "kind": "creation",
+  "name": "Dragées Communion Pochon Épis",
+  "familyId": "fetes-religieuses",
+  "family": "Fêtes religieuses",
+  "familyUrl": "creations.html?filter=fetes-religieuses&sub=communion",
+  "detail": "Prix à la pièce",
+  "url": "produit-communion-pochon-epis.html",
+  "image": "images/fetes-religieuses/communion-pochon-epis-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.5,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.0,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Religious celebrations",
+  "name_en": "Wheat Ear Pouch First Communion Dragées",
   "detail_en": "Price per piece"
  },
  "communion-pot-prairie": {

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Prali Amande Dark Chocolate Charcoal · Dragée Paris</title>
   <meta name="description" content="A Sicilian Avola almond coated in dark chocolate and a charcoal pearlescent sugar.">
-  <link rel="stylesheet" href="../style.css?v=20261015a">
+  <link rel="stylesheet" href="../style.css?v=20261016a">
   <!-- Open Graph -->
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="Dragée Paris">
@@ -158,7 +158,7 @@
   <div class="header__safe-area" aria-hidden="true"></div>
 
   <main id="main">
-    <section class="pdp">
+    <section class="pdp" data-unavailable>
       <div class="pdp__gallery">
         <picture>
           <source type="image/webp" srcset="../images/dragee-chocolat/chocolat-anthracite-800w.webp 800w, ../images/dragee-chocolat/chocolat-anthracite.webp 1254w" sizes="(max-width: 1024px) 100vw, 50vw">
@@ -180,7 +180,10 @@
           <p class="pdp__price"><span data-price-display>€11</span><span class="pdp__price-unit" data-unit-display>250 g</span></p>
         </div>
 
-        <a href="commander.html?ref=chocolat-anthracite&amp;format=250g" class="pdp__cta" data-order-link>Order →</a>
+        <div class="pdp__soldout">
+          <p class="pdp__soldout-label">Temporarily unavailable</p>
+          <p class="pdp__soldout-text">This shade will be back soon. <a href="message.html">Write to us</a> and we will let you know as soon as it returns.</p>
+        </div>
 
         <details class="pdp__acc-item">
           <summary class="pdp__acc-trigger">Delivery & ordering</summary>
@@ -283,7 +286,7 @@
     "category": "Dragées",
     "offers": {
       "@type": "Offer",
-      "availability": "https://schema.org/InStock",
+      "availability": "https://schema.org/OutOfStock",
       "priceCurrency": "EUR",
       "price": "11",
       "seller": { "@type": "Organization", "name": "Dragée Paris" }
