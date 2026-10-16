@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     text:  "Palette d'automne · Dragées orange, blanc nacré et noir · Commandez avant le 21 octobre pour une livraison avant le 31",
     short: "Palette d'automne · Commandez avant le 21 octobre",
     label: 'Découvrir',
-    href:  'dragees.html?filter=chocolats',
+    href:  '/#palette-automne',
   };
   (() => {
     if (EN || Date.now() >= Date.parse(SEASON_BAR.end)) return;
@@ -50,6 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', place, { passive: true });
     window.addEventListener('resize', place);
   })();
+
+  /* ---- 0b. Bloc produits saisonnier de l'accueil (remplace le bloc par défaut jusqu'à sa date de fin) ---- */
+  document.querySelectorAll('[data-season-end]').forEach((sec) => {
+    if (Date.now() >= Date.parse(sec.dataset.seasonEnd)) return;
+    const def = document.querySelector('[data-season-default]');
+    sec.hidden = false;
+    if (def) def.hidden = true;
+  });
 
   /* ---- 1. Header sticky scroll + hide-on-scroll-down ---- */
   const header = document.getElementById('header');
