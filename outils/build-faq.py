@@ -79,13 +79,13 @@ FAQ = {
 
 META = {
  'fr': {'title': 'Questions fréquentes · Dragée Paris',
-        'desc': 'Prix des dragées personnalisées, nombre de dragées par invité, délais, livraison en France et en Europe, allergènes : toutes les réponses de Dragée Paris, confiseur à Athis-Mons (Île-de-France).',
+        'desc': 'Prix des dragées personnalisées, nombre de dragées par invité, délais, livraison en France et en Europe, allergènes : toutes les réponses de Dragée Paris, maison de dragées à Athis-Mons (Île-de-France).',
         'h1': 'Questions fréquentes',
         'sub': 'Prix, dragées, personnalisation, délais et livraison : l’essentiel pour préparer vos dragées en toute sérénité.',
         'cta': 'Vous ne trouvez pas votre réponse ?', 'cta_btn': 'Nous écrire', 'cta2': 'Lancer ma création',
         'lang': 'fr', 'locale': 'fr_FR', 'aria': 'Questions fréquentes'},
  'en': {'title': 'Frequently asked questions · Dragée Paris',
-        'desc': 'Prices of personalised dragées, how many per guest, lead times, delivery across France and Europe, allergens: all the answers from Dragée Paris, confectioner near Paris.',
+        'desc': 'Prices of personalised dragées, how many per guest, lead times, delivery across France and Europe, allergens: all the answers from Dragée Paris, dragée house near Paris.',
         'h1': 'Frequently asked questions',
         'sub': 'Prices, dragées, personalisation, lead times and delivery: everything you need to plan your dragées with peace of mind.',
         'cta': 'Can’t find your answer?', 'cta_btn': 'Write to us', 'cta2': 'Start my creation',

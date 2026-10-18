@@ -1,6 +1,6 @@
 # Dragée Paris · Site vitrine
 
-Site vitrine e-commerce vitrine (sans paiement en ligne) pour **Dragée Paris**, confiseur-artisan en Île-de-France spécialisé dans les dragées personnalisables — Boutique (dragées classiques, vente au poids) et Atelier (créations sur-mesure par occasion).
+Site vitrine e-commerce vitrine (sans paiement en ligne) pour **Dragée Paris**, maison de dragées en Île-de-France spécialisé dans les dragées personnalisables — Boutique (dragées classiques, vente au poids) et Atelier (créations sur-mesure par occasion).
 
 Aucune dépendance, aucun build : HTML/CSS/JS pur. Le site s'ouvre directement dans un navigateur, ou se sert en local avec `python3 -m http.server`.
 
