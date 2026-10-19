@@ -7269,3 +7269,13 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   text-transform: uppercase;
   color: var(--caramel);
 }
+
+/* Page Entreprises : deux visuels de même taille, format 4:5, colonne image à 40 % */
+@media (min-width: 1025px) {
+  .cedric-split--pro { min-height: 0; align-items: center; }
+  .cedric-split--pro-rev { grid-template-columns: 1fr 40%; }
+  .cedric-split--pro .cedric-split__visual { padding: 48px 52px; }
+  .cedric-split--pro-rev .cedric-split__visual { padding: 48px 52px 48px 24px; }
+  .cedric-split--pro .cedric-split__visual picture { display: block; aspect-ratio: 4 / 5; max-height: 560px; max-width: 448px; margin: 0 auto; }
+  .cedric-split--pro .cedric-split__body { justify-content: center; }
+}
