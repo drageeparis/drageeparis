@@ -183,6 +183,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-chocolat-rose-pastel.html"/>
   </url>
   <url>
+    <loc>https://drageeparis.fr/produit-chocolat-rose-fuchsia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-chocolat-rose-fuchsia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-chocolat-rose-fuchsia.html"/>
+  </url>
+  <url>
     <loc>https://drageeparis.fr/produit-chocolat-bleu-roi.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -713,6 +720,13 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-chocolat-rose-pastel.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-chocolat-rose-pastel.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-chocolat-rose-fuchsia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-chocolat-rose-fuchsia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-chocolat-rose-fuchsia.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/en/produit-chocolat-bleu-roi.html</loc>

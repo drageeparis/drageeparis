@@ -563,6 +563,42 @@ window.DP_CATALOGUE = {
   "name_en": "Orange Chocolate Dragées",
   "detail_en": "70% dark chocolate centre · Almond-free"
  },
+ "chocolat-rose-fuchsia": {
+  "name": "Dragées Chocolat Rose Fuchsia",
+  "familyId": "chocolats",
+  "family": "Chocolats",
+  "familyUrl": "dragees.html?filter=chocolats",
+  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "url": "produit-chocolat-rose-fuchsia.html",
+  "image": "images/dragee-chocolat/chocolat-rose-fuchsia-800w.webp",
+  "formats": [
+   {
+    "id": "250g",
+    "label": "250 g",
+    "grams": 250,
+    "price": 7.5,
+    "label_en": "250 g"
+   },
+   {
+    "id": "500g",
+    "label": "500 g",
+    "grams": 500,
+    "price": 15.0,
+    "label_en": "500 g"
+   },
+   {
+    "id": "1kg",
+    "label": "1 kg",
+    "grams": 1000,
+    "price": 30.0,
+    "label_en": "1 kg"
+   }
+  ],
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Fuchsia Pink Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
+ },
  "chocolat-rose-pastel": {
   "name": "Dragées Chocolat Rose Pastel",
   "familyId": "chocolats",
