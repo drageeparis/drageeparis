@@ -815,6 +815,42 @@ window.DP_CATALOGUE = {
   "name_en": "Fir Green Chocolate Dragées",
   "detail_en": "70% dark chocolate centre · Almond-free"
  },
+ "chocolat-vert-d-eau": {
+  "name": "Dragées Chocolat Vert d'Eau",
+  "familyId": "chocolats",
+  "family": "Chocolats",
+  "familyUrl": "dragees.html?filter=chocolats",
+  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "url": "produit-chocolat-vert-d-eau.html",
+  "image": "images/dragee-chocolat/chocolat-vert-d-eau-800w.webp",
+  "formats": [
+   {
+    "id": "250g",
+    "label": "250 g",
+    "grams": 250,
+    "price": 7.5,
+    "label_en": "250 g"
+   },
+   {
+    "id": "500g",
+    "label": "500 g",
+    "grams": 500,
+    "price": 15.0,
+    "label_en": "500 g"
+   },
+   {
+    "id": "1kg",
+    "label": "1 kg",
+    "grams": 1000,
+    "price": 30.0,
+    "label_en": "1 kg"
+   }
+  ],
+  "kind": "dragee",
+  "family_en": "Chocolate dragées",
+  "name_en": "Seafoam Green Chocolate Dragées",
+  "detail_en": "70% dark chocolate centre · Almond-free"
+ },
  "chocolat-fuchsia": {
   "name": "Prali Amande Chocolat Noir Fuchsia",
   "familyId": "gourmandes",
