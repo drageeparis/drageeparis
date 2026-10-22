@@ -25,7 +25,7 @@ Prix : « 3,50 € » → « €3.50 » ; « 0,10 € » → « €0.10 ». Tél
 | Ouvrir le menu | Open menu |
 | Commander | Order |
 | Ma commande | My order |
-| © 2026 Dragée Paris · Créations de dragées personnalisées en Île-de-France · Tous droits réservés | © 2026 Dragée Paris · Personalised dragée creations in Île-de-France, Paris · All rights reserved |
+| © 2026 Dragée Paris · Dragées personnalisées assemblées à la main à Athis-Mons · Livraison en France et en Europe · Tous droits réservés | © 2026 Dragée Paris · Personalised dragées handmade in Athis-Mons, near Paris · Delivery across France and Europe · All rights reserved |
 
 ## Familles de dragées
 | FR | EN |
