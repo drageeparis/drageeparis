@@ -520,12 +520,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ---- 9b. Galerie produit à plusieurs photos : diaporama + vignettes ---- */
+  (function() {
+    var gallery = document.querySelector('.pdp__gallery--duo');
+    if (!gallery) return;
+    var pics = Array.prototype.slice.call(gallery.querySelectorAll(':scope > picture'));
+    if (pics.length < 2) return;
+
+    var track = document.createElement('div');
+    track.className = 'pdp__track';
+    pics.forEach(function(p) { track.appendChild(p); });
+    gallery.appendChild(track);
+
+    var thumbs = document.createElement('div');
+    thumbs.className = 'pdp__thumbs';
+    var btns = pics.map(function(p, i) {
+      var src = p.querySelector('img');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pdp__thumb' + (i === 0 ? ' is-active' : '');
+      b.setAttribute('aria-label', T('Voir la photo ', 'View photo ') + (i + 1));
+      var t = document.createElement('img');
+      t.src = src.currentSrc || src.src;
+      t.alt = '';
+      b.appendChild(t);
+      b.addEventListener('click', function() {
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+      });
+      thumbs.appendChild(b);
+      return b;
+    });
+    gallery.appendChild(thumbs);
+    gallery.classList.add('is-slider');
+
+    track.addEventListener('scroll', function() {
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      btns.forEach(function(b, i) { b.classList.toggle('is-active', i === idx); });
+    }, { passive: true });
+  })();
+
   /* ---- 10. Lightbox (pages produit) ---- */
   (function() {
     const gallery = document.querySelector('.pdp__gallery');
     if (!gallery) return;
-    const img = gallery.querySelector('img');
-    if (!img) return;
+    const imgs = gallery.querySelectorAll('picture img, :scope > img');
+    if (!imgs.length) return;
+    let img = imgs[0];
 
     const lb = document.createElement('div');
     lb.className = 'lightbox';
@@ -554,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = '';
     };
 
-    img.addEventListener('click', open);
+    imgs.forEach(function(el) { el.addEventListener('click', function() { img = el; open(); }); });
     closeBtn.addEventListener('click', close);
     lb.addEventListener('click', e => { if (e.target === lb) close(); });
     document.addEventListener('keydown', e => {
