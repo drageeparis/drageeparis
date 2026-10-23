@@ -172,7 +172,7 @@
         <h1 class="pdp__title">Prali Amande<br>Chocolat Noir Fuchsia</h1>
         <p class="pdp__weight">Amande Avola · Chocolat noir 70%</p>
         <p class="pdp__lead">Un fuchsia vif et éclatant, joyeux et affirmé. Pour un anniversaire de fille, une fête festive ou une table contrastée avec le blanc ou le doré.</p>
-        <p class="pdp__tagline">Des dragées d'origine française et italienne, sélectionnées avec soin et sublimées dans notre atelier en Île-de-France. Vendues au poids dès 250&nbsp;g, pour garnir vos propres contenants ou composer votre table.</p>
+        <p class="pdp__tagline">Des dragées d'origine française et italienne, sélectionnées avec soin et sublimées dans notre atelier d'Athis-Mons. Vendues au poids dès 250&nbsp;g, pour garnir vos propres contenants ou composer votre table.</p>
 
         <div class="pdp__qty-block" data-qty-block>
           <select class="pdp__qty-select" data-price-select aria-label="Quantité souhaitée">
@@ -181,16 +181,24 @@
             <option value="43 €" data-unit="1 kg">1 kg — 43 €</option>
           </select>
           <p class="pdp__price"><span data-price-display>11 €</span><span class="pdp__price-unit" data-unit-display>250 g</span></p>
+          <p class="pdp__qty-note">Plus de 1 kg ? Ajustez la quantité à l'étape suivante. Professionnels : <a href="devis-professionnel.html">demandez un devis</a>.</p>
         </div>
 
         <a href="commander.html?ref=chocolat-fuchsia&amp;format=250g" class="pdp__cta" data-order-link>Commander →</a>
 
+        <ul class="pdp__trust">
+          <li>Point relais offert sous 1 kg</li>
+          <li>Préparé à la main dans notre atelier d'Athis-Mons</li>
+          <li>Noté 5,0/5 sur Google · plus de 1 500 commandes</li>
+        </ul>
+
         <details class="pdp__acc-item">
           <summary class="pdp__acc-trigger">Livraison & Commande</summary>
           <div class="pdp__acc-body">
-            <p>Toutes nos commandes sont préparées à la main dans notre atelier d'Île-de-France. Comptez <strong>5 à 10 jours</strong> de préparation : nous vous recommandons de commander au moins 10 jours avant votre événement. Livraison en France et en Europe.</p>
+            <p>Toutes nos commandes sont préparées à la main dans notre atelier d'Athis-Mons. Comptez <strong>5 à 10 jours</strong> de préparation : nous vous recommandons de commander au moins 10 jours avant votre événement. Livraison en France et en Europe.</p>
             <ul>
               <li>Livraison en point relais (Mondial Relay) en France et en Europe</li>
+              <li>Frais de point relais : offerts sous 1 kg, puis 12 € par kilo entamé</li>
               <li>Retrait à l'atelier d'Athis-Mons, sur rendez-vous</li>
               <li>Emballage soigné, adapté au transport</li>
             </ul>
@@ -202,6 +210,14 @@
           <div class="pdp__acc-body">
             <p>Amande Avola (Prunus dulcis) de Sicile · Chocolat noir (cacao, sucre, beurre de cacao) · Sucre · Amidon de maïs · Gomme arabique · Colorant fuchsia vif.</p>
             <p>Contient : fruits à coque. Fabriqué dans un atelier manipulant gluten, lait et soja. Peut contenir des traces de ces allergènes.</p>
+          </div>
+        </details>
+
+        <details class="pdp__acc-item">
+          <summary class="pdp__acc-trigger">Conservation &amp; conseils</summary>
+          <div class="pdp__acc-body">
+            <p>À conserver au sec, à l'abri de la chaleur, de la lumière et de l'humidité, idéalement entre 15 et 18&nbsp;°C. Ne pas mettre au réfrigérateur.</p>
+            <p>Les teintes peuvent varier légèrement selon votre écran et d'un lot à l'autre.</p>
           </div>
         </details>
 
@@ -239,6 +255,21 @@
               <span class="prod-card__weight">250 g</span>
             </div>
             <p class="prod-card__price">À partir de 11 €</p>
+          </div>
+        </a>
+        <a href="produit-bouquet-rose-poudre.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+          <source type="image/webp" srcset="./images/bouquets/bouquet-rose-poudre-800w.webp 800w, ./images/bouquets/bouquet-rose-poudre.webp 1200w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px">
+          <img src="./images/bouquets/bouquet-rose-poudre.jpg" alt="Bouquet Rose Poudré" loading="lazy">
+        </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Bouquet Rose Poudré</span>
+              <span class="prod-card__weight">Bouquet</span>
+            </div>
+            <p class="prod-card__price">À partir de 5 €</p>
           </div>
         </a>
       </div>
@@ -286,10 +317,12 @@
     "brand": { "@type": "Brand", "name": "Dragée Paris" },
     "category": "Dragées",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       "availability": "https://schema.org/InStock",
       "priceCurrency": "EUR",
-      "price": "11",
+      "lowPrice": "11.00",
+      "highPrice": "43.00",
+      "offerCount": "3",
       "seller": { "@type": "Organization", "name": "Dragée Paris" }
     }
   }

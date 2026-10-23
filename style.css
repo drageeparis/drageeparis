@@ -5855,6 +5855,42 @@ figcaption {
 .pdp__qty-block {
   margin-bottom: 32px;
 }
+.pdp__qty-note {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 19px;
+  color: var(--ink);
+  opacity: 0.7;
+  max-width: 380px;
+}
+.pdp__qty-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.pdp__trust {
+  list-style: none;
+  margin: -32px 0 48px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pdp__trust li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  opacity: 0.8;
+}
+.pdp__trust li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #965F36;
+}
 .pdp__qty-select {
   display: block;
   width: 100%;
@@ -5973,9 +6009,9 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 }
 .pdp-related__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 36px;
-  max-width: 860px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 

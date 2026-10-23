@@ -172,7 +172,7 @@ window.DP_CATALOGUE = {
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-blanc-nacre.html",
   "image": "images/dragee-chocolat/dragee-chocolat-16-800w.webp",
   "formats": [
@@ -201,14 +201,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Pearl White Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-bleu-marine": {
   "name": "Dragées Chocolat Bleu Marine",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-bleu-marine.html",
   "image": "images/dragee-chocolat/dragee-chocolat-8-800w.webp",
   "formats": [
@@ -237,14 +237,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Navy Blue Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-bleu-poudre": {
   "name": "Dragées Chocolat Bleu Poudré",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-bleu-poudre.html",
   "image": "images/dragee-chocolat/dragee-chocolat-5-800w.webp",
   "formats": [
@@ -273,14 +273,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Powder Blue Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-bleu-roi": {
   "name": "Dragées Chocolat Bleu Roi",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-bleu-roi.html",
   "image": "images/dragee-chocolat/dragee-chocolat-7-800w.webp",
   "formats": [
@@ -309,14 +309,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Royal Blue Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-bordeaux": {
   "name": "Dragées Chocolat Bordeaux",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-bordeaux.html",
   "image": "images/dragee-chocolat/dragee-chocolat-12-800w.webp",
   "formats": [
@@ -345,14 +345,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Burgundy Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-brique": {
   "name": "Dragées Chocolat Brique",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-brique.html",
   "image": "images/dragee-chocolat/dragee-chocolat-11-800w.webp",
   "formats": [
@@ -381,14 +381,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Brick Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-jaune-moutarde": {
   "name": "Dragées Chocolat Jaune Moutarde",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-jaune-moutarde.html",
   "image": "images/dragee-chocolat/dragee-chocolat-10-800w.webp",
   "formats": [
@@ -417,14 +417,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Mustard Yellow Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-jaune-soleil": {
   "name": "Dragées Chocolat Jaune Soleil",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-jaune-soleil.html",
   "image": "images/dragee-chocolat/dragee-chocolat-9-800w.webp",
   "formats": [
@@ -453,14 +453,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Sunshine Yellow Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-chocolat-nature": {
   "name": "Dragées Chocolat Nature",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-chocolat-nature.html",
   "image": "images/dragee-chocolat/dragee-chocolat-14-800w.webp",
   "formats": [
@@ -489,14 +489,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Natural Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-noir": {
   "name": "Dragées Chocolat Noir",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-noir.html",
   "image": "images/dragee-chocolat/chocolat-noir-800w.webp",
   "formats": [
@@ -525,14 +525,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Black Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-orange": {
   "name": "Dragées Chocolat Orange",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-orange.html",
   "image": "images/dragee-chocolat/dragee-chocolat-1-800w.webp",
   "formats": [
@@ -561,14 +561,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Orange Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-rose-fuchsia": {
   "name": "Dragées Chocolat Rose Fuchsia",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-rose-fuchsia.html",
   "image": "images/dragee-chocolat/chocolat-rose-fuchsia-800w.webp",
   "formats": [
@@ -597,14 +597,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Fuchsia Pink Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-rose-pastel": {
   "name": "Dragées Chocolat Rose Pastel",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-rose-pastel.html",
   "image": "images/dragee-chocolat/chocolat-rose-pastel-800w.webp",
   "formats": [
@@ -633,14 +633,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Pastel Pink Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-rouge": {
   "name": "Dragées Chocolat Rouge",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-rouge.html",
   "image": "images/dragee-chocolat/dragee-chocolat-13-800w.webp",
   "formats": [
@@ -669,14 +669,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Red Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-turquoise": {
   "name": "Dragées Chocolat Turquoise",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-turquoise.html",
   "image": "images/dragee-chocolat/dragee-chocolat-6-800w.webp",
   "formats": [
@@ -705,14 +705,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Turquoise Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-anis": {
   "name": "Dragées Chocolat Vert Anis",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-vert-anis.html",
   "image": "images/dragee-chocolat/dragee-chocolat-3-800w.webp",
   "formats": [
@@ -741,14 +741,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Aniseed Green Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-pomme": {
   "name": "Dragées Chocolat Vert Pomme",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-vert-pomme.html",
   "image": "images/dragee-chocolat/dragee-chocolat-4-800w.webp",
   "formats": [
@@ -777,14 +777,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Apple Green Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-sapin": {
   "name": "Dragées Chocolat Vert Sapin",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-vert-sapin.html",
   "image": "images/dragee-chocolat/dragee-chocolat-2-800w.webp",
   "formats": [
@@ -813,14 +813,14 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Fir Green Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-vert-d-eau": {
   "name": "Dragées Chocolat Vert d'Eau",
   "familyId": "chocolats",
   "family": "Chocolats",
   "familyUrl": "dragees.html?filter=chocolats",
-  "detail": "Cœur chocolat noir 70% · Sans amande",
+  "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-vert-d-eau.html",
   "image": "images/dragee-chocolat/chocolat-vert-d-eau-800w.webp",
   "formats": [
@@ -849,7 +849,7 @@ window.DP_CATALOGUE = {
   "kind": "dragee",
   "family_en": "Chocolate dragées",
   "name_en": "Seafoam Green Chocolate Dragées",
-  "detail_en": "70% dark chocolate centre · Almond-free"
+  "detail_en": "71% dark chocolate centre · Almond-free"
  },
  "chocolat-fuchsia": {
   "name": "Prali Amande Chocolat Noir Fuchsia",

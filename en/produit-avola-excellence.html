@@ -170,7 +170,7 @@
         <h1 class="pdp__title">Excellence<br>Avola Dragées</h1>
         <p class="pdp__weight">Calibre 38 · Sicilian Avola almonds</p>
         <p class="pdp__lead">Our finest and most delicate Avola dragée, in a luminous pearly white. The connoisseur's choice for a wedding, a christening or a communion.</p>
-        <p class="pdp__tagline">Dragées of French and Italian origin, carefully selected and finished in our workshop in Île-de-France. Sold by weight from 500&nbsp;g, to fill your own favours or dress your table.</p>
+        <p class="pdp__tagline">Dragées of French and Italian origin, carefully selected and finished in our Athis-Mons workshop. Sold by weight from 500&nbsp;g, to fill your own favours or dress your table.</p>
 
         <div class="pdp__qty-block" data-qty-block>
           <select class="pdp__qty-select" data-price-select aria-label="Desired quantity">
@@ -178,16 +178,24 @@
             <option value="87 €" data-unit="1 kg">1 kg — €87</option>
           </select>
           <p class="pdp__price"><span data-price-display>€43.50</span><span class="pdp__price-unit" data-unit-display>500 g</span></p>
+          <p class="pdp__qty-note">More than 1 kg? Adjust the quantity at the next step. Professionals: <a href="devis-professionnel.html">request a quote</a>.</p>
         </div>
 
         <a href="commander.html?ref=avola-excellence&amp;format=500g" class="pdp__cta" data-order-link>Order →</a>
 
+        <ul class="pdp__trust">
+          <li>Free pick-up point delivery under 1 kg</li>
+          <li>Hand-prepared in our Athis-Mons workshop</li>
+          <li>Rated 5.0/5 on Google · over 1,500 orders</li>
+        </ul>
+
         <details class="pdp__acc-item">
           <summary class="pdp__acc-trigger">Delivery & ordering</summary>
           <div class="pdp__acc-body">
-            <p>All our orders are prepared by hand in our workshop in Île-de-France. Please allow <strong>5 to 10 days</strong> for preparation: we recommend ordering at least 10 days before your event. Delivery in France and across Europe.</p>
+            <p>All our orders are prepared by hand in our Athis-Mons workshop. Please allow <strong>5 to 10 days</strong> for preparation: we recommend ordering at least 10 days before your event. Delivery in France and across Europe.</p>
             <ul>
               <li>Delivery to a pick-up point (Mondial Relay) in France and across Europe</li>
+              <li>Pick-up point fees: free under 1 kg, then €12 per kilo or part thereof</li>
               <li>Collection from our Athis-Mons workshop, by appointment</li>
               <li>Careful packaging, designed for shipping</li>
             </ul>
@@ -199,6 +207,14 @@
           <div class="pdp__acc-body">
             <p>Sicilian Avola almonds (Prunus dulcis) · Sugar · Corn starch · Gum arabic · Natural pearl white colouring.</p>
             <p>Made in a workshop that handles nuts, gluten, milk and soya. May contain traces of these allergens.</p>
+          </div>
+        </details>
+
+        <details class="pdp__acc-item">
+          <summary class="pdp__acc-trigger">Storage &amp; tips</summary>
+          <div class="pdp__acc-body">
+            <p>Store in a dry place, away from heat, light and humidity, ideally between 15 and 18&nbsp;°C. Do not refrigerate.</p>
+            <p>Shades may vary slightly depending on your screen and from one batch to another.</p>
           </div>
         </details>
 
@@ -236,6 +252,21 @@
               <span class="prod-card__weight">500 g</span>
             </div>
             <p class="prod-card__price">From €34</p>
+          </div>
+        </a>
+        <a href="produit-bouquet-ivoire.html" class="prod-card">
+          <div class="prod-card__image">
+            <picture>
+          <source type="image/webp" srcset="../images/bouquets/bouquet-ivoire-800w.webp 800w, ../images/bouquets/bouquet-ivoire.webp 1200w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px">
+          <img src="../images/bouquets/bouquet-ivoire.jpg" alt="Ivory Bouquet" loading="lazy">
+        </picture>
+          </div>
+          <div class="prod-card__info">
+            <div class="prod-card__row">
+              <span class="prod-card__name">Ivory Bouquet</span>
+              <span class="prod-card__weight">Bouquet</span>
+            </div>
+            <p class="prod-card__price">From €5</p>
           </div>
         </a>
       </div>
@@ -282,10 +313,12 @@
     "brand": { "@type": "Brand", "name": "Dragée Paris" },
     "category": "Dragées",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       "availability": "https://schema.org/InStock",
       "priceCurrency": "EUR",
-      "price": "43.5",
+      "lowPrice": "43.50",
+      "highPrice": "87.00",
+      "offerCount": "2",
       "seller": { "@type": "Organization", "name": "Dragée Paris" }
     }
   }
