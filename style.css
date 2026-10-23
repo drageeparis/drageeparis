@@ -7394,3 +7394,23 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .msg-form__note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .form__helper a { color: #965F36; }
 .form__helper[hidden] { display: none; }
+
+/* Page entreprises */
+.pro-example {
+  display: block;
+  max-width: 448px;
+  margin: 14px auto 0;
+  text-align: center;
+  color: var(--ink-60);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.process__grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) {
+  .process__grid--4 { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
+  .process__grid--4 .etape:nth-child(3) { border-left: 0; }
+}
+@media (max-width: 768px) {
+  .process__grid--4 { grid-template-columns: 1fr; }
+}
