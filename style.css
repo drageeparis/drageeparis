@@ -6088,9 +6088,10 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
   font-weight: 300;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blanc);
-  background: #965F36;
-  border: 1px solid #965F36;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--border-radius--button);
   padding: 14px 36px;
   cursor: pointer;
   min-height: 44px;
@@ -6100,9 +6101,7 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 }
 @media (hover: hover) and (pointer: fine) {
   .msg-form__submit:hover {
-    background: #7A4D27;
-    border-color: #7A4D27;
-    box-shadow: 0 4px 18px rgba(150, 95, 54, 0.35);
+    opacity: 0.85;
   }
 }
 .msg-form__submit:active { transform: scale(0.97); }
@@ -7384,3 +7383,14 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 }
 .pdp__terms strong { font-weight: 500; color: #965F36; }
 .pdp__terms + .pdp__cta { margin-top: 24px; }
+
+/* Page message : espacements et compléments */
+.form-section--tight { padding-top: 16px; }
+.contact__sidebar-map { display: inline-block; margin-top: 8px; font-size: 12px; color: #965F36; text-decoration: none; }
+.contact__sidebar-map:hover { text-decoration: underline; text-underline-offset: 3px; }
+.contact__sidebar-faq { font-size: 12px; font-weight: 300; color: var(--ink-60); margin: 20px 0; }
+.contact__sidebar-faq a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.form__optional { text-transform: none; letter-spacing: 0; color: var(--ink-60); font-size: 11px; margin-left: 4px; }
+.msg-form__note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.form__helper a { color: #965F36; }
+.form__helper[hidden] { display: none; }

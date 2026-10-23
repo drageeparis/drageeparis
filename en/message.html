@@ -166,7 +166,7 @@
       <p class="section-intro__sub">A question, an idea, a project to share? We read every message carefully and reply within 48 hours.</p>
     </div>
 
-    <section class="form-section fade-in">
+    <section class="form-section form-section--tight fade-in">
       <div class="contact__layout">
 
         <aside class="contact__sidebar">
@@ -182,8 +182,15 @@
           <div class="contact__sidebar-item">
             <span class="contact__sidebar-label">Workshop</span>
             <span class="contact__sidebar-value">145 Ter, Av. Jacques Chirac</span>
-            <p class="contact__sidebar-note">91200 Athis-Mons, Île-de-France</p>
+            <p class="contact__sidebar-note">91200 Athis-Mons · Collection by appointment</p>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=145+Ter+Avenue+Jacques+Chirac+91200+Athis-Mons" class="contact__sidebar-map" target="_blank" rel="noopener">View on the map →</a>
           </div>
+          <div class="contact__sidebar-item">
+            <span class="contact__sidebar-label">Instagram</span>
+            <a href="https://www.instagram.com/drageeparis/" class="contact__sidebar-value" target="_blank" rel="noopener">@drageeparis</a>
+            <p class="contact__sidebar-note">Our latest creations, every week</p>
+          </div>
+          <p class="contact__sidebar-faq">Your answer may already be in our <a href="faq.html">FAQ</a>.</p>
           <div class="contact__sidebar-box">
             <p>For a personalised project, please use the <strong>Start my creation</strong> form: it allows us to prepare your quote precisely.</p>
             <a href="contact.html" class="contact__sidebar-link">Start my creation →</a>
@@ -205,9 +212,20 @@
               </div>
             </div>
             <div class="form__group">
-              <label class="form__label" for="msg-tel">Phone <span class="required" aria-hidden="true">*</span></label>
-              <input class="form__input" type="tel" id="msg-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="+33 6 12 34 56 78" required>
-              <span class="form__error" id="err-tel">Please enter a phone number.</span>
+              <label class="form__label" for="msg-objet">Your enquiry is about</label>
+              <select class="form__select form__input" id="msg-objet" name="objet">
+                <option value="">Choose a subject</option>
+                <option>An order in progress</option>
+                <option>A question about a product</option>
+                <option value="Projet personnalisé">A personalised project</option>
+                <option>A professional enquiry</option>
+                <option>Other</option>
+              </select>
+              <p class="form__helper" id="msg-objet-hint" hidden>For a personalised project, our <a href="contact.html">Start my creation</a> form lets us prepare your quote precisely.</p>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="msg-tel">Phone <span class="form__optional">(optional)</span></label>
+              <input class="form__input" type="tel" id="msg-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="+33 6 12 34 56 78">
             </div>
             <div class="form__group">
               <label class="form__label" for="msg-message">Message <span class="required" aria-hidden="true">*</span></label>
@@ -219,7 +237,7 @@
               <input type="text" id="msg-company" name="_gotcha" tabindex="-1" autocomplete="off">
             </div>
             <div class="msg-form__footer">
-              <p class="msg-form__note">Fields marked <span aria-hidden="true">*</span> are required. Guaranteed reply within 48 hours.</p>
+              <p class="msg-form__note">Fields marked <span aria-hidden="true">*</span> are required. Your details are only used to reply to your message and are never shared. <a href="mentions-legales.html#rgpd">Learn more</a></p>
               <button type="submit" class="msg-form__submit">Send message</button>
             </div>
             <p id="msg-send-error" hidden style="font-size:13px;color:#c0392b;margin-top:12px;font-family:var(--font);font-weight:300;">
@@ -235,7 +253,7 @@
               </svg>
             </div>
             <h2 class="msg-confirmation__title">Message sent!</h2>
-            <p class="msg-confirmation__text">Thank you for your message. We will reply within 48 working hours.</p>
+            <p class="msg-confirmation__text">Thank you for your message. We will reply within 48 hours.</p>
             <button class="msg-confirmation__back" id="msg-back">Send another message <span class="btn-arrow">→</span></button>
           </div>
         </div>

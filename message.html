@@ -168,7 +168,7 @@
       <p class="section-intro__sub">Une question, une idée, un projet à partager ? Nous lisons chaque message avec attention et vous répondons sous 48 heures.</p>
     </div>
 
-    <section class="form-section fade-in">
+    <section class="form-section form-section--tight fade-in">
       <div class="contact__layout">
 
         <aside class="contact__sidebar">
@@ -184,8 +184,15 @@
           <div class="contact__sidebar-item">
             <span class="contact__sidebar-label">Atelier</span>
             <span class="contact__sidebar-value">145 Ter, Av. Jacques Chirac</span>
-            <p class="contact__sidebar-note">91200 Athis-Mons, Île-de-France</p>
+            <p class="contact__sidebar-note">91200 Athis-Mons · Retrait sur rendez-vous</p>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=145+Ter+Avenue+Jacques+Chirac+91200+Athis-Mons" class="contact__sidebar-map" target="_blank" rel="noopener">Voir sur la carte →</a>
           </div>
+          <div class="contact__sidebar-item">
+            <span class="contact__sidebar-label">Instagram</span>
+            <a href="https://www.instagram.com/drageeparis/" class="contact__sidebar-value" target="_blank" rel="noopener">@drageeparis</a>
+            <p class="contact__sidebar-note">Nos dernières créations, chaque semaine</p>
+          </div>
+          <p class="contact__sidebar-faq">Votre réponse se trouve peut-être dans notre <a href="faq.html">FAQ</a>.</p>
           <div class="contact__sidebar-box">
             <p>Pour un projet personnalisé, utilisez le formulaire <strong>Lancer ma création</strong> : il nous permet de préparer votre devis avec précision.</p>
             <a href="contact.html" class="contact__sidebar-link">Lancer ma création →</a>
@@ -207,9 +214,20 @@
               </div>
             </div>
             <div class="form__group">
-              <label class="form__label" for="msg-tel">Téléphone <span class="required" aria-hidden="true">*</span></label>
-              <input class="form__input" type="tel" id="msg-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" required>
-              <span class="form__error" id="err-tel">Veuillez indiquer un numéro de téléphone.</span>
+              <label class="form__label" for="msg-objet">Votre demande concerne</label>
+              <select class="form__select form__input" id="msg-objet" name="objet">
+                <option value="">Choisir un objet</option>
+                <option>Une commande en cours</option>
+                <option>Une question sur un produit</option>
+                <option value="Projet personnalisé">Un projet personnalisé</option>
+                <option>Une demande professionnelle</option>
+                <option>Autre</option>
+              </select>
+              <p class="form__helper" id="msg-objet-hint" hidden>Pour un projet personnalisé, le formulaire <a href="contact.html">Lancer ma création</a> nous permet de préparer votre devis avec précision.</p>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="msg-tel">Téléphone <span class="form__optional">(facultatif)</span></label>
+              <input class="form__input" type="tel" id="msg-tel" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78">
             </div>
             <div class="form__group">
               <label class="form__label" for="msg-message">Message <span class="required" aria-hidden="true">*</span></label>
@@ -221,7 +239,7 @@
               <input type="text" id="msg-company" name="_gotcha" tabindex="-1" autocomplete="off">
             </div>
             <div class="msg-form__footer">
-              <p class="msg-form__note">Les champs marqués <span aria-hidden="true">*</span> sont obligatoires. Réponse garantie sous 48 heures.</p>
+              <p class="msg-form__note">Les champs marqués <span aria-hidden="true">*</span> sont obligatoires. Vos informations servent uniquement à répondre à votre message et ne sont jamais transmises à des tiers. <a href="mentions-legales.html#rgpd">En savoir plus</a></p>
               <button type="submit" class="msg-form__submit">Envoyer le message</button>
             </div>
             <p id="msg-send-error" hidden style="font-size:13px;color:#c0392b;margin-top:12px;font-family:var(--font);font-weight:300;">
@@ -237,7 +255,7 @@
               </svg>
             </div>
             <h2 class="msg-confirmation__title">Message bien envoyé !</h2>
-            <p class="msg-confirmation__text">Merci pour votre message. Nous vous répondrons dans les 48 heures ouvrées.</p>
+            <p class="msg-confirmation__text">Merci pour votre message. Nous vous répondrons sous 48 heures.</p>
             <button class="msg-confirmation__back" id="msg-back">Envoyer un autre message <span class="btn-arrow">→</span></button>
           </div>
         </div>

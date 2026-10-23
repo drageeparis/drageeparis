@@ -28,7 +28,8 @@
     var ok = true;
     ok = setError('msg-nom', 'err-nom', nom.length === 0) && ok;
     ok = setError('msg-email', 'err-email', !emailOk) && ok;
-    ok = setError('msg-tel', 'err-tel', tel.length === 0) && ok;
+    var telEl = document.getElementById('msg-tel');
+    if (telEl && telEl.required) ok = setError('msg-tel', 'err-tel', tel.length === 0) && ok;
     ok = setError('msg-message', 'err-message', message.length === 0) && ok;
     return ok;
   }
@@ -52,10 +53,11 @@
 
     var payload = { 'Nom': nom, 'Email': email, 'Téléphone': tel, 'Message': message, 'Langue du client': EN ? 'Anglais' : 'Français', '_gotcha': gotcha };
     /* Champs projet (formulaire « Lancer ma création ») : envoyés seulement s'ils existent et sont remplis */
-    [['msg-societe', 'Société / établissement'], ['msg-type', 'Type de client'], ['msg-occasion', 'Occasion'], ['msg-date', "Date de l'événement"], ['msg-qte', 'Quantité']].forEach(function (f) {
+    [['msg-objet', 'Objet'], ['msg-societe', 'Société / établissement'], ['msg-type', 'Type de client'], ['msg-occasion', 'Occasion'], ['msg-date', "Date de l'événement"], ['msg-qte', 'Quantité']].forEach(function (f) {
       var el = document.getElementById(f[0]);
       if (el && el.value.trim()) payload[f[1]] = el.value.trim();
     });
+    if (payload['Objet'] && !form.dataset.source) payload._subject = payload['Objet'] + ' · Dragée Paris';
     if (form.dataset.source) { payload['Formulaire'] = form.dataset.source; payload._subject = form.dataset.source === 'Professionnels' ? 'Demande de devis professionnel · Dragée Paris' : 'Nouvelle demande de création · Dragée Paris'; }
 
     var submitBtn = form.querySelector('.msg-form__submit');
@@ -88,6 +90,13 @@
       if (errEl) errEl.hidden = false;
     });
   });
+
+  /* Objet « projet personnalisé » : orienter vers le formulaire Lancer ma création */
+  var objetEl = document.getElementById('msg-objet');
+  var objetHint = document.getElementById('msg-objet-hint');
+  if (objetEl && objetHint) {
+    objetEl.addEventListener('change', function () { objetHint.hidden = objetEl.value !== 'Projet personnalisé'; });
+  }
 
   backBtn.addEventListener('click', function () {
     confirmation.hidden = true;
