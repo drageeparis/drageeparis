@@ -5838,6 +5838,13 @@ figcaption {
   opacity: 0.75;
   margin-bottom: 28px;
 }
+.pdp__lead {
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  max-width: 400px;
+}
 .pdp__tagline {
   font-size: 14px;
   line-height: 22px;
