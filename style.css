@@ -7422,7 +7422,7 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .nu-famille__titre { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--ink-20); }
 .nu-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 28px 16px; }
 .nu-teinte { display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
-.nu-swatch, .nu-accord__pastille, .nu-coffret__pastille {
+.nu-swatch, .nu-accord__pastille {
   display: block; border-radius: 50%;
   background-size: 300%; background-position: 50% 48%;
   box-shadow: inset 0 0 0 1px rgba(82,54,42,0.06), 0 6px 14px rgba(82,54,42,0.10);
@@ -7440,26 +7440,14 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .nu-accord__teintes { font-size: 12px; color: var(--ink); margin-bottom: 4px; }
 .nu-accord__occasion { font-size: 12px; color: var(--ink-60); margin-bottom: 18px; flex: 1; }
 .nu-accord__cta { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #965F36; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
-.nu-coffret { max-width: 1080px; margin: 64px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-.nu-coffret__visuel { background: #fff; aspect-ratio: 1 / 1; padding: 13%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 7%; align-content: center; box-shadow: 0 24px 50px rgba(82,54,42,0.12); border-radius: 3px; }
-.nu-coffret__pastille { width: 100%; aspect-ratio: 1 / 1; }
-.nu-coffret__sur { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #965F36; margin-bottom: 14px; }
-.nu-coffret__titre { font-family: var(--heading); font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; color: var(--ink); margin-bottom: 20px; }
-.nu-coffret__desc { font-size: 14px; line-height: 1.75; color: var(--ink); max-width: 420px; margin-bottom: 22px; }
-.nu-coffret__prix { font-family: var(--heading); font-size: 22px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink); margin-bottom: 6px; }
-.nu-coffret__prix span { font-family: var(--font); font-size: 12px; letter-spacing: 0; color: var(--ink-60); font-weight: 300; margin-left: 6px; }
-.nu-coffret__deduit { font-size: 12px; color: #965F36; margin-bottom: 28px; }
 @media (max-width: 1024px) {
   .nu-section { padding-left: 32px; padding-right: 32px; }
   .nu-accords { grid-template-columns: repeat(2, 1fr); }
-  .nu-coffret { gap: 44px; }
-}
+  }
 @media (max-width: 768px) {
   .nu-section { padding: 16px 20px 64px; }
   .nu-section--paper2 { padding-top: 64px; }
   .nu-grille { grid-template-columns: repeat(3, 1fr); gap: 24px 10px; }
   .nu-swatch { width: 72px; height: 72px; }
   .nu-accords { grid-template-columns: 1fr; }
-  .nu-coffret { grid-template-columns: 1fr; margin-top: 32px; }
-  .nu-coffret__titre { font-size: 24px; }
-}
+    }
