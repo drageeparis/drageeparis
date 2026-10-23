@@ -77,7 +77,8 @@
   var ref = params.get('ref');
   if (!CATALOGUE[ref]) ref = Object.keys(CATALOGUE)[0];
   var firstProd = CATALOGUE[ref];
-  var lines = [{ ref: ref, format: findFormat(firstProd, params.get('format')).id, qty: 1 }];
+  var qtyParam = parseInt(params.get('qty'), 10);
+  var lines = [{ ref: ref, format: findFormat(firstProd, params.get('format')).id, qty: qtyParam > 0 && qtyParam < 10000 ? qtyParam : 1 }];
   var pickerOpen = false;
 
   var linesBox = document.getElementById('order-lines');

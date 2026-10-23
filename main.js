@@ -559,6 +559,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   })();
 
+  /* ---- 9c. Estimation du prix d'une création (quantité × prix, remise dégressive) ---- */
+  (function() {
+    var calc = document.querySelector('[data-calc]');
+    if (!calc) return;
+    var qtyEl = calc.querySelector('[data-calc-qty]');
+    var totalEl = calc.querySelector('[data-calc-total]');
+    var detailEl = calc.querySelector('[data-calc-detail]');
+    var hintEl = calc.querySelector('[data-calc-hint]');
+    var min = parseInt(calc.dataset.min, 10) || 1;
+    var from = parseInt(calc.dataset.remiseFrom, 10) || 0;
+    var pct = parseFloat(calc.dataset.remise) || 0;
+    var link = document.querySelector('a[data-order-link]');
+    var eur = function(n) {
+      var s = (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
+      return EN ? '€' + s : s.replace('.', ',') + ' €';
+    };
+    function update() {
+      var radio = calc.querySelector('input[type=radio]:checked');
+      var unit = parseFloat(radio.value);
+      var q = parseInt(qtyEl.value, 10) || 0;
+      var brut = q * unit;
+      var remise = from && q >= from ? brut * pct / 100 : 0;
+      totalEl.textContent = eur(brut - remise);
+      detailEl.textContent = q + ' × ' + eur(unit) + (remise ? (EN ? ' · −' : ' · −') + pct + ' %' : '');
+      if (q < min) hintEl.textContent = EN ? 'Minimum order: ' + min + ' pieces.' : 'Minimum de commande : ' + min + ' pièces.';
+      else if (remise) hintEl.textContent = EN ? 'Discount included: you save ' + eur(remise) + '.' : 'Remise incluse : vous économisez ' + eur(remise) + '.';
+      else if (from) hintEl.textContent = EN ? (from - q) + ' more for −' + pct + ' %.' : 'Plus que ' + (from - q) + ' pour bénéficier de −' + pct + ' %.';
+      calc.classList.toggle('is-below-min', q < min);
+      if (link) {
+        var parts = link.getAttribute('href').split('?');
+        var p = new URLSearchParams(parts[1] || '');
+        p.set('format', radio.dataset.format);
+        if (q >= min) p.set('qty', q); else p.delete('qty');
+        link.setAttribute('href', parts[0] + '?' + p.toString());
+      }
+    }
+    calc.addEventListener('input', update);
+    calc.addEventListener('change', update);
+    update();
+  })();
+
   /* ---- 10. Lightbox (pages produit) ---- */
   (function() {
     const gallery = document.querySelector('.pdp__gallery');
