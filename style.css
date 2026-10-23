@@ -6009,9 +6009,9 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 }
 .pdp-related__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1080px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
