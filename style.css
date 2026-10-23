@@ -7451,5 +7451,3 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   .nu-swatch { width: 72px; height: 72px; }
   .nu-accords { grid-template-columns: 1fr; }
     }
-.cfg-inspi { font-size: 12px; font-weight: 300; color: var(--ink-60); margin: -10px 0 18px; }
-.cfg-inspi a { color: #965F36; text-decoration: none; border-bottom: 1px solid currentColor; }
