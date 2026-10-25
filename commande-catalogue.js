@@ -2446,26 +2446,5 @@ window.DP_CATALOGUE = {
   "family_en": "Bouquets & gift boxes",
   "name_en": "Purple Bouquet",
   "detail_en": "Price per piece"
- },
- "ecrin-fleuri": {
-  "kind": "creation",
-  "name": "Écrin fleuri",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-ecrin-fleuri.html",
-  "image": "images/bouquets/ecrin-fleuri-800w.webp",
-  "formats": [
-   {
-    "id": "piece",
-    "label": "À la pièce",
-    "price": 4.5,
-    "label_en": "Per piece"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Écrin Fleuri",
-  "detail_en": "Price per piece"
  }
 };
