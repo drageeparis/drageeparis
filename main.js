@@ -944,3 +944,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+/* ================================================
+   VIDÉOS LÉGÈRES : chargées et lancées seulement à l'écran
+================================================ */
+(function () {
+  var vids = document.querySelectorAll('video[data-lazy-video]');
+  if (!vids.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  if (!('IntersectionObserver' in window)) { vids.forEach(play); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; } play(v); }
+      else if (!v.paused) v.pause();
+    });
+  }, { rootMargin: '200px 0px' });
+  vids.forEach(function (v) { io.observe(v); });
+})();
