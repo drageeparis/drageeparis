@@ -1228,39 +1228,111 @@
   <url>
     <loc>https://drageeparis.fr/entreprises.html</loc>
     <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/entreprises.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/entreprises.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/devis-professionnel.html</loc>
     <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/devis-professionnel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/devis-professionnel.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/dragees-mariage.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-mariage.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-mariage.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/dragees-bapteme.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-bapteme.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-bapteme.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/dragees-communion.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-communion.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-communion.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/dragees-naissance.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-naissance.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-naissance.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/dragees-anniversaire.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-anniversaire.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-anniversaire.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/bouquets-de-dragees.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/bouquets-de-dragees.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/bouquets-de-dragees.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/dragees-mariage.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-mariage.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-mariage.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/dragees-bapteme.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-bapteme.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-bapteme.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/dragees-communion.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-communion.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-communion.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/dragees-naissance.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-naissance.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-naissance.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/dragees-anniversaire.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-anniversaire.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-anniversaire.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/bouquets-de-dragees.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/bouquets-de-dragees.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/bouquets-de-dragees.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/entreprises.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/entreprises.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/entreprises.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/devis-professionnel.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/devis-professionnel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/devis-professionnel.html"/>
   </url>
 </urlset>
