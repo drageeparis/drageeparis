@@ -176,7 +176,7 @@
         <h1 class="pdp__title">Dragées Chocolat<br>Bordeaux</h1>
         <p class="pdp__weight">Cœur chocolat noir 71% · Sans amande</p>
         <p class="pdp__lead">Un rouge profond aux nuances de vin, chaleureux et raffiné. Il habille avec élégance un mariage d'automne ou d'hiver, une table de fêtes ou un événement d'entreprise.</p>
-        <p class="pdp__tagline">Des dragées d'origine française et italienne, sélectionnées avec soin et sublimées dans notre atelier d'Athis-Mons. Vendues au poids dès 250&nbsp;g, pour garnir vos propres contenants ou composer votre table.</p>
+        <p class="pdp__tagline">Des dragées d'origine française et italienne, sélectionnées avec soin par notre atelier d'Athis-Mons. Vendues au poids dès 250&nbsp;g, pour garnir vos propres contenants ou composer votre table.</p>
 
         <div class="pdp__qty-block" data-qty-block>
           <select class="pdp__qty-select" data-price-select aria-label="Quantité souhaitée">
@@ -297,24 +297,48 @@
   </footer>
   <script src="main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Dragées Chocolat Bordeaux",
-    "description": "Un cœur fondant de chocolat noir enrobé d'un sucre nacré bordeaux profond. Sans amande, pour une dragée tout en gourmandise.",
-    "image": "https://drageeparis.fr/images/dragee-chocolat/dragee-chocolat-12.png",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "category": "Dragées",
-    "offers": {
-      "@type": "AggregateOffer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "EUR",
-      "lowPrice": "7.50",
-      "highPrice": "30.00",
-      "offerCount": "3",
-      "seller": { "@type": "Organization", "name": "Dragée Paris" }
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Dragées Chocolat Bordeaux",
+  "description": "Un cœur fondant de chocolat noir enrobé d'un sucre nacré bordeaux profond. Sans amande, pour une dragée tout en gourmandise.",
+  "image": "https://drageeparis.fr/images/dragee-chocolat/dragee-chocolat-12.png",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "category": "Dragées",
+  "offers": {
+    "@type": "AggregateOffer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "EUR",
+    "lowPrice": "7.50",
+    "highPrice": "30.00",
+    "offerCount": "3",
+    "seller": {
+      "@type": "Organization",
+      "name": "Dragée Paris"
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
     }
   }
-  </script>
+}
+</script>
 </body>
 </html>

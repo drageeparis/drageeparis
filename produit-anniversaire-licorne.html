@@ -272,22 +272,40 @@
   </footer>
   <script src="main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Dragées Anniversaire Licorne",
-    "description": "Une boîte transparente surmontée d'une licorne pastel à la crinière arc-en-ciel, garnie de dragées. Une touche féerique pour émerveiller petits et grands.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-7.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "3.50",
-      "highPrice": "4.00",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Dragées Anniversaire Licorne",
+  "description": "Une boîte transparente surmontée d'une licorne pastel à la crinière arc-en-ciel, garnie de dragées. Une touche féerique pour émerveiller petits et grands.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-7.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "3.50",
+    "highPrice": "4.00",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

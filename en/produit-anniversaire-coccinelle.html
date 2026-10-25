@@ -271,22 +271,40 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Ladybird Birthday Dragées",
-    "description": "Pretty boxes adorned with lucky ladybirds and filled with tender dragées. A sweet good-luck charm for blowing out the candles.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-8.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "4.00",
-      "highPrice": "4.50",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Ladybird Birthday Dragées",
+  "description": "Pretty boxes adorned with lucky ladybirds and filled with tender dragées. A sweet good-luck charm for blowing out the candles.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-8.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "4.00",
+    "highPrice": "4.50",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

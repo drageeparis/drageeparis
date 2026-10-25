@@ -272,22 +272,40 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Unicorn Birthday Dragées",
-    "description": "A clear box topped with a pastel unicorn with a rainbow mane, filled with dragées. A magical touch to delight young and old alike.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-7.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "3.50",
-      "highPrice": "4.00",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Unicorn Birthday Dragées",
+  "description": "A clear box topped with a pastel unicorn with a rainbow mane, filled with dragées. A magical touch to delight young and old alike.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-7.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "3.50",
+    "highPrice": "4.00",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

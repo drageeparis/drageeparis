@@ -176,7 +176,7 @@
         <h1 class="pdp__title">Prali Amande<br>Chocolat au Lait Rouge</h1>
         <p class="pdp__weight">Amande Avola · Chocolat au lait</p>
         <p class="pdp__lead">Un rouge franc et éclatant, autour d'une amande croquante enrobée de chocolat au lait. Pour un mariage, la Saint-Valentin ou les fêtes de fin d'année.</p>
-        <p class="pdp__tagline">Des dragées d'origine française et italienne, sélectionnées avec soin et sublimées dans notre atelier d'Athis-Mons. Vendues au poids dès 250&nbsp;g, pour garnir vos propres contenants ou composer votre table.</p>
+        <p class="pdp__tagline">Des dragées d'origine française et italienne, sélectionnées avec soin par notre atelier d'Athis-Mons. Vendues au poids dès 250&nbsp;g, pour garnir vos propres contenants ou composer votre table.</p>
 
         <div class="pdp__qty-block" data-qty-block>
           <select class="pdp__qty-select" data-price-select aria-label="Quantité souhaitée">
@@ -297,24 +297,48 @@
   </footer>
   <script src="main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Prali Amande Chocolat au Lait Rouge",
-    "description": "Une amande Avola de Sicile enrobée de chocolat au lait et d'un sucre nacré rouge vif.",
-    "image": "https://drageeparis.fr/images/chocolat-amande/amande-rouge-entiere.png",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "category": "Dragées",
-    "offers": {
-      "@type": "AggregateOffer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "EUR",
-      "lowPrice": "9.50",
-      "highPrice": "37.00",
-      "offerCount": "3",
-      "seller": { "@type": "Organization", "name": "Dragée Paris" }
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Prali Amande Chocolat au Lait Rouge",
+  "description": "Une amande Avola de Sicile enrobée de chocolat au lait et d'un sucre nacré rouge vif.",
+  "image": "https://drageeparis.fr/images/chocolat-amande/amande-rouge-entiere.png",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "category": "Dragées",
+  "offers": {
+    "@type": "AggregateOffer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "EUR",
+    "lowPrice": "9.50",
+    "highPrice": "37.00",
+    "offerCount": "3",
+    "seller": {
+      "@type": "Organization",
+      "name": "Dragée Paris"
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
     }
   }
-  </script>
+}
+</script>
 </body>
 </html>

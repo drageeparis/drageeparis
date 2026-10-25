@@ -271,21 +271,39 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Under the Sea Birthday Dragées",
-    "description": "Pretty clear tubes topped with sea-creature figurines — a whale, a seahorse — filled with colourful dragées. The spirit of the open sea, for a gentle celebration.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-2.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "EUR",
-      "price": "4.50",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Under the Sea Birthday Dragées",
+  "description": "Pretty clear tubes topped with sea-creature figurines — a whale, a seahorse — filled with colourful dragées. The spirit of the open sea, for a gentle celebration.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-2.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "price": "4.50",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

@@ -272,22 +272,40 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Little Chief Birthday Dragées",
-    "description": "A box sweetly decorated with a little animal in a feathered headdress, on a bohemian, adventurous theme. Personalised dragées for a party full of character.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-4.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "3.50",
-      "highPrice": "4.00",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Little Chief Birthday Dragées",
+  "description": "A box sweetly decorated with a little animal in a feathered headdress, on a bohemian, adventurous theme. Personalised dragées for a party full of character.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-4.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "3.50",
+    "highPrice": "4.00",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

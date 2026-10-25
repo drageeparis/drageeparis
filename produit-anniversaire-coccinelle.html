@@ -271,22 +271,40 @@
   </footer>
   <script src="main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Dragées Anniversaire Coccinelle",
-    "description": "De jolies boîtes ornées de coccinelles porte-bonheur, garnies de dragées tendres. Un porte-bonheur gourmand pour souffler les bougies.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-8.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "4.00",
-      "highPrice": "4.50",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Dragées Anniversaire Coccinelle",
+  "description": "De jolies boîtes ornées de coccinelles porte-bonheur, garnies de dragées tendres. Un porte-bonheur gourmand pour souffler les bougies.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-8.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "4.00",
+    "highPrice": "4.50",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

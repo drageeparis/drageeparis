@@ -272,22 +272,40 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Flamingo Birthday Dragées",
-    "description": "An elegant glass container topped with a crowned flamingo, filled with the dragées of your choice. A sweet, refined creation for a memorable birthday.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-1.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "4.00",
-      "highPrice": "4.50",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Flamingo Birthday Dragées",
+  "description": "An elegant glass container topped with a crowned flamingo, filled with the dragées of your choice. A sweet, refined creation for a memorable birthday.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-1.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "4.00",
+    "highPrice": "4.50",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>
