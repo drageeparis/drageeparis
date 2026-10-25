@@ -36,20 +36,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/atelier.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/commande-dragees.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/commande-dragees.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/commande-dragees.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/commande-creations.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/commande-creations.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/commande-creations.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/message.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -498,25 +484,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-univers-marin.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-anniversaire-animaux-des-bois.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-animaux-des-bois.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-animaux-des-bois.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-anniversaire-petit-indien.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-petit-indien.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-petit-indien.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-anniversaire-safari.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-safari.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-safari.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-anniversaire-panda.html</loc>
@@ -580,20 +552,6 @@
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/atelier.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/atelier.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/commande-dragees.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/commande-dragees.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/commande-dragees.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/commande-creations.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/commande-creations.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/commande-creations.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/en/message.html</loc>
@@ -1037,25 +995,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-univers-marin.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/en/produit-anniversaire-animaux-des-bois.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-animaux-des-bois.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-animaux-des-bois.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/en/produit-anniversaire-petit-indien.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-petit-indien.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-petit-indien.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-anniversaire-safari.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-anniversaire-safari.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-anniversaire-safari.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/en/produit-anniversaire-panda.html</loc>
