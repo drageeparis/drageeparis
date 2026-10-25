@@ -7414,3 +7414,13 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 @media (max-width: 768px) {
   .process__grid--4 { grid-template-columns: 1fr; }
 }
+
+/* Pages occasion (ex. dragees-mariage.html) */
+@media (min-width: 769px) {
+  .occasion-grid .product-card__media img { aspect-ratio: 3 / 4; }
+}
+.guide-grid--compact .guide-cell__title {
+  font-size: clamp(15px, 1.3vw, 19px);
+  letter-spacing: 0.16em;
+  margin-bottom: 14px;
+}
