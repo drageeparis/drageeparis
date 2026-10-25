@@ -7088,7 +7088,7 @@ body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__cta {
   opacity: 1; visibility: visible; transform: none; transition-delay: 0s;
 }
 .header__nav-item--mega:hover .header__nav-link svg, .header__nav-item--mega:focus-within .header__nav-link svg { transform: rotate(180deg); }
-.mega__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; max-width: 1240px; margin: 0 auto; }
+.mega__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; max-width: 1320px; margin: 0 auto; }
 .mega__item { display: block; text-decoration: none; color: var(--ink); }
 .mega__img { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: #E9DFD5; }
 .mega__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1s var(--ease); }
