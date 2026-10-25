@@ -272,22 +272,40 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Panda Birthday Dragées",
-    "description": "A natural container topped with a greedy little panda, set against bamboo and greenery. A sweet, playful creation for a cosy, cuddly birthday.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-6.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "4.00",
-      "highPrice": "4.50",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Panda Birthday Dragées",
+  "description": "A natural container topped with a greedy little panda, set against bamboo and greenery. A sweet, playful creation for a cosy, cuddly birthday.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-6.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "4.00",
+    "highPrice": "4.50",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

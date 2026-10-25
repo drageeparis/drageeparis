@@ -271,22 +271,40 @@
   </footer>
   <script src="main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Dragées Anniversaire Banquise",
-    "description": "Des boîtes transparentes coiffées d'animaux polaires — pingouin, ours blanc, phoque — garnies de dragées. Une escapade sur la banquise, pleine de fraîcheur et de douceur.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-9.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "3.50",
-      "highPrice": "4.00",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Dragées Anniversaire Banquise",
+  "description": "Des boîtes transparentes coiffées d'animaux polaires — pingouin, ours blanc, phoque — garnies de dragées. Une escapade sur la banquise, pleine de fraîcheur et de douceur.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-9.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "3.50",
+    "highPrice": "4.00",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>

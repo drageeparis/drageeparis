@@ -271,22 +271,40 @@
   </footer>
   <script src="../main.js?v=20261026b"></script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Ice Floe Birthday Dragées",
-    "description": "Clear boxes topped with polar animals — penguin, polar bear, seal — and filled with dragées. A getaway to the ice floe, full of freshness and sweetness.",
-    "image": "https://drageeparis.fr/images/anniversaire/anniv-9.jpg",
-    "brand": { "@type": "Brand", "name": "Dragée Paris" },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "3.50",
-      "highPrice": "4.00",
-      "availability": "https://schema.org/InStock"
-    },
-    "category": "Dragées"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Ice Floe Birthday Dragées",
+  "description": "Clear boxes topped with polar animals — penguin, polar bear, seal — and filled with dragées. A getaway to the ice floe, full of freshness and sweetness.",
+  "image": "https://drageeparis.fr/images/anniversaire/anniv-9.jpg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Dragée Paris"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "3.50",
+    "highPrice": "4.00",
+    "availability": "https://schema.org/InStock",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": [
+        "FR",
+        "BE",
+        "LU",
+        "NL",
+        "DE",
+        "AT",
+        "IT",
+        "ES",
+        "PT"
+      ],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+    }
+  },
+  "category": "Dragées"
+}
+</script>
 </body>
 </html>
