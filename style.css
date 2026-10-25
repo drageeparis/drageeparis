@@ -7424,3 +7424,6 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   letter-spacing: 0.16em;
   margin-bottom: 14px;
 }
+.avis-google--intro { margin: 18px auto 0; gap: 8px 10px; font-size: 13px; color: var(--ink-60, var(--ink)); }
+.avis-google--intro .avis-google__stars svg { width: 13px; height: 13px; }
+.avis-google--intro:hover .avis-google__note { color: var(--ink); }
