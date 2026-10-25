@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---- 0. Bandeau saisonnier (affiché jusqu'à la date de fin, puis disparaît seul) ----
      Pour une nouvelle saison : modifier SEASON_BAR (texte, lien, date de fin). */
   const SEASON_BAR = {
-    end:   '2026-11-01T00:00:00+01:00',
+    end:   '2026-10-22T00:00:00+02:00',
     text:  "Palette d'automne · Dragées orange, blanc nacré et noir · Commandez avant le 21 octobre pour une livraison avant le 31",
     short: "Palette d'automne · Commandez avant le 21 octobre",
     label: 'Découvrir',
