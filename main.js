@@ -821,13 +821,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ================================================
-   PIXEL META + CONSENTEMENT COOKIES (CNIL)
-   Le pixel ne se charge qu'après un clic sur « Accepter ».
+   PIXEL META + BALISE GOOGLE ADS + CONSENTEMENT COOKIES (CNIL)
+   Les deux outils ne se chargent qu'après un clic sur « Accepter ».
+   Conversion Google Ads « Demande de devis site » envoyée à chaque
+   envoi Formspree réussi.
    Choix mémorisé 6 mois. Événements : PageView, ViewContent
    (fiches produit), Lead (envoi réussi d'un formulaire Formspree).
 ================================================ */
 (function () {
   var PIXEL_ID = '953386344030306';
+  var GADS_ID = 'AW-18537079278';
+  var GADS_LEAD = GADS_ID + '/_2P7CI3b0akdEO7DlYdF';
   var KEY = 'dp_consent';
   var MAX_AGE = 1000 * 60 * 60 * 24 * 182;
   var EN = document.documentElement.lang === 'en';
@@ -844,9 +848,25 @@ document.addEventListener('DOMContentLoaded', () => {
     try { localStorage.setItem(KEY, JSON.stringify({ c: c, t: Date.now() })); } catch (e) {}
   }
 
+  function loadGoogle() {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('consent', 'default', {
+      ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted',
+      analytics_storage: 'denied'
+    });
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GADS_ID;
+    document.head.appendChild(g);
+    gtag('js', new Date());
+    gtag('config', GADS_ID);
+  }
+
   var loaded = false;
   function loadPixel() {
     if (loaded) return; loaded = true;
+    loadGoogle();
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -871,7 +891,9 @@ document.addEventListener('DOMContentLoaded', () => {
       var p = _fetch.apply(this, arguments);
       if (url.indexOf('formspree.io') !== -1 && (!init || (init.method || 'GET').toUpperCase() === 'POST')) {
         p.then(function (r) {
-          if (r && r.ok && window.fbq) fbq('track', 'Lead', { content_name: location.pathname.replace(/^\/|\.html$/g, '') || 'accueil' });
+          if (!r || !r.ok) return;
+          if (window.fbq) fbq('track', 'Lead', { content_name: location.pathname.replace(/^\/|\.html$/g, '') || 'accueil' });
+          if (window.gtag) gtag('event', 'conversion', { send_to: GADS_LEAD });
         }).catch(function () {});
       }
       return p;
@@ -898,8 +920,8 @@ document.addEventListener('DOMContentLoaded', () => {
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-label', T('Gestion des cookies', 'Cookie settings'));
     box.innerHTML =
-      '<p>' + T('Avec votre accord, nous utilisons des cookies de mesure d’audience publicitaire (Meta) afin de mieux vous faire découvrir nos créations. ',
-                'With your consent, we use advertising measurement cookies (Meta) to help more people discover our creations. ') +
+      '<p>' + T('Avec votre accord, nous utilisons des cookies de mesure publicitaire (Google, Meta) afin de mieux vous faire découvrir nos créations. ',
+                'With your consent, we use advertising measurement cookies (Google, Meta) to help more people discover our creations. ') +
       '<a href="' + legal + '">' + T('En savoir plus', 'Learn more') + '</a></p>' +
       '<div class="dp-c-btns"><button type="button" class="dp-c-no">' + T('Refuser', 'Decline') + '</button>' +
       '<button type="button" class="dp-c-ok">' + T('Accepter', 'Accept') + '</button></div>';
