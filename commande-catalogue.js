@@ -822,7 +822,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-vert-d-eau.html",
-  "image": "images/dragee-chocolat/chocolat-vert-d-eau-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-vert-d-eau-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
