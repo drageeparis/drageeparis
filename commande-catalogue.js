@@ -390,7 +390,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-jaune-moutarde.html",
-  "image": "images/dragee-chocolat/chocolat-jaune-moutarde-entiere-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-jaune-moutarde-v2-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
