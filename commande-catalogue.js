@@ -354,7 +354,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-brique.html",
-  "image": "images/dragee-chocolat/dragee-chocolat-11-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-brique-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
