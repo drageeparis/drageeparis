@@ -426,7 +426,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-jaune-soleil.html",
-  "image": "images/dragee-chocolat/dragee-chocolat-9-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-jaune-soleil-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
