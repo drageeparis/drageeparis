@@ -246,7 +246,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-bleu-poudre.html",
-  "image": "images/dragee-chocolat/dragee-chocolat-5-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-bleu-poudre-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
