@@ -750,7 +750,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-vert-pomme.html",
-  "image": "images/dragee-chocolat/dragee-chocolat-4-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-vert-pomme-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
