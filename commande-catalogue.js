@@ -678,7 +678,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "dragees.html?filter=chocolats",
   "detail": "Cœur chocolat noir 71% · Sans amande",
   "url": "produit-chocolat-turquoise.html",
-  "image": "images/dragee-chocolat/chocolat-turquoise-entiere-800w.webp",
+  "image": "images/dragee-chocolat/chocolat-turquoise-v2-entiere-800w.webp",
   "formats": [
    {
     "id": "250g",
