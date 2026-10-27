@@ -1016,6 +1016,15 @@
   }
 
 
+  // Mail interne uniquement : nom exact de la police dans Canva, entre parenthèses (jamais affiché sur le site)
+  var CANVA_FONTS = { 'Élégante': 'Lora Italic', 'Calligraphie': 'Great Vibes', 'Classique': 'Cinzel' };
+  function etiquetteFormatMail() {
+    var txt = etiquetteFormat(), nm = tagFont().name, canva = CANVA_FONTS[nm];
+    if (!canva) return txt;
+    var key = 'écriture ' + nm.toLowerCase();
+    return txt.replace(key, function(m) { return m + ' (Canva : ' + canva + ')'; });
+  }
+
   /* ---------- Étape 5 : décoration de la boîte (nœud, fleurs champêtres) ---------- */
   function isBoite() { return !conseil && containers[idx].key === 'boite'; }
   function stepUsable(n) { return n !== 5 || isBoite() || isPot(); } // étape décoration : boîte en carton (nœud, bouquet) et pot en verre (fleurs)
@@ -1291,7 +1300,7 @@
       'Contenant': contenantText(),
       'Dragées': drageesText(),
       'Texte de l\'étiquette': etiquetteText() || 'À définir',
-      'Étiquette': etiquetteFormat(),
+      'Étiquette': etiquetteFormatMail(),
       'Décoration': decoText() || 'Sans objet (contenant autre que la boîte)',
       'Nombre de boîtes': nbBoitesText(),
       'Prix indicatif': prixDetailMail() || 'Sur devis',
