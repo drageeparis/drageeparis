@@ -2194,7 +2194,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "creations.html",
   "detail": "Prix à la pièce",
   "url": "produit-bouquet-rose-amande.html",
-  "image": "images/bouquets/bouquet-rose-amande-800w.webp?v=20261029c",
+  "image": "images/bouquets/bouquet-rose-amande-800w.webp?v=20261029d",
   "formats": [
    {
     "id": "petitbouquet",
