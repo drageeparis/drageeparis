@@ -1304,6 +1304,120 @@ window.DP_CATALOGUE = {
   "name_en": "Terracotta Wedding Dragées",
   "detail_en": "Price per piece"
  },
+ "mariage-champetre": {
+  "kind": "creation",
+  "name": "Dragées Mariage Champêtre",
+  "familyId": "mariage",
+  "family": "Mariage",
+  "familyUrl": "dragees-mariage.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-mariage-champetre.html",
+  "image": "images/mariage/mariage-pot-champetre-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 5.3,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Wedding",
+  "name_en": "Champêtre Wedding Dragées",
+  "detail_en": "Price per piece"
+ },
+ "mariage-bouquet-printemps": {
+  "kind": "creation",
+  "name": "Dragées Mariage Bouquet Printemps",
+  "familyId": "mariage",
+  "family": "Mariage",
+  "familyUrl": "dragees-mariage.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-mariage-bouquet-printemps.html",
+  "image": "images/mariage/mariage-bouquet-printemps-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Wedding",
+  "name_en": "Spring Bouquet Wedding Dragées",
+  "detail_en": "Price per piece"
+ },
+ "mariage-riviera": {
+  "kind": "creation",
+  "name": "Dragées Mariage Riviera",
+  "familyId": "mariage",
+  "family": "Mariage",
+  "familyUrl": "dragees-mariage.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-mariage-riviera.html",
+  "image": "images/mariage/mariage-tube-riviera-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.5,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 3.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Wedding",
+  "name_en": "Riviera Wedding Dragées",
+  "detail_en": "Price per piece"
+ },
+ "mariage-alliance": {
+  "kind": "creation",
+  "name": "Dragées Mariage Alliance",
+  "familyId": "mariage",
+  "family": "Mariage",
+  "familyUrl": "dragees-mariage.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-mariage-alliance.html",
+  "image": "images/mariage/mariage-boite-alliance-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.0,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 3.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Wedding",
+  "name_en": "Alliance Wedding Dragées",
+  "detail_en": "Price per piece"
+ },
  "baby-shower-bleu": {
   "kind": "creation",
   "name": "Dragées Baby Shower Bleu",

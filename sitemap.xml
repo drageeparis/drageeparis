@@ -372,6 +372,34 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-terracotta.html"/>
   </url>
   <url>
+    <loc>https://drageeparis.fr/produit-mariage-champetre.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-champetre.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-champetre.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-mariage-bouquet-printemps.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-bouquet-printemps.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-bouquet-printemps.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-mariage-riviera.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-riviera.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-riviera.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-mariage-alliance.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-alliance.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-alliance.html"/>
+  </url>
+  <url>
     <loc>https://drageeparis.fr/produit-naissance-amande-avola.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -818,6 +846,34 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-terracotta.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-terracotta.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-mariage-champetre.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-champetre.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-champetre.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-mariage-bouquet-printemps.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-bouquet-printemps.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-bouquet-printemps.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-mariage-riviera.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-riviera.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-riviera.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-mariage-alliance.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-alliance.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-alliance.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/en/produit-naissance-amande-avola.html</loc>
