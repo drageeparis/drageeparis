@@ -1337,6 +1337,27 @@ window.DP_CATALOGUE = {
   "name_en": "Douceur Wedding Dragées",
   "detail_en": "Price per piece"
  },
+ "mariage-terracotta": {
+  "kind": "creation",
+  "name": "Dragées Mariage Terracotta",
+  "familyId": "mariage",
+  "family": "Mariage",
+  "familyUrl": "dragees-mariage.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-mariage-terracotta.html",
+  "image": "images/mariage/mariage-sachet-terracotta-800w.webp",
+  "formats": [
+   {
+    "id": "10dragées",
+    "label": "10 dragées",
+    "price": 4.5,
+    "label_en": "10 dragées"
+   }
+  ],
+  "family_en": "Wedding",
+  "name_en": "Terracotta Wedding Dragées",
+  "detail_en": "Price per piece"
+ },
  "baby-shower-bleu": {
   "kind": "creation",
   "name": "Dragées Baby Shower Bleu",
