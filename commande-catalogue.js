@@ -1283,60 +1283,6 @@ window.DP_CATALOGUE = {
   "name_en": "Prali Amande Milk Chocolate Fir Green",
   "detail_en": "Avola almond · Milk chocolate"
  },
- "mariage-chic": {
-  "kind": "creation",
-  "name": "Dragées Mariage Chic",
-  "familyId": "mariage",
-  "family": "Mariage",
-  "familyUrl": "dragees-mariage.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-mariage-chic.html",
-  "image": "images/mariage/mariage-rouge-vase-800w.webp",
-  "formats": [
-   {
-    "id": "10dragées",
-    "label": "Avec 10 dragées",
-    "price": 5.5,
-    "label_en": "With 10 dragées"
-   },
-   {
-    "id": "sansdragée",
-    "label": "Sans dragée",
-    "price": 4.5,
-    "label_en": "Without dragées"
-   }
-  ],
-  "family_en": "Wedding",
-  "name_en": "Chic Wedding Dragées",
-  "detail_en": "Price per piece"
- },
- "mariage-douceur": {
-  "kind": "creation",
-  "name": "Dragées Mariage Douceur",
-  "familyId": "mariage",
-  "family": "Mariage",
-  "familyUrl": "dragees-mariage.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-mariage-douceur.html",
-  "image": "images/mariage/mariage-lin-beige-800w.webp",
-  "formats": [
-   {
-    "id": "5dragées",
-    "label": "Avec 5 dragées",
-    "price": 5.0,
-    "label_en": "With 5 dragées"
-   },
-   {
-    "id": "sansdragée",
-    "label": "Sans dragée",
-    "price": 4.5,
-    "label_en": "Without dragées"
-   }
-  ],
-  "family_en": "Wedding",
-  "name_en": "Douceur Wedding Dragées",
-  "detail_en": "Price per piece"
- },
  "mariage-terracotta": {
   "kind": "creation",
   "name": "Dragées Mariage Terracotta",

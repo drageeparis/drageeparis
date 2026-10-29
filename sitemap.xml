@@ -365,25 +365,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-gender-reveal-mixte.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-mariage-chic.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-chic.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-chic.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-mariage-terracotta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-terracotta.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-terracotta.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-douceur.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-douceur.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-douceur.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-naissance-amande-avola.html</loc>
@@ -827,25 +813,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-gender-reveal-mixte.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-chic.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-chic.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-chic.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/en/produit-mariage-terracotta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-terracotta.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-terracotta.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-douceur.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-douceur.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-douceur.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/en/produit-naissance-amande-avola.html</loc>
