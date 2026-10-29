@@ -365,13 +365,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-gender-reveal-mixte.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-mariage-beaute.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-beaute.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-beaute.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-mariage-chic.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -379,60 +372,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-chic.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-mariage-coeur.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-coeur.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-coeur.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/produit-mariage-douceur.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-douceur.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-douceur.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-eternite.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-eternite.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-eternite.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-fleur.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-fleur.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-fleur.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-pampas.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-pampas.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-pampas.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-poetique.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-poetique.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-poetique.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-purete.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-purete.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-purete.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-mariage-romantique.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-romantique.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-romantique.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-naissance-amande-avola.html</loc>
@@ -876,13 +820,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-gender-reveal-mixte.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-beaute.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-beaute.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-beaute.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/en/produit-mariage-chic.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -890,60 +827,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-chic.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-coeur.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-coeur.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-coeur.html"/>
-  </url>
-  <url>
     <loc>https://drageeparis.fr/en/produit-mariage-douceur.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-douceur.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-douceur.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-eternite.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-eternite.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-eternite.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-fleur.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-fleur.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-fleur.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-pampas.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-pampas.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-pampas.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-poetique.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-poetique.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-poetique.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-purete.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-purete.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-purete.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-mariage-romantique.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-mariage-romantique.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-mariage-romantique.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/en/produit-naissance-amande-avola.html</loc>
