@@ -169,12 +169,18 @@
     }
     return seq;
   }
+  var DG_ARGENT = '#C9CCD2'; // petites dragées argentées de finition du tube
   function fillDragees() {
     var on = !conseil && current >= 3 && checkedValue('dragees') === 'Avec dragées';
     var seqFiole = on ? dgSequence() : [], seqAutres = on ? dgSequenceSimple() : [];
     Array.prototype.forEach.call(stage.querySelectorAll('.cfg-dgfill'), function(g) {
       var list = g.querySelectorAll('.dgf'), n = list.length, pochon = g.classList.contains('cfg-dgfill--pochon');
-      var seq = g.classList.contains('cfg-dgfill--tube') ? seqFiole : seqAutres;
+      if (g.classList.contains('cfg-dgfill--tube')) { // tube : argentée en bas, 4 dragées choisies, argentée en haut
+        var slots = on ? [DG_ARGENT, seqFiole[0], seqFiole[1], seqFiole[2], seqFiole[3], DG_ARGENT] : [];
+        for (var t = 0; t < n; t++) { list[t].style.display = slots[t] ? '' : 'none'; if (slots[t]) list[t].style.color = slots[t]; }
+        return;
+      }
+      var seq = seqAutres;
       // pochon : quelques dragées posées devant, réparties selon les couleurs choisies
       var show = pochon ? (seq.length ? Math.min(n, Math.max(3, Math.ceil(seq.length / 2))) : 0) : Math.min(n, seq.length);
       for (var i = 0; i < n; i++) {
@@ -396,7 +402,7 @@
   // n'est exigé que pour passer à l'étape suivante (voir drageesComplete)
   function floorOf() { return 1; }
   // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
-  function tubeCap() { return !conseil && containers[idx].key === 'tube' ? 6 : 0; } // tube : 6 dragées, ni plus ni moins
+  function tubeCap() { return !conseil && containers[idx].key === 'tube' ? 4 : 0; } // tube : 4 dragées au choix + 2 petites argentées de finition (haut et bas) = 6 dragées
   function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
   var POT_MAX = 10; // pot en verre : 10 dragées maximum, quelle que soit la catégorie
   function capOf(cat) {
@@ -407,7 +413,7 @@
   }
   // minimum par contenant : data-min (chocolats : 5), sinon le contenant doit être complet
   function minOf(cat) { if (bqCap()) return bqCap(); if (tubeCap()) return tubeCap(); var p = $('cfg-panel-' + cat); return (p && parseInt(p.getAttribute('data-min'), 10)) || capOf(cat); }
-  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); if (tubeCap()) return T(mx + ' dragées pour ce tube.', mx + ' dragées for this tube.'); if (bqCap()) return T(mx + ' dragées pour ce bouquet : une par pétale.', mx + ' dragées for this bouquet: one per petal.'); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
+  function rangeText(cat) { var mn = minOf(cat), mx = capOf(cat); if (tubeCap()) return T('Choisissez vos ' + mx + ' dragées. Votre tube en contient 6 : vos ' + mx + ' dragées, encadrées en haut et en bas par 2 petites dragées argentées qui signent la finition du tube.', 'Choose your ' + mx + ' dragées. Your tube holds 6: your ' + mx + ' dragées, framed top and bottom by 2 small silver dragées that finish the tube.'); if (bqCap()) return T(mx + ' dragées pour ce bouquet : une par pétale.', mx + ' dragées for this bouquet: one per petal.'); return mn < mx ? T('De ' + mn + ' à ' + mx + ' dragées par contenant.', mn + ' to ' + mx + ' dragées per container.') : T('Jusqu’à ' + mx + ' dragées par contenant.', 'Up to ' + mx + ' dragées per container.'); }
   function chosenCat() { return chosenColors.length ? catOf(inputOf(chosenColors[0])) : ''; }
   function totalQty() { return chosenColors.reduce(function(n, v) { return n + (qty[v] || 0); }, 0); }
   function shortName(el) {
@@ -881,7 +887,7 @@
     var dp = $('cfg-dg-price'), o = prixOptions();
     if (dp) {
       dp.hidden = !(isBoite() || isPot() || isTube()) || !avecDragees();
-      if (isTube()) dp.textContent = T('6 dragées : + ', '6 dragées: + ') + euros(PRIX_TUBE_DRAGEES) + T(' par tube', ' per tube');
+      if (isTube()) dp.textContent = T('6 dragées (4 au choix + 2 argentées) : + ', '6 dragées (4 of your choice + 2 silver): + ') + euros(PRIX_TUBE_DRAGEES) + T(' par tube', ' per tube');
       else dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + (isPot() ? T(' par pot', ' per jar') : T(' par boîte', ' per box'))
         : euros(PRIX_DRAGEE_SUP) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price').replace('de la boîte', isPot() ? 'du pot' : 'de la boîte').replace('box price', isPot() ? 'jar price' : 'box price');
     }
@@ -999,7 +1005,8 @@
     var dn = checkedName('dragees');
     if (d !== 'Avec dragées') return dn;
     if (!chosenColors.length) return dn + T(' · couleurs à définir', ' · colours to be decided');
-    return dn + ' · ' + (EN ? catName(chosenCat()) + ': ' : '') + chosenColors.map(function(v) { return nameOfValue('couleurs', v) + ' ×' + (qty[v] || 1); }).join(', ');
+    return dn + ' · ' + (EN ? catName(chosenCat()) + ': ' : '') + chosenColors.map(function(v) { return nameOfValue('couleurs', v) + ' ×' + (qty[v] || 1); }).join(', ')
+      + (isTube() ? T(' + 2 argentées de finition (6 dragées)', ' + 2 silver finishing dragées (6 dragées)') : '');
   }
   function etiquetteText() {
     return [val('cfg-l1'), val('cfg-l2')].filter(Boolean).join(' — ');
