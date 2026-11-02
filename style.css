@@ -7027,7 +7027,7 @@ span.btn--outline, .product-card__title, .product-card__actions .btn--outline { 
 .hero--light { background: #D9C3A5; }
 .hero--light .hero__bg img { object-position: 70% 50%; animation-name: heroScaleLight; }
 @keyframes heroScaleLight { from { transform: scale(1.04); opacity: 0.85; } to { transform: scale(1); opacity: 1; } }
-.hero--light .hero__overlay { background: linear-gradient(90deg, rgba(243, 236, 230, 0.35) 0%, rgba(243, 236, 230, 0) 55%); }
+.hero--light .hero__overlay { background: linear-gradient(180deg, rgba(243, 236, 230, 0.75) 0%, rgba(243, 236, 230, 0.35) 9%, rgba(243, 236, 230, 0) 18%), linear-gradient(90deg, rgba(243, 236, 230, 0.35) 0%, rgba(243, 236, 230, 0) 55%); }
 .hero--light .hero__content { justify-content: center; padding-bottom: 0; }
 .hero--light .hero__eyebrow { color: var(--ink); }
 .hero--light .hero__title-main { color: var(--ink); max-width: 620px; text-shadow: none; }
@@ -7050,7 +7050,7 @@ body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__cta {
 @media (max-width: 768px) {
   .hero--light { min-height: 0; background: var(--paper); }
   .hero--light .hero__bg { position: relative; inset: auto; aspect-ratio: 4 / 5; margin-top: 72px; }
-  .hero--light .hero__bg img { object-position: 80% 45%; }
+  .hero--light .hero__bg img { object-position: 90% 50%; }
   .hero--light .hero__overlay { display: none; }
   .hero--light .hero__content { min-height: 0; justify-content: flex-start; padding: 36px 24px 56px; text-align: center; align-items: center; }
   .hero--light .hero__ctas { width: 100%; }
