@@ -90,8 +90,50 @@
     updateCaption();
     fitAllTags();
   }
+  /* ---------- Réalisation réelle : une vraie photo du même contenant (étape du choix du contenant) ---------- */
+  var REAL_PHOTOS = {
+    boite: { img: 'images/mariage/mariage-boite-alliance', fr: 'Boîte en carton (création Alliance)', en: 'Cardboard box (Alliance design)' },
+    pot: { img: 'images/mariage/mariage-pot-champetre', fr: 'Pot en verre (création Champêtre)', en: 'Glass jar (Champêtre design)' },
+    tube: { img: 'images/mariage/mariage-tube-riviera', fr: 'Tube (création Riviera)', en: 'Tube (Riviera design)' },
+    pochon: { img: 'images/fetes-religieuses/bapteme-pochon-chapelet-or', fr: 'Pochon (création Chapelet Or)', en: 'Pouch (Chapelet Or design)' },
+    bouquet: { img: 'images/mariage/mariage-bouquet-printemps', fr: 'Bouquet de dragées (création Printemps)', en: 'Dragée bouquet (Printemps design)' }
+  };
+  var IMG_BASE = EN ? '../' : './';
+  var realBtn = null, realDlg = null;
+  (function buildReal() {
+    var cap = document.querySelector('.cfg-caption');
+    if (!cap) return;
+    realBtn = document.createElement('button');
+    realBtn.type = 'button';
+    realBtn.className = 'cfg-real';
+    realBtn.innerHTML = '<img class="cfg-real__thumb" alt="" width="40" height="52" loading="lazy"><span class="cfg-real__txt">' + T('Voir une réalisation réelle', 'See a real example') + '</span>';
+    cap.appendChild(realBtn);
+    realDlg = document.createElement('dialog');
+    realDlg.className = 'cfg-lightbox';
+    realDlg.setAttribute('aria-label', T('Réalisation réelle', 'Real example'));
+    realDlg.innerHTML = '<button type="button" class="cfg-lightbox__close" aria-label="' + T('Fermer', 'Close') + '">×</button>' +
+      '<figure class="cfg-lightbox__fig"><img class="cfg-lightbox__img" alt=""><figcaption class="cfg-lightbox__cap"><strong class="cfg-lightbox__title"></strong>' +
+      '<span>' + T('Exemple de réalisation : même contenant, décoration et étiquette différentes. Votre création est réalisée à vos couleurs et à votre texte.', 'Example of a finished piece: same container, different decoration and label. Your creation is made in your colours and with your text.') + '</span></figcaption></figure>';
+    document.body.appendChild(realDlg);
+    realBtn.addEventListener('click', function() {
+      var r = REAL_PHOTOS[containers[idx].key]; if (!r) return;
+      var im = realDlg.querySelector('.cfg-lightbox__img');
+      im.src = IMG_BASE + r.img + '.webp'; im.alt = EN ? r.en : r.fr;
+      realDlg.querySelector('.cfg-lightbox__title').textContent = EN ? r.en : r.fr;
+      if (realDlg.showModal) realDlg.showModal(); else realDlg.setAttribute('open', '');
+    });
+    realDlg.querySelector('.cfg-lightbox__close').addEventListener('click', function() { realDlg.close ? realDlg.close() : realDlg.removeAttribute('open'); });
+    realDlg.addEventListener('click', function(e) { if (e.target === realDlg) realDlg.close(); }); // clic hors de l'image
+  })();
+  function updateReal() {
+    if (!realBtn) return;
+    var r = REAL_PHOTOS[containers[idx].key];
+    realBtn.hidden = !r;
+    if (r) realBtn.querySelector('.cfg-real__thumb').src = IMG_BASE + r.img + '-800w.webp';
+  }
   function updateCaption() {
     $('cfg-name').textContent = containers[idx].name;
+    updateReal();
     updateSizes();
     $('cfg-desc').textContent = containers[idx].desc;
     if (typeof relabelSteps === 'function' && typeof current !== 'undefined') setProgress(current);

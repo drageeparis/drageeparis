@@ -7424,3 +7424,18 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
   letter-spacing: 0.16em;
   margin-bottom: 14px;
 }
+
+/* Configurateur : lien « Voir une réalisation réelle » + visionneuse */
+.cfg-real { display: inline-flex; align-items: center; gap: 10px; margin: 12px auto 0; padding: 4px 12px 4px 4px; background: none; border: 1px solid rgba(82, 54, 42, 0.18); border-radius: 999px; cursor: pointer; font: inherit; font-size: 12px; letter-spacing: .04em; color: var(--caramel, #965F36); transition: border-color .2s, background .2s; }
+.cfg-real:hover, .cfg-real:focus-visible { border-color: var(--caramel, #965F36); background: rgba(150, 95, 54, 0.05); }
+.cfg-real[hidden] { display: none; }
+.cfg-real__thumb { width: 32px; height: 40px; object-fit: cover; border-radius: 999px; display: block; }
+.cfg-real__txt { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.cfg-stage--preview .cfg-real { display: none; }
+.cfg-lightbox { position: fixed; inset: 0; margin: auto; height: fit-content; max-height: 94vh; overflow: auto; border: 0; padding: 0; max-width: min(92vw, 520px); width: 100%; background: var(--paper, #F3ECE6); border-radius: 4px; box-shadow: 0 24px 60px rgba(40, 25, 18, .25); }
+.cfg-lightbox::backdrop { background: rgba(40, 25, 18, 0.55); }
+.cfg-lightbox__fig { margin: 0; }
+.cfg-lightbox__img { display: block; width: 100%; max-height: 72vh; object-fit: contain; background: #DCCFBF; }
+.cfg-lightbox__cap { display: flex; flex-direction: column; gap: 6px; padding: 16px 20px 20px; font-size: 13px; font-weight: 300; line-height: 1.5; color: var(--ink-60); text-align: center; }
+.cfg-lightbox__title { font-weight: 400; color: var(--ink); font-size: 14px; letter-spacing: .04em; }
+.cfg-lightbox__close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(243, 236, 230, 0.9); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; z-index: 1; }
