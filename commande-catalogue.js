@@ -1283,6 +1283,33 @@ window.DP_CATALOGUE = {
   "name_en": "Prali Amande Milk Chocolate Fir Green",
   "detail_en": "Avola almond · Milk chocolate"
  },
+ "mariage-nuage": {
+  "kind": "creation",
+  "name": "Dragées Mariage Nuage",
+  "familyId": "mariage",
+  "family": "Mariage",
+  "familyUrl": "dragees-mariage.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-mariage-nuage.html",
+  "image": "images/mariage/mariage-pochon-nuage-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.5,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.0,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Wedding",
+  "name_en": "Nuage Wedding Dragées",
+  "detail_en": "Price per piece"
+ },
  "mariage-terracotta": {
   "kind": "creation",
   "name": "Dragées Mariage Terracotta",
