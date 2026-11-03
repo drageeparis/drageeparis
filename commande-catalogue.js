@@ -2087,6 +2087,39 @@ window.DP_CATALOGUE = {
   "name_en": "Under the Sea Birthday Dragées",
   "detail_en": "Price per piece"
  },
+ "bouquet-rose": {
+  "kind": "creation",
+  "name": "Bouquet Rose",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-rose.html",
+  "image": "images/bouquets/bouquet-tulle-rose-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Pink Bouquet",
+  "detail_en": "Price per piece"
+ },
  "bouquet-bleu": {
   "kind": "creation",
   "name": "Bouquet Bleu",
@@ -2095,7 +2128,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "creations.html",
   "detail": "Prix à la pièce",
   "url": "produit-bouquet-bleu.html",
-  "image": "images/bouquets/bouquet-bleu-800w.webp",
+  "image": "images/bouquets/bouquet-tulle-bleu-800w.webp",
   "formats": [
    {
     "id": "petitbouquet",
@@ -2120,39 +2153,6 @@ window.DP_CATALOGUE = {
   "name_en": "Blue Bouquet",
   "detail_en": "Price per piece"
  },
- "bouquet-ivoire": {
-  "kind": "creation",
-  "name": "Bouquet Ivoire",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-bouquet-ivoire.html",
-  "image": "images/bouquets/bouquet-ivoire-800w.webp",
-  "formats": [
-   {
-    "id": "petitbouquet",
-    "label": "Petit bouquet",
-    "price": 5.0,
-    "label_en": "Small bouquet"
-   },
-   {
-    "id": "moyenbouquet",
-    "label": "Moyen bouquet",
-    "price": 7.0,
-    "label_en": "Medium bouquet"
-   },
-   {
-    "id": "grandbouquet",
-    "label": "Grand bouquet",
-    "price": 10.0,
-    "label_en": "Large bouquet"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Ivory Bouquet",
-  "detail_en": "Price per piece"
- },
  "bouquet-jaune": {
   "kind": "creation",
   "name": "Bouquet Jaune",
@@ -2161,7 +2161,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "creations.html",
   "detail": "Prix à la pièce",
   "url": "produit-bouquet-jaune.html",
-  "image": "images/bouquets/bouquet-jaune-800w.webp",
+  "image": "images/bouquets/bouquet-tulle-jaune-800w.webp",
   "formats": [
    {
     "id": "petitbouquet",
@@ -2186,15 +2186,15 @@ window.DP_CATALOGUE = {
   "name_en": "Yellow Bouquet",
   "detail_en": "Price per piece"
  },
- "bouquet-rose-amande": {
+ "bouquet-rouge": {
   "kind": "creation",
-  "name": "Bouquet Rose Amande",
+  "name": "Bouquet Rouge",
   "familyId": "bouquets",
   "family": "Bouquets & écrins",
   "familyUrl": "creations.html",
   "detail": "Prix à la pièce",
-  "url": "produit-bouquet-rose-amande.html",
-  "image": "images/bouquets/bouquet-rose-amande-800w.webp?v=20261029d",
+  "url": "produit-bouquet-rouge.html",
+  "image": "images/bouquets/bouquet-tulle-rouge-800w.webp",
   "formats": [
    {
     "id": "petitbouquet",
@@ -2216,73 +2216,7 @@ window.DP_CATALOGUE = {
    }
   ],
   "family_en": "Bouquets & gift boxes",
-  "name_en": "Pink and Almond Green Bouquet",
-  "detail_en": "Price per piece"
- },
- "bouquet-rose-poudre": {
-  "kind": "creation",
-  "name": "Bouquet Rose Poudré",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-bouquet-rose-poudre.html",
-  "image": "images/bouquets/bouquet-rose-poudre-800w.webp",
-  "formats": [
-   {
-    "id": "petitbouquet",
-    "label": "Petit bouquet",
-    "price": 5.0,
-    "label_en": "Small bouquet"
-   },
-   {
-    "id": "moyenbouquet",
-    "label": "Moyen bouquet",
-    "price": 7.0,
-    "label_en": "Medium bouquet"
-   },
-   {
-    "id": "grandbouquet",
-    "label": "Grand bouquet",
-    "price": 10.0,
-    "label_en": "Large bouquet"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Powder Pink Bouquet",
-  "detail_en": "Price per piece"
- },
- "bouquet-vert-sauge": {
-  "kind": "creation",
-  "name": "Bouquet Vert Sauge",
-  "familyId": "bouquets",
-  "family": "Bouquets & écrins",
-  "familyUrl": "creations.html",
-  "detail": "Prix à la pièce",
-  "url": "produit-bouquet-vert-sauge.html",
-  "image": "images/bouquets/bouquet-vert-sauge-800w.webp",
-  "formats": [
-   {
-    "id": "petitbouquet",
-    "label": "Petit bouquet",
-    "price": 5.0,
-    "label_en": "Small bouquet"
-   },
-   {
-    "id": "moyenbouquet",
-    "label": "Moyen bouquet",
-    "price": 7.0,
-    "label_en": "Medium bouquet"
-   },
-   {
-    "id": "grandbouquet",
-    "label": "Grand bouquet",
-    "price": 10.0,
-    "label_en": "Large bouquet"
-   }
-  ],
-  "family_en": "Bouquets & gift boxes",
-  "name_en": "Sage Green Bouquet",
+  "name_en": "Red Bouquet",
   "detail_en": "Price per piece"
  },
  "bouquet-violet": {
@@ -2293,7 +2227,7 @@ window.DP_CATALOGUE = {
   "familyUrl": "creations.html",
   "detail": "Prix à la pièce",
   "url": "produit-bouquet-violet.html",
-  "image": "images/bouquets/bouquet-violet-800w.webp",
+  "image": "images/bouquets/bouquet-tulle-violet-800w.webp",
   "formats": [
    {
     "id": "petitbouquet",
@@ -2316,6 +2250,105 @@ window.DP_CATALOGUE = {
   ],
   "family_en": "Bouquets & gift boxes",
   "name_en": "Purple Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "bouquet-orange": {
+  "kind": "creation",
+  "name": "Bouquet Orange",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-orange.html",
+  "image": "images/bouquets/bouquet-tulle-orange-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Orange Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "bouquet-vert": {
+  "kind": "creation",
+  "name": "Bouquet Vert",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-vert.html",
+  "image": "images/bouquets/bouquet-tulle-vert-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Green Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "bouquet-fuchsia": {
+  "kind": "creation",
+  "name": "Bouquet Fuchsia",
+  "familyId": "bouquets",
+  "family": "Bouquets & écrins",
+  "familyUrl": "creations.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-bouquet-fuchsia.html",
+  "image": "images/bouquets/bouquet-tulle-fuchsia-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Bouquets & gift boxes",
+  "name_en": "Fuchsia Bouquet",
   "detail_en": "Price per piece"
  }
 };

@@ -974,60 +974,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/faq.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/produit-bouquet-rose-amande.html</loc>
+    <loc>https://drageeparis.fr/produit-bouquet-rose.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rose-amande.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rose-amande.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rose.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rose.html"/>
   </url>
   <url>
-    <loc>https://drageeparis.fr/en/produit-bouquet-rose-amande.html</loc>
+    <loc>https://drageeparis.fr/en/produit-bouquet-rose.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rose-amande.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rose-amande.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-bouquet-rose-poudre.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rose-poudre.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rose-poudre.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-bouquet-rose-poudre.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rose-poudre.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rose-poudre.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-bouquet-vert-sauge.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-vert-sauge.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-vert-sauge.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-bouquet-vert-sauge.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-vert-sauge.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-vert-sauge.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/produit-bouquet-ivoire.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-ivoire.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-ivoire.html"/>
-  </url>
-  <url>
-    <loc>https://drageeparis.fr/en/produit-bouquet-ivoire.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-ivoire.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-ivoire.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rose.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rose.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-bouquet-bleu.html</loc>
@@ -1058,6 +1016,20 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-jaune.html"/>
   </url>
   <url>
+    <loc>https://drageeparis.fr/produit-bouquet-rouge.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rouge.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rouge.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bouquet-rouge.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-rouge.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-rouge.html"/>
+  </url>
+  <url>
     <loc>https://drageeparis.fr/produit-bouquet-violet.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -1070,6 +1042,48 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-violet.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-violet.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-bouquet-orange.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-orange.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-orange.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bouquet-orange.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-orange.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-orange.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-bouquet-vert.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-vert.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-vert.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bouquet-vert.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-vert.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-vert.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-bouquet-fuchsia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-fuchsia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-fuchsia.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-bouquet-fuchsia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-bouquet-fuchsia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-bouquet-fuchsia.html"/>
   </url>
   <url>
     <loc>https://drageeparis.fr/produit-bapteme-eucalyptus.html</loc>
