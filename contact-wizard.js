@@ -1226,8 +1226,28 @@
     updateSizes();
   }
 
+  /* Bouquet : toujours avec dragées (option « Sans dragées » masquée) */
+  function syncBouquetDragees() {
+    var sansInput = document.querySelector('input[name="dragees"][value="Sans dragées"]');
+    var avecInput = document.querySelector('input[name="dragees"][value="Avec dragées"]');
+    if (!sansInput || !avecInput) return;
+    var bq = isBouquetC();
+    var card = sansInput.closest('.wizard__card');
+    if (card) card.hidden = bq;
+    var sub = getPanel(3) && getPanel(3).querySelector('.wizard__step-sub');
+    if (sub) {
+      if (!sub.dataset.orig) sub.dataset.orig = sub.innerHTML;
+      sub.innerHTML = bq ? T('Choisissez jusqu\u2019à trois dragées au chocolat parmi nos collections.', 'Choose up to three chocolate dragées from our collections.') : sub.dataset.orig;
+    }
+    if (bq && !avecInput.checked) {
+      avecInput.checked = true;
+      avecInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }
+
   function showStep(n, direction) {
     if (n === 2) conseil = false; // retour au choix du contenant
+    if (n >= 3) syncBouquetDragees();
     var prev = getPanel(current);
     if (prev) {
       prev.classList.remove('active');

@@ -6743,6 +6743,7 @@ details[open] > .pdp__acc-trigger::after { content: '−'; }
 #cfg-tag-fond-field[hidden] { display: none; }
 .cfg-dg-price { margin: 10px 0 0; font-size: 12.5px; font-weight: 300; color: var(--ink-60); text-align: right; }
 .cfg-dg-price[hidden] { display: none; }
+.wizard__card[hidden] { display: none; }
 
 /* Remise dégressive (configurateur et commande) */
 .cfg-boxes__remise { font-size: 12.5px; color: var(--ink-60); }
