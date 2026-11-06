@@ -7440,3 +7440,10 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .cfg-lightbox__cap { display: flex; flex-direction: column; gap: 6px; padding: 16px 20px 20px; font-size: 13px; font-weight: 300; line-height: 1.5; color: var(--ink-60); text-align: center; }
 .cfg-lightbox__title { font-weight: 400; color: var(--ink); font-size: 14px; letter-spacing: .04em; }
 .cfg-lightbox__close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(243, 236, 230, 0.9); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; z-index: 1; }
+
+/* ── Entreprises : « Ils nous font confiance » ── */
+.pro-trust { text-align: center; padding: 8px 24px 64px; }
+.pro-trust__title { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--caramel); margin: 0 0 22px; }
+.pro-trust__list { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; gap: clamp(28px, 6vw, 72px); flex-wrap: wrap; }
+.pro-trust__name { font-family: 'EB Garamond', Georgia, serif; font-size: clamp(20px, 2.4vw, 28px); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); opacity: .8; }
+.pro-trust__sep { width: 1px; height: 28px; background: var(--caramel); opacity: .5; }
