@@ -305,7 +305,7 @@
     if (sizesBox) sizesBox.hidden = conseil || containers[idx].key !== 'bouquet';
     // boîte en carton : taille d'étiquette fixe, le curseur est masqué
     var ff = $('cfg-tag-fond-field');
-    if (ff) ff.hidden = tagFondBlanc(); // boîte et bouquet : étiquette toujours blanche
+    if (ff) ff.hidden = true; // étiquette toujours blanche sur tous les contenants
     // couleur de fond imposée (blanc) selon le contenant : on redessine l'étiquette
     if (typeof renderTagShapes === 'function' && typeof tags !== 'undefined' && tags) renderTagShapes();
   }
@@ -664,7 +664,7 @@
   function tagShape() { return checkedValue('etiquette_forme') || 'Ronde'; }
   var TAG_SIZE_DEFAUT = 120; // taille de l'étiquette (%), identique pour tous les contenants
   function tagSizeFixed() { return !conseil && containers[idx].key === 'boite'; }
-  function tagFondBlanc() { return !conseil && (containers[idx].key === 'boite' || containers[idx].key === 'bouquet' || containers[idx].key === 'tube'); }
+  function tagFondBlanc() { return true; } // étiquette toujours blanche, quel que soit le contenant (choix de couleur retiré)
   function tagScale() {
     return TAG_SIZE_DEFAUT / 100; // taille fixe pour tous les contenants (curseur retiré)
   }
