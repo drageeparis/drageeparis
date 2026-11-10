@@ -446,6 +446,8 @@
   // Bouquet : exactement 1 dragée par pétale (petit 5, moyen 7, grand 10)
   function tubeCap() { return !conseil && containers[idx].key === 'tube' ? 4 : 0; } // tube : 4 dragées au choix + 2 petites argentées de finition (haut et bas) = 6 dragées
   function bqCap() { return !conseil && containers[idx].key === 'bouquet' ? sizeOf(bouquetSize).n : 0; }
+  // Couleurs : 3 maximum, sauf le bouquet où le client choisit librement (jusqu'à 1 couleur par pétale : 5, 7 ou 10)
+  function maxColors() { return bqCap() || MAX_COLORS; }
   var POT_MAX = 10; // pot en verre : 10 dragées maximum, quelle que soit la catégorie
   function capOf(cat) {
     if (bqCap()) return bqCap();
@@ -467,26 +469,27 @@
 
   function refreshDragees() {
     var cat = chosenCat(), cap = capOf(cat || activeCat), tot = totalQty();
-    var fullColors = chosenColors.length >= MAX_COLORS, fullQty = !!cat && tot >= cap;
+    var mc = maxColors(), fullColors = chosenColors.length >= mc, fullQty = !!cat && tot >= cap;
     colorInputs.forEach(function(o) {
       o.disabled = !o.checked && (fullColors || fullQty || (!!cat && catOf(o) !== cat));
       // bulle d'explication au survol (ou au toucher) d'une dragée indisponible
       var tip = '';
       if (!o.checked && !!cat && catOf(o) !== cat) tip = T('Une seule catégorie par contenant : vous avez choisi des « ' + catName(cat) + ' ». Retirez-les pour choisir des « ' + catName(catOf(o)) + ' ».', 'One category per container: you have chosen “' + catName(cat) + '”. Remove them to choose “' + catName(catOf(o)) + '”.');
-      else if (!o.checked && fullColors) tip = T('Trois couleurs maximum : retirez-en une pour choisir celle-ci.', 'Three colours maximum: remove one to choose this one.');
+      else if (!o.checked && fullColors) tip = T(mc + ' couleurs maximum : retirez-en une pour choisir celle-ci.', mc + ' colours maximum: remove one to choose this one.');
       else if (!o.checked && fullQty) tip = T('Contenant complet : diminuez une quantité pour ajouter cette couleur.', 'Container full: reduce a quantity to add this colour.');
       if (tip) o.parentNode.setAttribute('data-tip', tip); else o.parentNode.removeAttribute('data-tip');
     });
     var lim = $('cfg-colors-limit');
     lim.hidden = !(fullColors || fullQty);
-    lim.textContent = fullColors ? T('Trois couleurs maximum : retirez-en une pour en choisir une autre.', 'Three colours maximum: remove one to choose another.')
+    lim.textContent = fullColors && !fullQty ? T(mc + ' couleurs maximum : retirez-en une pour en choisir une autre.', mc + ' colours maximum: remove one to choose another.')
       : T('Contenant complet (' + cap + ' dragées) : vous pouvez continuer. Pour ajouter une couleur, diminuez d’abord une quantité.', 'Container full (' + cap + ' dragées): you can continue. To add a colour, first reduce a quantity.');
     var one = $('cfg-dg-onecat');
     one.hidden = !cat || cat === activeCat;
     if (cat) one.textContent = T('Une seule catégorie par contenant : retirez vos « ' + catName(cat) + ' » pour choisir dans une autre.', 'One category per container: remove your “' + catName(cat) + '” to choose from another.');
     $('cfg-dg-cap').textContent = rangeText(activeCat);
     var cnt = $('cfg-colors-count');
-    if (cnt) { cnt.textContent = chosenColors.length + ' / ' + MAX_COLORS; cnt.classList.toggle('is-full', fullColors); }
+    var hint = $('cfg-colors-max'); if (hint) hint.textContent = bqCap() ? T('(autant de couleurs que vous le souhaitez)', '(as many colours as you like)') : T('(jusqu\'à 3 couleurs)', '(up to 3 colours)');
+    if (cnt) { cnt.textContent = chosenColors.length + ' / ' + mc; cnt.classList.toggle('is-full', fullColors); }
     // liste des quantités
     var box = $('cfg-qty'), list = $('cfg-qty-list'), total = $('cfg-qty-total');
     box.hidden = !chosenColors.length;
@@ -594,6 +597,9 @@
     while (over > 0 && chosenColors.length > 1) { // trop de couleurs pour le contenant : on retire les dernières
       var last = chosenColors[chosenColors.length - 1], el = inputOf(last);
       over -= qty[last] || 1; delete qty[last]; chosenColors.pop(); if (el) el.checked = false;
+    }
+    while (chosenColors.length > maxColors()) { // retour à un contenant limité à 3 couleurs (ex. bouquet → boîte)
+      var lc = chosenColors.pop(), lel = inputOf(lc); delete qty[lc]; if (lel) lel.checked = false;
     }
     refreshDragees();
   };
