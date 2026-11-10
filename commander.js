@@ -301,7 +301,8 @@
   var DG_FIXE = { 'bapteme-fiole-boheme': 6, 'communion-fiole-rubis': 6, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
   /* Bouquets de la catégorie « Bouquets » (Rose, Vert…) : dragées présélectionnées selon le modèle,
      le client ne les choisit pas (pas de bloc de choix, pas de validation). */
-  function dgPreset(l) { var p = l && CATALOGUE[l.ref]; return !!p && p.familyId === 'bouquets' && /^bouquet-/.test(l.ref); }
+  var DG_PRESET_EXTRA = { 'mariage-bouquet-printemps': true, 'communion-bouquet-celeste': true };
+  function dgPreset(l) { var p = l && CATALOGUE[l.ref]; return !!p && ((p.familyId === 'bouquets' && /^bouquet-/.test(l.ref)) || !!DG_PRESET_EXTRA[l.ref]); }
   function dgFixe(l) {
     if (!l || dgPreset(l) || dgChoix(l) || !wantsDragees(l)) return 0;
     if (BQ_MAX[l.format]) return BQ_MAX[l.format];
