@@ -299,8 +299,11 @@
   /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
      Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
   var DG_FIXE = { 'bapteme-fiole-boheme': 6, 'communion-fiole-rubis': 6, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
+  /* Bouquets de la catégorie « Bouquets » (Rose, Vert…) : dragées présélectionnées selon le modèle,
+     le client ne les choisit pas (pas de bloc de choix, pas de validation). */
+  function dgPreset(l) { var p = l && CATALOGUE[l.ref]; return !!p && p.familyId === 'bouquets' && /^bouquet-/.test(l.ref); }
   function dgFixe(l) {
-    if (!l || dgChoix(l) || !wantsDragees(l)) return 0;
+    if (!l || dgPreset(l) || dgChoix(l) || !wantsDragees(l)) return 0;
     if (BQ_MAX[l.format]) return BQ_MAX[l.format];
     var m = /^(?:avec)?(\d+)dragée/.exec(l.format || '');
     if (m) return parseInt(m[1], 10);
@@ -310,6 +313,7 @@
   function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
   function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
   function dgText(l) {
+    if (dgPreset(l)) return T('Dragées au chocolat du modèle', 'Chocolate dragées of the design') + (BQ_MAX[l.format] ? ' (' + BQ_MAX[l.format] + ')' : '');
     var g = dgOf(l);
     if (!g.order.length) return '';
     return g.order.map(function (r) { return dgLabel(r) + ' ×' + g.qty[r]; }).join(', ') + ' (' + dgTotal(g) + '/' + dgMax(l) + ')';
@@ -537,7 +541,7 @@
       row.appendChild(qty);
 
       if (d.crea) row.appendChild(persoBlock(l, i));
-      if (d.crea && wantsDragees(l)) row.appendChild(dgBlock(l, i));
+      if (d.crea && wantsDragees(l) && !dgPreset(l)) row.appendChild(dgBlock(l, i));
 
       linesBox.appendChild(row);
     });
