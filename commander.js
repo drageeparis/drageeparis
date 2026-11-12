@@ -298,7 +298,7 @@
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
   /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
      Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
-  var DG_FIXE = { 'bapteme-fiole-boheme': 6, 'communion-fiole-rubis': 6, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
+  var DG_FIXE = { 'bapteme-fiole-boheme': 4, 'communion-fiole-rubis': 6, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
   /* Bouquets de la catégorie « Bouquets » (Rose, Vert…) : dragées présélectionnées selon le modèle,
      le client ne les choisit pas (pas de bloc de choix, pas de validation). */
   var DG_PRESET_EXTRA = { 'mariage-bouquet-printemps': true, 'communion-bouquet-celeste': true };
@@ -310,6 +310,11 @@
     if (m) return parseInt(m[1], 10);
     return DG_FIXE[l.ref] || 0;
   }
+  /* Fioles à petits cœurs de finition : 6 dragées = 4 au choix + 1 petit cœur en haut et 1 en bas (or ou argenté) */
+  var COEURS = { 'bapteme-fiole-boheme': true };
+  function hasCoeurs(l) { return !!(l && COEURS[l.ref] && wantsDragees(l)); }
+  function coeursOf(l) { if (!l.coeurs) l.coeurs = 'Or'; return l.coeurs; }
+  function coeursText(l) { return coeursOf(l) === 'Argenté' ? T('argentés', 'silver') : T('or', 'gold'); }
   function dgMax(l) { return (l && dgChoix(l) && dgChoix(l).max) || dgFixe(l) || DG_MAX; }
   function dgTotal(g) { return g.order.reduce(function (s, r) { return s + (g.qty[r] || 0); }, 0); }
   function dgCat(g) { return g.order.length ? CATALOGUE[g.order[0]].familyId : ''; }
@@ -347,6 +352,21 @@
       box.appendChild(manque > 0
         ? el('p', 'order-dg__min', T('Sélectionnez ' + fixe + ' dragées pour passer commande' + (tot ? ' : encore ' + manque + ' à choisir.' : '.'), 'Select ' + fixe + ' dragées to place your order' + (tot ? ': ' + manque + ' more to choose.' : '.')))
         : el('p', 'order-dg__ok', T('Sélection complète : ' + fixe + ' dragées.', 'Selection complete: ' + fixe + ' dragées.')));
+    }
+    if (hasCoeurs(l)) {
+      box.appendChild(el('p', 'wizard__hint', T('Votre fiole contient 6 dragées : vos 4 dragées, encadrées en haut et en bas par un petit cœur.', 'Your vial holds 6 dragées: your 4 dragées, framed top and bottom by a small heart.')));
+      var ch = el('div', 'order-perso__modes');
+      ch.setAttribute('role', 'group');
+      ch.setAttribute('aria-label', T('Couleur des petits cœurs', 'Colour of the small hearts'));
+      ch.appendChild(el('span', 'order-perso__label', T('Petits cœurs :', 'Small hearts:')));
+      [['Or', T('Or', 'Gold')], ['Argenté', T('Argenté', 'Silver')]].forEach(function (c) {
+        var b = el('button', 'order-chip order-chip--sm', c[1]);
+        b.type = 'button';
+        b.setAttribute('aria-pressed', coeursOf(l) === c[0] ? 'true' : 'false');
+        b.addEventListener('click', function () { if (l.coeurs === c[0]) return; l.coeurs = c[0]; render(); });
+        ch.appendChild(b);
+      });
+      box.appendChild(ch);
     }
     if (choix) {
       var reste = choix.min - tot;
@@ -558,6 +578,7 @@
       left.appendChild(el('span', 'order__sum-meta', lineLabel(l)));
       if (d.crea && persoText(l)) left.appendChild(el('span', 'order__sum-meta order__sum-perso', T('« ', '“') + persoText(l) + T(' »', '”')));
       if (d.crea && wantsDragees(l) && dgText(l)) left.appendChild(el('span', 'order__sum-meta', dgText(l)));
+      if (d.crea && hasCoeurs(l)) left.appendChild(el('span', 'order__sum-meta', T('Petits cœurs ', 'Small hearts: ') + coeursText(l)));
       li.appendChild(left);
       li.appendChild(el('span', 'order__sum-price', linePrice(d)));
       sumLines.appendChild(li);
@@ -944,6 +965,7 @@
       var d = lineData(l);
       return '• ' + pn(d.prod) + ' — ' + lineLabel(l) + ' — ' + linePrice(d) + (d.remise ? ' (remise ' + Math.round(d.remise * 100) + ' % incluse)' : '') +
         (d.crea && wantsDragees(l) ? '\n   Dragées : ' + (dgText(l) || 'à définir') : '') +
+        (d.crea && hasCoeurs(l) ? '\n   Petits cœurs (haut et bas) : ' + coeursOf(l) : '') +
         (d.crea ? '\n   Étiquette : ' + (persoText(l) || 'à définir') : '');
     }).join('\n');
     var first = lineData(lines[0]);
