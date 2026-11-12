@@ -298,7 +298,7 @@
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
   /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
      Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
-  var DG_FIXE = { 'bapteme-fiole-boheme': 4, 'communion-fiole-rubis': 6, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
+  var DG_FIXE = { 'bapteme-fiole-boheme': 4, 'communion-fiole-rubis': 4, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
   /* Bouquets de la catégorie « Bouquets » (Rose, Vert…) : dragées présélectionnées selon le modèle,
      le client ne les choisit pas (pas de bloc de choix, pas de validation). */
   var DG_PRESET_EXTRA = { 'mariage-bouquet-printemps': true, 'communion-bouquet-celeste': true };
@@ -311,7 +311,7 @@
     return DG_FIXE[l.ref] || 0;
   }
   /* Fioles à petits cœurs de finition : 6 dragées = 4 au choix + 1 petit cœur en haut et 1 en bas (or ou argenté) */
-  var COEURS = { 'bapteme-fiole-boheme': true };
+  var COEURS = { 'bapteme-fiole-boheme': true, 'communion-fiole-rubis': true };
   function hasCoeurs(l) { return !!(l && COEURS[l.ref] && wantsDragees(l)); }
   function coeursOf(l) { if (!l.coeurs) l.coeurs = 'Or'; return l.coeurs; }
   function coeursText(l) { return coeursOf(l) === 'Argenté' ? T('argentés', 'silver') : T('or', 'gold'); }
