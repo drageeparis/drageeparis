@@ -7447,3 +7447,56 @@ select.form__input { appearance: none; -webkit-appearance: none; background: tra
 .pro-trust__list { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
 .pro-trust__name { font-family: 'EB Garamond', Georgia, serif; font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); opacity: .55; }
 .pro-trust__sep { width: 1px; height: 14px; background: var(--caramel); opacity: .4; }
+
+/* ================================================
+   SAISON NOËL — habillage activé par main.js (classe html.saison-noel)
+   jusqu'à la date de fin de SEASON_BAR, puis retrait automatique.
+   Bordeaux #6B1E2A en accent, filet doré #B8963E.
+================================================ */
+.saison-noel { --noel: #6B1E2A; --noel-hover: #561722; --or: #B8963E; }
+.saison-noel .season-bar { background: var(--noel); border-bottom: 1px solid var(--or); }
+.saison-noel .season-bar .season-bar__text,
+.saison-noel .season-bar .season-bar__link { color: #F3ECE6; }
+/* Boutons principaux */
+.saison-noel .header__cta,
+.saison-noel .header.header--inner .header__cta,
+.saison-noel .header.scrolled .header__cta { background-color: var(--noel); border-color: var(--noel); color: #F3ECE6; }
+.saison-noel .header__cta:hover { background-color: var(--noel-hover); color: #F3ECE6; }
+.saison-noel body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__cta { background-color: var(--noel); border-color: var(--noel); color: #F3ECE6; }
+.saison-noel .btn--dark { background: var(--noel); border-color: var(--noel); }
+.saison-noel .btn--dark:hover { background: var(--noel-hover); border-color: var(--noel-hover); box-shadow: 0 4px 18px rgba(107, 30, 42, 0.35); }
+.saison-noel .pdp__cta,
+.saison-noel .drawer__cta { background: var(--noel); color: #F3ECE6; }
+.saison-noel .header__cta-icon { color: var(--or); }
+/* Liens « Découvrir… » */
+.saison-noel .cedric-products__link,
+.saison-noel .mega__all { color: var(--noel); border-color: var(--noel); }
+/* Noël en tête du menu Créations */
+.saison-noel .mega__item[href="dragees-noel.html"] { order: -1; }
+.saison-noel .mega__item[href="dragees-noel.html"] .mega__label { color: var(--noel); }
+.saison-noel .drawer__main-list { display: flex; flex-direction: column; }
+.saison-noel .drawer__main-item:has(> a[href="dragees-noel.html"]) { order: -1; }
+.saison-noel .drawer__main-btn[href="dragees-noel.html"],
+.saison-noel .drawer__sub-link[href="dragees-noel.html"] { color: var(--noel); }
+/* Pastille « Édition limitée » sur les créations de Noël */
+.saison-noel .prod-card[href^="produit-noel-"] .prod-card__image,
+.saison-noel .product-card:has(a[href^="produit-noel-"]) .product-card__media { position: relative; }
+.saison-noel .prod-card[href^="produit-noel-"] .prod-card__image::after,
+.saison-noel .product-card:has(a[href^="produit-noel-"]) .product-card__media::after {
+  content: "Édition limitée";
+  position: absolute; top: 14px; left: 14px; z-index: 1;
+  padding: 6px 10px;
+  background: #F3ECE6; color: var(--noel);
+  font-family: var(--font-body--family); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  pointer-events: none;
+}
+html[lang="en"].saison-noel .prod-card[href^="produit-noel-"] .prod-card__image::after,
+html[lang="en"].saison-noel .product-card:has(a[href^="produit-noel-"]) .product-card__media::after { content: "Limited edition"; }
+.pdp__badge { display: none; }
+.saison-noel .pdp__badge {
+  display: block; margin: 0 0 14px;
+  font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--noel);
+}
+/* Filet doré */
+.saison-noel .footer { border-top: 1px solid var(--or); }
+.saison-noel body:has(.hero--light) .header:not(.header--inner):not(.scrolled) .header__cta-icon { color: var(--or); }

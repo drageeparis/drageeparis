@@ -11,14 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---- 0. Bandeau saisonnier (affiché jusqu'à la date de fin, puis disparaît seul) ----
      Pour une nouvelle saison : modifier SEASON_BAR (texte, lien, date de fin). */
   const SEASON_BAR = {
-    end:   '2026-10-22T00:00:00+02:00',
-    text:  "Palette d'automne · Dragées orange, blanc nacré et noir · Commandez avant le 21 octobre pour une livraison avant le 31",
-    short: "Palette d'automne · Commandez avant le 21 octobre",
-    label: 'Découvrir',
-    href:  '/#palette-automne',
+    end:   '2026-12-26T00:00:00+01:00',
+    text:  T('Collection Noël · Édition limitée, assemblée à la main dans notre atelier', 'Christmas collection · Limited edition, handmade in our workshop'),
+    short: T('Collection Noël · Édition limitée', 'Christmas collection · Limited edition'),
+    label: T('Découvrir', 'Discover'),
+    href:  'dragees-noel.html',
   };
+  /* Habillage de saison (Noël) : classe sur <html> + textes de l'accueil (data-noel-text / data-noel-href),
+     jusqu'à la même date de fin. Styles : section « SAISON NOËL » de style.css. */
+  if (Date.now() < Date.parse(SEASON_BAR.end)) {
+    document.documentElement.classList.add('saison-noel');
+    document.querySelectorAll('[data-noel-text]').forEach((el) => { el.textContent = el.dataset.noelText; });
+    document.querySelectorAll('[data-noel-href]').forEach((el) => { el.setAttribute('href', el.dataset.noelHref); });
+  }
   (() => {
-    if (EN || Date.now() >= Date.parse(SEASON_BAR.end)) return;
+    if (Date.now() >= Date.parse(SEASON_BAR.end)) return;
     const hdr = document.getElementById('header');
     if (!hdr) return;
     const bar = document.createElement('div');
