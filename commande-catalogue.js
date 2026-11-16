@@ -1,5 +1,5 @@
 /* Fichier généré par outils/catalogue-commande.py à partir des fiches produit. Ne pas modifier à la main. */
-window.DP_FAMILLES = [{"id": "avola", "name": "Amandes Avola", "name_en": "Avola almonds", "kind": "dragee"}, {"id": "traditionnelles", "name": "Amandes traditionnelles", "name_en": "Traditional almonds", "kind": "dragee"}, {"id": "chocolats", "name": "Chocolats", "name_en": "Chocolate dragées", "kind": "dragee"}, {"id": "gourmandes", "name": "Chocolats amandes", "name_en": "Chocolate almonds", "kind": "dragee"}, {"id": "mariage", "name": "Mariage", "name_en": "Wedding", "kind": "creation"}, {"id": "premiers-instants", "name": "Premiers instants", "name_en": "First moments", "kind": "creation"}, {"id": "fetes-religieuses", "name": "Fêtes religieuses", "name_en": "Religious celebrations", "kind": "creation"}, {"id": "anniversaires", "name": "Anniversaires", "name_en": "Birthdays", "kind": "creation"}, {"id": "bouquets", "name": "Bouquets & écrins", "name_en": "Bouquets & gift boxes", "kind": "creation"}];
+window.DP_FAMILLES = [{"id": "avola", "name": "Amandes Avola", "name_en": "Avola almonds", "kind": "dragee"}, {"id": "traditionnelles", "name": "Amandes traditionnelles", "name_en": "Traditional almonds", "kind": "dragee"}, {"id": "chocolats", "name": "Chocolats", "name_en": "Chocolate dragées", "kind": "dragee"}, {"id": "gourmandes", "name": "Chocolats amandes", "name_en": "Chocolate almonds", "kind": "dragee"}, {"id": "mariage", "name": "Mariage", "name_en": "Wedding", "kind": "creation"}, {"id": "premiers-instants", "name": "Premiers instants", "name_en": "First moments", "kind": "creation"}, {"id": "fetes-religieuses", "name": "Fêtes religieuses", "name_en": "Religious celebrations", "kind": "creation"}, {"id": "anniversaires", "name": "Anniversaires", "name_en": "Birthdays", "kind": "creation"}, {"id": "bouquets", "name": "Bouquets & écrins", "name_en": "Bouquets & gift boxes", "kind": "creation"}, {"id": "noel", "name": "Noël", "name_en": "Christmas", "kind": "creation"}];
 window.DP_CATALOGUE = {
  "avola-excellence": {
   "name": "Dragées Avola Excellence",
@@ -2376,6 +2376,99 @@ window.DP_CATALOGUE = {
   ],
   "family_en": "Bouquets & gift boxes",
   "name_en": "Fuchsia Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "noel-bouquet-tartan": {
+  "kind": "creation",
+  "name": "Bouquet Tartan",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-bouquet-tartan.html",
+  "image": "images/noel/noel-bouquet-tartan-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Tartan Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "noel-pot-sous-bois": {
+  "kind": "creation",
+  "name": "Pot Sous-Bois",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-pot-sous-bois.html",
+  "image": "images/noel/noel-pot-sous-bois-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 5.3,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Woodland Jar",
+  "detail_en": "Price per piece"
+ },
+ "noel-bouquet-houx": {
+  "kind": "creation",
+  "name": "Bouquet Houx",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-bouquet-houx.html",
+  "image": "images/noel/noel-bouquet-houx-800w.webp",
+  "formats": [
+   {
+    "id": "petitbouquet",
+    "label": "Petit bouquet",
+    "price": 5.0,
+    "label_en": "Small bouquet"
+   },
+   {
+    "id": "moyenbouquet",
+    "label": "Moyen bouquet",
+    "price": 7.0,
+    "label_en": "Medium bouquet"
+   },
+   {
+    "id": "grandbouquet",
+    "label": "Grand bouquet",
+    "price": 10.0,
+    "label_en": "Large bouquet"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Holly Bouquet",
   "detail_en": "Price per piece"
  }
 };

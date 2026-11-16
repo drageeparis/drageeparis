@@ -1293,4 +1293,60 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/devis-professionnel.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/devis-professionnel.html"/>
   </url>
+  <url>
+    <loc>https://drageeparis.fr/dragees-noel.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-noel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-noel.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/dragees-noel.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/dragees-noel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/dragees-noel.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-bouquet-tartan.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-tartan.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-tartan.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-bouquet-tartan.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-tartan.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-tartan.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-pot-sous-bois.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-pot-sous-bois.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-pot-sous-bois.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-pot-sous-bois.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-pot-sous-bois.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-pot-sous-bois.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-bouquet-houx.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-houx.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-houx.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-bouquet-houx.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-houx.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-houx.html"/>
+  </url>
 </urlset>

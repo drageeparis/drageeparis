@@ -298,10 +298,10 @@
   var BQ_MAX = { petitbouquet: 5, moyenbouquet: 7, grandbouquet: 10 };
   /* Créations à nombre fixe de dragées (écrins, tubes, bouquets) : le client doit toutes les choisir.
      Le nombre vient du format (« 10 dragées », « petit bouquet »…) ou de DG_FIXE pour les prix à la pièce. */
-  var DG_FIXE = { 'bapteme-fiole-boheme': 4, 'communion-fiole-rubis': 4, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
+  var DG_FIXE = { 'bapteme-fiole-boheme': 4, 'communion-fiole-rubis': 4, 'communion-pochon-epis': 5, 'bapteme-pot-champetre': 7, 'noel-pot-sous-bois': 7, 'communion-pot-prairie': 7, 'bapteme-pochon-chapelet-or': 5 };
   /* Bouquets de la catégorie « Bouquets » (Rose, Vert…) : dragées présélectionnées selon le modèle,
      le client ne les choisit pas (pas de bloc de choix, pas de validation). */
-  var DG_PRESET_EXTRA = { 'mariage-bouquet-printemps': true, 'communion-bouquet-celeste': true };
+  var DG_PRESET_EXTRA = { 'mariage-bouquet-printemps': true, 'communion-bouquet-celeste': true, 'noel-bouquet-tartan': true, 'noel-bouquet-houx': true };
   function dgPreset(l) { var p = l && CATALOGUE[l.ref]; return !!p && ((p.familyId === 'bouquets' && /^bouquet-/.test(l.ref)) || !!DG_PRESET_EXTRA[l.ref]); }
   function dgFixe(l) {
     if (!l || dgPreset(l) || dgChoix(l) || !wantsDragees(l)) return 0;

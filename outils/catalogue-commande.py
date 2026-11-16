@@ -63,9 +63,10 @@ FAM_CREA = {
     'premiers-instants': ('premiers-instants', 'Premiers instants'),
     'fetes-religieuses': ('fetes-religieuses', 'Fêtes religieuses'),
     'anniversaires': ('anniversaires', 'Anniversaires'),
+    'noel': ('noel', 'Noël'),
     '': ('bouquets', 'Bouquets & écrins'),
 }
-ORDRE_CREA = ['mariage', 'premiers-instants', 'fetes-religieuses', 'anniversaires', 'bouquets']
+ORDRE_CREA = ['mariage', 'premiers-instants', 'fetes-religieuses', 'anniversaires', 'noel', 'bouquets']
 BOUTIQUE = ('produit-avola-', 'produit-traditionnelle-', 'produit-chocolat-', 'produit-amande-chocolat-')
 
 def fmt_id(label):
@@ -89,7 +90,7 @@ for chemin in sorted(glob.glob(os.path.join(ROOT, 'produit-*.html'))):
     img = img.group(1) if img else re.search(r'class="pdp__gallery">.*?<img src="\./([^"]+)"', s, re.S).group(1)
     back = re.search(r'href="([^"]+)" class="pdp__back"', s).group(1).replace('&amp;', '&')
     m = re.search(r'filter=([a-z-]+)', back)
-    fam_id, fam_nom = FAM_CREA[m.group(1) if m else '']
+    fam_id, fam_nom = FAM_CREA['noel' if back == 'dragees-noel.html' else (m.group(1) if m else '')]
     formats = []
     opts = re.findall(r'<option value="([^"]+)" data-unit="([^"]+)"', s)
     if opts:
@@ -129,7 +130,7 @@ produits.sort(key=lambda p: (ORDRE.index(p['familyId']), p['name']))
 # ---------- Version anglaise : noms et détails lus dans en/produit-*.html ----------
 FAM_EN = {'avola': 'Avola almonds', 'traditionnelles': 'Traditional almonds', 'chocolats': 'Chocolate dragées',
           'gourmandes': 'Chocolate almonds', 'mariage': 'Wedding', 'premiers-instants': 'First moments',
-          'fetes-religieuses': 'Religious celebrations', 'anniversaires': 'Birthdays', 'bouquets': 'Bouquets & gift boxes'}
+          'fetes-religieuses': 'Religious celebrations', 'anniversaires': 'Birthdays', 'noel': 'Christmas', 'bouquets': 'Bouquets & gift boxes'}
 
 def label_en(label):
     m = re.match(r'Avec (\d+) dragées?$', label)
