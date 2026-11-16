@@ -18,8 +18,9 @@
 
   var LEAD_DAYS = 10;   /* dragées : délai maximal (5 à 10 jours) = première date proposée */
   var LEAD_LABEL = '5 à 10 jours';
-  var CREA_LEAD_DAYS = 28;  /* créations : 4 à 6 semaines */
-  var CREA_LEAD_LABEL = '4 à 6 semaines';
+  var CREA_LEAD_DAYS = 14;  /* créations : 2 à 4 semaines (collection Noël : 2 semaines) */
+  var CREA_LEAD_LABEL = '2 à 4 semaines';
+  var NOEL_LEAD_LABEL = '2 semaines';
   var MAX_QTY_CREA = 2000;  /* nombre maximal de pièces par création */
 
   /* Frais point relais (Mondial Relay) : gratuits sous 1 kg,
@@ -102,18 +103,20 @@
 
   function isCrea(ref) { return CATALOGUE[ref] && CATALOGUE[ref].kind === 'creation'; }
   function hasCreation() { return lines.some(function (l) { return isCrea(l.ref); }); }
+  /* Commande composée uniquement de créations de Noël (et éventuellement de dragées) : délai 2 semaines */
+  function onlyNoel() { var c = lines.filter(function (l) { return isCrea(l.ref); }); return c.length > 0 && c.every(function (l) { return CATALOGUE[l.ref].familyId === 'noel'; }); }
 
-  /* ---------- date minimale (dépend du contenu : dragées 5 à 10 jours, créations 4 à 6 semaines) ---------- */
+  /* ---------- date minimale (dépend du contenu : dragées 5 à 10 jours, créations 2 à 4 semaines, Noël 2 semaines) ---------- */
   var minIso = '';
   function updateLead() {
-    var crea = hasCreation();
+    var crea = hasCreation(), noel = crea && onlyNoel();
     var d = new Date();
     d.setDate(d.getDate() + (crea ? CREA_LEAD_DAYS : LEAD_DAYS));
     minIso = isoDate(d);
     dateInput.setAttribute('min', minIso);
     document.getElementById('o-date-help').textContent = EN
-      ? 'Preparation time: ' + (crea ? '4 to 6 weeks' : '5 to 10 days') + '. Dates available from ' + longDate(minIso) + '.'
-      : 'Délai de préparation : ' + (crea ? CREA_LEAD_LABEL : LEAD_LABEL) + '. Dates possibles à partir du ' + longDate(minIso) + '.';
+      ? 'Preparation time: ' + (crea ? (noel ? '2 weeks' : '2 to 4 weeks') : '5 to 10 days') + '. Dates available from ' + longDate(minIso) + '.'
+      : 'Délai de préparation : ' + (crea ? (noel ? NOEL_LEAD_LABEL : CREA_LEAD_LABEL) : LEAD_LABEL) + '. Dates possibles à partir du ' + longDate(minIso) + '.';
     document.getElementById('err-date-min').textContent = longDate(minIso);
   }
   updateLead();

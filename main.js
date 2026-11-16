@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
      Pour une nouvelle saison : modifier SEASON_BAR (texte, lien, date de fin). */
   const SEASON_BAR = {
     end:   '2026-12-26T00:00:00+01:00',
-    text:  T('Collection Noël · Édition limitée, assemblée à la main dans notre atelier', 'Christmas collection · Limited edition, handmade in our workshop'),
+    text:  T('Collection Noël · Édition limitée, assemblée à la main · Préparation en 2 semaines', 'Christmas collection · Limited edition, handmade · Ready in 2 weeks'),
     short: T('Collection Noël · Édition limitée', 'Christmas collection · Limited edition'),
     label: T('Découvrir', 'Discover'),
     href:  'dragees-noel.html',
