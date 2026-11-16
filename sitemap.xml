@@ -1349,4 +1349,60 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-houx.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-houx.html"/>
   </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-bouquet-sapin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-sapin.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-sapin.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-bouquet-sapin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-bouquet-sapin.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-bouquet-sapin.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-pochon-hiver.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-pochon-hiver.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-pochon-hiver.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-pochon-hiver.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-pochon-hiver.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-pochon-hiver.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-tube-etoile.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-tube-etoile.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-tube-etoile.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-tube-etoile.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-tube-etoile.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-tube-etoile.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/produit-noel-sachet-gui.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-sachet-gui.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-sachet-gui.html"/>
+  </url>
+  <url>
+    <loc>https://drageeparis.fr/en/produit-noel-sachet-gui.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://drageeparis.fr/produit-noel-sachet-gui.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drageeparis.fr/en/produit-noel-sachet-gui.html"/>
+  </url>
 </urlset>

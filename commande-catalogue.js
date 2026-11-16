@@ -2470,5 +2470,101 @@ window.DP_CATALOGUE = {
   "family_en": "Christmas",
   "name_en": "Holly Bouquet",
   "detail_en": "Price per piece"
+ },
+ "noel-bouquet-sapin": {
+  "kind": "creation",
+  "name": "Bouquet Sapin",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-bouquet-sapin.html",
+  "image": "images/noel/noel-bouquet-sapin-800w.webp",
+  "formats": [
+   {
+    "id": "piece",
+    "label": "À la pièce",
+    "price": 8.0,
+    "label_en": "Per piece"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Fir Tree Bouquet",
+  "detail_en": "Price per piece"
+ },
+ "noel-pochon-hiver": {
+  "kind": "creation",
+  "name": "Pochon Hiver",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-pochon-hiver.html",
+  "image": "images/noel/noel-pochon-hiver-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.5,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 4.0,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Winter Pouch",
+  "detail_en": "Price per piece"
+ },
+ "noel-tube-etoile": {
+  "kind": "creation",
+  "name": "Tube Étoile",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-tube-etoile.html",
+  "image": "images/noel/noel-tube-etoile-800w.webp",
+  "formats": [
+   {
+    "id": "avecdragées",
+    "label": "Avec dragées",
+    "price": 4.5,
+    "label_en": "With dragées"
+   },
+   {
+    "id": "sansdragées",
+    "label": "Sans dragées",
+    "price": 3.5,
+    "label_en": "Without dragées"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Star Tube",
+  "detail_en": "Price per piece"
+ },
+ "noel-sachet-gui": {
+  "kind": "creation",
+  "name": "Sachet Gui",
+  "familyId": "noel",
+  "family": "Noël",
+  "familyUrl": "dragees-noel.html",
+  "detail": "Prix à la pièce",
+  "url": "produit-noel-sachet-gui.html",
+  "image": "images/noel/noel-sachet-gui-800w.webp",
+  "formats": [
+   {
+    "id": "10dragées",
+    "label": "10 dragées",
+    "price": 4.5,
+    "label_en": "10 dragées"
+   }
+  ],
+  "family_en": "Christmas",
+  "name_en": "Mistletoe Bag",
+  "detail_en": "Price per piece"
  }
 };
