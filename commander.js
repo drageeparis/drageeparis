@@ -127,6 +127,10 @@
     'bapteme-eucalyptus': { min: 5, max: 15, base: 3.5, parDragee: 0.1 },
     'communion-calice': { min: 5, max: 15, base: 3.5, parDragee: 0.1 }
   };
+  /* Les dragées amandes Avola (Excellence, Élégance, Éminence…) sont facturées 0,25 € l'unité ; les autres gardent parDragee */
+  var PRIX_DRAGEE_AVOLA = 0.25;
+  function dgEstAvola(l) { var g = l.dg; return !!(g && g.order.length && CATALOGUE[g.order[0]] && CATALOGUE[g.order[0]].familyId === 'avola'); }
+  function dgPrixUnit(l, c) { return dgEstAvola(l) ? PRIX_DRAGEE_AVOLA : c.parDragee; }
   function dgChoix(l) { return DG_AU_CHOIX[l.ref] && !/^sans/i.test(l.format || '') ? DG_AU_CHOIX[l.ref] : null; }
   /* Nombre facturé = dragées choisies, au minimum c.min (incluses dans le prix de base) */
   function dgNombre(l) {
@@ -154,7 +158,7 @@
     var c = dgChoix(l);
     if (c) {
       var n = dgNombre(l);
-      f = { id: f.id, label: 'Avec ' + n + ' dragées', label_en: 'With ' + n + ' dragées', price: Math.round((c.base + c.parDragee * n) * 100) / 100 };
+      f = { id: f.id, label: 'Avec ' + n + ' dragées', label_en: 'With ' + n + ' dragées', price: Math.round((c.base + dgPrixUnit(l, c) * n) * 100) / 100 };
     }
     var crea = p.kind === 'creation';
     var brut = f.price == null ? null : f.price * l.qty;
@@ -378,7 +382,7 @@
       } else {
         box.appendChild(el('p', 'order-dg__ok', T('Minimum atteint. Vous pouvez ajouter des dragées jusqu\'à ' + choix.max + '.', 'Minimum reached. You can add dragées up to ' + choix.max + '.')));
       }
-      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées incluses dans le prix. Au-delà, jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire.', choix.min + ' dragées included in the price. Beyond that, up to ' + choix.max + ' per box: + ' + euro(choix.parDragee) + ' per extra dragée.')));
+      box.appendChild(el('p', 'wizard__hint', T(choix.min + ' dragées incluses dans le prix. Au-delà, jusqu\'à ' + choix.max + ' dragées par boîte : + ' + euro(choix.parDragee) + ' par dragée supplémentaire (' + euro(PRIX_DRAGEE_AVOLA) + ' en amandes Avola).', choix.min + ' dragées included in the price. Beyond that, up to ' + choix.max + ' per box: + ' + euro(choix.parDragee) + ' per extra dragée (' + euro(PRIX_DRAGEE_AVOLA) + ' for Avola almonds).')));
     }
 
     var tabs = el('div', 'cfg-dg-tabs');

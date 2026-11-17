@@ -887,7 +887,9 @@
   function remiseFor(n) { for (var i = 0; i < REMISES.length; i++) if (n >= REMISES[i].des) return REMISES[i]; return null; }
   function totalBrut() { return Math.round(nbBoites() * prixUnitaire() * 100) / 100; }
   function totalNet() { var r = remiseFor(nbBoites()), t = totalBrut(); return r ? Math.round(t * (1 - r.taux) * 100) / 100 : t; }
-  var PRIX_DRAGEE_SUP = 0.10;   // par dragée (minimum 5 par boîte)
+  var PRIX_DRAGEE_SUP = 0.10;   // par dragée au chocolat (minimum 5 par boîte)
+  var PRIX_DRAGEE_AVOLA = 0.25; // par dragée amande Avola (Excellence, Élégance, Éminence…)
+  function prixDragee() { return chosenCat() === 'avola' ? PRIX_DRAGEE_AVOLA : PRIX_DRAGEE_SUP; }
   var NB_MAX = 5000;
   var NB_MIN = 20;          // minimum de commande
   function euros(n) { return n.toLocaleString(EN ? 'en-GB' : 'fr-FR', { style: 'currency', currency: 'EUR' }); }
@@ -899,7 +901,7 @@
     var d = isBoite() ? decoChoice() : '';
     var nbSup = checkedValue('dragees') === 'Avec dragées' ? Math.max(0, totalQty() - DRAGEES_INCLUSES) : 0;
     return { noeud: (d === 'Nœud satiné' || d === 'Nœud + bouquet') ? PRIX_NOEUD : 0, bouquet: (d === 'Nœud + bouquet' || (isPot() && potFleurs())) ? PRIX_BOUQUET : 0,
-      sup: Math.round(nbSup * PRIX_DRAGEE_SUP * 100) / 100, nbSup: nbSup };
+      sup: Math.round(nbSup * prixDragee() * 100) / 100, nbSup: nbSup };
   }
   function isBouquetC() { return !conseil && containers[idx].key === 'bouquet'; }
   // Bouquet : prix selon la taille (1 dragée au chocolat par pétale, étiquette comprise)
@@ -936,8 +938,8 @@
     if (dp) {
       dp.hidden = !(isBoite() || isPot() || isTube()) || !avecDragees();
       if (isTube()) dp.textContent = T('6 dragées (4 au choix + 2 argentées) : + ', '6 dragées (4 of your choice + 2 silver): + ') + euros(PRIX_TUBE_DRAGEES) + T(' par tube', ' per tube');
-      else dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(PRIX_DRAGEE_SUP) + T(' : + ', ': + ') + euros(o.sup) + (isPot() ? T(' par pot', ' per jar') : T(' par boîte', ' per box'))
-        : euros(PRIX_DRAGEE_SUP) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price').replace('de la boîte', isPot() ? 'du pot' : 'de la boîte').replace('box price', isPot() ? 'jar price' : 'box price');
+      else dp.textContent = o.nbSup ? o.nbSup + ' dragée' + (o.nbSup > 1 ? 's' : '') + ' × ' + euros(prixDragee()) + T(' : + ', ': + ') + euros(o.sup) + (isPot() ? T(' par pot', ' per jar') : T(' par boîte', ' per box'))
+        : euros(prixDragee()) + T(' par dragée, en plus du prix de la boîte', ' per dragée, on top of the box price').replace('de la boîte', isPot() ? 'du pot' : 'de la boîte').replace('box price', isPot() ? 'jar price' : 'box price');
     }
     var r = remiseFor(n), rem = $('w-nb-remise'), next = REMISES[REMISES.length - 1];
     $('w-nb-total').textContent = pu && n >= NB_MIN ? T('Total : ', 'Total: ') + euros(totalNet()) : '';
